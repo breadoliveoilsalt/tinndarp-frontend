@@ -1,0 +1,32 @@
+language: node_js
+
+node_js:
+- 13.8.0
+
+cache:
+  directories:
+    - node_modules
+
+script:
+  - ./scripts/ci-test.sh
+  - ./scripts/build_and_zip_app.sh
+
+deploy: &null
+  - provider: s3
+    skip_cleanup: true
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: tinndarp-frontend
+    local-dir: build/zipped_app
+    repo: breadoliveoilsalt/tinndarp-frontend
+    on:
+      all_branches: true
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    deployment_group: tinndarp-group
+    bucket: tinndarp-frontend
+    key: app.zip
+    bundle_type: zip
+    application: tinndarp-frontend
+    region: us-east-2
