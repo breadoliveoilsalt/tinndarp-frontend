@@ -1,14 +1,34 @@
 language: node_js
+
 node_js:
-  - "stable"
+- stable
+
 cache:
   directories:
     - node_modules
+  yarn
 
-script:
-  - npm run build
-  - ./scripts/ci-test.sh
-
-
-deploy:
-  skip_cleanup: true
+jobs:
+  include:
+    - stage: test
+      script: 
+        - CI=true npm test
+    - stage: build
+      script: npm run build
+      repo: breadoliveoilsalt/tinndarp-frontend
+      all_braches: true
+#      branch: master
+      skip_cleanup: true
+    - stage: deploy
+        deploy:
+          - provider: s3
+            access_key_id: AKIA3WTYI6CM32S5O7YE
+            secret_access_key:
+              secure: iDXGG+CU4GJO9PvvN6022bAX74nhfeDAeYUgfTMaiCZ9argXWhsHkNq/uMUZKiswW4D/Ewm0ufE2JYtFIkXQo+xImWMiEunUTqaLKfvluFcrguJ6CvTiidzEv+SHeNRLjhvtEnv/YQpkTlfaSNuO2uY3mbjnOyABpEVS3XYDv95n886KBVI2WC8GTa+HI2JDehAvb2K1AquSgI+lR8OMpDFWviJ+blFjNO2G3ljYSzpX4vWlkF8FRUKso/PFYP1lwOVEifHBSg3Os8pwhshaH1UOMsfr7k4gh3M8zhvTrLlQOv58BILslvl931pwJrU5JBzUD1tQ8MXIi+8yuMQMXN2Z9Y7Fgv1IpyVIQDjfywaC/gBg3dZpOTU4e/cWu/h6P9wkWf994jgjvD1MiY6/NfVhYFFeefUKrpcKFZNnNIcd+9/I/0m/0ER6V+ghQY6CBxb8Hx6SB96mLMnA35IyHCg0dmc0bHzZpj2BgpGEGejYZEdbE7IYHaLQbhAqoxEJPB92jZJjX4M/9vqK64FsyBdu47RgyYfkCar7WXG1xTIxiVuKibX44hHduioOgn4Muiie8tfpYcNEF6eu9MBCYvsic58Hv1hDq5vi90vVDWUDAZ+XN49L8bP67epu1drQ/0fwxE7RXydwCAgbUfKcG20vuowh3UwEWexqiO3xfwo=
+            bucket: tinndarp-frontend
+            local-dir: build
+            acl: private
+            repo: breadoliveoilsalt/tinndarp-frontend
+            all_branches: true
+#            branch: master
+#            tags: true
