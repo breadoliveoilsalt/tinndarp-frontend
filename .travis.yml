@@ -20,7 +20,7 @@ deploy: &null
     local-dir: build/zipped_app
     repo: breadoliveoilsalt/tinndarp-frontend
     on:
-      all_branches: true
+      branch: master
   - provider: codedeploy
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
@@ -30,3 +30,5 @@ deploy: &null
     bundle_type: zip
     application: tinndarp-frontend
     region: us-east-2
+    on:
+      branch: master
