@@ -11,7 +11,7 @@ function App() {
           Tony's React App
         </p>
         <p>
-          You did it, baby! Nice. 
+          This confirms deployment on merging PR into master.
         </p>
         <p>
           Edit <code>src/App.js</code> and save to reload.
