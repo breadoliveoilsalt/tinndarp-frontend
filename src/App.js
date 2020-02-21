@@ -11,7 +11,7 @@ function App() {
           Tony's React App
         </p>
         <p>
-          You did it, baby! But the tests failed!
+          You did it, baby! Nice. 
         </p>
         <p>
           Edit <code>src/App.js</code> and save to reload.
