@@ -5,7 +5,7 @@ import { render } from 'react-dom'
 import './index.css';
 import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
-import App from './App';
+import App from './components/App';
 // From Redux: import App from './components/App'
 import rootReducer from './reducers/rootReducer'
 import * as serviceWorker from './serviceWorker';
