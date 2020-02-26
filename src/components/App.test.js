@@ -8,21 +8,21 @@ Enzyme.configure({ adapter: new Adapter() })
 
 describe("<App />", () => {
 
-  it("renders a div with a className of 'App'", () => {
+  it("renders a container div with a className of 'App'", () => {
     const wrapper = shallow(<App />)
 
     expect(wrapper.find("div.app")).toHaveLength(1)
   })
 
-  it("renders a <Header /> component", () => {
+  it("renders a <Header /> within the container div", () => {
     const wrapper = shallow(<App />)
 
-    expect(wrapper.find(Header)).toHaveLength(1)
+    expect(wrapper.find("div.app").find(Header)).toHaveLength(1)
   })
 
-  it("renders a <BrowsingContainer /> component", () => {
+  it("renders a <BrowsingContainer /> withing the container div", () => {
     const wrapper = shallow(<App />)
 
-    expect(wrapper.find(BrowsingContainer)).toHaveLength(1)
+    expect(wrapper.find("div.app").find(BrowsingContainer)).toHaveLength(1)
   })
 })

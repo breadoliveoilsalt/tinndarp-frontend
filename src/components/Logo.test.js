@@ -8,7 +8,7 @@ Enzyme.configure({ adapter: new Adapter() })
 
 describe("<Logo />", () => {
 
-  it("renders a div with a className passed down by props", () => {
+  it("renders a container div with a className passed down by props", () => {
     const propsClassName = "some-class"
     const wrapper = shallow(<Logo className={propsClassName} />)
 
@@ -16,7 +16,7 @@ describe("<Logo />", () => {
     expect(wrapper.find("div").hasClass(propsClassName)).toBeTruthy()
   })
 
-  it("renders an image className passed down by props", () => {
+  it("renders an image with a className passed down by props", () => {
     const propsClassName = "some-class"
     const wrapper = shallow(<Logo className={propsClassName} />)
 
@@ -33,5 +33,5 @@ describe("<Logo />", () => {
     })
 
   })
-  
+
 })
