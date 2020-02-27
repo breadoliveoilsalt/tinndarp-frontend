@@ -38,11 +38,17 @@ describe("itemsToBrowse store slice", () => {
 
         describe("the returned function", () => {
 
-          it("calls getItems to request items from the backend server", () => {
-            let mockGetItems = jest.fn()
+          let mockGetItems
+          const mockReturnedData = ["item 1", "item 2"]
+
+          beforeEach(() => {
+            mockGetItems = jest.fn()
             requests.getItems = mockGetItems
-            const mockReturnedData = ["item 1", "item 2"]
             mockGetItems.mockReturnValueOnce(Promise.resolve(mockReturnedData))
+          })
+
+
+          it("calls getItems to request items from the backend server", () => {
             const returnedFunction = fetchItems()
 
             returnedFunction(dispatch)
@@ -51,10 +57,6 @@ describe("itemsToBrowse store slice", () => {
           })
 
           it("relies on dispatch to load the returned data to the store", () => {
-            let mockGetItems = jest.fn()
-            requests.getItems = mockGetItems
-            const mockReturnedData = ["item 1", "item 2"]
-            mockGetItems.mockReturnValueOnce(Promise.resolve(mockReturnedData))
             const returnedFunction = fetchItems()
 
             returnedFunction(dispatch)
