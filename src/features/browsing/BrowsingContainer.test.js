@@ -6,12 +6,11 @@ Enzyme.configure({ adapter: new Adapter() })
 import { Provider } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit'
 
+const mockStore = configureStore({reducer: () => {}})
 describe("<BrowsingContainer />", () => {
 
-  const store = configureStore()
-
   it("renders <CurrentItemContainer/ >", () => {
-    const wrapper = shallow(<Provider store={store}> <BrowsingContainer /> </Provider>).dive()
+    const wrapper = shallow(<Provider store={mockStore}> <BrowsingContainer /> </Provider>)
 
     expect(wrapper.find(CurrentItemContainer)).toHaveLength(1)
   })
