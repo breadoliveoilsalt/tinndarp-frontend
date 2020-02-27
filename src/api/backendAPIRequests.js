@@ -1,7 +1,7 @@
-import { baseURL, fetchWrapper } from './backendAPIRequestsConfig'
+import * as config from './backendAPIRequestsConfig'
 
 export async function getItems() {
-  const url = baseURL + "/items"
-  let { data } = await fetchWrapper.get(url)
+  const url = config.baseURL + "/items"
+  let { data } = await config.fetchWrapper.get(url)
   return data
 }
