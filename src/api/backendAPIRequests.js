@@ -1,6 +1,7 @@
-import axios from 'axios'
+import { baseURL, fetchWrapper } from './backendAPIRequestsConfig'
 
 export async function getItems() {
-  let { data } = await axios.get("https://tinndarp-backend.herokuapp.com/items")
+  const url = baseURL + "/items"
+  let { data } = await fetchWrapper.get(url)
   return data
 }
