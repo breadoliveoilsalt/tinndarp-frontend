@@ -1,24 +1,21 @@
 import { createSlice, dispatch } from "@reduxjs/toolkit"
-import { getItems } from "../api/backendAPIRequests"
+import { getItems } from "../../api/backendAPIRequests"
 
-const itemsSlice = createSlice({
+const itemsToBrowseSlice = createSlice({
   name: "items",
   initialState: [],
   reducers: {
     loadItems: (state, action) => state = action.payload
   }
-
 })
 
-export const { loadItems } = itemsSlice.actions
+export const { loadItems } = itemsToBrowseSlice.actions
 
-export const { actions, reducer } = itemsSlice
+export const { actions, reducer } = itemsToBrowseSlice
 
 export default reducer
 
-// export const fetchItems = (dispatch){
 export function fetchItems() {
-  console.log("Items being fetched")
   return async function(dispatch) {
     const items = await getItems()
     dispatch(loadItems(items))
