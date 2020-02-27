@@ -1,5 +1,5 @@
-import { createSlice, dispatch } from "@reduxjs/toolkit"
-import * as requests from "../../api/backendAPIRequests"
+import { createSlice, dispatch } from '@reduxjs/toolkit'
+import * as requests from '../../api/backendAPIRequests'
 
 const itemsToBrowseSlice = createSlice({
   name: "items",

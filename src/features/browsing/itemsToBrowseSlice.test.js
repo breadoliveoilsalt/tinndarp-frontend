@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import itemsToBrowseReducer, { loadItems, fetchItems } from './itemsToBrowseSlice'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
-import * as requests from  "../../api/backendAPIRequests"
+import * as requests from  '../../api/backendAPIRequests'
 
 const store = configureStore({
   reducer: itemsToBrowseReducer

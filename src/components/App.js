@@ -1,7 +1,7 @@
-import React from "react"
-import Header from "./Header.js"
-import BrowsingContainer from "../features/browsing/BrowsingContainer.js"
-import "./App.css"
+import React from 'react'
+import Header from './Header'
+import BrowsingContainer from '../features/browsing/BrowsingContainer'
+import './App.css'
 
 function App() {
   return (

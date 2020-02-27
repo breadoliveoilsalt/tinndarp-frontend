@@ -6,7 +6,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 import App from './components/App';
 import rootReducer from './reducers/rootReducer'
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from './serviceWorker'
 
 const store = configureStore({
   reducer: rootReducer

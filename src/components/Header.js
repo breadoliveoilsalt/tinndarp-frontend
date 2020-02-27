@@ -1,6 +1,6 @@
-import React from "react"
-import Logo from "./Logo.js"
-import Divider from "./Divider.js"
+import React from 'react'
+import Logo from './Logo'
+import Divider from './Divider'
 
 function Header() {
   return (
