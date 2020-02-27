@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import itemsToBrowseReducer, { loadItems, fetchItems } from './itemsToBrowseSlice'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
+import * as requests from  "../../api/backendAPIRequests"
 
 const store = configureStore({
   reducer: itemsToBrowseReducer
@@ -27,9 +28,29 @@ describe("itemsToBrowse store slice", () => {
         expect(store.getState()).toEqual(itemsList)
       })
 
-      // describe("fetchItems", () => {
-      //   expect(false).toBeTruthy()
-      // })
+      describe("fetchItems", () => {
+
+        it("is a thunk that returns a function", () => {
+          const result = fetchItems()
+
+          expect(typeof result === "function").toBeTruthy()
+        })
+
+        describe("the returned function", () => {
+
+          it("calls getItems to request items from the backend server", () => {
+            let mockGetItems = jest.fn()
+            requests.getItems = mockGetItems
+            const mockReturnedData = ["item 1", "item 2"]
+            mockGetItems.mockReturnValueOnce(Promise.resolve(mockReturnedData))
+            const returnedFunction = fetchItems
+            debugger
+            returnedFunction(dispatch)
+
+            expect(mockGetItems.mock.calls.length).toEqual(1)
+          })
+        })
+      })
     })
   })
 })

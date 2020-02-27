@@ -1,5 +1,5 @@
 import { createSlice, dispatch } from "@reduxjs/toolkit"
-import { getItems } from "../../api/backendAPIRequests"
+import * as requests from "../../api/backendAPIRequests"
 
 const itemsToBrowseSlice = createSlice({
   name: "items",
@@ -17,7 +17,7 @@ export default reducer
 
 export function fetchItems() {
   return async function(dispatch) {
-    const items = await getItems()
+    const items = await requests.getItems()
     dispatch(loadItems(items))
   }
 }
