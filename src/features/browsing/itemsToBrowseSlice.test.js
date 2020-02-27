@@ -43,11 +43,23 @@ describe("itemsToBrowse store slice", () => {
             requests.getItems = mockGetItems
             const mockReturnedData = ["item 1", "item 2"]
             mockGetItems.mockReturnValueOnce(Promise.resolve(mockReturnedData))
-            const returnedFunction = fetchItems
-            debugger
+            const returnedFunction = fetchItems()
+
             returnedFunction(dispatch)
 
             expect(mockGetItems.mock.calls.length).toEqual(1)
+          })
+
+          it("relies on dispatch to load the returned data to the store", () => {
+            let mockGetItems = jest.fn()
+            requests.getItems = mockGetItems
+            const mockReturnedData = ["item 1", "item 2"]
+            mockGetItems.mockReturnValueOnce(Promise.resolve(mockReturnedData))
+            const returnedFunction = fetchItems()
+
+            returnedFunction(dispatch)
+
+            expect(store.getState()).toEqual(mockReturnedData)
           })
         })
       })
