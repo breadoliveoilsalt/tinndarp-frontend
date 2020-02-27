@@ -2,14 +2,16 @@ import React from 'react'
 
 function CurrentItemContainer(props) {
 
-  const currentItem = props.currentItem
+  if (props.currentItem != undefined) {
+    const currentItem = props.currentItem
 
-  debugger
-  return (
-    <div>
-      <p>Current Item:</p>
-    </div>
-  )
+    return (
+      <div>
+        <p>Current Item:</p>
+        <img className={"current-item"} src={currentItem.image_url} />
+      </div>
+    )
+  }
 }
 
 export default CurrentItemContainer
