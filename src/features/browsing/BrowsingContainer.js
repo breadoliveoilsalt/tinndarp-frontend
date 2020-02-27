@@ -9,7 +9,7 @@ function BrowsingContainer() {
     dispatch(fetchItems())
   })
 
-  const items = useSelector(state => state.itemsToBrowse)
+  const items = useSelector(state => state.itemsToBrowse.itemsList)
   let currentItem
   let content = null
 

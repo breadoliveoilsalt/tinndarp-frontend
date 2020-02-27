@@ -27,4 +27,5 @@ describe("<BrowsingContainer />", () => {
 
     expect(wrapper.find(CurrentItemContainer).exists()).toBeTruthy()
   })
+
 })
