@@ -1,4 +1,3 @@
-
 import { combineReducers } from "redux"
 import feature1Reducer from "features/feature1Reducer"
 import feature2Reducer from "features/feature2Reducer"
