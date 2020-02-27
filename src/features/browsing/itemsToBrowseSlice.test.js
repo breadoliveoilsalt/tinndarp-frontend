@@ -12,8 +12,8 @@ const dispatch = store.dispatch
 describe("itemsToBrowse store slice", () => {
 
   describe("the inital state", () => {
-    it("is equal to an empty array", () => {
-      expect(store.getState()).toEqual([])
+    it("is equal to null", () => {
+      expect(store.getState()).toBeNull()
     })
   })
 

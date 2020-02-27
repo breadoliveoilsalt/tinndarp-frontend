@@ -3,7 +3,7 @@ import * as requests from '../../api/backendAPIRequests'
 
 const itemsToBrowseSlice = createSlice({
   name: "itemsToBrowse",
-  initialState: [],
+  initialState: null,
   reducers: {
     loadItems: (state, action) => state = action.payload
   }
