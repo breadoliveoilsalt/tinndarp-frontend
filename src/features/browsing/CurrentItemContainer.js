@@ -1,10 +1,13 @@
 import React from 'react'
 
-function CurrentItemContainer() {
+function CurrentItemContainer(props) {
 
+  const currentItem = props.currentItem
+
+  debugger
   return (
     <div>
-    CurrentItemContainer
+      <p>Current Item:</p>
     </div>
   )
 }

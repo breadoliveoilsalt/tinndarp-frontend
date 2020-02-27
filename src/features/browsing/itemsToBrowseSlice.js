@@ -2,7 +2,7 @@ import { createSlice, dispatch } from '@reduxjs/toolkit'
 import * as requests from '../../api/backendAPIRequests'
 
 const itemsToBrowseSlice = createSlice({
-  name: "items",
+  name: "itemsToBrowse",
   initialState: [],
   reducers: {
     loadItems: (state, action) => state = action.payload
