@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import itemsToBrowseReducer, { loadItems, fetchItems } from './itemsToBrowseSlice'
+import itemsToBrowseReducer, * as actions from './itemsToBrowseSlice'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import * as requests from  '../../api/backendAPIRequests'
 
@@ -12,8 +12,13 @@ const dispatch = store.dispatch
 describe("itemsToBrowse store slice", () => {
 
   describe("the inital state", () => {
-    it("is equal to null", () => {
-      expect(store.getState()).toBeNull()
+    it("has fields for a list of items, a currentItem, and a currentItemIndex", () => {
+      const expectedInitialState = {
+        items: null,
+        currentItem: null,
+        currentItemIndex: 0
+      }
+      expect(store.getState()).toEqual(expectedInitialState)
     })
   })
 
@@ -23,15 +28,15 @@ describe("itemsToBrowse store slice", () => {
       it("loads a list of items to the state", () => {
         const itemsList = ["item 1", "item 2"]
 
-        dispatch(loadItems(itemsList))
+        dispatch(actions.loadItems(itemsList))
 
-        expect(store.getState()).toEqual(itemsList)
+        expect(store.getState().items).toEqual(itemsList)
       })
 
       describe("fetchItems", () => {
 
         it("is a thunk that returns a function", () => {
-          const result = fetchItems()
+          const result = actions.fetchItems()
 
           expect(typeof result === "function").toBeTruthy()
         })
@@ -49,7 +54,7 @@ describe("itemsToBrowse store slice", () => {
 
 
           it("calls getItems to request items from the backend server", () => {
-            const returnedFunction = fetchItems()
+            const returnedFunction = actions.fetchItems()
 
             returnedFunction(dispatch)
 
@@ -57,11 +62,11 @@ describe("itemsToBrowse store slice", () => {
           })
 
           it("relies on dispatch to load the returned data to the store", () => {
-            const returnedFunction = fetchItems()
+            const returnedFunction = actions.fetchItems()
 
             returnedFunction(dispatch)
 
-            expect(store.getState()).toEqual(mockReturnedData)
+            expect(store.getState().items).toEqual(mockReturnedData)
           })
         })
       })
