@@ -30,13 +30,17 @@ export const { actions, reducer } = itemsToBrowseSlice
 export default reducer
 
 export function fetchItems() {
-  console.log("fetching items")
-  return async function(dispatch) {
+  return function(dispatch) {
     dispatch(updateFetchingStatus(true))
-    const items = await requests.getItems()
-    dispatch(loadItems(items))
-    dispatch(updateFetchingStatus(false))
-    dispatch(loadCurrentItem())
+    // const items = await requests.getItems()
+    requests.getItems()
+      .then(data => dispatch(loadItems(data)))
+      .then(() => dispatch(loadCurrentItem()))
+      .then(() => dispatch(updateFetchingStatus(false)))
+      // .then(() => dispatch(updateFetchingStatus(false)))
+    // dispatch(loadItems(items))
+    // dispatch(updateFetchingStatus(false))
+    // dispatch(loadCurrentItem())
   }
 
 }
