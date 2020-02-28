@@ -1,6 +1,10 @@
 import { createSlice, dispatch } from '@reduxjs/toolkit'
 import * as requests from '../../api/backendAPIRequests'
 
+const LOAD_ITEMS = 'LOAD_ITEMS'
+const LOAD_CURRENT_ITEM = 'LOAD_CURRENT_ITEM'
+const UPDATE_FETCHING_STATUS = 'UPDATE_FETCHING_STATUS'
+
 const initialState = {
   items: null,
   currentItem: null,
@@ -13,6 +17,8 @@ function itemsToBrowseReducer(state = initialState, action) {
       return Object.assign({}, state, {items: action.payload})
     case LOAD_CURRENT_ITEM:
       return Object.assign({}, state, {currentItem: state.items[0]})
+    case UPDATE_FETCHING_STATUS:
+      return Object.assign({}, state, {fetchingItems: action.payload})
     default:
       return state
   }
@@ -33,12 +39,19 @@ export function loadCurrentItem() {
   }
 }
 
-const LOAD_ITEMS = 'LOAD_ITEMS'
-const LOAD_CURRENT_ITEM = 'LOAD_CURRENT_ITEM'
+export function updateFetchingStatus(bool) {
+  return {
+    type: UPDATE_FETCHING_STATUS,
+    payload: bool
+  }
+}
+
 export function fetchItems() {
   return function(dispatch) {
+    dispatch(updateFetchingStatus(true))
     return requests.getItems()
       .then(data => dispatch(loadItems(data)))
       .then(() => dispatch(loadCurrentItem()))
+      .then(() => dispatch(updateFetchingStatus(false)))
   }
 }
