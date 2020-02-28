@@ -26,14 +26,26 @@ export class BrowsingContainer extends Component {
 
   render() {
 
-    let content = null
+    if (!this.props.items) {
+      return (<Loader />)
+    } else {
+      return <CurrentItemContainer currentItem={this.props.currentItem}/>
+    }
+
+    // if (!this.props.items) {
+    //
+    // }
+    //
+    // return (<CurrentItemContainer />)
+
+    // let content = null
 
     // if (!this.props.items) {
     //   content = <Loader />
     // } else if (this.itemsAreLoaded()) {
     //   content = <BrowsingContainer currentItem={this.props.currentItems} />
     // }
-    return content
+    // return content
   }
 }
 

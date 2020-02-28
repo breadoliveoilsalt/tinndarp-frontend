@@ -2,7 +2,8 @@ import React from 'react'
 
 const CurrentItemContainer = (props) => {
 
-  if (props.currentItem !== undefined) {
+  if (props.currentItem) {
+
     const currentItem = props.currentItem
 
     return (
@@ -11,6 +12,8 @@ const CurrentItemContainer = (props) => {
         <img className={"current-item"} src={currentItem.image_url} />
       </div>
     )
+  } else {
+    return null
   }
 }
 
