@@ -4,7 +4,6 @@ import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import * as requests from  '../../api/backendAPIRequests'
 
 const store = configureStore()
-
 const dispatch = store.dispatch
 
 describe("itemsToBrowse store slice", () => {
@@ -78,16 +77,19 @@ describe("itemsToBrowse store slice", () => {
         })
 
         it("relies on dispatch to load the returned data to the store", () => {
-          dispatch(actions.fetchItems())
+          return dispatch(actions.fetchItems()).then(() => {
+            expect(mockGetItems.mock.calls.length).toEqual(1)
+            expect(store.getState().itemsToBrowse.items).toEqual(mockReturnedData)
+          })
 
-          expect(mockGetItems.mock.calls.length).toEqual(1)
-          expect(store.getState().itemsToBrowse.items).toEqual(mockReturnedData)
         })
 
         it("leaves the fetchingItems state at false once complete", () => {
           expect(store.getState().itemsToBrowse.fetchingItems).toBeTruthy()
-          dispatch(actions.fetchItems())
-          expect(store.getState().itemsToBrowse.fetchingItems).toBeFalsy()
+          return dispatch(actions.fetchItems()).then(() => {
+            expect(store.getState().itemsToBrowse.fetchingItems).toBeFalsy()
+          })
+          
         })
       })
     })
