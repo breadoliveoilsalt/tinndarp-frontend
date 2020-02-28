@@ -10,8 +10,7 @@ export class BrowsingContainer extends Component {
 
 
   componentDidMount() {
-    // this.props.fetchItems()
-    // this.props.fetchItems
+    this.props.fetchItems()
     this.props.loadItems("Hey there")
   }
 
