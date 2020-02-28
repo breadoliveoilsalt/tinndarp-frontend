@@ -16,8 +16,6 @@ export class BrowsingContainer extends Component {
   componentDidMount() {
     if (!this.props.items) {
       this.props.fetchItems()
-      // fetchItems()
-      // this.props.dispatch(fetchItems())
     }
   }
 
@@ -40,20 +38,9 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({fetchItems: fetchItems}, dispatch)
+  return {
+    fetchItems: () => dispatch(fetchItems())
+  }
 }
-// function mapDispatchToProps(dispatch) {
-//     return ({
-//         fetchItems: () => dispatch(fetchItems())
-//     })
-// }
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     fetchItems: () => dispatch(fetchItems())
-//     // loadItems: (items) => dispatch(loadItems(items)),
-//     // updateFetchingStatus: (bool) => dispatch(updateFetchingStatus(bool))
-//   }
-// }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BrowsingContainer)
-// export default connect(mapStateToProps, null)(BrowsingContainer)

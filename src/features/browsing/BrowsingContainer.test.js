@@ -6,8 +6,6 @@ import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit'
 import configureMockStore from 'redux-mock-store'
-
-// all I did was change this from the named export to the default and test now seems to work???
 import BrowsingContainer from './BrowsingContainer'
 import CurrentItemContainer from './CurrentItemContainer'
 
@@ -34,14 +32,5 @@ describe("<BrowsingContainer />", () => {
 
     expect(wrapper.find(CurrentItemContainer).exists()).toBeTruthy()
   })
-  // it("renders <CurrentItemContainer/ > if the store has a list of items", () => {
-  //   const state = {itemsToBrowse:
-  //                   {items: ["item 1"]}
-  //                 }
-  //   const store = mockStore(state)
-  //   const wrapper = mount(<Provider store={store}> <BrowsingContainer /> </Provider>)
-  //
-  //   expect(wrapper.find(CurrentItemContainer).exists()).toBeTruthy()
-  // })
 
 })
