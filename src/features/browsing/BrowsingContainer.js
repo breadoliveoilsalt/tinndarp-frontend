@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-// import { fetchItems, loadItems, updateFetchingStatus } from './itemsToBrowseSlice'
 import { fetchItems } from './itemsToBrowseSlice'
 
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
@@ -15,13 +14,9 @@ export class BrowsingContainer extends Component {
 
   componentDidMount() {
     if (!this.props.items) {
-      this.props.fetchItems()
+      this.props.dispatch(fetchItems())
     }
   }
-
-  // itemsAreLoaded() {
-  //   return (this.props.items != null) && (this.props.items.length > 0)
-  // }
 
   render() {
 
@@ -41,12 +36,18 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchItems: () => dispatch(fetchItems()),
-    // loadItems: (items) => dispatch(loadItems(items)),
-    // updateFetchingStatus: (bool) => dispatch(updateFetchingStatus(bool))
-  }
-}
+// function mapDispatchToProps(dispatch) {
+//     return ({
+//         fetchItems: () => dispatch(fetchItems())
+//     })
+// }
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     fetchItems: () => dispatch(fetchItems())
+//     // loadItems: (items) => dispatch(loadItems(items)),
+//     // updateFetchingStatus: (bool) => dispatch(updateFetchingStatus(bool))
+//   }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BrowsingContainer)
+// export default connect(mapStateToProps, mapDispatchToProps)(BrowsingContainer)
+export default connect(mapStateToProps, null)(BrowsingContainer)

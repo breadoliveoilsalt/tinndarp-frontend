@@ -68,14 +68,9 @@ const LOAD_CURRENT_ITEM = 'LOAD_CURRENT_ITEM'
 export function fetchItems() {
   return function(dispatch) {
     // dispatch(updateFetchingStatus(true))
-    // return requests.getItems()
-    return axios.get("https://tinndarp-backend.herokuapp.com/items")
-      // .then(data => dispatch(loadItems(data)))
-      .then(rawData => {
-        const itemData = rawData.data
-        dispatch(loadItems(itemData))
-        return itemData
-      })
+    return requests.getItems()
+      .then(data => dispatch(loadItems(data)))
+      .then(() => dispatch(loadCurrentItem()))
       // .then((itemData) => dispatch(loadCurrentItem(itemData[0])))
       // .then(() => dispatch(updateFetchingStatus(false)))
   }
