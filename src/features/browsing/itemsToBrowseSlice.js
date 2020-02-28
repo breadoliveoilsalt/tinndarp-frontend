@@ -32,15 +32,9 @@ export default reducer
 export function fetchItems() {
   return function(dispatch) {
     dispatch(updateFetchingStatus(true))
-    // const items = await requests.getItems()
     requests.getItems()
       .then(data => dispatch(loadItems(data)))
       .then(() => dispatch(loadCurrentItem()))
       .then(() => dispatch(updateFetchingStatus(false)))
-      // .then(() => dispatch(updateFetchingStatus(false)))
-    // dispatch(loadItems(items))
-    // dispatch(updateFetchingStatus(false))
-    // dispatch(loadCurrentItem())
   }
-
 }

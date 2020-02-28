@@ -16,7 +16,7 @@ describe("itemsToBrowse store slice", () => {
       const expectedInitialState = {
         items: null,
         currentItem: null,
-        currentItemIndex: 0
+        fetchingItems: true
       }
       expect(store.getState()).toEqual(expectedInitialState)
     })
@@ -67,6 +67,10 @@ describe("itemsToBrowse store slice", () => {
             returnedFunction(dispatch)
 
             expect(store.getState().items).toEqual(mockReturnedData)
+          })
+
+          it("leaves the fetchingItems state at false once complete", () => {
+
           })
         })
       })

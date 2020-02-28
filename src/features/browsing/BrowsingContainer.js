@@ -10,8 +10,6 @@ export class BrowsingContainer extends Component {
 
   constructor(props) {
      super(props);
-     // this.props.fetchItems = this.props.fetchItems.bind(this)
-     // this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
 
   componentDidMount() {
@@ -31,21 +29,6 @@ export class BrowsingContainer extends Component {
     } else {
       return <CurrentItemContainer currentItem={this.props.currentItem}/>
     }
-
-    // if (!this.props.items) {
-    //
-    // }
-    //
-    // return (<CurrentItemContainer />)
-
-    // let content = null
-
-    // if (!this.props.items) {
-    //   content = <Loader />
-    // } else if (this.itemsAreLoaded()) {
-    //   content = <BrowsingContainer currentItem={this.props.currentItems} />
-    // }
-    // return content
   }
 }
 
@@ -62,17 +45,6 @@ const mapDispatchToProps = (dispatch) => {
     fetchItems: () => dispatch(fetchItems()),
     loadItems: (items) => dispatch(loadItems(items)),
     updateFetchingStatus: (bool) => dispatch(updateFetchingStatus(bool))
-
-    // dispatch -> just having this alone was causing loadItems to run and erase items field
-    // loadError: (message) => dispatch(loadError(message)),
-    // deleteError: () => dispatch(deleteError()),
-    // beginBookAPIRequest: () => dispatch(beginBookAPIRequest()),
-    // endBookAPIRequest: () => dispatch(endBookAPIRequest()),
-    // loadSearchTerms: (searchTerms) => dispatch(loadSearchTerms(searchTerms)),
-    // increaseSearchStartingID: () => dispatch(increaseSearchStartingID()),
-    // clearPriorSearch: () => dispatch(clearPriorSearch()),
-    // resetSearch: () => dispatch(resetSearch()),
-    // getBookRecords: (apiRequest) => dispatch(getBookRecords(apiRequest))
   }
 }
 
