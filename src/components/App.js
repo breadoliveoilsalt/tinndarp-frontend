@@ -3,7 +3,7 @@ import Header from './Header'
 import BrowsingContainer from '../features/browsing/BrowsingContainer'
 import './App.css'
 
-function App() {
+const App = () => {
   return (
     <div className="app">
       <Header />

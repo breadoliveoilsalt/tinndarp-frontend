@@ -2,7 +2,7 @@ import React from 'react'
 import Logo from './Logo'
 import Divider from './Divider'
 
-function Header() {
+const Header = () => {
   return (
     <div>
       <Logo className="logo-header" />

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Divider(props) {
+const Divider = (props) => {
   return (
     <div>
       <div className={props.className} />

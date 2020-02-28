@@ -1,6 +1,6 @@
 import React from 'react'
 
-function CurrentItemContainer(props) {
+const CurrentItemContainer = (props) => {
 
   if (props.currentItem !== undefined) {
     const currentItem = props.currentItem
