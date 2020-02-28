@@ -16,6 +16,7 @@ export class BrowsingContainer extends Component {
   componentDidMount() {
     if (!this.props.items) {
       this.props.fetchItems()
+      // fetchItems()
       // this.props.dispatch(fetchItems())
     }
   }
