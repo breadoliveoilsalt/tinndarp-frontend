@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { fetchItems } from './itemsToBrowseSlice'
 
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
@@ -14,7 +15,8 @@ export class BrowsingContainer extends Component {
 
   componentDidMount() {
     if (!this.props.items) {
-      this.props.dispatch(fetchItems())
+      this.props.fetchItems()
+      // this.props.dispatch(fetchItems())
     }
   }
 
@@ -36,6 +38,9 @@ const mapStateToProps = (state) => {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({fetchItems: fetchItems}, dispatch)
+}
 // function mapDispatchToProps(dispatch) {
 //     return ({
 //         fetchItems: () => dispatch(fetchItems())
@@ -49,5 +54,5 @@ const mapStateToProps = (state) => {
 //   }
 // }
 
-// export default connect(mapStateToProps, mapDispatchToProps)(BrowsingContainer)
-export default connect(mapStateToProps, null)(BrowsingContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(BrowsingContainer)
+// export default connect(mapStateToProps, null)(BrowsingContainer)
