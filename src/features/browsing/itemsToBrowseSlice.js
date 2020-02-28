@@ -1,5 +1,6 @@
 import { createSlice, dispatch } from '@reduxjs/toolkit'
 import * as requests from '../../api/backendAPIRequests'
+import axios from 'axios'
 
 const initialState = {
   items: null,
@@ -7,34 +8,75 @@ const initialState = {
   fetchingItems: true
 }
 
-const itemsToBrowseSlice = createSlice({
-  name: "itemsToBrowse",
-  initialState,
-  reducers: {
-    loadItems(state, action) {
-      state.items = action.payload
-    },
-    loadCurrentItem(state) {
-      state.currentItem = state.items[0]
-    },
-    updateFetchingStatus(state, action) {
-      state.fetchingItems = action.payload
-    }
+function itemsToBrowseReducer(state = initialState, action) {
+  switch (action.type) {
+    case LOAD_ITEMS:
+      return Object.assign({}, state, {items: action.payload})
+    case LOAD_CURRENT_ITEM:
+      return Object.assign({}, state, {currentItem: state.items[0]})
+    default:
+      return state
   }
-})
+}
 
-export const { loadItems, loadCurrentItem, updateFetchingStatus } = itemsToBrowseSlice.actions
+export default itemsToBrowseReducer
 
-export const { actions, reducer } = itemsToBrowseSlice
+export function loadItems(data) {
+  return {
+    type: LOAD_ITEMS,
+    payload: data
+  }
+}
 
-export default reducer
+export function loadCurrentItem() {
+  return {
+    type: LOAD_CURRENT_ITEM
+  }
+}
 
+const LOAD_ITEMS = 'LOAD_ITEMS'
+const LOAD_CURRENT_ITEM = 'LOAD_CURRENT_ITEM'
+// Prior code that threw fetchItems() is not a function error
+// const initialState = {
+//   items: null,
+//   currentItem: null,
+//   fetchingItems: true
+// }
+//
+// const itemsToBrowseSlice = createSlice({
+//   name: "itemsToBrowse",
+//   initialState,
+//   reducers: {
+//     loadItems(state, action) {
+//       state.items = action.payload
+//     },
+//     loadCurrentItem(state) {
+//       state.currentItem = state.items[0]
+//     },
+//     updateFetchingStatus(state, action) {
+//       state.fetchingItems = action.payload
+//     }
+//   }
+// })
+//
+// export const { loadItems, loadCurrentItem, updateFetchingStatus } = itemsToBrowseSlice.actions
+//
+// export const { actions, reducer } = itemsToBrowseSlice
+//
+// export default reducer
+//
 export function fetchItems() {
   return function(dispatch) {
-    dispatch(updateFetchingStatus(true))
-    requests.getItems()
-      .then(data => dispatch(loadItems(data)))
-      .then(() => dispatch(loadCurrentItem()))
-      .then(() => dispatch(updateFetchingStatus(false)))
+    // dispatch(updateFetchingStatus(true))
+    // return requests.getItems()
+    return axios.get("https://tinndarp-backend.herokuapp.com/items")
+      // .then(data => dispatch(loadItems(data)))
+      .then(rawData => {
+        const itemData = rawData.data
+        dispatch(loadItems(itemData))
+        return itemData
+      })
+      // .then((itemData) => dispatch(loadCurrentItem(itemData[0])))
+      // .then(() => dispatch(updateFetchingStatus(false)))
   }
 }

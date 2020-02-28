@@ -18,7 +18,7 @@ describe("<BrowsingContainer />", () => {
     const state = {itemsToBrowse:
                     {items: ["item 1"]}
                   }
-    const store = mockStore({})
+    const store = mockStore(state)
     const wrapper = mount(<Provider store={store}> <BrowsingContainer /> </Provider>)
 
     expect(wrapper.find(CurrentItemContainer).exists()).toBeFalsey()

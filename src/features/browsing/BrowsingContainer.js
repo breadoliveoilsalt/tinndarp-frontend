@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchItems, loadItems, updateFetchingStatus } from './itemsToBrowseSlice'
+// import { fetchItems, loadItems, updateFetchingStatus } from './itemsToBrowseSlice'
+import { fetchItems } from './itemsToBrowseSlice'
 
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import CurrentItemContainer from './CurrentItemContainer'
@@ -18,9 +19,9 @@ export class BrowsingContainer extends Component {
     }
   }
 
-  itemsAreLoaded() {
-    return (this.props.items != null) && (this.props.items.length > 0)
-  }
+  // itemsAreLoaded() {
+  //   return (this.props.items != null) && (this.props.items.length > 0)
+  // }
 
   render() {
 
@@ -43,8 +44,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchItems: () => dispatch(fetchItems()),
-    loadItems: (items) => dispatch(loadItems(items)),
-    updateFetchingStatus: (bool) => dispatch(updateFetchingStatus(bool))
+    // loadItems: (items) => dispatch(loadItems(items)),
+    // updateFetchingStatus: (bool) => dispatch(updateFetchingStatus(bool))
   }
 }
 
