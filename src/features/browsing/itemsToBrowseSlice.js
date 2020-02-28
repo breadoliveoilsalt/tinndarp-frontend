@@ -4,7 +4,7 @@ import * as requests from '../../api/backendAPIRequests'
 const initialState = {
   items: null,
   currentItem: null,
-  currentItemIndex: 0
+  fetchingItems: true
 }
 
 const itemsToBrowseSlice = createSlice({
@@ -15,23 +15,28 @@ const itemsToBrowseSlice = createSlice({
       state.items = action.payload
     },
     loadCurrentItem(state) {
-      state.currentItem = state.items[state.currentItemIndex]
-      state.currentItemIndex += 1
+      state.currentItem = state.items[0]
+    },
+    updateFetchingStatus(state, action) {
+      state.fetchingItems = action.payload
     }
   }
 })
 
-export const { loadItems, loadCurrentItem } = itemsToBrowseSlice.actions
+export const { loadItems, loadCurrentItem, updateFetchingStatus } = itemsToBrowseSlice.actions
 
 export const { actions, reducer } = itemsToBrowseSlice
 
 export default reducer
 
 export function fetchItems() {
+  console.log("fetching items")
   return async function(dispatch) {
+    dispatch(updateFetchingStatus(true))
     const items = await requests.getItems()
     dispatch(loadItems(items))
+    dispatch(updateFetchingStatus(false))
     dispatch(loadCurrentItem())
   }
-  
+
 }
