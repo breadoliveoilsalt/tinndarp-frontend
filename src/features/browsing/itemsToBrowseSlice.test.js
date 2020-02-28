@@ -1,22 +1,26 @@
-import { configureStore } from '@reduxjs/toolkit'
+import configureStore from '../../configureStore'
 import itemsToBrowseReducer, * as actions from './itemsToBrowseSlice'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import * as requests from  '../../api/backendAPIRequests'
 
-const store = configureStore({
-  reducer: itemsToBrowseReducer
-})
+const store = configureStore()
 
 const dispatch = store.dispatch
 
 describe("itemsToBrowse store slice", () => {
 
+  beforeEach(() => {
+    dispatch(actions.resetItemsToBrowseState())
+  })
+
   describe("the inital state", () => {
     it("has fields for a list of items, a currentItem, and a currentItemIndex", () => {
       const expectedInitialState = {
-        items: null,
-        currentItem: null,
-        fetchingItems: true
+        itemsToBrowse: {
+          items: null,
+          currentItem: null,
+          fetchingItems: true
+        }
       }
       expect(store.getState()).toEqual(expectedInitialState)
     })
@@ -25,53 +29,65 @@ describe("itemsToBrowse store slice", () => {
   describe("the actions to dispatch", () => {
 
     describe("loadItems", () => {
+
       it("loads a list of items to the state", () => {
         const itemsList = ["item 1", "item 2"]
 
         dispatch(actions.loadItems(itemsList))
 
-        expect(store.getState().items).toEqual(itemsList)
+        expect(store.getState().itemsToBrowse.items).toEqual(itemsList)
       })
 
-      describe("fetchItems", () => {
+    })
 
-        it("is a thunk that returns a function", () => {
-          const result = actions.fetchItems()
+    describe("updateFetchingStatus", () => {
 
-          expect(typeof result === "function").toBeTruthy()
+      it("updates fetchingItems", () => {
+        expect(store.getState().itemsToBrowse.fetchingItems).toEqual(true)
+
+        dispatch(actions.updateFetchingStatus(false))
+
+        expect(store.getState().itemsToBrowse.fetchingItems).toEqual(false)
+      })
+
+    })
+
+    describe("fetchItems", () => {
+
+      it("is a thunk that returns a function", () => {
+        const result = actions.fetchItems()
+
+        expect(typeof result === "function").toBeTruthy()
+      })
+
+      describe("the returned function", () => {
+
+        let mockGetItems
+        const mockReturnedData = ["item 1", "item 2"]
+
+        beforeEach(() => {
+          mockGetItems = jest.fn()
+          requests.getItems = mockGetItems
+          mockGetItems.mockReturnValueOnce(Promise.resolve(mockReturnedData))
         })
 
-        describe("the returned function", () => {
+        it("calls getItems to request items from the backend server", () => {
+          dispatch(actions.fetchItems())
 
-          let mockGetItems
-          const mockReturnedData = ["item 1", "item 2"]
+          expect(mockGetItems.mock.calls.length).toEqual(1)
+        })
 
-          beforeEach(() => {
-            mockGetItems = jest.fn()
-            requests.getItems = mockGetItems
-            mockGetItems.mockReturnValueOnce(Promise.resolve(mockReturnedData))
-          })
+        it("relies on dispatch to load the returned data to the store", () => {
+          dispatch(actions.fetchItems())
 
+          expect(mockGetItems.mock.calls.length).toEqual(1)
+          expect(store.getState().itemsToBrowse.items).toEqual(mockReturnedData)
+        })
 
-          it("calls getItems to request items from the backend server", () => {
-            const returnedFunction = actions.fetchItems()
-
-            returnedFunction(dispatch)
-
-            expect(mockGetItems.mock.calls.length).toEqual(1)
-          })
-
-          it("relies on dispatch to load the returned data to the store", () => {
-            const returnedFunction = actions.fetchItems()
-
-            returnedFunction(dispatch)
-
-            expect(store.getState().items).toEqual(mockReturnedData)
-          })
-
-          it("leaves the fetchingItems state at false once complete", () => {
-
-          })
+        it("leaves the fetchingItems state at false once complete", () => {
+          expect(store.getState().itemsToBrowse.fetchingItems).toBeTruthy()
+          dispatch(actions.fetchItems())
+          expect(store.getState().itemsToBrowse.fetchingItems).toBeFalsy()
         })
       })
     })
