@@ -6,7 +6,7 @@ import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit'
 import configureMockStore from 'redux-mock-store'
-import BrowsingContainer from './BrowsingContainer'
+import BrowsingContainerConnectedToStore, { BrowsingContainer } from './BrowsingContainer'
 import CurrentItemContainer from './CurrentItemContainer'
 
 const mockStore = configureMockStore([thunk])
@@ -18,7 +18,7 @@ describe("<BrowsingContainer />", () => {
                     {items: null}
                   }
     const store = mockStore(state)
-    const wrapper = mount(<Provider store={store}> <BrowsingContainer /> </Provider>)
+    const wrapper = mount(<Provider store={store}> <BrowsingContainerConnectedToStore /> </Provider>)
 
     expect(wrapper.find(CurrentItemContainer).exists()).toBeFalsy()
   })
@@ -28,9 +28,17 @@ describe("<BrowsingContainer />", () => {
                     {items: ["item 1"]}
                   }
     const store = mockStore(state)
-    const wrapper = mount(<Provider store={store}> <BrowsingContainer /> </Provider>)
+    const wrapper = mount(<Provider store={store}> <BrowsingContainerConnectedToStore /> </Provider>)
 
     expect(wrapper.find(CurrentItemContainer).exists()).toBeTruthy()
+  })
+
+  it("calls fetchItems when it mounts", () => {
+    const props = {fetchItems: jest.fn()}
+    const wrapper = shallow(<BrowsingContainer {...props} />)
+
+    expect(props.fetchItems.mock.calls.length).toEqual(1)
+
   })
 
 })
