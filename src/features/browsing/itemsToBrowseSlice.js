@@ -1,4 +1,3 @@
-import { createSlice, dispatch } from '@reduxjs/toolkit'
 import * as requests from '../../api/backendAPIRequests'
 
 const LOAD_ITEMS = 'LOAD_ITEMS'

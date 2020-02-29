@@ -5,7 +5,10 @@ import './App.css'
 const Logo = (props) => {
   return (
     <div className={props.className}>
-      <img className={props.className} src={logo} />
+      <img className={props.className}
+        src={logo}
+        alt={"TINNDARP logo"}
+      />
     </div>
   )
 }

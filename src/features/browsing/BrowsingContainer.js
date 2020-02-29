@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { fetchItems } from './itemsToBrowseSlice'
-
-import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import CurrentItemContainer from './CurrentItemContainer'
 import Loader from '../../components/Loader'
 

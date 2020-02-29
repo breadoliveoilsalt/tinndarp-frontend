@@ -9,7 +9,10 @@ const CurrentItemContainer = (props) => {
     return (
       <div>
         <p>Current Item:</p>
-        <img className={"current-item"} src={currentItem.image_url} />
+        <img className={"current-item"}
+          src={currentItem.image_url}
+          alt={"current item"}
+        />
       </div>
     )
   } else {
