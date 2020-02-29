@@ -12,7 +12,6 @@ describe("<Logo />", () => {
     const propsClassName = "some-class"
     const wrapper = shallow(<Logo className={propsClassName} />)
 
-    expect(wrapper.find("img")).toHaveLength(1)
     expect(wrapper.find("div").hasClass(propsClassName)).toBeTruthy()
   })
 
