@@ -16,7 +16,8 @@ describe("<CurrentItemContainer />", () => {
       const image_url_source = "some source"
       const wrapper = shallow(<CurrentItemContainer currentItem={{
         image_url: image_url_source
-      }} />)
+        }} 
+      />)
 
       expect(wrapper.find("img")).toHaveLength(1)
       expect(wrapper.find("img").prop("src")).toEqual(image_url_source)

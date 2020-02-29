@@ -9,10 +9,6 @@ import Loader from '../../components/Loader'
 
 export class BrowsingContainer extends Component {
 
-  constructor(props) {
-     super(props);
-  }
-
   componentDidMount() {
     if (!this.props.items) {
       this.props.fetchItems()
