@@ -11,13 +11,16 @@ const CurrentItemContainer = (props) => {
 
         <div className={"browsing-instructions"}>
           Click "Like" or "Nope" Below to Rate the Item
-        </div>
+        </ div>
 
-        <img className={"current-item"}
-          src={currentItem.image_url}
-          alt={"current item"}
-        />
-      </div>
+        <div>
+          <img
+            className="current-item-image"
+            src={currentItem.image_url}
+            alt={"current item"}
+          />
+        </ div>
+      </ div>
     )
   } else {
     return null

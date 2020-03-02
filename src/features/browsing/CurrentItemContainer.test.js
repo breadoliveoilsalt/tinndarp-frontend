@@ -26,8 +26,12 @@ describe("<CurrentItemContainer />", () => {
       description: itemDescription
     }
 
+    let wrapper
+    beforeEach(() => {
+      wrapper = shallow(<CurrentItemContainer currentItem={currentItem} />)
+    })
+
     it("renders instructions on how to rate an item in a div with 'browsing-instruction' className", () => {
-      const wrapper = shallow(<CurrentItemContainer currentItem={currentItem} />)
       const instructions = wrapper.find("div.browsing-instructions")
 
       expect(instructions).toHaveLength(1)
@@ -37,12 +41,16 @@ describe("<CurrentItemContainer />", () => {
       expect(instructions.props().className).toEqual("browsing-instructions")
     })
 
-    it("renders an image with the currentItem url_image", () => {
-        const wrapper = shallow(<CurrentItemContainer currentItem={currentItem} />)
+    it("renders an image with the currentItem url_image and current-item-image className", () => {
+      expect(wrapper.find("img")).toHaveLength(1)
+      expect(wrapper.find("img").prop("src")).toEqual(itemImageURL)
+      expect(wrapper.find("img").prop("className")).toEqual("current-item-image")
+    })
 
-        expect(wrapper.find("img")).toHaveLength(1)
-        expect(wrapper.find("img").prop("src")).toEqual(itemImageURL)
-      })
+    it("renders the item's name", () => {
+
+
+    })
 
 
   })

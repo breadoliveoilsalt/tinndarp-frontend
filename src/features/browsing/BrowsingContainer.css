@@ -2,3 +2,8 @@
   margin: 1em auto;
   width: 75%;
 }
+
+img.current-item-image {
+  width: 80%;
+  border: 0.1em solid black;
+}
