@@ -59,6 +59,7 @@ export function fetchItems() {
     dispatch(updateFetchingStatus(true))
     return requests.getItems()
       .then(data => {
+        debugger
         dispatch(loadItems(data))
       })
       .then(() => dispatch(loadCurrentItem()))

@@ -12,15 +12,27 @@ describe("<CurrentItemContainer />", () => {
     expect(wrapper).toEqual({})
   })
 
-  it("renders an image with the currentItem url_image if there is a currentItem prop", () => {
-      const image_url_source = "some source"
-      const wrapper = shallow(<CurrentItemContainer currentItem={{
-        image_url: image_url_source
-        }} 
-      />)
+  describe("if there is a currentItem prop", () => {
 
-      expect(wrapper.find("img")).toHaveLength(1)
-      expect(wrapper.find("img").prop("src")).toEqual(image_url_source)
-    })
+    const itemName = "BUSKBO"
+    const itemImageURL =  "https://www.ikea.com/us/en/images/products/buskbo-armchair__0700959_PE723853_S5.JPG?f=s"
+    const itemPrice = "130.00"
+    const itemDescription = "Armchair, rattan"
+
+    const currentItem = {
+      name: itemName,
+      image_url: itemImageURL,
+      price: itemPrice,
+      description: itemDescription
+    }
+
+    it("renders an image with the currentItem url_image", () => {
+        const wrapper = shallow(<CurrentItemContainer currentItem={currentItem} />)
+
+        expect(wrapper.find("img")).toHaveLength(1)
+        expect(wrapper.find("img").prop("src")).toEqual(itemImageURL)
+      })
+
+  })
 
 })
