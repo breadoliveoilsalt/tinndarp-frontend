@@ -2,4 +2,4 @@
 
 set -Eeou pipefail
 
-CI=true npm test
+CI=true yarn test

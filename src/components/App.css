@@ -1,0 +1,41 @@
+.app {
+  text-align: center;
+  width: 100%;
+}
+
+div.logo-header {
+  padding: 1em;
+  text-align: left;
+}
+
+img.logo-header {
+  width: 50%;
+}
+
+div.divider {
+  border: 0.1em solid grey;
+  background-color: grey;
+  width: 80%;
+  margin: 0 auto;
+}
+
+img.current-item {
+  width: 75%;
+  border: 0.1em solid black;
+}
+
+.loader {
+  margin: 1em auto;
+  padding: 1em;
+  border: 1em solid grey;
+  border-top: 1em solid black;
+  border-radius: 50%;
+  width: 1em;
+  height: 1em;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
