@@ -12,15 +12,53 @@ describe("<CurrentItemContainer />", () => {
     expect(wrapper).toEqual({})
   })
 
-  it("renders an image with the currentItem url_image if there is a currentItem prop", () => {
-      const image_url_source = "some source"
-      const wrapper = shallow(<CurrentItemContainer currentItem={{
-        image_url: image_url_source
-        }} 
-      />)
+  describe("if there is a currentItem prop", () => {
 
-      expect(wrapper.find("img")).toHaveLength(1)
-      expect(wrapper.find("img").prop("src")).toEqual(image_url_source)
+    const itemName = "BUSKBO"
+    const itemImageURL =  "https://www.ikea.com/us/en/images/products/buskbo-armchair__0700959_PE723853_S5.JPG?f=s"
+    const itemPrice = "130.00"
+    const itemDescription = "Armchair, rattan"
+
+    const currentItem = {
+      name: itemName,
+      image_url: itemImageURL,
+      price: itemPrice,
+      description: itemDescription
+    }
+
+    let wrapper
+    beforeEach(() => {
+      wrapper = shallow(<CurrentItemContainer currentItem={currentItem} />)
     })
+
+    it("renders instructions on how to rate an item in a div with 'browsing-instruction' className", () => {
+      const instructions = wrapper.find("div.browsing-instructions")
+
+      expect(instructions).toHaveLength(1)
+
+      const expectedMessage = "Click \"Like\" or \"Nope\" Below to Rate the Item"
+      expect(instructions.text()).toEqual(expectedMessage)
+      expect(instructions.props().className).toEqual("browsing-instructions")
+    })
+
+    it("renders an image with the currentItem url_image and 'browsing-item-image' className", () => {
+      expect(wrapper.find("img")).toHaveLength(1)
+      expect(wrapper.find("img").prop("src")).toEqual(itemImageURL)
+      expect(wrapper.find("img").prop("className")).toEqual("browsing-item-image")
+    })
+
+    it("renders the item's name in div with the classname 'browsing-item-details'", () => {
+      expect(wrapper.find("div.browsing-item-details").text()).toContain(itemName)
+    })
+
+    it("renders the item's price in div with the classname 'browsing-item-details'", () => {
+      expect(wrapper.find("div.browsing-item-details").text()).toContain("$ " + itemPrice)
+    })
+
+    it("renders the item's description in div with the classname 'browsing-item-details'", () => {
+      expect(wrapper.find("div.browsing-item-details").text()).toContain(itemDescription)
+    })
+    
+  })
 
 })

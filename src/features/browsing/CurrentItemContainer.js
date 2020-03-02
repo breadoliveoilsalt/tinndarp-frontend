@@ -2,22 +2,36 @@ import React from 'react'
 
 const CurrentItemContainer = (props) => {
 
+  let content = null
+
   if (props.currentItem) {
-
     const currentItem = props.currentItem
-
-    return (
+    content = (
       <div>
-        <p>Current Item:</p>
-        <img className={"current-item"}
-          src={currentItem.image_url}
-          alt={"current item"}
-        />
+
+        <div className="browsing-instructions">
+          Click "Like" or "Nope" Below to Rate the Item
+        </div>
+
+        <div>
+          <img
+            className="browsing-item-image"
+            src={currentItem.image_url}
+            alt={"current item"}
+          />
+        </div>
+
+        <div className="browsing-item-details">
+          {currentItem.name} <br/>
+          $ {currentItem.price} <br/>
+          {currentItem.description} <br/>
+        </div>
+
       </div>
     )
-  } else {
-    return null
   }
+
+  return content
 }
 
 export default CurrentItemContainer

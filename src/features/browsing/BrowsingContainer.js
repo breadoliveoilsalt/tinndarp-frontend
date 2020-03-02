@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { fetchItems } from './itemsToBrowseSlice'
 import CurrentItemContainer from './CurrentItemContainer'
 import Loader from '../../components/Loader'
+import './BrowsingContainer.css'
 
 export class BrowsingContainer extends Component {
 
@@ -14,11 +15,12 @@ export class BrowsingContainer extends Component {
 
   render() {
 
-    if (!this.props.items) {
+    if (this.props.fetchingItems) {
       return (<Loader />)
-    } else {
+    } else if (this.props.items && this.props.items.length > 0){
       return <CurrentItemContainer currentItem={this.props.currentItem}/>
-    }
+    } else
+      return null
   }
 }
 

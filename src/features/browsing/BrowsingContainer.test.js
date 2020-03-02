@@ -7,6 +7,7 @@ import { Provider } from 'react-redux'
 import configureMockStore from 'redux-mock-store'
 import BrowsingContainerConnectedToStore, { BrowsingContainer } from './BrowsingContainer'
 import CurrentItemContainer from './CurrentItemContainer'
+import Loader from '../../components/Loader'
 
 const mockStore = configureMockStore([thunk])
 
@@ -22,9 +23,11 @@ describe("<BrowsingContainer />", () => {
     expect(wrapper.find(CurrentItemContainer).exists()).toBeFalsy()
   })
 
-  it("renders <CurrentItemContainer/ > if the store has a list of items", () => {
+  it("renders <CurrentItemContainer/ > if the store has a list of items and the app is not fetchingItems", () => {
     const state = {itemsToBrowse:
-                    {items: ["item 1"]}
+                    { items: ["item 1"],
+                      fetchingItems: false
+                    }
                   }
     const store = mockStore(state)
     const wrapper = mount(<Provider store={store}> <BrowsingContainerConnectedToStore /> </Provider>)
@@ -37,7 +40,27 @@ describe("<BrowsingContainer />", () => {
     const wrapper = shallow(<BrowsingContainer {...props} />)
 
     expect(props.fetchItems.mock.calls.length).toEqual(1)
-
   })
 
+  it("renders a Loader if the app is fetching items", () => {
+    const state = {itemsToBrowse:
+                    {fetchingItems: true}
+                  }
+    const store = mockStore(state)
+    const wrapper = mount(<Provider store={store}> <BrowsingContainerConnectedToStore /> </Provider>)
+
+    expect(wrapper.find(Loader).exists()).toBeTruthy()
+  })
+
+  it("renders a Loader if the app is fetching items and there are items already", () => {
+    const state = {itemsToBrowse:
+                    { fetchingItems: true,
+                      items: ["item 1"]
+                    }
+                  }
+    const store = mockStore(state)
+    const wrapper = mount(<Provider store={store}> <BrowsingContainerConnectedToStore /> </Provider>)
+
+    expect(wrapper.find(Loader).exists()).toBeTruthy()
+  })
 })

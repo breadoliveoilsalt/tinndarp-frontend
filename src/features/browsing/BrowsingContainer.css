@@ -1,0 +1,14 @@
+div.browsing-instructions {
+  margin: 1em auto;
+  width: 75%;
+}
+
+img.browsing-item-image {
+  width: 80%;
+  border: 0.1em solid black;
+}
+
+div.browsing-item-details {
+  margin: 1em;
+  font-weight: bold;
+}

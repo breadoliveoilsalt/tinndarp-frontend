@@ -19,10 +19,6 @@ div.divider {
   margin: 0 auto;
 }
 
-img.current-item {
-  width: 75%;
-  border: 0.1em solid black;
-}
 
 .loader {
   margin: 1em auto;
