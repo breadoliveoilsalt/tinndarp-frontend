@@ -51,7 +51,9 @@ describe("<CurrentItemContainer />", () => {
       expect(wrapper.find("div.browsing-item-details").text()).toContain(itemName)
     })
 
-
+    it("renders the item's price in div with the classname 'browsing-item-details'", () => {
+      expect(wrapper.find("div.browsing-item-details").text()).toContain("$ " + itemPrice)
+    })
   })
 
 })
