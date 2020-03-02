@@ -8,7 +8,11 @@ const CurrentItemContainer = (props) => {
 
     return (
       <div>
-        <p>Current Item:</p>
+
+        <div className={"browsing-instructions"}>
+          Click "Like" or "Nope" Below to Rate the Item
+        </div>
+
         <img className={"current-item"}
           src={currentItem.image_url}
           alt={"current item"}

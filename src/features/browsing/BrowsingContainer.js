@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { fetchItems } from './itemsToBrowseSlice'
 import CurrentItemContainer from './CurrentItemContainer'
 import Loader from '../../components/Loader'
+import './BrowsingContainer.css'
 
 export class BrowsingContainer extends Component {
 
