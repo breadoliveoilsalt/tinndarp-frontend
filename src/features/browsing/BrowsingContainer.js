@@ -14,11 +14,12 @@ export class BrowsingContainer extends Component {
 
   render() {
 
-    if (!this.props.items) {
+    if (this.props.fetchingItems) {
       return (<Loader />)
-    } else {
+    } else if (this.props.items && this.props.items.length > 0){
       return <CurrentItemContainer currentItem={this.props.currentItem}/>
-    }
+    } else
+      return null
   }
 }
 
