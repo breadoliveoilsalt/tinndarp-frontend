@@ -23,7 +23,7 @@ const CurrentItemContainer = (props) => {
 
         <div className="browsing-item-details">
           {currentItem.name} <br/>
-          $ {currentItem.price} 
+          $ {currentItem.price} <br/>
         </div>
       </div>
     )
