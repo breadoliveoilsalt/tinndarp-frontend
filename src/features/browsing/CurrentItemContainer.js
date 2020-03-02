@@ -2,11 +2,11 @@ import React from 'react'
 
 const CurrentItemContainer = (props) => {
 
+  let content = null
+
   if (props.currentItem) {
-
     const currentItem = props.currentItem
-
-    return (
+    content = (
       <div>
 
         <div className="browsing-instructions">
@@ -26,11 +26,12 @@ const CurrentItemContainer = (props) => {
           $ {currentItem.price} <br/>
           {currentItem.description} <br/>
         </div>
+
       </div>
     )
-  } else {
-    return null
   }
+
+  return content
 }
 
 export default CurrentItemContainer
