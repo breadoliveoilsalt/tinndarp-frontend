@@ -26,12 +26,24 @@ describe("<CurrentItemContainer />", () => {
       description: itemDescription
     }
 
+    it("renders instructions on how to rate an item in a div with 'browsing-instruction' className", () => {
+      const wrapper = shallow(<CurrentItemContainer currentItem={currentItem} />)
+      const instructions = wrapper.find("div.browsing-instructions")
+
+      expect(instructions).toHaveLength(1)
+
+      const expectedMessage = "Click \"Like\" or \"Nope\" Below to Rate the Item"
+      expect(instructions.text()).toEqual(expectedMessage)
+      expect(instructions.props().className).toEqual("browsing-instructions")
+    })
+
     it("renders an image with the currentItem url_image", () => {
         const wrapper = shallow(<CurrentItemContainer currentItem={currentItem} />)
 
         expect(wrapper.find("img")).toHaveLength(1)
         expect(wrapper.find("img").prop("src")).toEqual(itemImageURL)
       })
+
 
   })
 
