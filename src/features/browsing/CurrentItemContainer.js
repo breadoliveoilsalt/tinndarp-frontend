@@ -11,7 +11,7 @@ const CurrentItemContainer = (props) => {
 
         <div className="browsing-instructions">
           Click "Like" or "Nope" Below to Rate the Item
-        </ div>
+        </div>
 
         <div>
           <img
@@ -19,12 +19,13 @@ const CurrentItemContainer = (props) => {
             src={currentItem.image_url}
             alt={"current item"}
           />
-        </ div>
+        </div>
 
         <div className="browsing-item-details">
-          {currentItem.name}
+          {currentItem.name} <br/>
+          $ {currentItem.price} 
         </div>
-      </ div>
+      </div>
     )
   } else {
     return null

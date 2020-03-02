@@ -9,5 +9,6 @@ img.browsing-item-image {
 }
 
 div.browsing-item-details {
-  
+  margin: 1em;
+  font-weight: bold;
 }
