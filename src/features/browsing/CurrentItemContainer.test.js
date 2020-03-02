@@ -18,12 +18,14 @@ describe("<CurrentItemContainer />", () => {
     const itemImageURL =  "https://www.ikea.com/us/en/images/products/buskbo-armchair__0700959_PE723853_S5.JPG?f=s"
     const itemPrice = "130.00"
     const itemDescription = "Armchair, rattan"
+    const itemMoreInfoURL = "https://www.ikea.com/us/en/p/buskbo-armchair-rattan-70434311/"
 
     const currentItem = {
       name: itemName,
       image_url: itemImageURL,
       price: itemPrice,
-      description: itemDescription
+      description: itemDescription,
+      more_info_url: itemMoreInfoURL
     }
 
     let wrapper
@@ -58,7 +60,14 @@ describe("<CurrentItemContainer />", () => {
     it("renders the item's description in div with the classname 'browsing-item-details'", () => {
       expect(wrapper.find("div.browsing-item-details").text()).toContain(itemDescription)
     })
-    
+
+    it("renders a 'More Info' link, linking to the currentItem's moreInfoURL", () => {
+      const itemLink = wrapper.find("a")
+
+      expect(itemLink.exists()).toBeTruthy()
+      expect(itemLink.prop("href")).toEqual(itemMoreInfoURL)
+    })
+
   })
 
 })
