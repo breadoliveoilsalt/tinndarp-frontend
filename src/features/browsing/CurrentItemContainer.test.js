@@ -41,14 +41,14 @@ describe("<CurrentItemContainer />", () => {
       expect(instructions.props().className).toEqual("browsing-instructions")
     })
 
-    it("renders an image with the currentItem url_image and 'current-item-image' className", () => {
+    it("renders an image with the currentItem url_image and 'browsing-item-image' className", () => {
       expect(wrapper.find("img")).toHaveLength(1)
       expect(wrapper.find("img").prop("src")).toEqual(itemImageURL)
-      expect(wrapper.find("img").prop("className")).toEqual("current-item-image")
+      expect(wrapper.find("img").prop("className")).toEqual("browsing-item-image")
     })
 
-    it("renders the item's name in div with the classname 'item-details'", () => {
-      expect(wrapper.find("div.item-details").text()).toContain(itemName)
+    it("renders the item's name in div with the classname 'browsing-item-details'", () => {
+      expect(wrapper.find("div.browsing-item-details").text()).toContain(itemName)
     })
 
 
