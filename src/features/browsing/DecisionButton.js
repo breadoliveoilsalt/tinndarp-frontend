@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 const DecisionButton = (props) => {
 
   return (
-    <button value="A button" />
+    <button name="A button"> A button for real </button>
   )
 }
 

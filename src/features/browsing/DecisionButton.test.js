@@ -12,4 +12,11 @@ describe("<DecisionButton />", () => {
     const wrapper = shallow(<DecisionButton {...props} />)
     expect(wrapper.find("button")).toHaveLength(1)
   })
+
+  it("renders the text prop within the button", () => {
+    const buttonText = "Button Text"
+    const props = {text: buttonText}
+    const wrapper = shallow(<DecisionButton {...props} />)
+    expect(wrapper.find("button").text()).toEqual(buttonText)
+  })
 })

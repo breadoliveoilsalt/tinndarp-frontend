@@ -1,4 +1,5 @@
 import React from 'react'
+import DecisionButton from './DecisionButton'
 
 const CurrentItemContainer = (props) => {
 
@@ -27,6 +28,8 @@ const CurrentItemContainer = (props) => {
           ${currentItem.price} <br/>
           <a href={currentItem.moreInfoURL} target="_blank" rel="noopener noreferrer"> More Info </a>
         </div>
+
+        <DecisionButton />
 
       </div>
     )
