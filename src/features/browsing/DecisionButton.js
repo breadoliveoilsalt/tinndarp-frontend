@@ -4,7 +4,7 @@ const DecisionButton = (props) => {
 
   return (
     <button
-      className="decision-button"
+      className={props.className}
       onClick={props.action}
     >
       {props.text}

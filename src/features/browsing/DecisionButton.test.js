@@ -23,12 +23,19 @@ describe("<DecisionButton />", () => {
     it("renders the text prop", () => {
       const buttonText = "Button Text"
       props = {text: buttonText}
+
       wrapper = shallow(<DecisionButton {...props} />)
+
       expect(wrapper.find("button").text()).toEqual(buttonText)
     })
 
-    it("has a className of 'decision-button'", () => {
-      expect(wrapper.find("button").props().className).toEqual("decision-button")
+    it("has a className from props.className", () => {
+      const buttonClassName ="decision-button nope-button"
+
+      props = {className: buttonClassName}
+      wrapper = shallow(<DecisionButton {...props} />)
+
+      expect(wrapper.find("button").props().className).toEqual(buttonClassName)
     })
 
     it("on a click, calls the callback passed down as props.action", () => {
