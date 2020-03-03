@@ -91,5 +91,27 @@ describe("itemsToBrowse store slice", () => {
         })
       })
     })
+
+    describe("loadCurrentItem()", () => {
+      it("loads the first item as the currentItem", () => {
+        const itemsList = ["item 1", "item 2"]
+        dispatch(actions.loadItems(itemsList))
+
+        expect(store.getState().itemsToBrowse.currentItem).toBeNull()
+        dispatch(actions.loadCurrentItem())
+
+        expect(store.getState().itemsToBrowse.currentItem).toEqual("item 1")
+      })
+    })
+
+    // describe("removeCurrentItem()", () => {
+    //   it("removes the current item from the state", () => {
+    //       dispatch(actions.loadItems(itemsList))
+    //
+    //       dispatch(actions.)
+    //
+    //       expect(store.getState().itemsToBrowse.items).toEqual(itemsList)
+    //   })
+    // })
   })
 })
