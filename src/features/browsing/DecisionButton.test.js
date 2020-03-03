@@ -8,7 +8,8 @@ import DecisionButton from './DecisionButton'
 describe("<DecisionButton />", () => {
 
   it("renders a button", () => {
-    const wrapper = shallow(<DecisionButton />)
+    const props = {}
+    const wrapper = shallow(<DecisionButton {...props} />)
     expect(wrapper.find("button")).toHaveLength(1)
   })
 })
