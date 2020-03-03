@@ -1,6 +1,6 @@
 import React from 'react'
 
-const FinshedBrowsingDisplay = () => {
+const FinishedBrowsingDisplay = () => {
   return (
     <div>
       You have finished browsing all of the items!
@@ -9,4 +9,4 @@ const FinshedBrowsingDisplay = () => {
 }
 
 
-export default FinshedBrowsingDisplay
+export default FinishedBrowsingDisplay
