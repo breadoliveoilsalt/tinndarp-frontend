@@ -5,6 +5,7 @@ const CurrentItemContainer = (props) => {
   let content = null
 
   if (props.currentItem) {
+    debugger
     const currentItem = props.currentItem
     content = (
       <div>

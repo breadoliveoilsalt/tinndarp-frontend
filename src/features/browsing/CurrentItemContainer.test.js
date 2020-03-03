@@ -22,10 +22,10 @@ describe("<CurrentItemContainer />", () => {
 
     const currentItem = {
       name: itemName,
-      image_url: itemImageURL,
+      imageURL: itemImageURL,
       price: itemPrice,
       description: itemDescription,
-      more_info_url: itemMoreInfoURL
+      moreInfoURL: itemMoreInfoURL
     }
 
     let wrapper
@@ -54,7 +54,7 @@ describe("<CurrentItemContainer />", () => {
     })
 
     it("renders the item's price in div with the classname 'browsing-item-details'", () => {
-      expect(wrapper.find("div.browsing-item-details").text()).toContain("$ " + itemPrice)
+      expect(wrapper.find("div.browsing-item-details").text()).toContain("$" + itemPrice)
     })
 
     it("renders the item's description in div with the classname 'browsing-item-details'", () => {
