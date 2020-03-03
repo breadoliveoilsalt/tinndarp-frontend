@@ -92,13 +92,13 @@ describe("itemsToBrowse store slice", () => {
       })
     })
 
-    describe("loadCurrentItem()", () => {
+    describe("updateCurrentItem()", () => {
       it("loads the first item as the currentItem", () => {
         const itemsList = ["item 1", "item 2"]
         dispatch(actions.loadItems(itemsList))
 
         expect(store.getState().itemsToBrowse.currentItem).toBeNull()
-        dispatch(actions.loadCurrentItem())
+        dispatch(actions.updateCurrentItem())
 
         expect(store.getState().itemsToBrowse.currentItem).toEqual("item 1")
       })
@@ -108,7 +108,7 @@ describe("itemsToBrowse store slice", () => {
         dispatch(actions.loadItems(itemsList))
 
         expect(store.getState().itemsToBrowse.currentItem).toBeNull()
-        dispatch(actions.loadCurrentItem())
+        dispatch(actions.updateCurrentItem())
 
         expect(store.getState().itemsToBrowse.currentItem).toBeNull()
       })
@@ -119,7 +119,7 @@ describe("itemsToBrowse store slice", () => {
       it("returns currentItem in the state to null", () => {
         const itemsList = ["item 1", "item 2"]
         dispatch(actions.loadItems(itemsList))
-        dispatch(actions.loadCurrentItem())
+        dispatch(actions.updateCurrentItem())
 
         expect(store.getState().itemsToBrowse.currentItem).toEqual("item 1")
         dispatch(actions.removeCurrentItem())
