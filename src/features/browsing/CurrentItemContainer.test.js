@@ -69,8 +69,15 @@ describe("<CurrentItemContainer />", () => {
       expect(itemLink.prop("href")).toEqual(itemMoreInfoURL)
     })
 
-    it("renders two <DecisionButtons />", () => {
-        expect(wrapper.find(DecisionButton)).toHaveLength(2)
+    it("renders a <DecisionButton /> for noping and a <DecisionButton /> for liking", () => {
+      expect(wrapper.find(DecisionButton)).toHaveLength(2)
+      expect(wrapper.find(DecisionButton).first().prop("text")).toEqual("Nope")
+      expect(wrapper.find(DecisionButton).last().prop("text")).toEqual("Like")
+    })
+
+    describe("the <DecisionButton /> for liking an item", () => {
+
+
     })
   })
 
