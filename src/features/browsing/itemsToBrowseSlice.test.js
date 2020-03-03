@@ -102,6 +102,16 @@ describe("itemsToBrowse store slice", () => {
 
         expect(store.getState().itemsToBrowse.currentItem).toEqual("item 1")
       })
+
+      it("does nothing if the items list is empty", () => {
+        const itemsList = []
+        dispatch(actions.loadItems(itemsList))
+
+        expect(store.getState().itemsToBrowse.currentItem).toBeNull()
+        dispatch(actions.loadCurrentItem())
+
+        expect(store.getState().itemsToBrowse.currentItem).toBeNull()
+      })
     })
 
     // describe("removeCurrentItem()", () => {
