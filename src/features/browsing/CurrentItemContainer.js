@@ -16,7 +16,7 @@ const CurrentItemContainer = (props) => {
         <div>
           <img
             className="browsing-item-image"
-            src={currentItem.image_url}
+            src={currentItem.imageURL}
             alt={"current item"}
           />
         </div>
@@ -24,8 +24,8 @@ const CurrentItemContainer = (props) => {
         <div className="browsing-item-details">
           {currentItem.name} <br/>
           {currentItem.description} <br/>
-          $ {currentItem.price} <br/>
-          <a target="_blank" href={currentItem.more_info_url}> More Info </a>
+          ${currentItem.price} <br/>
+          <a target="_blank" href={currentItem.moreInfoURL}> More Info </a>
         </div>
 
       </div>
