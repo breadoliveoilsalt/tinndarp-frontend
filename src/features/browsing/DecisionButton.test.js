@@ -7,16 +7,33 @@ import DecisionButton from './DecisionButton'
 
 describe("<DecisionButton />", () => {
 
+  let wrapper
+  let props = {}
+
+  beforeEach(() => {
+    wrapper = shallow(<DecisionButton {...props} />)
+  })
+
   it("renders a button", () => {
     const props = {}
     const wrapper = shallow(<DecisionButton {...props} />)
     expect(wrapper.find("button")).toHaveLength(1)
   })
 
-  it("renders the text prop within the button", () => {
-    const buttonText = "Button Text"
-    const props = {text: buttonText}
-    const wrapper = shallow(<DecisionButton {...props} />)
-    expect(wrapper.find("button").text()).toEqual(buttonText)
+  describe("the rendered button", () => {
+
+    it("renders the text prop within the button", () => {
+      const buttonText = "Button Text"
+      const props = {text: buttonText}
+      const wrapper = shallow(<DecisionButton {...props} />)
+      expect(wrapper.find("button").text()).toEqual(buttonText)
+    })
+
+    it("has a className of 'decision-button'", () => {
+      const wrapper = shallow(<DecisionButton {...props} />)
+      expect(wrapper.find("button").props().className).toEqual("decision-button")
+    })
+
   })
+
 })
