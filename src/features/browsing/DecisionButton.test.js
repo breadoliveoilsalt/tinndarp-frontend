@@ -15,23 +15,24 @@ describe("<DecisionButton />", () => {
   })
 
   it("renders a button", () => {
-    const props = {}
-    const wrapper = shallow(<DecisionButton {...props} />)
     expect(wrapper.find("button")).toHaveLength(1)
   })
 
   describe("the rendered button", () => {
 
-    it("renders the text prop within the button", () => {
+    it("renders the text prop", () => {
       const buttonText = "Button Text"
-      const props = {text: buttonText}
-      const wrapper = shallow(<DecisionButton {...props} />)
+      props = {text: buttonText}
+      wrapper = shallow(<DecisionButton {...props} />)
       expect(wrapper.find("button").text()).toEqual(buttonText)
     })
 
     it("has a className of 'decision-button'", () => {
-      const wrapper = shallow(<DecisionButton {...props} />)
       expect(wrapper.find("button").props().className).toEqual("decision-button")
+    })
+
+    it("on a click, calls the callback passed down as props.action", () => {
+      // props = {action: jest.fn()}
     })
 
   })
