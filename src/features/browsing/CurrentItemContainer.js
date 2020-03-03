@@ -26,7 +26,7 @@ const CurrentItemContainer = (props) => {
           {currentItem.name} <br/>
           {currentItem.description} <br/>
           ${currentItem.price} <br/>
-          <a target="_blank" href={currentItem.moreInfoURL}> More Info </a>
+          <a href={currentItem.moreInfoURL} target="_blank" rel="noopener noreferrer"> More Info </a>
         </div>
 
       </div>
