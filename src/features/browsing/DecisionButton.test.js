@@ -32,7 +32,13 @@ describe("<DecisionButton />", () => {
     })
 
     it("on a click, calls the callback passed down as props.action", () => {
-      // props = {action: jest.fn()}
+      props = {action: jest.fn()}
+      wrapper = shallow(<DecisionButton {...props} />)
+      const button = wrapper.find("button")
+
+      button.simulate("click")
+
+      expect(props.action.mock.calls.length).toEqual(1)
     })
 
   })
