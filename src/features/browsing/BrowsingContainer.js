@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchItems } from './itemsToBrowseSlice'
-import CurrentItemContainer from './CurrentItemContainer'
 import Loader from '../../components/Loader'
+import CurrentItemContainer from './CurrentItemContainer'
+import EmptyItemsDisplay from './EmptyItemsDisplay'
 import './BrowsingContainer.css'
 
 export class BrowsingContainer extends Component {

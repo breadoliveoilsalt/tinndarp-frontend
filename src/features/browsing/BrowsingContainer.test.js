@@ -8,6 +8,7 @@ import configureMockStore from 'redux-mock-store'
 import BrowsingContainerConnectedToStore, { BrowsingContainer } from './BrowsingContainer'
 import CurrentItemContainer from './CurrentItemContainer'
 import Loader from '../../components/Loader'
+import FinshedBrowsingDisplay from './FinshedBrowsingDisplay'
 
 const mockStore = configureMockStore([thunk])
 
@@ -62,5 +63,17 @@ describe("<BrowsingContainer />", () => {
     const wrapper = mount(<Provider store={store}> <BrowsingContainerConnectedToStore /> </Provider>)
 
     expect(wrapper.find(Loader).exists()).toBeTruthy()
+  })
+
+  it("renders an <FinshedBrowsingDisplay /> if the state's items list is empty and the app is not fetching", () => {
+    const state = {itemsToBrowse:
+                    { fetchingItems: false,
+                      items: []
+                    }
+                  }
+    const store = mockStore(state)
+    const wrapper = mount(<Provider store={store}> <BrowsingContainerConnectedToStore /> </Provider>)
+
+    expect(wrapper.find(FinshedBrowsingDisplay).exists()).toBeTruthy()
   })
 })
