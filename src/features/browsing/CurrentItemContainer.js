@@ -34,6 +34,7 @@ const CurrentItemContainer = (props) => {
             text="Nope"
             className="decision-button nope-button"
             currentItem={currentItem}
+            action={props.handleNope}
           />
           <DecisionButton
             text={"Like"}
