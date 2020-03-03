@@ -30,8 +30,12 @@ const CurrentItemContainer = (props) => {
         </div>
 
         <div>
-          <DecisionButton />
-          <DecisionButton />
+          <DecisionButton
+            text={"Nope"}
+          />
+          <DecisionButton
+            text={"Like"}
+          />
         </div>
       </div>
     )

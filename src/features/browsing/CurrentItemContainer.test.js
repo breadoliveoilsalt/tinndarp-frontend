@@ -75,10 +75,10 @@ describe("<CurrentItemContainer />", () => {
       expect(wrapper.find(DecisionButton).last().prop("text")).toEqual("Like")
     })
 
-    describe("the <DecisionButton /> for liking an item", () => {
-
-
-    })
+    // describe("the <DecisionButton /> for liking an item", () => {
+    //
+    //
+    // })
   })
 
 })
