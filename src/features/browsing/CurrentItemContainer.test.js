@@ -75,10 +75,15 @@ describe("<CurrentItemContainer />", () => {
       expect(wrapper.find(DecisionButton).last().prop("text")).toEqual("Like")
     })
 
-    // describe("the <DecisionButton /> for liking an item", () => {
-    //
-    //
-    // })
+    describe("the <DecisionButton /> for noping an item", () => {
+
+      it("has a props classname of 'decision-button nope-button'", () => {
+        const nopeButton = wrapper.find(DecisionButton).first()
+        expect(nopeButton.props().className).toEqual("decision-button nope-button")
+      })
+
+
+    })
   })
 
 })
