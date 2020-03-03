@@ -2,6 +2,9 @@ import React from 'react'
 import Enzyme, { shallow, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 Enzyme.configure({ adapter: new Adapter() })
+import thunk from 'redux-thunk'
+import { Provider } from 'react-redux'
+import configureMockStore from 'redux-mock-store'
 import CurrentItemContainer from './CurrentItemContainer'
 import DecisionButton from './DecisionButton'
 
@@ -82,6 +85,10 @@ describe("<CurrentItemContainer />", () => {
         expect(nopeButton.props().className).toEqual("decision-button nope-button")
       })
 
+      it("has a currentItem prop equal to the currentItem prop of the parent", () => {
+        const nopeButton = wrapper.find(DecisionButton).first()
+        expect(nopeButton.props().currentItem).toEqual(currentItem)
+      })
 
     })
   })
