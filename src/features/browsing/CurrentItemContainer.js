@@ -16,15 +16,16 @@ const CurrentItemContainer = (props) => {
         <div>
           <img
             className="browsing-item-image"
-            src={currentItem.image_url}
+            src={currentItem.imageURL}
             alt={"current item"}
           />
         </div>
 
         <div className="browsing-item-details">
           {currentItem.name} <br/>
-          $ {currentItem.price} <br/>
           {currentItem.description} <br/>
+          ${currentItem.price} <br/>
+          <a href={currentItem.moreInfoURL} target="_blank" rel="noopener noreferrer"> More Info </a>
         </div>
 
       </div>
