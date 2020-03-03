@@ -4,6 +4,7 @@ const LOAD_ITEMS = 'LOAD_ITEMS'
 const LOAD_CURRENT_ITEM = 'LOAD_CURRENT_ITEM'
 const UPDATE_FETCHING_STATUS = 'UPDATE_FETCHING_STATUS'
 const RESET_ITEMS_TO_BROWSE_STATE = 'RESET_ITEMS_TO_BROWSE_STATE'
+const REMOVE_CURRENT_ITEM = 'REMOVE_CURRENT_ITEM'
 
 const initialState = {
   items: null,
@@ -21,6 +22,8 @@ function itemsToBrowseReducer(state = initialState, action) {
       } else {
         return state
       }
+    case REMOVE_CURRENT_ITEM:
+      return Object.assign({}, state, {currentItem: null})
     case UPDATE_FETCHING_STATUS:
       return Object.assign({}, state, {fetchingItems: action.payload})
     case RESET_ITEMS_TO_BROWSE_STATE:
@@ -42,6 +45,12 @@ export function loadItems(data) {
 export function loadCurrentItem() {
   return {
     type: LOAD_CURRENT_ITEM
+  }
+}
+
+export function removeCurrentItem() {
+  return {
+    type: REMOVE_CURRENT_ITEM
   }
 }
 

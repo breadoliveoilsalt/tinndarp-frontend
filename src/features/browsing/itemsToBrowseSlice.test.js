@@ -121,9 +121,9 @@ describe("itemsToBrowse store slice", () => {
         dispatch(actions.loadCurrentItem())
 
         expect(store.getState().itemsToBrowse.currentItem).toEqual("item 1")
-        dispatch(action.removeCurrentItem())
+        dispatch(actions.removeCurrentItem())
 
-        expect(store.getState().itemsToBrowse.items).toBeNull()
+        expect(store.getState().itemsToBrowse.currentItem).toBeNull()
       })
     })
   })
