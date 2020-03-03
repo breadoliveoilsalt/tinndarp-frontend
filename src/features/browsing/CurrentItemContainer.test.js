@@ -90,6 +90,19 @@ describe("<CurrentItemContainer />", () => {
         expect(nopeButton.props().currentItem).toEqual(currentItem)
       })
 
+      it("has a action props equal to the parent prop for handleNope", () => {
+        let handleNope = jest.fn()
+
+        wrapper = shallow(<CurrentItemContainer
+          currentItem={currentItem}
+          handleNope={handleNope}
+        />)
+
+        const nopeButton = wrapper.find(DecisionButton).first()
+        expect(nopeButton.props().action).toEqual(handleNope)
+      }
+    )
+
     })
   })
 
