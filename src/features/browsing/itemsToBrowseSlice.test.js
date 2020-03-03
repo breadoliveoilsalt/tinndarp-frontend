@@ -114,14 +114,17 @@ describe("itemsToBrowse store slice", () => {
       })
     })
 
-    // describe("removeCurrentItem()", () => {
-    //   it("removes the current item from the state", () => {
-    //       dispatch(actions.loadItems(itemsList))
-    //
-    //       dispatch(actions.)
-    //
-    //       expect(store.getState().itemsToBrowse.items).toEqual(itemsList)
-    //   })
-    // })
+    describe("removeCurrentItem()", () => {
+      it("returns currentItem in the state to null", () => {
+        const itemsList = ["item 1", "item 2"]
+        dispatch(actions.loadItems(itemsList))
+        dispatch(actions.loadCurrentItem())
+
+        expect(store.getState().itemsToBrowse.currentItem).toEqual("item 1")
+        dispatch(action.removeCurrentItem())
+
+        expect(store.getState().itemsToBrowse.items).toBeNull()
+      })
+    })
   })
 })
