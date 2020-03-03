@@ -29,6 +29,10 @@ const CurrentItemContainer = (props) => {
           <a href={currentItem.moreInfoURL} target="_blank" rel="noopener noreferrer"> More Info </a>
         </div>
 
+        <div>
+          <DecisionButton />
+          <DecisionButton />
+        </div>
       </div>
     )
   }

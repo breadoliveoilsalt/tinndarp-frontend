@@ -3,6 +3,7 @@ import Enzyme, { shallow, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 Enzyme.configure({ adapter: new Adapter() })
 import CurrentItemContainer from './CurrentItemContainer'
+import DecisionButton from './DecisionButton'
 
 describe("<CurrentItemContainer />", () => {
 
@@ -69,7 +70,7 @@ describe("<CurrentItemContainer />", () => {
     })
 
     it("renders two <DecisionButtons />", () => {
-        expect(wrapper.find(<DecisionButton />)).toHaveLength(2)
+        expect(wrapper.find(DecisionButton)).toHaveLength(2)
     })
   })
 
