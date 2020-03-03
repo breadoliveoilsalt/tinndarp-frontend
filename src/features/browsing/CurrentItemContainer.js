@@ -1,12 +1,11 @@
 import React from 'react'
 import DecisionButton from './DecisionButton'
 
-const CurrentItemContainer = (props) => {
+const CurrentItemContainer = ( {currentItem, handleNope}) => {
 
   let content = null
 
-  if (props.currentItem) {
-    const currentItem = props.currentItem
+  if (currentItem) {
     content = (
       <div>
 
@@ -34,7 +33,7 @@ const CurrentItemContainer = (props) => {
             text="Nope"
             className="decision-button nope-button"
             currentItem={currentItem}
-            action={props.handleNope}
+            action={handleNope}
           />
           <DecisionButton
             text={"Like"}
