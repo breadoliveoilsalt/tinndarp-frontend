@@ -115,6 +115,7 @@ describe("itemsToBrowse store slice", () => {
     })
 
     describe("removeCurrentItem()", () => {
+
       it("returns currentItem in the state to null", () => {
         const itemsList = ["item 1", "item 2"]
         dispatch(actions.loadItems(itemsList))
@@ -124,6 +125,15 @@ describe("itemsToBrowse store slice", () => {
         dispatch(actions.removeCurrentItem())
 
         expect(store.getState().itemsToBrowse.currentItem).toBeNull()
+      })
+
+      it("removes the first item in the items list", () => {
+        const itemsList = ["item 1", "item 2"]
+        dispatch(actions.loadItems(itemsList))
+
+        dispatch(actions.removeCurrentItem())
+
+        expect(store.getState().itemsToBrowse.items).toEqual(["item 2"])
       })
     })
   })
