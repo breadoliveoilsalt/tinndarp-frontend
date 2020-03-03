@@ -29,19 +29,6 @@ const CurrentItemContainer = (props) => {
           <a href={currentItem.moreInfoURL} target="_blank" rel="noopener noreferrer"> More Info </a>
         </div>
 
-        <div>
-          <DecisionButton
-            className="decision-button nope-button"
-            text="Nope"
-            action={() => console.log("No like!")}
-          />
-
-          <DecisionButton
-            className="decision-button like-button"
-            text="Like"
-            action={() => console.log("Like!")}
-          />
-        </div>
       </div>
     )
   }

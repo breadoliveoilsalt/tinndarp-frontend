@@ -68,6 +68,9 @@ describe("<CurrentItemContainer />", () => {
       expect(itemLink.prop("href")).toEqual(itemMoreInfoURL)
     })
 
+    it("renders two <DecisionButtons />", () => {
+        expect(wrapper.find(<DecisionButton />)).toHaveLength(2)
+    })
   })
 
 })
