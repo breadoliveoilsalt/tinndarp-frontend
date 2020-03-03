@@ -16,7 +16,11 @@ function itemsToBrowseReducer(state = initialState, action) {
     case LOAD_ITEMS:
       return Object.assign({}, state, {items: action.payload})
     case LOAD_CURRENT_ITEM:
-      return Object.assign({}, state, {currentItem: state.items[0]})
+      if (state.items.length > 0) {
+        return Object.assign({}, state, {currentItem: state.items[0]})
+      } else {
+        return state
+      }
     case UPDATE_FETCHING_STATUS:
       return Object.assign({}, state, {fetchingItems: action.payload})
     case RESET_ITEMS_TO_BROWSE_STATE:
