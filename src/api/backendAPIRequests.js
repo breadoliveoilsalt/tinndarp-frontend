@@ -2,17 +2,26 @@ import * as config from './backendAPIRequestsConfig'
 
 export async function getItems() {
   const url = config.baseURL + "/items"
-  let { rawData } = await config.fetchWrapper.get(url)
+  let rawData = await config.fetchWrapper.get(url)
   return processFromBackendAPI(rawData)
 }
 
 export function processFromBackendAPI(rawData) {
-  return {
-    name: rawData.name,
-    imageURL: rawData.image_url,
-    description: rawData.description,
-    price: rawData.price,
-    moreInfoURL: rawData.more_info_url
+  const rawItemListData = rawData.data
+  let processedData = []
+  rawItemListData.forEach(rawItemData => cherrypickData(rawItemData, processedData))
+  return processedData
+}
+
+function cherrypickData(rawItemData, processedData) {
+  const newObject = {
+    id: rawItemData.id,
+    name: rawItemData.name,
+    imageURL: rawItemData.image_url,
+    description: rawItemData.description,
+    price: rawItemData.price,
+    moreInfoURL: rawItemData.more_info_url
   }
 
+  processedData.push(newObject)
 }
