@@ -1,7 +1,37 @@
 .app {
-  text-align: center;
   width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 14px;
+  /* this sets the ems; works with media query below and viewport meta tag in index.html */
 }
+
+@media (min-width: 900px) {
+  body {
+    font-size: 16px;
+  }
+
+  .app {
+    width: 40%;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 900px) {
+  body {
+    font-size: 16px;
+  }
+
+  .app {
+    width: 60%;
+  }
+}
+
+@media (min-width: 400px) and (max-width: 600px) {
+  .app {
+    width: 80%;
+  }
+}
+
 
 div.logo-header {
   padding: 1em;
