@@ -76,4 +76,19 @@ describe("<BrowsingContainer />", () => {
 
     expect(wrapper.find(FinishedBrowsingDisplay).exists()).toBeTruthy()
   })
+
+  describe("handleNope()", () => {
+
+    it("calls the removeCurrentItem action", () => {
+      const props = { removeCurrentItem: jest.fn(),
+                      fetchItems: jest.fn()
+                    }
+      const wrapper = shallow(<BrowsingContainer {...props} />)
+
+      wrapper.instance().handleNope()
+
+      expect(removeCurrentItem.mock.calls.length).toEqual(1)
+    })
+
+  })
 })

@@ -15,7 +15,6 @@ export class BrowsingContainer extends Component {
   }
 
   render() {
-
     if (this.props.fetchingItems) {
       return (<Loader />)
     } else if (this.props.items && this.props.items.length > 0){
