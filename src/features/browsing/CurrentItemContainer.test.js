@@ -2,7 +2,11 @@ import React from 'react'
 import Enzyme, { shallow, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 Enzyme.configure({ adapter: new Adapter() })
+import thunk from 'redux-thunk'
+import { Provider } from 'react-redux'
+import configureMockStore from 'redux-mock-store'
 import CurrentItemContainer from './CurrentItemContainer'
+import DecisionButton from './DecisionButton'
 
 describe("<CurrentItemContainer />", () => {
 
@@ -66,6 +70,64 @@ describe("<CurrentItemContainer />", () => {
 
       expect(itemLink.exists()).toBeTruthy()
       expect(itemLink.prop("href")).toEqual(itemMoreInfoURL)
+    })
+
+    it("renders a <DecisionButton /> for noping and a <DecisionButton /> for liking", () => {
+      expect(wrapper.find(DecisionButton)).toHaveLength(2)
+      expect(wrapper.find(DecisionButton).first().prop("text")).toEqual("Nope")
+      expect(wrapper.find(DecisionButton).last().prop("text")).toEqual("Like")
+    })
+
+    describe("the <DecisionButton /> for noping an item", () => {
+
+      it("has a props classname of 'decision-button nope-button'", () => {
+        const nopeButton = wrapper.find(DecisionButton).first()
+        expect(nopeButton.props().className).toEqual("decision-button nope-button")
+      })
+
+      it("has a currentItem prop equal to the currentItem prop of the parent", () => {
+        const nopeButton = wrapper.find(DecisionButton).first()
+        expect(nopeButton.props().currentItem).toEqual(currentItem)
+      })
+
+      it("has a action props equal to the parent prop for handleNope", () => {
+        let handleNope = jest.fn()
+
+        wrapper = shallow(<CurrentItemContainer
+          currentItem={currentItem}
+          handleNope={handleNope}
+        />)
+
+        const nopeButton = wrapper.find(DecisionButton).first()
+        expect(nopeButton.props().action).toEqual(handleNope)
+      })
+
+    })
+
+    describe("the <DecisionButton /> for liking an item", () => {
+
+      it("has a props classname of 'decision-button like-button'", () => {
+        const likeButton = wrapper.find(DecisionButton).last()
+        expect(likeButton.props().className).toEqual("decision-button like-button")
+      })
+
+      it("has a currentItem prop equal to the currentItem prop of the parent", () => {
+        const likeButton = wrapper.find(DecisionButton).last()
+        expect(likeButton.props().currentItem).toEqual(currentItem)
+      })
+
+      it("has a action props equal to the parent prop for handleLike", () => {
+        let handleLike = jest.fn()
+
+        wrapper = shallow(<CurrentItemContainer
+          currentItem={currentItem}
+          handleLike={handleLike}
+        />)
+
+        const likeButton = wrapper.find(DecisionButton).last()
+        expect(likeButton.props().action).toEqual(handleLike)
+      })
+
     })
 
   })

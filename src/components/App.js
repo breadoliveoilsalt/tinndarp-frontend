@@ -8,6 +8,7 @@ const App = () => {
     <div className="app">
       <Header />
       <BrowsingContainer />
+      <div className="footer-to-come" style={{"height": "2em"}}></div>
     </div>
   )
 }

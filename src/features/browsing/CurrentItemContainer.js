@@ -1,11 +1,11 @@
 import React from 'react'
+import DecisionButton from './DecisionButton'
 
-const CurrentItemContainer = (props) => {
+const CurrentItemContainer = ( {currentItem, handleNope, handleLike} ) => {
 
   let content = null
 
-  if (props.currentItem) {
-    const currentItem = props.currentItem
+  if (currentItem) {
     content = (
       <div>
 
@@ -28,6 +28,21 @@ const CurrentItemContainer = (props) => {
           <a href={currentItem.moreInfoURL} target="_blank" rel="noopener noreferrer"> More Info </a>
         </div>
 
+        <div>
+          <DecisionButton
+            text="Nope"
+            className="decision-button nope-button"
+            currentItem={currentItem}
+            action={handleNope}
+          />
+
+          <DecisionButton
+            text="Like"
+            className="decision-button like-button"
+            currentItem={currentItem}
+            action={handleLike}
+          />
+        </div>
       </div>
     )
   }

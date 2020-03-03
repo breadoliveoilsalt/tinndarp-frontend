@@ -6,15 +6,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 14px; /* this sets the ems; works with media query below and viewport meta tag in index.html */
-}
-
-@media (min-width: 800px) {
-
-  body {
-    font-size: 20px;
-  }
-
 }
 
 code {
