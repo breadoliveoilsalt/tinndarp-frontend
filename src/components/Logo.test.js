@@ -15,22 +15,4 @@ describe("<Logo />", () => {
     expect(wrapper.find("div").hasClass(propsClassName)).toBeTruthy()
   })
 
-  it("renders an image with a className passed down by props", () => {
-    const propsClassName = "some-class"
-    const wrapper = shallow(<Logo className={propsClassName} />)
-
-    expect(wrapper.find("img")).toHaveLength(1)
-    expect(wrapper.find("img").hasClass(propsClassName)).toBeTruthy()
-  })
-
-  describe("the rendered image", () => {
-
-    it("is the Tinndarp logo", () => {
-      const wrapper = shallow(<Logo />)
-
-      expect(wrapper.find("img").prop("src")).toEqual(logo)
-    })
-
-  })
-
 })

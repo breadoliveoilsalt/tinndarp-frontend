@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from './Header'
 import BrowsingContainer from '../features/browsing/BrowsingContainer'
+import Footer from './Footer'
 import './App.css'
 
 const App = () => {
@@ -8,7 +9,7 @@ const App = () => {
     <div className="app">
       <Header />
       <BrowsingContainer />
-      <div className="footer-to-come" style={{"height": "2em"}}></div>
+      <Footer />
     </div>
   )
 }
