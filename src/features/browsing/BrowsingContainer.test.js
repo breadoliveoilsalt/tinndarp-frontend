@@ -14,7 +14,7 @@ const mockStore = configureMockStore([thunk])
 
 describe("<BrowsingContainer />", () => {
 
-  it("does not render <CurrentItemContainer/ > if the store has no list of items", () => {
+  it("does not render <CurrentItemContainer /> if the store has no list of items", () => {
     const state = {itemsToBrowse:
                     {items: null}
                   }
@@ -24,7 +24,7 @@ describe("<BrowsingContainer />", () => {
     expect(wrapper.find(CurrentItemContainer).exists()).toBeFalsy()
   })
 
-  it("renders <CurrentItemContainer/ > if the store has a list of items and the app is not fetchingItems", () => {
+  it("renders <CurrentItemContainer /> if the store has a list of items and the app is not fetchingItems", () => {
     const state = {itemsToBrowse:
                     { items: ["item 1"],
                       fetchingItems: false
@@ -87,7 +87,7 @@ describe("<BrowsingContainer />", () => {
 
       wrapper.instance().handleNope()
 
-      expect(removeCurrentItem.mock.calls.length).toEqual(1)
+      expect(props.removeCurrentItem.mock.calls.length).toEqual(1)
     })
 
   })

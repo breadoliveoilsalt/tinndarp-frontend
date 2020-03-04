@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchItems } from './itemsToBrowseSlice'
+import { fetchItems, removeCurrentItem } from './itemsToBrowseSlice'
 import Loader from '../../components/Loader'
 import CurrentItemContainer from './CurrentItemContainer'
 import FinishedBrowsingDisplay from './FinishedBrowsingDisplay'
@@ -14,11 +14,21 @@ export class BrowsingContainer extends Component {
     }
   }
 
+  handleNope() {
+    this.props.removeCurrentItem()
+  }
+
   render() {
+    debugger;
     if (this.props.fetchingItems) {
       return (<Loader />)
     } else if (this.props.items && this.props.items.length > 0){
-      return <CurrentItemContainer currentItem={this.props.currentItem}/>
+      return (
+        <CurrentItemContainer
+          currentItem={this.props.currentItem}
+          handleNope={this.handleNope}
+        />
+      )
     } else
       return <FinishedBrowsingDisplay />
   }
@@ -34,7 +44,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchItems: () => dispatch(fetchItems())
+    fetchItems: () => dispatch(fetchItems()),
+    removeCurrentItem: () => dispatch(removeCurrentItem())
   }
 }
 
