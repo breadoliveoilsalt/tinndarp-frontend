@@ -95,6 +95,7 @@ describe("<BrowsingContainer />", () => {
   })
 
   describe("handleNope()", () => {
+
     let props
     beforeEach(() => {
       props = {
@@ -121,4 +122,34 @@ describe("<BrowsingContainer />", () => {
     })
 
   })
+
+  describe("handleLike()", () => {
+
+    let props
+    beforeEach(() => {
+      props = {
+        removeCurrentItem: jest.fn(),
+        updateCurrentItem: jest.fn(),
+        fetchItems: jest.fn()
+      }
+    })
+
+    it("calls the removeCurrentItem action", () => {
+      const wrapper = shallow(<BrowsingContainer {...props} />)
+
+      wrapper.instance().handleLike()
+
+      expect(props.removeCurrentItem.mock.calls.length).toEqual(1)
+    })
+
+    it("calls the updateCurrentItem action", () => {
+      const wrapper = shallow(<BrowsingContainer {...props} />)
+
+      wrapper.instance().handleLike()
+
+      expect(props.updateCurrentItem.mock.calls.length).toEqual(1)
+    })
+
+  })
+
 })

@@ -26,7 +26,8 @@ export class BrowsingContainer extends Component {
   }
 
   handleLike() {
-
+    this.props.removeCurrentItem()
+    this.props.updateCurrentItem()
   }
 
   render() {
