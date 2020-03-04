@@ -16,6 +16,7 @@ export class BrowsingContainer extends Component {
 
   handleNope() {
     this.props.removeCurrentItem()
+    this.props.updateCurrentItem()
   }
 
   render() {

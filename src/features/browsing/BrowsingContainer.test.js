@@ -78,16 +78,26 @@ describe("<BrowsingContainer />", () => {
   })
 
   describe("handleNope()", () => {
+    const props = {
+                    removeCurrentItem: jest.fn(),
+                    updateCurrentItem: jest.fn(),
+                    fetchItems: jest.fn()
+                  }
 
     it("calls the removeCurrentItem action", () => {
-      const props = { removeCurrentItem: jest.fn(),
-                      fetchItems: jest.fn()
-                    }
       const wrapper = shallow(<BrowsingContainer {...props} />)
 
       wrapper.instance().handleNope()
 
       expect(props.removeCurrentItem.mock.calls.length).toEqual(1)
+    })
+
+    it("calls the updateCurrentItem action", () => {
+      const wrapper = shallow(<BrowsingContainer {...props} />)
+
+      wrapper.instance().handleNope()
+
+      expect(props.updateCurrentItem.mock.calls.length).toEqual(1)
     })
 
   })
