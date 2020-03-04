@@ -2,7 +2,7 @@ import React from 'react'
 
 const FinishedBrowsingDisplay = () => {
   return (
-    <div>
+    <div className="finished-browsing-display">
       You have finished browsing all of the items!
     </div>
   )
