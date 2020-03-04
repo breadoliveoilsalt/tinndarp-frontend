@@ -19,6 +19,10 @@ export class BrowsingContainer extends Component {
     this.props.updateCurrentItem()
   }
 
+  handleLike() {
+
+  }
+
   render() {
     debugger;
     if (this.props.fetchingItems) {
@@ -28,6 +32,7 @@ export class BrowsingContainer extends Component {
         <CurrentItemContainer
           currentItem={this.props.currentItem}
           handleNope={this.handleNope}
+          handleLike={this.handleLike}
         />
       )
     } else

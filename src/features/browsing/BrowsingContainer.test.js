@@ -50,7 +50,7 @@ describe("<BrowsingContainer />", () => {
 
     expect(currentItemContainer.prop("currentItem")).toEqual("item 1")
     expect(currentItemContainer.prop("handleNope")).toEqual(browsingContainerParent.instance().handleNope)
-    expect(currentItemContainer.prop("handleLike")).toEqual(browsingContainerParentk.instance().handleLike)
+    expect(currentItemContainer.prop("handleLike")).toEqual(browsingContainerParent.instance().handleLike)
   })
 
   it("calls fetchItems when it mounts", () => {
