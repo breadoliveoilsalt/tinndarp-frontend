@@ -78,11 +78,14 @@ describe("<BrowsingContainer />", () => {
   })
 
   describe("handleNope()", () => {
-    const props = {
-                    removeCurrentItem: jest.fn(),
-                    updateCurrentItem: jest.fn(),
-                    fetchItems: jest.fn()
-                  }
+    let props
+    beforeEach(() => {
+      props = {
+        removeCurrentItem: jest.fn(),
+        updateCurrentItem: jest.fn(),
+        fetchItems: jest.fn()
+      }
+    })
 
     it("calls the removeCurrentItem action", () => {
       const wrapper = shallow(<BrowsingContainer {...props} />)
