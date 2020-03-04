@@ -8,6 +8,12 @@ import './BrowsingContainer.css'
 
 export class BrowsingContainer extends Component {
 
+  constructor(props) {
+    super(props)
+    this.handleNope = this.handleNope.bind(this)
+    this.handleLike = this.handleLike.bind(this)
+  }
+
   componentDidMount() {
     if (!this.props.items) {
       this.props.fetchItems()
