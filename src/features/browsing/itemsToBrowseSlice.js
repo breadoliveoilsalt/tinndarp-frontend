@@ -23,7 +23,7 @@ function itemsToBrowseReducer(state = initialState, action) {
         return state
       }
     case REMOVE_CURRENT_ITEM:
-      const [firstItem, ...remainingItems] = state.items
+      const remainingItems = state.items.slice(1)
       return Object.assign({}, state, {currentItem: null, items: remainingItems})
     case UPDATE_FETCHING_STATUS:
       return Object.assign({}, state, {fetchingItems: action.payload})
