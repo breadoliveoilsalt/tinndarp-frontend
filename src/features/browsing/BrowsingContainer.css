@@ -53,3 +53,10 @@ a {
 .nope-button:hover {
   background-color: #B22222;
 }
+
+.finished-browsing-display {
+  margin: 1em auto;
+  font-size: 2em;
+  font-weight: bold;
+  width: 80%;
+}

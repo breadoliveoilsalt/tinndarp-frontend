@@ -91,5 +91,50 @@ describe("itemsToBrowse store slice", () => {
         })
       })
     })
+
+    describe("updateCurrentItem()", () => {
+      it("loads the first item as the currentItem", () => {
+        const itemsList = ["item 1", "item 2"]
+        dispatch(actions.loadItems(itemsList))
+
+        expect(store.getState().itemsToBrowse.currentItem).toBeNull()
+        dispatch(actions.updateCurrentItem())
+
+        expect(store.getState().itemsToBrowse.currentItem).toEqual("item 1")
+      })
+
+      it("does nothing if the items list is empty", () => {
+        const itemsList = []
+        dispatch(actions.loadItems(itemsList))
+
+        expect(store.getState().itemsToBrowse.currentItem).toBeNull()
+        dispatch(actions.updateCurrentItem())
+
+        expect(store.getState().itemsToBrowse.currentItem).toBeNull()
+      })
+    })
+
+    describe("removeCurrentItem()", () => {
+
+      it("returns currentItem in the state to null", () => {
+        const itemsList = ["item 1", "item 2"]
+        dispatch(actions.loadItems(itemsList))
+        dispatch(actions.updateCurrentItem())
+
+        expect(store.getState().itemsToBrowse.currentItem).toEqual("item 1")
+        dispatch(actions.removeCurrentItem())
+
+        expect(store.getState().itemsToBrowse.currentItem).toBeNull()
+      })
+
+      it("removes the first item in the items list", () => {
+        const itemsList = ["item 1", "item 2"]
+        dispatch(actions.loadItems(itemsList))
+
+        dispatch(actions.removeCurrentItem())
+
+        expect(store.getState().itemsToBrowse.items).toEqual(["item 2"])
+      })
+    })
   })
 })

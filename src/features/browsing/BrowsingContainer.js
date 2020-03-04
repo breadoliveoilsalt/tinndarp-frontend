@@ -1,11 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchItems } from './itemsToBrowseSlice'
-import CurrentItemContainer from './CurrentItemContainer'
+import { fetchItems, removeCurrentItem, updateCurrentItem } from './itemsToBrowseSlice'
 import Loader from '../../components/Loader'
+import CurrentItemContainer from './CurrentItemContainer'
+import FinishedBrowsingDisplay from './FinishedBrowsingDisplay'
 import './BrowsingContainer.css'
 
 export class BrowsingContainer extends Component {
+
+  constructor(props) {
+    super(props)
+    this.handleNope = this.handleNope.bind(this)
+    this.handleLike = this.handleLike.bind(this)
+  }
 
   componentDidMount() {
     if (!this.props.items) {
@@ -13,14 +20,29 @@ export class BrowsingContainer extends Component {
     }
   }
 
-  render() {
+  handleNope() {
+    this.props.removeCurrentItem()
+    this.props.updateCurrentItem()
+  }
 
+  handleLike() {
+    this.props.removeCurrentItem()
+    this.props.updateCurrentItem()
+  }
+
+  render() {
     if (this.props.fetchingItems) {
       return (<Loader />)
     } else if (this.props.items && this.props.items.length > 0){
-      return <CurrentItemContainer currentItem={this.props.currentItem}/>
+      return (
+        <CurrentItemContainer
+          currentItem={this.props.currentItem}
+          handleNope={this.handleNope}
+          handleLike={this.handleLike}
+        />
+      )
     } else
-      return null
+      return <FinishedBrowsingDisplay />
   }
 }
 
@@ -34,7 +56,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchItems: () => dispatch(fetchItems())
+    fetchItems: () => dispatch(fetchItems()),
+    removeCurrentItem: () => dispatch(removeCurrentItem()),
+    updateCurrentItem: () => dispatch(updateCurrentItem())
   }
 }
 
