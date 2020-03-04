@@ -36,23 +36,23 @@ describe("<BrowsingContainer />", () => {
     expect(wrapper.find(CurrentItemContainer).exists()).toBeTruthy()
   })
 
-  // it("renders <CurrentItemContainer /> with props for its own currentItem prop, its handleNope, and its handleLike", () => {
-  //   const state = {itemsToBrowse:
-  //                   { items: ["item 1"],
-  //                     currentItem: "item 1"
-  //                   }
-  //                 }
-  //   const store = mockStore(state)
-  //   const wrapper = mount(<Provider store={store}> <BrowsingContainerConnectedToStore /> </Provider>)
-  //
-  //   const currentItemContainer = wrapper.find(CurrentItemContainer)
-  //   console.log(currentItemContainer.prop("handleNope"))
-  //   console.log(wrapper.find(BrowsingContainerConnectedToStore).instance())
-  //   expect(currentItemContainer.prop("currentItem")).toEqual("item 1")
-  //   // expect(wrapper.find(CurrentItemContainer).prop("handleNope")).toEqual(wrapper.instance().handleNope)
-  //
-  // })
-  //
+  it("renders <CurrentItemContainer /> with props for its own currentItem prop, its handleNope, and its handleLike", () => {
+    const state = {itemsToBrowse:
+                    { items: ["item 1"],
+                      currentItem: "item 1"
+                    }
+                  }
+    const store = mockStore(state)
+    const wrapper = mount(<BrowsingContainerConnectedToStore store={store} /> )
+
+    const browsingContainerParent = wrapper.find(BrowsingContainer)
+    const currentItemContainer = wrapper.find(CurrentItemContainer)
+
+    expect(currentItemContainer.prop("currentItem")).toEqual("item 1")
+    expect(currentItemContainer.prop("handleNope")).toEqual(browsingContainerParent.instance().handleNope)
+    expect(currentItemContainer.prop("handleLike")).toEqual(browsingContainerParentk.instance().handleLike)
+  })
+
   it("calls fetchItems when it mounts", () => {
     const props = {fetchItems: jest.fn()}
     const wrapper = shallow(<BrowsingContainer {...props} />)
