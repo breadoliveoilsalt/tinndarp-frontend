@@ -4,6 +4,7 @@ import Header from './Header'
 import Home from './Home'
 import CreateAccountContainer from '../features/userAccount/CreateAccountContainer'
 import BrowsingContainer from '../features/browsing/BrowsingContainer'
+import NoMatch from './NoMatch'
 import Footer from './Footer'
 import './App.css'
 
@@ -14,16 +15,21 @@ const App = () => {
         <Header />
           <Switch>
 
-            <Route path="/sign_up">
+            <Route exact path="/">
+              <Home />
+            </ Route>
+            
+            <Route exact path="/sign_up">
               <CreateAccountContainer />
             </ Route>
 
-            <Route path="/browse">
+            <Route exact path="/browse">
               <BrowsingContainer />
             </ Route>
 
-            <Route path="/">
-              <Home />
+
+            <Route path="*">
+              <NoMatch />
             </ Route>
 
           </ Switch>
