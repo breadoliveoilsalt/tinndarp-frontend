@@ -1,7 +1,7 @@
 import React from 'react'
 import App from './App'
 import Header from './Header'
-import Routes from './Routes'
+import RoutesContainer from './RoutesContainer'
 import Footer from './Footer'
 import Enzyme, { shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
@@ -21,10 +21,10 @@ describe("<App />", () => {
     expect(wrapper.find("div.app").find(Header)).toHaveLength(1)
   })
 
-  it("renders <Routes /> withing the container div", () => {
+  it("renders <RoutesContainer /> withing the container div", () => {
     const wrapper = shallow(<App />)
 
-    expect(wrapper.find("div.app").find(Routes)).toHaveLength(1)
+    expect(wrapper.find("div.app").find(RoutesContainer)).toHaveLength(1)
   })
 
   it("renders a <Footer /> withing the container div", () => {

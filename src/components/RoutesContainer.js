@@ -5,10 +5,10 @@ import CreateAccountContainer from '../features/userAccount/CreateAccountContain
 import BrowsingContainer from '../features/browsing/BrowsingContainer'
 import NoMatch from './NoMatch'
 
-const Routes = () => {
+const RoutesContainer = () => {
+
   return (
     <BrowserRouter>
-
       <Switch>
 
         <Route exact path="/">
@@ -29,10 +29,8 @@ const Routes = () => {
         </ Route>
 
       </ Switch>
-
     </ BrowserRouter>
-
   )
 }
 
-export default Routes
+export default RoutesContainer

@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from './Header'
-import Routes from './Routes'
+import RoutesContainer from './RoutesContainer'
 import Footer from './Footer'
 import './App.css'
 
@@ -8,7 +8,7 @@ const App = () => {
   return (
     <div className="app">
       <Header />
-      <Routes />
+      <RoutesContainer />
       <Footer />
     </div>
   )
