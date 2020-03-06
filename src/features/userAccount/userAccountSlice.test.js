@@ -2,13 +2,15 @@ import configureStore from '../../configureStore'
 import accountReducer, * as actions from './userAccountSlice'
 import * as requests from  '../../api/backendAPIRequests'
 
-const store = configureStore()
-const dispatch = store.dispatch
 
 describe("userAccount state", () => {
 
+  let store
+  let dispatch
+
   beforeEach(() => {
-    dispatch(actions.resetuserAccountState())
+    store = configureStore()
+    dispatch = store.dispatch
   })
 
   it("has an initial state with fields for logged_in and token", () => {
