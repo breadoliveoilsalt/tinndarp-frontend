@@ -1,41 +1,16 @@
 import React from 'react'
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
 import Header from './Header'
-import Home from './Home'
-import CreateAccountContainer from '../features/userAccount/CreateAccountContainer'
-import BrowsingContainer from '../features/browsing/BrowsingContainer'
-import NoMatch from './NoMatch'
+import Routes from './Routes'
 import Footer from './Footer'
 import './App.css'
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <div className="app">
-        <Header />
-          <Switch>
-
-            <Route exact path="/">
-              <Home />
-            </ Route>
-            
-            <Route exact path="/sign_up">
-              <CreateAccountContainer />
-            </ Route>
-
-            <Route exact path="/browse">
-              <BrowsingContainer />
-            </ Route>
-
-
-            <Route path="*">
-              <NoMatch />
-            </ Route>
-
-          </ Switch>
-        <Footer />
-      </div>
-    </ BrowserRouter>
+    <div className="app">
+      <Header />
+      <Routes />
+      <Footer />
+    </div>
   )
 }
 
