@@ -19,4 +19,17 @@ describe("userAccount state", () => {
     expect(store.getState().userAccount).toEqual(expectedUserAccountInitialState)
   })
 
+  describe("the actions", () => {
+
+    describe("updateLoggedInStatus()", () => {
+
+      it("updates whether the user is logged in", () => {
+        expect(store.getState().userAccount.logged_in).toEqual(false)
+
+        dispatch(updateLoggedInStatus(true))
+
+        expect(store.getState().userAccount.logged_in).toEqual(true)
+      })
+    })
+  })
 })
