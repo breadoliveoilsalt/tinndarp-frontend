@@ -1,6 +1,5 @@
 import configureStore from '../../configureStore'
 import itemsToBrowseReducer, * as actions from './itemsToBrowseSlice'
-import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import * as requests from  '../../api/backendAPIRequests'
 
 const store = configureStore()
