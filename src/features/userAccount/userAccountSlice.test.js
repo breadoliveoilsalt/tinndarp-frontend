@@ -45,8 +45,22 @@ describe("userAccount state", () => {
 
         expect(store.getState().userAccount.token).toEqual(token)
       })
+
     })
 
+    describe("deleteToken()", () => {
+
+      it("deletes the token in the state", () => {
+        const token = "xyz"
+        dispatch(actions.addToken(token))
+        expect(store.getState().userAccount.token).toEqual(token)
+
+        dispatch(actions.deleteToken())
+
+        expect(store.getState().userAccount.token).toEqual(null)
+      })
+
+    })
   })
 
 })
