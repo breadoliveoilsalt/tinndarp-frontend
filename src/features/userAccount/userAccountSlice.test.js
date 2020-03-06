@@ -13,7 +13,7 @@ describe("userAccount state", () => {
 
   it("has an initial state with fields for logged_in and token", () => {
     const expectedUserAccountInitialState = {
-      logged_in: false,
+      loggedIn: false,
       token: null
     }
     expect(store.getState().userAccount).toEqual(expectedUserAccountInitialState)
@@ -24,12 +24,15 @@ describe("userAccount state", () => {
     describe("updateLoggedInStatus()", () => {
 
       it("updates whether the user is logged in", () => {
-        expect(store.getState().userAccount.logged_in).toEqual(false)
+        expect(store.getState().userAccount.loggedIn).toEqual(false)
 
-        dispatch(updateLoggedInStatus(true))
+        dispatch(actions.updateLoggedInStatus(true))
 
-        expect(store.getState().userAccount.logged_in).toEqual(true)
+        expect(store.getState().userAccount.loggedIn).toEqual(true)
       })
+
     })
+
   })
+
 })
