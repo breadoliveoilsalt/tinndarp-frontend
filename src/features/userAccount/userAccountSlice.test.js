@@ -33,6 +33,18 @@ describe("userAccount state", () => {
 
     })
 
+    describe("addToken()", () => {
+
+      it("sets the token state with the argument passed in", () => {
+        expect(store.getState().userAccount.token).toEqual(null)
+
+        const token = "xyz"
+        dispatch(actions.addToken(token))
+
+        expect(store.getState().userAccount.token).toEqual(token)
+      })
+    })
+
   })
 
 })
