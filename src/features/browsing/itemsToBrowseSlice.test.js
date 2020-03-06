@@ -7,8 +7,12 @@ const dispatch = store.dispatch
 
 describe("itemsToBrowse store slice", () => {
 
+  let store
+  let dispatch
+
   beforeEach(() => {
-    dispatch(actions.resetItemsToBrowseState())
+    store = configureStore()
+    dispatch = store.dispatch
   })
 
   describe("the inital state", () => {
