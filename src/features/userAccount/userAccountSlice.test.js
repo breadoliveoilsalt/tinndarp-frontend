@@ -16,7 +16,7 @@ describe("userAccount state", () => {
       logged_in: false,
       token: null
     }
-    expect(store.getState().userAccount).toEqual(expectedInitialState)
+    expect(store.getState().userAccount).toEqual(expectedUserAccountInitialState)
   })
 
 })

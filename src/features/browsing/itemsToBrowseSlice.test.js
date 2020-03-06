@@ -13,14 +13,12 @@ describe("itemsToBrowse store slice", () => {
 
   describe("the inital state", () => {
     it("has fields for a list of items, a currentItem, and a currentItemIndex", () => {
-      const expectedInitialState = {
-        itemsToBrowse: {
-          items: null,
-          currentItem: null,
-          fetchingItems: true
-        }
+      const expectedItemsToBrowseInitialState = {
+        items: null,
+        currentItem: null,
+        fetchingItems: true
       }
-      expect(store.getState()).toEqual(expectedInitialState)
+      expect(store.getState().itemsToBrowse).toEqual(expectedItemsToBrowseInitialState)
     })
   })
 
