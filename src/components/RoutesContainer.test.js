@@ -51,13 +51,10 @@ describe("<Routes />", () => {
       </ Provider>
     )
 
-    const routeComponent = wrapper.find(RoutesContainer)
+    const routeComponent = wrapper.find(Route)
     const createAccountContainerComponent = wrapper.find(CreateAccountContainer)
-    console.log(routeComponent.debug())
-    console.log(createAccountContainerComponent.debug())
     expect(routeComponent.children().length).toEqual(1)
     expect(routeComponent.children()).toEqual(createAccountContainerComponent)
-    // expect(routeComponent.children().equals(createAccountContainerComponent)).toBe(true)
   })
 
 })
