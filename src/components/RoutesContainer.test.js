@@ -7,9 +7,10 @@ import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import configureStore from '../configureStore'
 import RoutesContainer from './RoutesContainer'
+import Home from './Home'
 import CreateAccountContainer from '../features/userAccount/CreateAccountContainer'
 import BrowsingContainer from '../features/browsing/BrowsingContainer'
-import Home from './Home'
+import NoMatch from './NoMatch'
 
 const store = configureStore()
 
@@ -57,62 +58,34 @@ describe("<Routes />", () => {
     expect(routeComponent.children()).toEqual(createAccountContainerComponent)
   })
 
-    it("renders only a <Route /> with <BrowsingContainer /> when the route is '/browse'", () => {
-      const wrapper = mount(
-        <Provider store={store} >
-          <MemoryRouter initialEntries={[ '/browse' ]} initialIndex={0}>
-            <RoutesContainer />
-          </MemoryRouter>
-        </Provider>
-      )
+  it("renders only a <Route /> with <BrowsingContainer /> when the route is '/browse'", () => {
+    const wrapper = mount(
+      <Provider store={store} >
+        <MemoryRouter initialEntries={[ '/browse' ]} initialIndex={0}>
+          <RoutesContainer />
+        </MemoryRouter>
+      </Provider>
+    )
 
-      const routeComponent = wrapper.find(Route)
-      const browsingContainerComponent = wrapper.find(BrowsingContainer)
-      expect(routeComponent.children().length).toEqual(1)
-      expect(routeComponent.children()).toEqual(browsingContainerComponent)
-    })
+    const routeComponent = wrapper.find(Route)
+    const browsingContainerComponent = wrapper.find(BrowsingContainer)
+    expect(routeComponent.children().length).toEqual(1)
+    expect(routeComponent.children()).toEqual(browsingContainerComponent)
+  })
+
+  it("renders only a <Route /> with <NoMatch /> when the route does not match any other routes", () => {
+    const wrapper = mount(
+      <Provider store={store} >
+        <MemoryRouter initialEntries={[ '/adlkjfasl' ]} initialIndex={0}>
+          <RoutesContainer />
+        </MemoryRouter>
+      </Provider>
+    )
+
+    const routeComponent = wrapper.find(Route)
+    const noMatchComponent = wrapper.find(NoMatch)
+    expect(routeComponent.children().length).toEqual(1)
+    expect(routeComponent.children()).toEqual(noMatchComponent)
+  })
 
 })
-
-  //   expect(wrapper.find(SearchLayoutAndLogic)).to.have.lengthOf(1)
-  //   expect(wrapper.find(AboutPage)).to.have.lengthOf(0)
-  //   expect(wrapper.find(PageNotFound)).to.have.lengthOf(0)
-  //
-  // })
-  //
-  // it("renders only the AboutPage component when the route is '/about'", function(){
-  //
-  //   let store = configureStore()
-  //
-  //   const wrapper = mount(
-  //     <Provider store={store} >
-  //       <MemoryRouter exact initialEntries={[ '/about' ]} >
-  //         <Routes />
-  //       </MemoryRouter>
-  //     </ Provider>
-  //   )
-  //
-  //   expect(wrapper.find(SearchLayoutAndLogic)).to.have.lengthOf(0)
-  //   expect(wrapper.find(AboutPage)).to.have.lengthOf(1)
-  //   expect(wrapper.find(PageNotFound)).to.have.lengthOf(0)
-  //
-  // })
-  //
-  // it("renders the PageNotFound component when the route is neither '/' nor '/about'", function(){
-  //
-  //   let store = configureStore()
-  //
-  //   const wrapper = mount(
-  //     <Provider store={store} >
-  //       <MemoryRouter exact initialEntries={[ '/about123' ]} >
-  //         <Routes />
-  //       </MemoryRouter>
-  //     </ Provider>
-  //   )
-  //
-  //   expect(wrapper.find(SearchLayoutAndLogic)).to.have.lengthOf(0)
-  //   expect(wrapper.find(AboutPage)).to.have.lengthOf(0)
-  //   expect(wrapper.find(PageNotFound)).to.have.lengthOf(1)
-  //
-  // })
-// })
