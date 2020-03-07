@@ -5,13 +5,13 @@ Enzyme.configure({ adapter: new Adapter() })
 import { MemoryRouter, Switch, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
-import configureMockStore from 'redux-mock-store'
+import configureStore from '../configureStore'
 import RoutesContainer from './RoutesContainer'
 import CreateAccountContainer from '../features/userAccount/CreateAccountContainer'
+import BrowsingContainer from '../features/browsing/BrowsingContainer'
 import Home from './Home'
 
-const mockStore = configureMockStore([thunk])
-const store = mockStore({})
+const store = configureStore()
 
 describe("<Routes />", () => {
 
@@ -32,8 +32,8 @@ describe("<Routes />", () => {
       <Provider store={store}>
         <MemoryRouter initialEntries={[ '/' ]} initialIndex={0}>
           <RoutesContainer />
-        </ MemoryRouter>
-      </ Provider>
+        </MemoryRouter>
+      </Provider>
     )
 
     const routeComponent = wrapper.find(Route)
@@ -47,8 +47,8 @@ describe("<Routes />", () => {
       <Provider store={store} >
         <MemoryRouter initialEntries={[ '/sign_up' ]} initialIndex={0}>
           <RoutesContainer />
-        </ MemoryRouter>
-      </ Provider>
+        </MemoryRouter>
+      </Provider>
     )
 
     const routeComponent = wrapper.find(Route)
@@ -56,6 +56,21 @@ describe("<Routes />", () => {
     expect(routeComponent.children().length).toEqual(1)
     expect(routeComponent.children()).toEqual(createAccountContainerComponent)
   })
+
+    it("renders only a <Route /> with <BrowsingContainer /> when the route is '/browse'", () => {
+      const wrapper = mount(
+        <Provider store={store} >
+          <MemoryRouter initialEntries={[ '/browse' ]} initialIndex={0}>
+            <RoutesContainer />
+          </MemoryRouter>
+        </Provider>
+      )
+
+      const routeComponent = wrapper.find(Route)
+      const browsingContainerComponent = wrapper.find(BrowsingContainer)
+      expect(routeComponent.children().length).toEqual(1)
+      expect(routeComponent.children()).toEqual(browsingContainerComponent)
+    })
 
 })
 

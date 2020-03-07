@@ -14,8 +14,8 @@ render(
   <Provider store={store}>
     <BrowserRouter>
       <App />
-    </ BrowserRouter>
-  </ Provider>,
+    </BrowserRouter>
+  </Provider>,
   document.getElementById('root')
 )
 

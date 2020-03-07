@@ -16,17 +16,17 @@ const RoutesContainer = () => {
 
         <Route exact path="/sign_up">
           <CreateAccountContainer />
-        </ Route>
+        </Route>
 
         <Route exact path="/browse">
           <BrowsingContainer />
-        </ Route>
+        </Route>
 
         <Route path="*">
           <NoMatch />
-        </ Route>
+        </Route>
 
-      </ Switch>
+      </Switch>
   )
 }
 
