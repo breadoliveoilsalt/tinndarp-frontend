@@ -8,7 +8,6 @@ import NoMatch from './NoMatch'
 const RoutesContainer = () => {
 
   return (
-    <BrowserRouter>
       <Switch>
 
         <Route exact path="/">
@@ -23,13 +22,11 @@ const RoutesContainer = () => {
           <BrowsingContainer />
         </ Route>
 
-
         <Route path="*">
           <NoMatch />
         </ Route>
 
       </ Switch>
-    </ BrowserRouter>
   )
 }
 
