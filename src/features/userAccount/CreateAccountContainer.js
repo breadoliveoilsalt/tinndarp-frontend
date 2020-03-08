@@ -18,7 +18,7 @@ export class CreateAccountContainer extends Component {
   render() {
     let errors = null
     if (this.props.errors) {
-      errors = <div>Sorry, the follwoing errors occured:</div>
+      errors = <div>Sorry, the following errors occured:</div>
       const errorDivs = this.props.errors.map(error => {
         return (<div className="error"> error </div>)
       })
