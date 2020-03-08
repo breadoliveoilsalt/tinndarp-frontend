@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchItems, removeCurrentItem, updateCurrentItem } from './itemsToBrowseSlice'
-import Loader from '../../components/Loader'
+import Loader from '../apiRequests/Loader'
 import CurrentItemContainer from './CurrentItemContainer'
 import FinishedBrowsingDisplay from './FinishedBrowsingDisplay'
 import './BrowsingContainer.css'

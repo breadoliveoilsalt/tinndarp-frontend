@@ -7,7 +7,7 @@ import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import BrowsingContainerConnectedToStore, { BrowsingContainer } from './BrowsingContainer'
 import CurrentItemContainer from './CurrentItemContainer'
-import Loader from '../../components/Loader'
+import Loader from '../apiRequests/Loader'
 import FinishedBrowsingDisplay from './FinishedBrowsingDisplay'
 
 describe("<BrowsingContainer />", () => {
