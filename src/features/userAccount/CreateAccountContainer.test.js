@@ -5,11 +5,16 @@ Enzyme.configure({ adapter: new Adapter() })
 import { Provider } from 'react-redux'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-import CreateAccountContainer from './CreateAccountContainer'
+import CreateAccountContainerConnectedToStore, { CreateAccountContainer } from './CreateAccountContainer'
 import AccountForm from './AccountForm'
-const mockStore = configureMockStore([thunk])
 
 describe("<CreateAccountContainer />", () => {
+
+  let mockStore
+
+  beforeEach(() => {
+    mockStore = configureMockStore([thunk])
+  })
 
   it("renders an <AccountForm />", () => {
     const wrapper = shallow(<CreateAccountContainer />)
@@ -18,7 +23,15 @@ describe("<CreateAccountContainer />", () => {
   })
 
   it("renders any errors present in the state", () => {
-    const wrapper = shallow(<CreateAccountContainer />)
 
+    const state = mockStore({errors: ["Invalid email format", "Email too short"]})
+    const wrapper = mount(<CreateAccountContainerConnectedToStore state={state} />)
+
+    const errors = wrapper.find(".error")
+
+    expect(errors.length).toEqual(2)
+    expect(errors.at(0).text()).toEqual("Invalid email format")
+    expect(errors.at(1).text()).toEqual("Email too short")
   })
+
 })
