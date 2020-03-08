@@ -1,7 +1,8 @@
 input {
+  margin: 1em auto;
   border: 0.1em black solid;
   text-align: center;
-  width: 90%;
+  width: 80%;
   height: 2em;
 }
 

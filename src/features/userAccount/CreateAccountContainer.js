@@ -1,26 +1,28 @@
-import React from 'react'
+import React, { Component } from 'react'
+import AccountForm from './AccountForm'
 import './UserAccount.css'
 
-const CreateAccountContainer = (props) => {
-  return (
-    <div className="large-text">
+export class CreateAccountContainer extends Component {
 
-      <div classname="large-text">Sign Up for an Account! </ div>
+  constructor(props) {
+    super(props)
+    this.handleCreateAccount = this.handleCreateAccount.bind(this)
+  }
 
-      <form onSubmit={props.handleCreateAccount}>
-        <div>
-          <input type="text" placeholder="Your email" name="email" />
-        </div>
-        <div>
-          <input type="password" placeholder="Your password" name="password" />
-        </div>
-        <div>
-          <input className="submit-button" type="submit" value="Submit" />
-        </div>
-      </form>
+  handleCreateAccount(e) {
+    e.preventDefault()
+    console.log("Account Created!")
+  }
 
-    </div>
-  )
+  render() {
+    return (
+      <div>
+        <div className="large-text">Sign Up for an Account! </ div>
+        <AccountForm action={this.handleCreateAccount} />
+      </div>
+    )
+  }
+
 }
 
 export default CreateAccountContainer
