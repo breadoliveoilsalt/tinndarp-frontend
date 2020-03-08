@@ -15,13 +15,27 @@ describe("userAccount state", () => {
 
   it("has an initial state with fields for logged_in and token", () => {
     const expectedUserAccountInitialState = {
+      errors: null,
       loggedIn: false,
       token: null
     }
     expect(store.getState().userAccount).toEqual(expectedUserAccountInitialState)
   })
 
-  describe("the actions", () => {
+  describe("the actions()", () => {
+
+
+    describe("loadErrors()", () => {
+
+      it("loads errors into the state", () => {
+        const errors = ["Invalid email format", "Email too short"]
+        expect(store.getState().userAccount.errors).toBeNull()
+
+        dispatch(actions.loadErrors(errors))
+
+        expect(store.getState().userAccount.errors).toEqual(errors)
+      })
+    })
 
     describe("updateLoggedInStatus()", () => {
 
@@ -61,7 +75,7 @@ describe("userAccount state", () => {
       })
 
     })
-    
+
   })
 
 })
