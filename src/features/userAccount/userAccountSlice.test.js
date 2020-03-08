@@ -1,6 +1,6 @@
 import configureStore from '../../configureStore'
 import accountReducer, * as actions from './userAccountSlice'
-import * as requests from  '../apiRequests/backendAPIRequests'
+import * as requests from  '../apiRequests/itemsAPIRequests'
 
 
 describe("userAccount state", () => {
