@@ -1,4 +1,5 @@
 import * as requests from '../apiRequests/itemsAPIRequests'
+import * as apiActions from '../apiRequests/apiRequestSlice'
 
 const LOAD_ITEMS = 'LOAD_ITEMS'
 const UPDATE_CURRENT_ITEM = 'UPDATE_CURRENT_ITEM'
@@ -60,12 +61,12 @@ export function resetItemsToBrowseState() {
 
 export function fetchItems() {
   return function(dispatch) {
-    dispatch(updateFetchingStatus(true))
+    dispatch(apiActions.updateFetchingStatus(true))
     return requests.getItems()
       .then(data => {
         dispatch(loadItems(data))
       })
       .then(() => dispatch(updateCurrentItem()))
-      .then(() => dispatch(updateFetchingStatus(false)))
+      .then(() => dispatch(apiActions.updateFetchingStatus(false)))
   }
 }

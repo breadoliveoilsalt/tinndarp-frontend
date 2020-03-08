@@ -37,18 +37,6 @@ describe("itemsToBrowse store slice", () => {
 
     })
 
-    // describe("updateFetchingStatus", () => {
-    // 
-    //   it("updates fetchingItems", () => {
-    //     expect(store.getState().itemsToBrowse.fetchingItems).toEqual(true)
-    //
-    //     dispatch(actions.updateFetchingStatus(false))
-    //
-    //     expect(store.getState().itemsToBrowse.fetchingItems).toEqual(false)
-    //   })
-    //
-    // })
-
     describe("fetchItems", () => {
 
       it("is a thunk that returns a function", () => {
@@ -81,9 +69,8 @@ describe("itemsToBrowse store slice", () => {
         })
 
         it("leaves the fetchingItems state at false once complete", () => {
-          expect(store.getState().itemsToBrowse.fetchingItems).toBeTruthy()
           return dispatch(actions.fetchItems()).then(() => {
-            expect(store.getState().itemsToBrowse.fetchingItems).toBeFalsy()
+            expect(store.getState().apiRequest.fetchingItems).toBeFalsy()
           })
 
         })

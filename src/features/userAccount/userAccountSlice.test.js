@@ -23,33 +23,6 @@ describe("userAccount state", () => {
   })
 
   describe("the actions()", () => {
-    // 
-    // describe("loadErrors()", () => {
-    //
-    //   it("loads errors into the state", () => {
-    //     const errors = ["Invalid email format", "Email too short"]
-    //     expect(store.getState().userAccount.errors).toBeNull()
-    //
-    //     dispatch(actions.loadErrors(errors))
-    //
-    //     expect(store.getState().userAccount.errors).toEqual(errors)
-    //   })
-    //
-    // })
-    //
-    // describe("deleteErrors()", () => {
-    //
-    //   it("deletes errors from the state", () => {
-    //     const errors = ["Invalid email format", "Email too short"]
-    //     dispatch(actions.loadErrors(errors))
-    //     expect(store.getState().userAccount.errors).toEqual(errors)
-    //
-    //     dispatch(actions.deleteErrors())
-    //
-    //     expect(store.getState().userAccount.errors).toBeNull()
-    //   })
-    //
-    // })
 
     describe("updateLoggedInStatus()", () => {
 

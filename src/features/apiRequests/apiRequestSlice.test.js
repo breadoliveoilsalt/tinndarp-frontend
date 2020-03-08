@@ -27,11 +27,11 @@ describe("apiRequestSlice", () => {
 
       it("loads errors into the state", () => {
         const errors = ["Invalid email format", "Email too short"]
-        expect(store.getState().userAccount.errors).toBeNull()
+        expect(store.getState().apiRequest.errors).toBeNull()
 
         dispatch(actions.loadErrors(errors))
 
-        expect(store.getState().userAccount.errors).toEqual(errors)
+        expect(store.getState().apiRequest.errors).toEqual(errors)
       })
 
     })
@@ -41,11 +41,11 @@ describe("apiRequestSlice", () => {
       it("deletes errors from the state", () => {
         const errors = ["Invalid email format", "Email too short"]
         dispatch(actions.loadErrors(errors))
-        expect(store.getState().userAccount.errors).toEqual(errors)
+        expect(store.getState().apiRequest.errors).toEqual(errors)
 
         dispatch(actions.deleteErrors())
 
-        expect(store.getState().userAccount.errors).toBeNull()
+        expect(store.getState().apiRequest.errors).toBeNull()
       })
 
     })
@@ -53,11 +53,11 @@ describe("apiRequestSlice", () => {
     describe("updateFetchingStatus", () => {
 
       it("updates fetchingItems", () => {
-        expect(store.getState().itemsToBrowse.fetchingItems).toEqual(true)
+        expect(store.getState().apiRequest.fetchingItems).toEqual(false)
 
-        dispatch(actions.updateFetchingStatus(false))
+        dispatch(actions.updateFetchingStatus(true))
 
-        expect(store.getState().itemsToBrowse.fetchingItems).toEqual(false)
+        expect(store.getState().apiRequest.fetchingItems).toEqual(true)
       })
 
     })
