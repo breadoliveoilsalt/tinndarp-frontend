@@ -1,4 +1,4 @@
-import * as requests from '../../api/backendAPIRequests'
+import * as requests from '../apiRequests/backendAPIRequests'
 
 const LOAD_ITEMS = 'LOAD_ITEMS'
 const UPDATE_CURRENT_ITEM = 'UPDATE_CURRENT_ITEM'

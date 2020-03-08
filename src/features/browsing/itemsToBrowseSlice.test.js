@@ -1,6 +1,6 @@
 import configureStore from '../../configureStore'
 import itemsToBrowseReducer, * as actions from './itemsToBrowseSlice'
-import * as requests from  '../../api/backendAPIRequests'
+import * as requests from  '../apiRequests/backendAPIRequests'
 
 const store = configureStore()
 const dispatch = store.dispatch
