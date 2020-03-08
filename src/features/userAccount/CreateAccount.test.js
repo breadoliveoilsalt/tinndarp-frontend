@@ -24,5 +24,15 @@ describe("<CreateAccountContainer />", () => {
       expect(inputFields.at(2).prop("type")).toEqual("submit")
     })
 
+    it("calls props.handleCreateAccount() on clickling submit", () => {
+      const props = { handleCreateAccount: jest.fn()}
+      const wrapper = shallow(<CreateAccountContainer {...props} />)
+      const form = wrapper.find("form")
+
+      form.simulate("submit")
+
+      expect(props.handleCreateAccount.mock.calls.length).toEqual(1)
+    })
+
   })
 })
