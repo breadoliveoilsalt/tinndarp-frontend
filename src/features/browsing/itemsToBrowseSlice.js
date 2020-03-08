@@ -2,7 +2,6 @@ import * as requests from '../apiRequests/itemsAPIRequests'
 
 const LOAD_ITEMS = 'LOAD_ITEMS'
 const UPDATE_CURRENT_ITEM = 'UPDATE_CURRENT_ITEM'
-const UPDATE_FETCHING_STATUS = 'UPDATE_FETCHING_STATUS'
 const RESET_ITEMS_TO_BROWSE_STATE = 'RESET_ITEMS_TO_BROWSE_STATE'
 const REMOVE_CURRENT_ITEM = 'REMOVE_CURRENT_ITEM'
 
@@ -25,8 +24,6 @@ function itemsToBrowseReducer(state = initialState, action) {
     case REMOVE_CURRENT_ITEM:
       const remainingItems = state.items.slice(1)
       return Object.assign({}, state, {currentItem: null, items: remainingItems})
-    case UPDATE_FETCHING_STATUS:
-      return Object.assign({}, state, {fetchingItems: action.payload})
     case RESET_ITEMS_TO_BROWSE_STATE:
       return Object.assign({}, state, initialState)
     default:
@@ -52,13 +49,6 @@ export function updateCurrentItem() {
 export function removeCurrentItem() {
   return {
     type: REMOVE_CURRENT_ITEM
-  }
-}
-
-export function updateFetchingStatus(bool) {
-  return {
-    type: UPDATE_FETCHING_STATUS,
-    payload: bool
   }
 }
 
