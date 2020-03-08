@@ -4,14 +4,19 @@ import Adapter from 'enzyme-adapter-react-16'
 Enzyme.configure({ adapter: new Adapter() })
 import { Provider } from 'react-redux'
 import configureMockStore from 'redux-mock-store'
+import thunk from 'redux-thunk'
 import BrowsingContainerConnectedToStore, { BrowsingContainer } from './BrowsingContainer'
 import CurrentItemContainer from './CurrentItemContainer'
 import Loader from '../../components/Loader'
 import FinishedBrowsingDisplay from './FinishedBrowsingDisplay'
 
-const mockStore = configureMockStore([thunk])
-
 describe("<BrowsingContainer />", () => {
+
+  let mockStore
+
+  beforeEach(() => {
+    mockStore = configureMockStore([thunk])
+  })
 
   it("does not render <CurrentItemContainer /> if the store has no list of items", () => {
     const state = {itemsToBrowse:

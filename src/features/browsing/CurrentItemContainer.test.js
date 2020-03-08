@@ -2,9 +2,6 @@ import React from 'react'
 import Enzyme, { shallow, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 Enzyme.configure({ adapter: new Adapter() })
-import thunk from 'redux-thunk'
-import { Provider } from 'react-redux'
-import configureMockStore from 'redux-mock-store'
 import CurrentItemContainer from './CurrentItemContainer'
 import DecisionButton from './DecisionButton'
 
