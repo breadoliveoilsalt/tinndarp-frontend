@@ -1,0 +1,10 @@
+input {
+  border: 0.1em black solid;
+  text-align: center;
+  width: 90%;
+  height: 2em;
+}
+
+input.submit-button {
+  width: 50%;
+}
