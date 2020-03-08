@@ -11,4 +11,18 @@ describe("<CreateAccountContainer />", () => {
 
     expect(wrapper.find("form").length).toEqual(1)
   })
+
+  describe("the form", () => {
+    it("has input fields for a name, password, and submit button", () => {
+      const wrapper = shallow(<CreateAccountContainer />)
+
+      const inputFields = wrapper.find("form").find("input")
+
+      expect(inputFields.length).toEqual(3)
+      expect(inputFields.at(0).prop("name")).toEqual("email")
+      expect(inputFields.at(1).prop("name")).toEqual("password")
+      expect(inputFields.at(2).prop("type")).toEqual("submit")
+    })
+
+  })
 })
