@@ -18,27 +18,6 @@ describe("<CreateAccountContainer />", () => {
     mockStore = configureMockStore([thunk])
   })
 
-  describe("if a user is logged in", () => {
-
-    it("renders a link redirecting the user to the browsing page", () => {
-      const state = {
-          apiRequest:
-            { errors: null },
-          userAccount:
-            { loggedIn: true }
-          }
-      const store = mockStore(state)
-
-      const wrapper = mount(<Provider store={store}> <BrowserRouter> <CreateAccountContainerConnectedToStore /> </ BrowserRouter> </Provider>)
-
-      const link = wrapper.find(Link)
-
-      expect(link.length).toEqual(1)
-      expect(link.prop("to")).toEqual("/browse")
-    })
-
-  })
-
   describe("if a user is not logged in", () => {
 
     it("renders an <AccountForm />", () => {
