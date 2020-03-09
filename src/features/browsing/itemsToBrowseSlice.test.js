@@ -67,9 +67,9 @@ describe("itemsToBrowse store slice", () => {
 
         })
 
-        it("leaves the fetchingItems state at false once complete", () => {
+        it("leaves the fetchings state at false once complete", () => {
           return dispatch(actions.fetchItems()).then(() => {
-            expect(store.getState().apiRequest.fetchingItems).toBeFalsy()
+            expect(store.getState().apiRequest.fetchings).toBeFalsy()
           })
 
         })

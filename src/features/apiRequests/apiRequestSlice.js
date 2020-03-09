@@ -4,7 +4,7 @@ const LOAD_ERRORS = 'LOAD_ERRORS'
 const DELETE_ERRORS = 'DELETE_ERRORS'
 
 const initialState = {
-  fetchingItems: false,
+  fetching: false,
   errors: null,
 }
 
@@ -13,7 +13,7 @@ function apiRequestReducer(state = initialState, action) {
     case RESET_API_REQUEST_STATE:
       return Object.assign({}, initialState)
     case UPDATE_FETCHING_STATUS:
-      return Object.assign({}, state, {fetchingItems: action.payload})
+      return Object.assign({}, state, {fetching: action.payload})
     case LOAD_ERRORS:
       return Object.assign({}, state, {errors: action.payload})
     case DELETE_ERRORS:

@@ -12,9 +12,9 @@ describe("apiRequestSlice", () => {
   })
 
   describe("the inital state", () => {
-    it("has fields for fetchingItems and errors", () => {
+    it("has fields for fetching and errors", () => {
       const expectedInitialState = {
-        fetchingItems: false,
+        fetching: false,
         errors: null
       }
       expect(store.getState().apiRequest).toEqual(expectedInitialState)
@@ -52,12 +52,12 @@ describe("apiRequestSlice", () => {
 
     describe("updateFetchingStatus", () => {
 
-      it("updates fetchingItems", () => {
-        expect(store.getState().apiRequest.fetchingItems).toEqual(false)
+      it("updates fetching", () => {
+        expect(store.getState().apiRequest.fetching).toEqual(false)
 
         dispatch(actions.updateFetchingStatus(true))
 
-        expect(store.getState().apiRequest.fetchingItems).toEqual(true)
+        expect(store.getState().apiRequest.fetching).toEqual(true)
       })
 
     })

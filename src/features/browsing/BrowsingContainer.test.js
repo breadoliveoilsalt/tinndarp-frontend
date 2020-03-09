@@ -21,7 +21,7 @@ describe("<BrowsingContainer />", () => {
   it("does not render <CurrentItemContainer /> if the store has no list of items", () => {
     const state = {
                   apiRequest: {
-                    fetchingItems: false
+                    fetching: false
                   },
                   itemsToBrowse: {
                     items: null}
@@ -32,10 +32,10 @@ describe("<BrowsingContainer />", () => {
     expect(wrapper.find(CurrentItemContainer).exists()).toBeFalsy()
   })
 
-  it("renders <CurrentItemContainer /> if the store has a list of items and the app is not fetchingItems", () => {
+  it("renders <CurrentItemContainer /> if the store has a list of items and the app is not fetching", () => {
     const state = {
                     apiRequest: {
-                      fetchingItems: false
+                      fetching: false
                     },
                     itemsToBrowse: {
                       items: ["item 1", "item 2"]
@@ -50,7 +50,7 @@ describe("<BrowsingContainer />", () => {
   it("renders <CurrentItemContainer /> with props for its own currentItem prop, its handleNope, and its handleLike", () => {
     const state = {
                     apiRequest: {
-                      fetchingItems: false
+                      fetching: false
                     },
                     itemsToBrowse: {
                       items: ["item 1"],
@@ -78,7 +78,7 @@ describe("<BrowsingContainer />", () => {
   it("renders a Loader if the app is fetching items", () => {
     const state = {
                     apiRequest: {
-                      fetchingItems: true
+                      fetching: true
                     },
                     itemsToBrowse: {
                       items: ["item 1"]
@@ -93,7 +93,7 @@ describe("<BrowsingContainer />", () => {
   it("renders a Loader if the app is fetching items and there are items already", () => {
     const state = {
                     apiRequest: {
-                      fetchingItems: true,
+                      fetching: true,
                     },
                     itemsToBrowse: {
                       items: ["item 1"]
@@ -108,7 +108,7 @@ describe("<BrowsingContainer />", () => {
   it("renders an <FinishedBrowsingDisplay /> if the state's items list is empty and the app is not fetching", () => {
     const state = {
                     apiRequest: {
-                      fetchingItems: false,
+                      fetching: false,
                     },
                     itemsToBrowse: {
                       items: []

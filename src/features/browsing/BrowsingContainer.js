@@ -31,7 +31,7 @@ export class BrowsingContainer extends Component {
   }
 
   render() {
-    if (this.props.fetchingItems) {
+    if (this.props.fetching) {
       return (<Loader />)
     } else if (this.props.items && this.props.items.length > 0){
       return (
@@ -50,7 +50,7 @@ const mapStateToProps = (state) => {
   return {
     items: state.itemsToBrowse.items,
     currentItem: state.itemsToBrowse.currentItem,
-    fetchingItems: state.apiRequest.fetchingItems
+    fetching: state.apiRequest.fetching
   }
 }
 
