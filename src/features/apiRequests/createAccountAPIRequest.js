@@ -1,6 +1,5 @@
 import * as config from './backendAPIRequestsConfig'
 
-// TEST! Including the processing of data
 export async function postCreateAccount(credentials) {
   const url = config.baseURL + "/sign_up"
   const data = {user: credentials}
@@ -22,3 +21,5 @@ const process = (rawData) => {
   }
   return rawData.data
 }
+
+export default postCreateAccount
