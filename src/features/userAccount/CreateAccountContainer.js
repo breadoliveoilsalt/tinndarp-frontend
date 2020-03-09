@@ -12,7 +12,7 @@ export class CreateAccountContainer extends Component {
     this.handleCreateAccount = this.handleCreateAccount.bind(this)
   }
 
-// TEST! 
+// TEST!
   handleCreateAccount(e) {
     e.preventDefault()
     const credentials = {
@@ -23,15 +23,16 @@ export class CreateAccountContainer extends Component {
   }
 
   render() {
-    let errors = this.props.errors ? <ErrorsDisplay /> : null
 
-    return (
+    let content = (
       <div>
         <div className="large-text">Sign Up for an Account! </ div>
-        {errors}
+        {this.props.errors ? <ErrorsDisplay /> : null}
         <AccountForm action={this.handleCreateAccount} />
       </div>
     )
+
+    return content
   }
 
 }
