@@ -9,7 +9,6 @@ const REMOVE_CURRENT_ITEM = 'REMOVE_CURRENT_ITEM'
 const initialState = {
   items: null,
   currentItem: null,
-  fetchingItems: true
 }
 
 function itemsToBrowseReducer(state = initialState, action) {

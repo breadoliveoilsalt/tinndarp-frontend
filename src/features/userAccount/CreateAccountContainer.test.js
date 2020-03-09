@@ -16,11 +16,11 @@ describe("<CreateAccountContainer />", () => {
     mockStore = configureMockStore([thunk])
   })
 
-  // it("renders an <AccountForm />", () => {
-  //   const wrapper = shallow(<CreateAccountContainer />)
-  //
-  //   expect(wrapper.find(AccountForm).length).toEqual(1)
-  // })
+  it("renders an <AccountForm />", () => {
+    const wrapper = shallow(<CreateAccountContainer />)
+
+    expect(wrapper.find(AccountForm).length).toEqual(1)
+  })
 
   it("renders any errors in the state from an api request", () => {
     const state =
@@ -32,11 +32,12 @@ describe("<CreateAccountContainer />", () => {
 
     const wrapper = mount(<CreateAccountContainerConnectedToStore store={store} />)
 
-    // const errors = wrapper.find(".error")
-    //
-    // expect(errors.length).toEqual(2)
-    // expect(errors.at(0).text()).toEqual("Invalid email format")
-    // expect(errors.at(1).text()).toEqual("Email too short")
+    console.log(wrapper.debug())
+    const errors = wrapper.find("div.error")
+
+    expect(errors.length).toEqual(2)
+    expect(errors.at(0).text()).toEqual("Invalid email format")
+    expect(errors.at(1).text()).toEqual("Email too short")
   })
 
 })

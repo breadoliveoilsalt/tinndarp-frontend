@@ -15,7 +15,6 @@ describe("userAccount state", () => {
 
   it("has an initial state with fields for logged_in and token", () => {
     const expectedUserAccountInitialState = {
-      errors: null,
       loggedIn: false,
       token: null
     }

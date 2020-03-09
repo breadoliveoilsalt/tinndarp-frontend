@@ -16,8 +16,7 @@ describe("itemsToBrowse store slice", () => {
     it("has fields for a list of items, a currentItem, and a currentItemIndex", () => {
       const expectedItemsToBrowseInitialState = {
         items: null,
-        currentItem: null,
-        fetchingItems: true
+        currentItem: null
       }
       expect(store.getState().itemsToBrowse).toEqual(expectedItemsToBrowseInitialState)
     })

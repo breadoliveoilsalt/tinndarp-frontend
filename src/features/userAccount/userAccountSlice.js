@@ -4,7 +4,6 @@ const ADD_TOKEN = 'ADD_TOKEN'
 const DELETE_TOKEN = 'DELETE_TOKEN'
 
 const initialState = {
-  errors: null,
   loggedIn: false,
   token: null,
 }

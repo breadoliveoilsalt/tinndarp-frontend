@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import AccountForm from './AccountForm'
+import { loadErrors } from '../apiRequests/apiRequestSlice'
 import './UserAccount.css'
 
 export class CreateAccountContainer extends Component {
@@ -8,6 +9,10 @@ export class CreateAccountContainer extends Component {
   constructor(props) {
     super(props)
     this.handleCreateAccount = this.handleCreateAccount.bind(this)
+  }
+
+  componentDidMount() {
+    loadErrors(["problem1"])
   }
 
   handleCreateAccount(e) {
@@ -19,6 +24,7 @@ export class CreateAccountContainer extends Component {
     let errors = null
     if (this.props.errors) {
       errors = <div>Sorry, the following errors occured:</div>
+      debugger;
       const errorDivs = this.props.errors.map(error => {
         return (<div className="error"> error </div>)
       })
@@ -44,6 +50,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    loadErrors: (errors) => dispatch(loadErrors(errors))
   }
 }
 
