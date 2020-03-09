@@ -18,24 +18,12 @@ describe("<ErrorsDisplay />", () => {
         <ErrorsDisplay store={store}/>
       </Provider>)
 
-      // it("renders any errors in the state from an api request", () => {
-      //   const state =
-      //     { apiRequest:
-      //       { errors: ["Invalid email format", "Email too short"] }
-      //     }
-      //
-      //   const store = mockStore(state)
-      //
-      //   const wrapper = mount(<CreateAccountContainerConnectedToStore store={store} />)
-      //
-      //   console.log(wrapper.debug())
-      //   const errors = wrapper.find("div.error")
-      //
-      //   expect(errors.length).toEqual(2)
-      //   expect(errors.at(0).text()).toEqual("Invalid email format")
-      //   expect(errors.at(1).text()).toEqual("Email too short")
-      // })
-      //
+    const errors = wrapper.find("div.error")
+
+
+    expect(errors.length).toEqual(2)
+    expect(errors.at(0).text()).toEqual("problem 1")
+    expect(errors.at(1).text()).toEqual("problem 2")
   })
 
 })

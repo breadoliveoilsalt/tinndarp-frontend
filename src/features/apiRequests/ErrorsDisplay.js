@@ -5,7 +5,7 @@ class ErrorsDisplay extends Component {
 
   render() {
     const errorsDivs = this.props.errors.map((error, index) => {
-      return (<div className="error" key={index + 1}> {error} </div>)
+      return (<div className="error" key={index + 1}>{error}</div>)
     })
 
    return (
