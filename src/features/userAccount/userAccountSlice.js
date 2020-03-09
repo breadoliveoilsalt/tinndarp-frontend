@@ -60,14 +60,19 @@ export function submitCreateAccount(credentials) {
   return function(dispatch) {
     return postCreateAccount(credentials)
       .then( data => {
+        debugger
         if (data.errors) {
           dispatch(loadErrors(data.errors))
         } else if (data.loggedIn) {
           dispatch(updateLoggedInStatus(true))
+          saveToken(data.token)
         } else {
           dispatch(loadErrors(["Sorry, something went wrong with the server."]))
         }
       })
-
   }
+}
+
+function saveToken(token) {
+  window.localStorage.setItem("tinndarp_token", token)
 }
