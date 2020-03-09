@@ -7,7 +7,6 @@ const TINNDARP_TOKEN_KEY = 'tinndarp_token'
 
 const initialState = {
   loggedIn: false,
-  token: null,
 }
 
 function userAccountReducer(state = initialState, action) {
@@ -23,7 +22,7 @@ function userAccountReducer(state = initialState, action) {
 
 export default userAccountReducer
 
-export function resetuserAccountState() {
+export function resetUserAccountState() {
   return {
     type: RESET_USER_ACCOUNT_STATE
   }
@@ -36,9 +35,7 @@ export function updateLoggedInStatus(bool) {
   }
 }
 
-// TEST!
 export function submitCreateAccount(credentials) {
-  console.log(credentials)
   return function(dispatch) {
     return postCreateAccount(credentials)
       .then( data => {
