@@ -41,15 +41,3 @@ export function deleteErrors() {
     type: DELETE_ERRORS
   }
 }
-
-export function fetchItems() {
-  return function(dispatch) {
-    dispatch(updateFetchingStatus(true))
-    return requests.getItems()
-      .then(data => {
-        dispatch(loadItems(data))
-      })
-      .then(() => dispatch(updateCurrentItem()))
-      .then(() => dispatch(updateFetchingStatus(false)))
-  }
-}

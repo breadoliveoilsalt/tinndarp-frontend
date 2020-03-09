@@ -50,7 +50,7 @@ const mapStateToProps = (state) => {
   return {
     items: state.itemsToBrowse.items,
     currentItem: state.itemsToBrowse.currentItem,
-    fetchingItems: state.itemsToBrowse.fetchingItems
+    fetchingItems: state.apiRequest.fetchingItems
   }
 }
 

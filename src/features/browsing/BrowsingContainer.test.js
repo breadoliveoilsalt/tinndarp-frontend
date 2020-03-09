@@ -19,8 +19,12 @@ describe("<BrowsingContainer />", () => {
   })
 
   it("does not render <CurrentItemContainer /> if the store has no list of items", () => {
-    const state = {itemsToBrowse:
-                    {items: null}
+    const state = {
+                  apiRequest: {
+                    fetchingItems: false
+                  },
+                  itemsToBrowse: {
+                    items: null}
                   }
     const store = mockStore(state)
     const wrapper = mount(<BrowsingContainerConnectedToStore store={store} />)
@@ -29,9 +33,12 @@ describe("<BrowsingContainer />", () => {
   })
 
   it("renders <CurrentItemContainer /> if the store has a list of items and the app is not fetchingItems", () => {
-    const state = {itemsToBrowse:
-                    { items: ["item 1"],
+    const state = {
+                    apiRequest: {
                       fetchingItems: false
+                    },
+                    itemsToBrowse: {
+                      items: ["item 1", "item 2"]
                     }
                   }
     const store = mockStore(state)
@@ -41,8 +48,12 @@ describe("<BrowsingContainer />", () => {
   })
 
   it("renders <CurrentItemContainer /> with props for its own currentItem prop, its handleNope, and its handleLike", () => {
-    const state = {itemsToBrowse:
-                    { items: ["item 1"],
+    const state = {
+                    apiRequest: {
+                      fetchingItems: false
+                    },
+                    itemsToBrowse: {
+                      items: ["item 1"],
                       currentItem: "item 1"
                     }
                   }
@@ -65,8 +76,13 @@ describe("<BrowsingContainer />", () => {
   })
 
   it("renders a Loader if the app is fetching items", () => {
-    const state = {itemsToBrowse:
-                    {fetchingItems: true}
+    const state = {
+                    apiRequest: {
+                      fetchingItems: true
+                    },
+                    itemsToBrowse: {
+                      items: ["item 1"]
+                    }
                   }
     const store = mockStore(state)
     const wrapper = mount(<BrowsingContainerConnectedToStore store={store} />)
@@ -75,8 +91,11 @@ describe("<BrowsingContainer />", () => {
   })
 
   it("renders a Loader if the app is fetching items and there are items already", () => {
-    const state = {itemsToBrowse:
-                    { fetchingItems: true,
+    const state = {
+                    apiRequest: {
+                      fetchingItems: true,
+                    },
+                    itemsToBrowse: {
                       items: ["item 1"]
                     }
                   }
@@ -87,8 +106,11 @@ describe("<BrowsingContainer />", () => {
   })
 
   it("renders an <FinishedBrowsingDisplay /> if the state's items list is empty and the app is not fetching", () => {
-    const state = {itemsToBrowse:
-                    { fetchingItems: false,
+    const state = {
+                    apiRequest: {
+                      fetchingItems: false,
+                    },
+                    itemsToBrowse: {
                       items: []
                     }
                   }

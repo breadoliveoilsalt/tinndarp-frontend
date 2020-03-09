@@ -38,7 +38,7 @@ export class CreateAccountContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    errors: state.userAccount.errors,
+    errors: state.apiRequest.errors,
   }
 }
 

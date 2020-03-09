@@ -22,9 +22,9 @@ describe("<CreateAccountContainer />", () => {
   //   expect(wrapper.find(AccountForm).length).toEqual(1)
   // })
 
-  it("renders any errors present in the state", () => {
+  it("renders any errors in the state from an api request", () => {
     const state =
-      { userAccount:
+      { apiRequest:
         { errors: ["Invalid email format", "Email too short"] }
       }
 
