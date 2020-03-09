@@ -20,13 +20,13 @@ describe("<CreateAccountContainer />", () => {
 
   describe("if a user is logged in", () => {
 
-  it("renders a link redirecting the user to the browsing page", () => {
-    const state = {
-        apiRequest:
-          { errors: null },
-        userAccount:
-          { loggedIn: true }
-        }
+    it("renders a link redirecting the user to the browsing page", () => {
+      const state = {
+          apiRequest:
+            { errors: null },
+          userAccount:
+            { loggedIn: true }
+          }
       const store = mockStore(state)
 
       const wrapper = mount(<Provider store={store}> <BrowserRouter> <CreateAccountContainerConnectedToStore /> </ BrowserRouter> </Provider>)
@@ -36,7 +36,7 @@ describe("<CreateAccountContainer />", () => {
       expect(link.length).toEqual(1)
       expect(link.prop("to")).toEqual("/browse")
     })
-    
+
   })
 
   describe("if a user is not logged in", () => {
@@ -73,6 +73,59 @@ describe("<CreateAccountContainer />", () => {
       const wrapper = mount(<Provider store={store}> <CreateAccountContainerConnectedToStore /> </Provider>)
 
       expect(wrapper.find(ErrorsDisplay).length).toEqual(0)
+    })
+  })
+
+  describe("handleCreateAccount()", () => {
+    const userEmail = "someEmail@email.com"
+    const userPassword = "password"
+
+    let event
+    let props
+
+    beforeEach(() => {
+      event = {
+        preventDefault: jest.fn(),
+        target: {
+          email: {value: userEmail},
+          password: {value: userPassword}
+        }
+      }
+      props = {
+        resetAPIRequestState: jest.fn(),
+        submitCreateAccount: jest.fn()
+      }
+    })
+
+    it("call preventDefault() on the event", () => {
+      const wrapper = shallow(<CreateAccountContainer {...props} />)
+
+      wrapper.instance().handleCreateAccount(event)
+
+      expect(event.preventDefault.mock.calls.length).toEqual(1)
+    })
+
+    it("calls this.props.resetAPIRequestState()", () => {
+      const wrapper = shallow(<CreateAccountContainer {...props} />)
+
+      wrapper.instance().handleCreateAccount(event)
+
+      expect(props.resetAPIRequestState.mock.calls.length).toEqual(1)
+    })
+
+    it("calls this.props.submitCreateAccount, passing it the event target's email and password values", () => {
+      const wrapper = shallow(<CreateAccountContainer {...props} />)
+
+      wrapper.instance().handleCreateAccount(event)
+
+      expect(props.submitCreateAccount.mock.calls.length).toEqual(1)
+
+      const expectedArgument = {
+        email: event.target.email.value,
+        password: event.target.password.value
+      }
+
+      expect(props.submitCreateAccount.mock.calls[0][0]).toEqual(expectedArgument)
     })
   })
 })

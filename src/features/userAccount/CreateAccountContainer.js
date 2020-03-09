@@ -15,7 +15,6 @@ export class CreateAccountContainer extends Component {
     this.handleCreateAccount = this.handleCreateAccount.bind(this)
   }
 
-// TEST!
   handleCreateAccount(e) {
     e.preventDefault()
     this.props.resetAPIRequestState()
@@ -33,7 +32,7 @@ export class CreateAccountContainer extends Component {
     if (this.props.loggedIn) {
       content = (
         <div>
-          <div className="large-text">You're already logged in! Please click below to start browsing items.</ div>
+          <div className="large-text">You're logged in! Please click below to start browsing items.</ div>
           <Link className="link" to="/browse">Start browsing!</Link>
         </div>
       )
