@@ -8,9 +8,7 @@ input {
 
 input.submit-button {
   width: 50%;
-}
-
-.error {
-  border: .1em solid red;
-  margin: 0.5em;
+  font-weight: bold;
+  color: #FFDD1F;
+  background-color: #3484F2;
 }

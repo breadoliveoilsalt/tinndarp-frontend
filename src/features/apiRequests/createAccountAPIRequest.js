@@ -9,5 +9,5 @@ export async function postCreateAccount(credentials) {
 }
 
 const process = (rawData) => {
-  debugger
+  return rawData.data
 }

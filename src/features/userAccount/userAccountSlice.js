@@ -1,4 +1,5 @@
 import { postCreateAccount } from '../apiRequests/createAccountAPIRequest'
+import { loadErrors } from '../apiRequests/apiRequestSlice'
 
 const RESET_USER_ACCOUNT_STATE = 'RESET_USER_ACCOUNT_STATE'
 const UPDATE_LOGGED_IN_STATUS = 'UPDATE_LOGGED_IN_STATUS'
@@ -59,7 +60,13 @@ export function submitCreateAccount(credentials) {
   return function(dispatch) {
     return postCreateAccount(credentials)
       .then( data => {
-        debugger
+        if (data.errors) {
+          dispatch(loadErrors(data.errors))
+        } else if (data.loggedIn) {
+          dispatch(updateLoggedInStatus(true))
+        } else {
+          dispatch(loadErrors(["Sorry, something went wrong with the server."]))
+        }
       })
 
   }

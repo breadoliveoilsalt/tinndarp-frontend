@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import './apiRequests.css'
 
 class ErrorsDisplay extends Component {
 
