@@ -56,7 +56,12 @@ describe("<CreateAccountContainer />", () => {
         }
       const store = mockStore(state)
 
-      const wrapper = mount(<Provider store={store}> <CreateAccountContainerConnectedToStore /> </Provider>)
+      const wrapper = mount(
+        <Provider store={store}>
+          <BrowserRouter>
+            <CreateAccountContainerConnectedToStore />
+          </BrowserRouter>
+        </Provider>)
 
       expect(wrapper.find(ErrorsDisplay).length).toEqual(1)
     })
@@ -70,7 +75,14 @@ describe("<CreateAccountContainer />", () => {
         }
       const store = mockStore(state)
 
-      const wrapper = mount(<Provider store={store}> <CreateAccountContainerConnectedToStore /> </Provider>)
+      const props = {history: jest.fn()}
+
+      const wrapper = mount(
+        <Provider store={store}>
+          <BrowserRouter>
+            <CreateAccountContainerConnectedToStore {...props} />
+          </ BrowserRouter>
+        </Provider>)
 
       expect(wrapper.find(ErrorsDisplay).length).toEqual(0)
     })
