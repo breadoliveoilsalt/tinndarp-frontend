@@ -1,3 +1,5 @@
+import { postCreateAccount } from '../apiRequests/createAccountAPIRequest'
+
 const RESET_USER_ACCOUNT_STATE = 'RESET_USER_ACCOUNT_STATE'
 const UPDATE_LOGGED_IN_STATUS = 'UPDATE_LOGGED_IN_STATUS'
 const ADD_TOKEN = 'ADD_TOKEN'
@@ -48,5 +50,17 @@ export function addToken(token) {
 export function deleteToken() {
   return {
     type: DELETE_TOKEN
+  }
+}
+
+// TEST!
+export function submitCreateAccount(credentials) {
+  console.log(credentials)
+  return function(dispatch) {
+    return postCreateAccount(credentials)
+      .then( data => {
+        debugger
+      })
+
   }
 }

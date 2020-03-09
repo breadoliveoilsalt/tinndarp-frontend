@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import AccountForm from './AccountForm'
 import ErrorsDisplay from '../apiRequests/ErrorsDisplay'
+import { submitCreateAccount } from './userAccountSlice'
 import './UserAccount.css'
 
 export class CreateAccountContainer extends Component {
@@ -11,9 +12,14 @@ export class CreateAccountContainer extends Component {
     this.handleCreateAccount = this.handleCreateAccount.bind(this)
   }
 
+// TEST! 
   handleCreateAccount(e) {
     e.preventDefault()
-    console.log("Account Created!")
+    const credentials = {
+      email: e.target.email.value,
+      password: e.target.password.value
+    }
+    this.props.submitCreateAccount(credentials)
   }
 
   render() {
@@ -38,6 +44,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    submitCreateAccount: (credentials) => dispatch(submitCreateAccount(credentials))
   }
 }
 
