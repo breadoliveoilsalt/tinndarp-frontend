@@ -23,6 +23,7 @@ function userAccountReducer(state = initialState, action) {
 export default userAccountReducer
 
 export function resetUserAccountState() {
+  deleteToken()
   return {
     type: RESET_USER_ACCOUNT_STATE
   }
@@ -56,5 +57,7 @@ export function saveToken(token) {
 }
 
 export function deleteToken() {
-  window.localStorage.removeItem(TINNDARP_TOKEN_KEY)
+  if (window.localStorage.getItem(TINNDARP_TOKEN_KEY)) {
+    window.localStorage.removeItem(TINNDARP_TOKEN_KEY)
+  }
 }

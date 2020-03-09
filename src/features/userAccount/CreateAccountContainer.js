@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import AccountForm from './AccountForm'
 import ErrorsDisplay from '../apiRequests/ErrorsDisplay'
-import { submitCreateAccount, resetUserAccountState } from './userAccountSlice'
+import { resetAPIRequestState } from '../apiRequests/apiRequestSlice'
+import { submitCreateAccount } from './userAccountSlice'
+
 import './UserAccount.css'
 
 export class CreateAccountContainer extends Component {
@@ -16,7 +18,7 @@ export class CreateAccountContainer extends Component {
 // TEST!
   handleCreateAccount(e) {
     e.preventDefault()
-    this.props.resetUserAccountState()
+    this.props.resetAPIRequestState()
     const credentials = {
       email: e.target.email.value,
       password: e.target.password.value
@@ -59,7 +61,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    resetUserAccountState: () => dispatch(resetUserAccountState()),
+    resetAPIRequestState: () => dispatch(resetAPIRequestState()),
     submitCreateAccount: (credentials) => dispatch(submitCreateAccount(credentials))
   }
 }
