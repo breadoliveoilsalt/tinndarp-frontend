@@ -24,9 +24,11 @@ describe("<CreateAccountContainer />", () => {
   })
 
   it("renders an <ErrorsDisplay /> if there are errors from an apiRequest", () => {
-    const state =
-      { apiRequest:
-        { errors: ["Invalid email format", "Email too short"] }
+    const state = {
+      apiRequest: {
+        errors: ["Invalid email format", "Email too short"] },
+      userAccount:
+        { loggedIn: false }
       }
     const store = mockStore(state)
 
@@ -36,9 +38,11 @@ describe("<CreateAccountContainer />", () => {
   })
 
   it("does not render an <ErrorsDisplay /> if there no are errors from an apiRequest", () => {
-    const state =
-      { apiRequest:
-        { errors: null }
+    const state = {
+      apiRequest:
+        { errors: null },
+      userAccount:
+        { loggedIn: false }
       }
     const store = mockStore(state)
 
@@ -46,5 +50,5 @@ describe("<CreateAccountContainer />", () => {
 
     expect(wrapper.find(ErrorsDisplay).length).toEqual(0)
   })
-  
+
 })
