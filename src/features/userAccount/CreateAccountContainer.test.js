@@ -7,6 +7,7 @@ import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import CreateAccountContainerConnectedToStore, { CreateAccountContainer } from './CreateAccountContainer'
 import AccountForm from './AccountForm'
+import ErrorsDisplay from '../apiRequests/ErrorsDisplay'
 
 describe("<CreateAccountContainer />", () => {
 
@@ -22,22 +23,28 @@ describe("<CreateAccountContainer />", () => {
     expect(wrapper.find(AccountForm).length).toEqual(1)
   })
 
-  it("renders any errors in the state from an api request", () => {
+  it("renders an <ErrorsDisplay /> if there are errors from an apiRequest", () => {
     const state =
       { apiRequest:
         { errors: ["Invalid email format", "Email too short"] }
       }
-
     const store = mockStore(state)
 
-    const wrapper = mount(<CreateAccountContainerConnectedToStore store={store} />)
+    const wrapper = mount(<Provider store={store}> <CreateAccountContainerConnectedToStore /> </Provider>)
 
-    console.log(wrapper.debug())
-    const errors = wrapper.find("div.error")
-
-    expect(errors.length).toEqual(2)
-    expect(errors.at(0).text()).toEqual("Invalid email format")
-    expect(errors.at(1).text()).toEqual("Email too short")
+    expect(wrapper.find(ErrorsDisplay).length).toEqual(1)
   })
 
+  it("does not render an <ErrorsDisplay /> if there no are errors from an apiRequest", () => {
+    const state =
+      { apiRequest:
+        { errors: null }
+      }
+    const store = mockStore(state)
+
+    const wrapper = mount(<Provider store={store}> <CreateAccountContainerConnectedToStore /> </Provider>)
+
+    expect(wrapper.find(ErrorsDisplay).length).toEqual(0)
+  })
+  
 })
