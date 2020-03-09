@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom'
 import AccountForm from './AccountForm'
 import ErrorsDisplay from '../apiRequests/ErrorsDisplay'
 import { submitCreateAccount } from './userAccountSlice'
