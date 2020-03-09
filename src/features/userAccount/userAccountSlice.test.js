@@ -21,8 +21,7 @@ describe("userAccount state", () => {
 
   it("has an initial state with fields for logged_in and token", () => {
     const expectedUserAccountInitialState = {
-      loggedIn: false,
-      token: null
+      loggedIn: false
     }
     expect(store.getState().userAccount).toEqual(expectedUserAccountInitialState)
   })
@@ -137,7 +136,7 @@ describe("userAccount state", () => {
           return dispatch(actions.submitCreateAccount()).then(() => {
             expect(window.localStorage.getItem(token_key)).toEqual("xyz")
           })
-          
+
         })
 
       })
