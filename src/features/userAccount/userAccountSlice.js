@@ -3,6 +3,7 @@ import { loadErrors } from '../apiRequests/apiRequestSlice'
 
 const RESET_USER_ACCOUNT_STATE = 'RESET_USER_ACCOUNT_STATE'
 const UPDATE_LOGGED_IN_STATUS = 'UPDATE_LOGGED_IN_STATUS'
+const TINNDARP_TOKEN_KEY = 'tinndarp_token'
 
 const initialState = {
   loggedIn: false,
@@ -53,6 +54,10 @@ export function submitCreateAccount(credentials) {
   }
 }
 
-function saveToken(token) {
-  window.localStorage.setItem("tinndarp_token", token)
+export function saveToken(token) {
+  window.localStorage.setItem(TINNDARP_TOKEN_KEY, token)
+}
+
+export function deleteToken() {
+  window.localStorage.removeItem(TINNDARP_TOKEN_KEY)
 }

@@ -35,29 +35,29 @@ describe("userAccount state", () => {
 
     })
 
-    describe("addToken()", () => {
+    describe("saveToken())", () => {
 
-      it("sets the token state with the argument passed in", () => {
-        expect(store.getState().userAccount.token).toEqual(null)
-
+      it("saves the token to local storage with a key equal to 'tinndarp_token'", () => {
         const token = "xyz"
-        dispatch(actions.addToken(token))
+        actions.saveToken(token)
 
-        expect(store.getState().userAccount.token).toEqual(token)
+        expect(window.localStorage.getItem('tinndarp_token')).toEqual(token)
+
+        window.localStorage.removeItem(token)
       })
 
     })
 
     describe("deleteToken()", () => {
 
-      it("deletes the token in the state", () => {
+      it("deletes the token from local storage", () => {
         const token = "xyz"
-        dispatch(actions.addToken(token))
-        expect(store.getState().userAccount.token).toEqual(token)
+        actions.saveToken(token)
+        expect(window.localStorage.getItem('tinndarp_token')).toEqual(token)
 
-        dispatch(actions.deleteToken())
+        actions.deleteToken()
 
-        expect(store.getState().userAccount.token).toEqual(null)
+        expect(window.localStorage.getItem('tinndarp_token')).toBeNull()
       })
 
     })
