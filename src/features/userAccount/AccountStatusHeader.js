@@ -15,11 +15,15 @@ class AccountStatusHeader extends Component {
 
     if (loggedInWithToken()) {
       content = (
-          <a onClick={this.signOut}>Sign Out</a>
+        <div className="sign-out-link-header">
+          <a href="" onClick={this.signOut}>Sign Out</a>
+        </div>
       )
     } else {
       content = (
-        <Link to="/sign_up">Create an Account!</Link>
+        <div className="create-account-link-header">
+          <Link  to="/sign_up">Create an Account</Link>
+        </div>
       )
     }
 

@@ -30,7 +30,8 @@ export class CreateAccountContainer extends Component {
   render() {
     let content
 
-    if (loggedInWithToken()) {
+//IMP I think I need this everywhere
+    if (this.props.loggedIn || loggedInWithToken()) {
       content = (
         <RedirectComponent
           text="You're logged in and being redirected to the browsing page!"

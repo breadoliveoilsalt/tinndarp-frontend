@@ -14,10 +14,21 @@ input.submit-button {
 }
 
 .account-status-header {
+  width: 35%;
+  float: right;
+  font-weight: bold;
+}
+
+.create-account-link-header {
   width: 5em;
   float: right;
-  padding-top: 0.1em;
-  margin-right: 1em;
-  text-align: right;
-  font-weight: bold;
+  margin-right: 0.5em;
+  margin-top: 0.25em;
+}
+
+.sign-out-link-header {
+  width: 3em;
+  float: right;
+  margin-right: 0.5em;
+  margin-top: 0.25em;
 }
