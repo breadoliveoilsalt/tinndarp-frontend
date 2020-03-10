@@ -61,3 +61,7 @@ export function deleteToken() {
     window.localStorage.removeItem(TINNDARP_TOKEN_KEY)
   }
 }
+
+export function loggedInWithToken() {
+  return !!window.localStorage.getItem(TINNDARP_TOKEN_KEY)
+}

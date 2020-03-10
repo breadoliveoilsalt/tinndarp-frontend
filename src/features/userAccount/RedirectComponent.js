@@ -10,14 +10,14 @@ class RedirectComponent extends Component {
 
   delayedRedirect() {
     const redirectTo = this.props.redirectTo
-    const millisecondsToRedirect = this.props.millisecondsToRedirect
+    const millisecondsToRedirect = parseInt(this.props.millisecondsToRedirect)
     setTimeout(() => this.props.history.push(redirectTo), millisecondsToRedirect)
   }
 
   render() {
     return (
       <div>
-        <p>{this.props.text}</p>
+        <p className="large-text">{this.props.text}</p>
         <Loader />
         {this.delayedRedirect()}
       </div>
