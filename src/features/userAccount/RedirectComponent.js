@@ -1,15 +1,29 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Loader from '../apiRequests/Loader'
+import { withRouter } from 'react-router-dom'
 
-const RedirectComponent = (props) => {
 
-  return (
-    <div>
-      <p>{props.text}</p>
+class RedirectComponent extends Component {
+  constructor(props) {
+    super(props)
+  }
 
-      <Loader />
-    </div>
-  )
+  delayedRedirect() {
+    const redirectPath = this.props.redirectTo
+    const millisecondsToRedirect = this.props.millisecondsToRedirect
+    setTimeout(() => this.props.history.push(redirectPath), millisecondsToRedirect)
+  }
+
+
+  render() {
+    return (
+      <div>
+        <p>{this.props.text}</p>
+
+        <Loader />
+      </div>
+    )
+  }
 
 }
-export default RedirectComponent
+export default withRouter(RedirectComponent)
