@@ -15,7 +15,6 @@ describe("<RedirectComponent />", () => {
         <RedirectComponent {...props} />
       </BrowserRouter>)
 
-    console.log(wrapper.debug())
     expect(wrapper.find("p").text()).toEqual(props.text)
   })
 
@@ -29,12 +28,17 @@ describe("<RedirectComponent />", () => {
     expect(wrapper.find(Loader).length).toEqual(1)
   })
 
-  it("redirects to the redirectTo prop", () => {
+  it("redirects to the redirectTo prop within the time given", () => {
     const props = {
-      millisecondsToRedirect: 0,
+      millisecondsToRedirect: 500,
       redirectTo: "/browse"
     }
+    const wrapper = mount(
+      <BrowserRouter>
+        <RedirectComponent {...props} />
+      </BrowserRouter>)
 
-    const wrapper = shallow(<RedirectComponent {...props} />)
+    setTimeout(() => expect(window.location.pathname).toEqual(props.redirectTo), 1000)
   })
+
 })
