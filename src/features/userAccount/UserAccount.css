@@ -12,3 +12,12 @@ input.submit-button {
   color: #FFDD1F;
   background-color: #3484F2;
 }
+
+.account-status-header {
+  width: 5em;
+  float: right;
+  padding-top: 0.1em;
+  margin-right: 1em;
+  text-align: right;
+  font-weight: bold;
+}
