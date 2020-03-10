@@ -1,27 +1,24 @@
 import configureStore from '../../configureStore'
 import itemsToBrowseReducer, * as actions from './itemsToBrowseSlice'
-import { useSelector, useDispatch, shallowEqual } from 'react-redux'
-import * as requests from  '../../api/backendAPIRequests'
-
-const store = configureStore()
-const dispatch = store.dispatch
+import * as requests from  '../apiRequests/itemsAPIRequests'
 
 describe("itemsToBrowse store slice", () => {
 
+  let store
+  let dispatch
+
   beforeEach(() => {
-    dispatch(actions.resetItemsToBrowseState())
+    store = configureStore()
+    dispatch = store.dispatch
   })
 
   describe("the inital state", () => {
     it("has fields for a list of items, a currentItem, and a currentItemIndex", () => {
-      const expectedInitialState = {
-        itemsToBrowse: {
-          items: null,
-          currentItem: null,
-          fetchingItems: true
-        }
+      const expectedItemsToBrowseInitialState = {
+        items: null,
+        currentItem: null
       }
-      expect(store.getState()).toEqual(expectedInitialState)
+      expect(store.getState().itemsToBrowse).toEqual(expectedItemsToBrowseInitialState)
     })
   })
 
@@ -35,18 +32,6 @@ describe("itemsToBrowse store slice", () => {
         dispatch(actions.loadItems(itemsList))
 
         expect(store.getState().itemsToBrowse.items).toEqual(itemsList)
-      })
-
-    })
-
-    describe("updateFetchingStatus", () => {
-
-      it("updates fetchingItems", () => {
-        expect(store.getState().itemsToBrowse.fetchingItems).toEqual(true)
-
-        dispatch(actions.updateFetchingStatus(false))
-
-        expect(store.getState().itemsToBrowse.fetchingItems).toEqual(false)
       })
 
     })
@@ -82,10 +67,9 @@ describe("itemsToBrowse store slice", () => {
 
         })
 
-        it("leaves the fetchingItems state at false once complete", () => {
-          expect(store.getState().itemsToBrowse.fetchingItems).toBeTruthy()
+        it("leaves the fetchings state at false once complete", () => {
           return dispatch(actions.fetchItems()).then(() => {
-            expect(store.getState().itemsToBrowse.fetchingItems).toBeFalsy()
+            expect(store.getState().apiRequest.fetchings).toBeFalsy()
           })
 
         })

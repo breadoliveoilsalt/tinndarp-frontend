@@ -2,21 +2,29 @@ import React from 'react'
 import Enzyme, { shallow, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 Enzyme.configure({ adapter: new Adapter() })
-import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import configureMockStore from 'redux-mock-store'
+import thunk from 'redux-thunk'
 import BrowsingContainerConnectedToStore, { BrowsingContainer } from './BrowsingContainer'
 import CurrentItemContainer from './CurrentItemContainer'
-import Loader from '../../components/Loader'
+import Loader from '../apiRequests/Loader'
 import FinishedBrowsingDisplay from './FinishedBrowsingDisplay'
-
-const mockStore = configureMockStore([thunk])
 
 describe("<BrowsingContainer />", () => {
 
+  let mockStore
+
+  beforeEach(() => {
+    mockStore = configureMockStore([thunk])
+  })
+
   it("does not render <CurrentItemContainer /> if the store has no list of items", () => {
-    const state = {itemsToBrowse:
-                    {items: null}
+    const state = {
+                  apiRequest: {
+                    fetching: false
+                  },
+                  itemsToBrowse: {
+                    items: null}
                   }
     const store = mockStore(state)
     const wrapper = mount(<BrowsingContainerConnectedToStore store={store} />)
@@ -24,10 +32,13 @@ describe("<BrowsingContainer />", () => {
     expect(wrapper.find(CurrentItemContainer).exists()).toBeFalsy()
   })
 
-  it("renders <CurrentItemContainer /> if the store has a list of items and the app is not fetchingItems", () => {
-    const state = {itemsToBrowse:
-                    { items: ["item 1"],
-                      fetchingItems: false
+  it("renders <CurrentItemContainer /> if the store has a list of items and the app is not fetching", () => {
+    const state = {
+                    apiRequest: {
+                      fetching: false
+                    },
+                    itemsToBrowse: {
+                      items: ["item 1", "item 2"]
                     }
                   }
     const store = mockStore(state)
@@ -37,8 +48,12 @@ describe("<BrowsingContainer />", () => {
   })
 
   it("renders <CurrentItemContainer /> with props for its own currentItem prop, its handleNope, and its handleLike", () => {
-    const state = {itemsToBrowse:
-                    { items: ["item 1"],
+    const state = {
+                    apiRequest: {
+                      fetching: false
+                    },
+                    itemsToBrowse: {
+                      items: ["item 1"],
                       currentItem: "item 1"
                     }
                   }
@@ -61,8 +76,13 @@ describe("<BrowsingContainer />", () => {
   })
 
   it("renders a Loader if the app is fetching items", () => {
-    const state = {itemsToBrowse:
-                    {fetchingItems: true}
+    const state = {
+                    apiRequest: {
+                      fetching: true
+                    },
+                    itemsToBrowse: {
+                      items: ["item 1"]
+                    }
                   }
     const store = mockStore(state)
     const wrapper = mount(<BrowsingContainerConnectedToStore store={store} />)
@@ -71,8 +91,11 @@ describe("<BrowsingContainer />", () => {
   })
 
   it("renders a Loader if the app is fetching items and there are items already", () => {
-    const state = {itemsToBrowse:
-                    { fetchingItems: true,
+    const state = {
+                    apiRequest: {
+                      fetching: true,
+                    },
+                    itemsToBrowse: {
                       items: ["item 1"]
                     }
                   }
@@ -83,8 +106,11 @@ describe("<BrowsingContainer />", () => {
   })
 
   it("renders an <FinishedBrowsingDisplay /> if the state's items list is empty and the app is not fetching", () => {
-    const state = {itemsToBrowse:
-                    { fetchingItems: false,
+    const state = {
+                    apiRequest: {
+                      fetching: false,
+                    },
+                    itemsToBrowse: {
                       items: []
                     }
                   }

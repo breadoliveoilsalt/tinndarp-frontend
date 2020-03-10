@@ -1,15 +1,14 @@
-import * as requests from '../../api/backendAPIRequests'
+import * as requests from '../apiRequests/itemsAPIRequests'
+import * as apiActions from '../apiRequests/apiRequestSlice'
 
 const LOAD_ITEMS = 'LOAD_ITEMS'
 const UPDATE_CURRENT_ITEM = 'UPDATE_CURRENT_ITEM'
-const UPDATE_FETCHING_STATUS = 'UPDATE_FETCHING_STATUS'
 const RESET_ITEMS_TO_BROWSE_STATE = 'RESET_ITEMS_TO_BROWSE_STATE'
 const REMOVE_CURRENT_ITEM = 'REMOVE_CURRENT_ITEM'
 
 const initialState = {
   items: null,
   currentItem: null,
-  fetchingItems: true
 }
 
 function itemsToBrowseReducer(state = initialState, action) {
@@ -25,8 +24,6 @@ function itemsToBrowseReducer(state = initialState, action) {
     case REMOVE_CURRENT_ITEM:
       const remainingItems = state.items.slice(1)
       return Object.assign({}, state, {currentItem: null, items: remainingItems})
-    case UPDATE_FETCHING_STATUS:
-      return Object.assign({}, state, {fetchingItems: action.payload})
     case RESET_ITEMS_TO_BROWSE_STATE:
       return Object.assign({}, state, initialState)
     default:
@@ -55,13 +52,6 @@ export function removeCurrentItem() {
   }
 }
 
-export function updateFetchingStatus(bool) {
-  return {
-    type: UPDATE_FETCHING_STATUS,
-    payload: bool
-  }
-}
-
 export function resetItemsToBrowseState() {
   return {
     type: RESET_ITEMS_TO_BROWSE_STATE
@@ -70,12 +60,12 @@ export function resetItemsToBrowseState() {
 
 export function fetchItems() {
   return function(dispatch) {
-    dispatch(updateFetchingStatus(true))
+    dispatch(apiActions.updateFetchingStatus(true))
     return requests.getItems()
       .then(data => {
         dispatch(loadItems(data))
       })
       .then(() => dispatch(updateCurrentItem()))
-      .then(() => dispatch(updateFetchingStatus(false)))
+      .then(() => dispatch(apiActions.updateFetchingStatus(false)))
   }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchItems, removeCurrentItem, updateCurrentItem } from './itemsToBrowseSlice'
-import Loader from '../../components/Loader'
+import Loader from '../apiRequests/Loader'
 import CurrentItemContainer from './CurrentItemContainer'
 import FinishedBrowsingDisplay from './FinishedBrowsingDisplay'
 import './BrowsingContainer.css'
@@ -31,7 +31,7 @@ export class BrowsingContainer extends Component {
   }
 
   render() {
-    if (this.props.fetchingItems) {
+    if (this.props.fetching) {
       return (<Loader />)
     } else if (this.props.items && this.props.items.length > 0){
       return (
@@ -50,7 +50,7 @@ const mapStateToProps = (state) => {
   return {
     items: state.itemsToBrowse.items,
     currentItem: state.itemsToBrowse.currentItem,
-    fetchingItems: state.itemsToBrowse.fetchingItems
+    fetching: state.apiRequest.fetching
   }
 }
 

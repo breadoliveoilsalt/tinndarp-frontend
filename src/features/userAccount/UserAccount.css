@@ -1,0 +1,14 @@
+input {
+  margin: 1em auto;
+  border: 0.1em black solid;
+  text-align: center;
+  width: 80%;
+  height: 2em;
+}
+
+input.submit-button {
+  width: 50%;
+  font-weight: bold;
+  color: #FFDD1F;
+  background-color: #3484F2;
+}

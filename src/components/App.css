@@ -55,6 +55,21 @@ div.divider {
   margin: 0 auto;
 }
 
+.large-text {
+  margin: 1em;
+  font-size: 2em;
+  font-weight: bold
+}
+
+div.home-logo {
+  margin: 1em auto;
+  font-size: 3em;
+  width: 5.1em;
+  padding: 0.1em 0.2em;
+  font-weight: bold;
+  color: #FFDD1F;
+  background-color: #3484F2;
+}
 
 .loader {
   margin: 1em auto;
