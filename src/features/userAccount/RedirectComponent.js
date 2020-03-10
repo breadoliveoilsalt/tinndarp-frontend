@@ -1,10 +1,13 @@
 import React from 'react'
+import Loader from '../apiRequests/Loader'
 
 const RedirectComponent = (props) => {
 
   return (
     <div>
-      {props.text}
+      <p>{props.text}</p>
+
+      <Loader />
     </div>
   )
 
