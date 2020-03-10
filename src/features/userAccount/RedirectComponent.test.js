@@ -10,6 +10,6 @@ describe("<RedirectComponent />", () => {
     const props={text: "You are being redirected!"}
     const wrapper = shallow(<RedirectComponent {...props} />)
 
-    exect(wrapper.text()).toEqual(props.text)
+    expect(wrapper.text()).toEqual(props.text)
   })
 })
