@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchItems, removeCurrentItem, updateCurrentItem } from './itemsToBrowseSlice'
+import { loggedInWithToken } from '../userAccount/userAccountSlice'
+import RedirectComponent from '../userAccount/RedirectComponent'
 import Loader from '../apiRequests/Loader'
 import CurrentItemContainer from './CurrentItemContainer'
 import FinishedBrowsingDisplay from './FinishedBrowsingDisplay'
@@ -31,7 +33,15 @@ export class BrowsingContainer extends Component {
   }
 
   render() {
-    if (this.props.fetching) {
+    if (this.props.errors) {
+      return (
+        <RedirectComponent
+          text="You are not logged in. Please create an account!"
+          redirectTo="/sign_up"
+          millisecondsToRedirect="2000"
+        />
+      )
+    } else if (this.props.fetching) {
       return (<Loader />)
     } else if (this.props.items && this.props.items.length > 0){
       return (
@@ -50,7 +60,8 @@ const mapStateToProps = (state) => {
   return {
     items: state.itemsToBrowse.items,
     currentItem: state.itemsToBrowse.currentItem,
-    fetching: state.apiRequest.fetching
+    fetching: state.apiRequest.fetching,
+    errors: state.apiRequest.errors
   }
 }
 
