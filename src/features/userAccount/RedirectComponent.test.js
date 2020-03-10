@@ -12,4 +12,11 @@ describe("<RedirectComponent />", () => {
 
     expect(wrapper.text()).toEqual(props.text)
   })
+
+  it("renders the Loader", () => {
+    const props = {}
+    const wrapper = shallow(<RedirectComponent {...props} />)
+
+    expect(wrapper.find(Loader).length).toEqual(1)
+  })
 })
