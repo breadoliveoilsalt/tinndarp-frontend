@@ -4,10 +4,6 @@ import { withRouter } from 'react-router-dom'
 
 class RedirectComponent extends Component {
 
-  constructor(props) {
-    super(props)
-  }
-
   delayedRedirect() {
     const redirectTo = this.props.redirectTo
     const millisecondsToRedirect = parseInt(this.props.millisecondsToRedirect)

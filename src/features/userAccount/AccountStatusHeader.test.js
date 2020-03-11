@@ -54,8 +54,6 @@ describe("<AccountStatusHeader />", () => {
     window.localStorage.removeItem(TINNDARP_TOKEN_KEY)
   })
 
-  
-
   it("redners a <Link /> to create an account if the state indicates the user is not signed in", () => {
     const state = {userAccount: {loggedIn: false}}
     const store = mockStore(state)

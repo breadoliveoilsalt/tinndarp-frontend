@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchItems, removeCurrentItem, updateCurrentItem } from './itemsToBrowseSlice'
-import { loggedInWithToken } from '../userAccount/userAccountSlice'
 import RedirectComponent from '../userAccount/RedirectComponent'
 import Loader from '../apiRequests/Loader'
 import CurrentItemContainer from './CurrentItemContainer'

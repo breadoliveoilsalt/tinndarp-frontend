@@ -55,4 +55,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps)(withRouter(AccountStatusHeader))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AccountStatusHeader))
