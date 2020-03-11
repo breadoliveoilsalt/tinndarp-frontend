@@ -1,5 +1,5 @@
 import { postCreateAccount } from '../apiRequests/createAccountAPIRequest'
-import { loadErrors } from '../apiRequests/apiRequestSlice'
+import { loadErrors, deleteErrors } from '../apiRequests/apiRequestSlice'
 
 const RESET_USER_ACCOUNT_STATE = 'RESET_USER_ACCOUNT_STATE'
 const UPDATE_LOGGED_IN_STATUS = 'UPDATE_LOGGED_IN_STATUS'
@@ -43,6 +43,7 @@ export function submitCreateAccount(credentials) {
         if (data.errors) {
           dispatch(loadErrors(data.errors))
         } else if (data.loggedIn) {
+          dispatch(deleteErrors())
           dispatch(updateLoggedInStatus(true))
           saveToken(data.token)
         } else {
@@ -60,4 +61,8 @@ export function deleteToken() {
   if (window.localStorage.getItem(TINNDARP_TOKEN_KEY)) {
     window.localStorage.removeItem(TINNDARP_TOKEN_KEY)
   }
+}
+
+export function loggedInWithToken() {
+  return !!window.localStorage.getItem(TINNDARP_TOKEN_KEY)
 }

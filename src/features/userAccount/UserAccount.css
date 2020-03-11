@@ -12,3 +12,37 @@ input.submit-button {
   color: #FFDD1F;
   background-color: #3484F2;
 }
+
+.account-status-header {
+  width: 35%;
+  float: right;
+  font-weight: bold;
+}
+
+.create-account-link-header {
+  width: 5em;
+  float: right;
+  margin-right: 0.5em;
+  margin-top: 0.25em;
+}
+
+.sign-out-link-header {
+  width: 3em;
+  float: right;
+  margin-right: 0.5em;
+  margin-top: 0.25em;
+}
+
+#sign-out-button-header {
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  font-size: 1em;
+  font-weight: bold;
+  /*optional*/
+  /* font-family: arial, sans-serif; */
+  /*input has OS specific font-family*/
+  /* color: #069; */
+  text-decoration: underline;
+  cursor: pointer;
+}

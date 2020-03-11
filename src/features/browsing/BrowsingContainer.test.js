@@ -5,7 +5,9 @@ Enzyme.configure({ adapter: new Adapter() })
 import { Provider } from 'react-redux'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
+import { MemoryRouter } from 'react-router-dom'
 import BrowsingContainerConnectedToStore, { BrowsingContainer } from './BrowsingContainer'
+import RedirectComponent from '../userAccount/RedirectComponent'
 import CurrentItemContainer from './CurrentItemContainer'
 import Loader from '../apiRequests/Loader'
 import FinishedBrowsingDisplay from './FinishedBrowsingDisplay'
@@ -18,16 +20,38 @@ describe("<BrowsingContainer />", () => {
     mockStore = configureMockStore([thunk])
   })
 
+  it("renders a RedirectComponent and no CurrentItemContainer if there are errors", () => {
+    const state = { apiRequest: {
+                    fetching: false,
+                    errors: ["Error logging in"]
+                  },
+                  itemsToBrowse: {
+                    items: ["item 1", "item 2"]}
+                  }
+    const store = mockStore(state)
+    const wrapper = mount(
+      <MemoryRouter>
+        <BrowsingContainerConnectedToStore store={store} />)
+      </MemoryRouter>
+    )
+
+    expect(wrapper.find(CurrentItemContainer).length).toEqual(0)
+    expect(wrapper.find(RedirectComponent).length).toEqual(1)
+  })
+
   it("does not render <CurrentItemContainer /> if the store has no list of items", () => {
-    const state = {
-                  apiRequest: {
+    const state = { apiRequest: {
                     fetching: false
                   },
                   itemsToBrowse: {
                     items: null}
                   }
     const store = mockStore(state)
-    const wrapper = mount(<BrowsingContainerConnectedToStore store={store} />)
+    const wrapper = mount(
+      <MemoryRouter>
+        <BrowsingContainerConnectedToStore store={store} />)
+      </MemoryRouter>
+    )
 
     expect(wrapper.find(CurrentItemContainer).exists()).toBeFalsy()
   })
@@ -42,7 +66,11 @@ describe("<BrowsingContainer />", () => {
                     }
                   }
     const store = mockStore(state)
-    const wrapper = mount(<BrowsingContainerConnectedToStore store={store} />)
+    const wrapper = mount(
+      <MemoryRouter>
+        <BrowsingContainerConnectedToStore store={store} />)
+      </MemoryRouter>
+    )
 
     expect(wrapper.find(CurrentItemContainer).exists()).toBeTruthy()
   })
@@ -58,7 +86,11 @@ describe("<BrowsingContainer />", () => {
                     }
                   }
     const store = mockStore(state)
-    const wrapper = mount(<BrowsingContainerConnectedToStore store={store} /> )
+    const wrapper = mount(
+      <MemoryRouter>
+        <BrowsingContainerConnectedToStore store={store} />)
+      </MemoryRouter>
+    )
 
     const browsingContainerParent = wrapper.find(BrowsingContainer)
     const currentItemContainer = wrapper.find(CurrentItemContainer)
@@ -115,7 +147,11 @@ describe("<BrowsingContainer />", () => {
                     }
                   }
     const store = mockStore(state)
-    const wrapper = mount(<BrowsingContainerConnectedToStore store={store} />)
+    const wrapper = mount(
+      <MemoryRouter>
+        <BrowsingContainerConnectedToStore store={store} />)
+      </MemoryRouter>
+    )
 
     expect(wrapper.find(FinishedBrowsingDisplay).exists()).toBeTruthy()
   })

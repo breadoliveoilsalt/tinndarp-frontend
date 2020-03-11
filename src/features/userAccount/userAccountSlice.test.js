@@ -65,6 +65,21 @@ describe("userAccount state", () => {
 
     })
 
+    describe("loggedInWithToken()", () => {
+
+      it("returns true if there is a token saved locally", () => {
+        const token = "xyz"
+        actions.saveToken(token)
+
+        expect(actions.loggedInWithToken()).toEqual(true)
+      })
+
+
+      it("returns false if there is not a token saved locally", () => {
+        expect(actions.loggedInWithToken()).toEqual(false)
+      })
+    })
+
     describe("submitCreateAccount()", () => {
       it("is a thunk that returns a function", () => {
         const result = actions.submitCreateAccount()

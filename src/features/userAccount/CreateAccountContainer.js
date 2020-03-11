@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import AccountForm from './AccountForm'
 import ErrorsDisplay from '../apiRequests/ErrorsDisplay'
-import Loader from '../apiRequests/Loader'
+import RedirectComponent from './RedirectComponent'
 import { resetAPIRequestState } from '../apiRequests/apiRequestSlice'
-import { submitCreateAccount } from './userAccountSlice'
+import { submitCreateAccount, loggedInWithToken } from './userAccountSlice'
 
 import './UserAccount.css'
 
@@ -14,6 +14,10 @@ export class CreateAccountContainer extends Component {
   constructor(props) {
     super(props)
     this.handleCreateAccount = this.handleCreateAccount.bind(this)
+  }
+
+  componentDidMount() {
+    this.props.resetAPIRequestState()
   }
 
   handleCreateAccount(e) {
@@ -26,20 +30,16 @@ export class CreateAccountContainer extends Component {
     this.props.submitCreateAccount(credentials)
   }
 
-  delayedRedirectToBrowse() {
-    setTimeout(() => this.props.history.push("/browse"), 3000)
-  }
-
   render() {
     let content
 
-    if (this.props.loggedIn) {
+    if (this.props.loggedIn || loggedInWithToken()) {
       content = (
-        <div>
-          <div className="large-text">You're logged in and being redirected to the browsing page!</ div>
-          <Loader />
-          {this.delayedRedirectToBrowse()}
-        </div>
+        <RedirectComponent
+          text="You're logged in and being redirected to the browsing page!"
+          redirectTo="/browse"
+          millisecondsToRedirect="2500"
+        />
       )
     } else {
        content = (

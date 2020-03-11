@@ -5,6 +5,7 @@ Enzyme.configure({ adapter: new Adapter() })
 import Header from './Header'
 import Logo from './Logo'
 import Divider from './Divider'
+import AccountStatusHeader from '../features/userAccount/AccountStatusHeader'
 
 describe("<Header />", () => {
 
@@ -22,4 +23,9 @@ describe("<Header />", () => {
     expect(wrapper.find(Divider).hasClass("divider")).toBeTruthy()
   })
 
+  it("renders <AccountStatusHeader />", () => {
+    const wrapper = shallow(<Header />)
+
+    expect(wrapper.find(AccountStatusHeader)).toHaveLength(1)
+  })
 })
