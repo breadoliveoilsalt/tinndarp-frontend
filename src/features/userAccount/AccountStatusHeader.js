@@ -3,22 +3,26 @@ import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import { loggedInWithToken, deleteToken } from './userAccountSlice'
 import './UserAccount.css'
-//TEST
-// AND connect this to this.props.loggedIn
-class AccountStatusHeader extends Component {
+
+export class AccountStatusHeader extends Component {
+
+  // signOut = () => {
+  //   deleteToken()
+  //   this.props.history.push("/")
+  // }
 
   signOut() {
     deleteToken()
     this.props.history.push("/")
   }
-
+  
   render() {
     let content
 
     if (this.props.loggedIn || loggedInWithToken()) {
       content = (
         <div className="sign-out-link-header">
-          <a href="" onClick={this.signOut}>Sign Out</a>
+          <a id="sign-out-link" href="" onClick={this.signOut}>Sign Out</a>
         </div>
       )
     } else {
