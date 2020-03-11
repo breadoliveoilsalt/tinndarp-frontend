@@ -83,6 +83,23 @@ describe("<AccountStatusHeader />", () => {
       expect(userAccountActions.deleteToken.mock.calls.length).toEqual(1)
     })
 
+    it("updates the state's loggedIn status as false", () => {
+      userAccountActions.deleteToken = jest.fn()
+      const props = {
+        history: {push: jest.fn()},
+        updateLoggedInStatus: jest.fn()
+      }
+
+      const wrapper = shallow(<AccountStatusHeader {...props} />)
+
+      wrapper.instance().signOut()
+
+      expect(wrapper.instance().props.updateLoggedInStatus.mock.calls.length).toEqual(1)
+      // expect(wrapper.props().updateLoggedInStatus.mock.calls[0]).toEqual(1)
+      // works but gives me the argument!!
+      expect(wrapper.instance().props.updateLoggedInStatus.mock.calls[0][0]).toEqual(false)
+    })
+
     it("redirects to the home page", () => {
       userAccountActions.deleteToken = jest.fn()
       const props = {
