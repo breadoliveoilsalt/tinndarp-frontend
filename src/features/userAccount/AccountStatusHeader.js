@@ -6,16 +6,16 @@ import './UserAccount.css'
 
 export class AccountStatusHeader extends Component {
 
-  // signOut = () => {
-  //   deleteToken()
-  //   this.props.history.push("/")
-  // }
+  constructor(props) {
+    super(props)
+    this.signOut = this.signOut.bind(this)
+  }
 
   signOut() {
     deleteToken()
     this.props.history.push("/")
   }
-  
+
   render() {
     let content
 

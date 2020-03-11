@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import { Link, BrowserRouter, MemoryRouter } from 'react-router-dom'
+import * as userAccountActions from './userAccountSlice'
 import AccountStatusHeaderConnectedToStore, { AccountStatusHeader } from './AccountStatusHeader'
 
 describe("<AccountStatusHeader />", () => {
@@ -59,7 +60,6 @@ describe("<AccountStatusHeader />", () => {
 
     const wrapper = customMount(store)
 
-    debugger;
     const link = wrapper.find("Link")
 
     expect(link.length).toEqual(1)
@@ -67,58 +67,30 @@ describe("<AccountStatusHeader />", () => {
     expect(link.prop("to")).toEqual("/sign_up")
   })
 
-  // describe("signOut()", () => {
-  // })
-  // describe("the 'Sign Out' link", () => {
-  //   it("calls signOut() when clicked", () => {
-  //     const props = {history: {push: jest.fn()}}
-  //     window.localStorage.setItem(TINNDARP_TOKEN_KEY, "xyz")
-  //     const wrapper = shallow(<AccountStatusHeader {...props} />)
-  //     wrapper.signOut = jest.fn()
-  //
-  //     wrapper.find("a#sign-out-link").props().onClick()
-  //     expect(wrapper.signOut.mock.calls.length).toEqual(1)
-  //     // debugger;
+  describe("signOut()", () => {
 
+    it("calls deleteToken()", () => {
+      userAccountActions.deleteToken = jest.fn()
+      const props = {history: {push: jest.fn()}}
+      const wrapper = shallow(<AccountStatusHeader {...props} />)
 
+      wrapper.instance().signOut()
 
+      expect(userAccountActions.deleteToken.mock.calls.length).toEqual(1)
+    })
 
+    it("redirects to the home page", () => {
+      userAccountActions.deleteToken = jest.fn()
+      const props = {history: {push: jest.fn()}}
+      const wrapper = shallow(<AccountStatusHeader {...props} />)
 
-      // window.localStorage.setItem(TINNDARP_TOKEN_KEY, "xyz")
-      // const props = {history: []}
-      // const wrapper = shallow(<AccountStatusHeader {...props} />)
-      // wrapper.props.history = []
-      // wrapper.instance().signOut = jest.fn()
-      // console.log(wrapper.instance().signOut)
-      // window.localStorage.removeItem(TINNDARP_TOKEN_KEY)
+      wrapper.instance().signOut()
 
-      // const state = {userAccount: {loggedIn: true}}
-      // const store = mockStore(state)
-      //
-      // const wrapper = customMount(store)
-      // // had to use arrow function to be able to do this!!!
-      // wrapper.signOut = jest.fn()
-      // const signOutLink = wrapper.find("a")
-      // expect(wrapper.signOut.mock.calls.length).toEqual(1)
+      const argumentPassedToHistoryPush = props.history.push.mock.calls[0][0]
 
-      // //
-      // signOutLink.simulate("click")
-      //
-      // console.log(wrapper.instance().signOut)
-      // const state = {userAccount: {loggedIn: true}}
-      // const store = mockStore(state)
-      //
-      // const wrapper = customMount(store)
-      // console.log(wrapper.signOut)
-      // wrapper.instance().signOut = jest.fn()
+      expect(argumentPassedToHistoryPush).toEqual("/")
+    })
 
-      // console.log(wrapper.instance())
-      //
-
-      // window.localStorage.removeItem(TINNDARP_TOKEN_KEY)
-    // })
-  // })
-
-  // setTimeout(() => expect(window.location.pathname).toEqual(props.redirectTo), 1000)
-
+  })
+  
 })
