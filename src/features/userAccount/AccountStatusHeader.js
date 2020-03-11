@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import { loggedInWithToken, deleteToken } from './userAccountSlice'
 import './UserAccount.css'
 //TEST
+// AND connect this to this.props.loggedIn
 class AccountStatusHeader extends Component {
 
   signOut() {
@@ -13,7 +15,7 @@ class AccountStatusHeader extends Component {
   render() {
     let content
 
-    if (loggedInWithToken()) {
+    if (this.props.loggedIn || loggedInWithToken()) {
       content = (
         <div className="sign-out-link-header">
           <a href="" onClick={this.signOut}>Sign Out</a>
@@ -36,4 +38,10 @@ class AccountStatusHeader extends Component {
 
 }
 
-export default withRouter(AccountStatusHeader)
+const mapStateToProps = (state) => {
+  return {
+    loggedIn: state.userAccount.loggedIn
+  }
+}
+
+export default connect(mapStateToProps)(withRouter(AccountStatusHeader))
