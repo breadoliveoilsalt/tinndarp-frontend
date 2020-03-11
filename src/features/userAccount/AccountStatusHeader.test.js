@@ -31,28 +31,30 @@ describe("<AccountStatusHeader />", () => {
     window.localStorage.removeItem(TINNDARP_TOKEN_KEY)
   })
 
-  it("renders a link to 'Sign Out' if the state indicates the user is signed in", () => {
+  it("renders a button to 'Sign Out' if the state indicates the user is signed in", () => {
     const state = {userAccount: {loggedIn: true}}
     const store = mockStore(state)
 
     const wrapper = customMount(store)
 
-    expect(wrapper.find("a#sign-out-link").length).toEqual(1)
-    expect(wrapper.find("a#sign-out-link").text()).toEqual("Sign Out")
+    expect(wrapper.find("button#sign-out-button-header").length).toEqual(1)
+    expect(wrapper.find("button#sign-out-button-header").text()).toEqual("Sign Out")
   })
 
-  it("renders a link to 'Sign Out' if the state does not indicate the user is signed in but there is a token saved", () => {
+  it("renders a button to 'Sign Out' if the state does not indicate the user is signed in but there is a token saved", () => {
     const state = {userAccount: {loggedIn: false}}
     const store = mockStore(state)
     window.localStorage.setItem(TINNDARP_TOKEN_KEY, "xyz")
 
     const wrapper = customMount(store)
 
-    expect(wrapper.find("a#sign-out-link").length).toEqual(1)
-    expect(wrapper.find("a#sign-out-link").text()).toEqual("Sign Out")
+    expect(wrapper.find("button#sign-out-button-header").length).toEqual(1)
+    expect(wrapper.find("button#sign-out-button-header").text()).toEqual("Sign Out")
 
     window.localStorage.removeItem(TINNDARP_TOKEN_KEY)
   })
+
+  
 
   it("redners a <Link /> to create an account if the state indicates the user is not signed in", () => {
     const state = {userAccount: {loggedIn: false}}
@@ -71,7 +73,11 @@ describe("<AccountStatusHeader />", () => {
 
     it("calls deleteToken()", () => {
       userAccountActions.deleteToken = jest.fn()
-      const props = {history: {push: jest.fn()}}
+      const props = {
+        history: {push: jest.fn()},
+        updateLoggedInStatus: jest.fn()
+      }
+
       const wrapper = shallow(<AccountStatusHeader {...props} />)
 
       wrapper.instance().signOut()
@@ -81,7 +87,10 @@ describe("<AccountStatusHeader />", () => {
 
     it("redirects to the home page", () => {
       userAccountActions.deleteToken = jest.fn()
-      const props = {history: {push: jest.fn()}}
+      const props = {
+        history: {push: jest.fn()},
+        updateLoggedInStatus: jest.fn()
+      }
       const wrapper = shallow(<AccountStatusHeader {...props} />)
 
       wrapper.instance().signOut()
