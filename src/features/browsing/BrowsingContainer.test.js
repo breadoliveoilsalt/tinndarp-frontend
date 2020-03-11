@@ -66,7 +66,6 @@ describe("<BrowsingContainer />", () => {
                     }
                   }
     const store = mockStore(state)
-    // const wrapper = mount(<BrowsingContainerConnectedToStore store={store} /> )
     const wrapper = mount(
       <MemoryRouter>
         <BrowsingContainerConnectedToStore store={store} />)
@@ -92,7 +91,6 @@ describe("<BrowsingContainer />", () => {
         <BrowsingContainerConnectedToStore store={store} />)
       </MemoryRouter>
     )
-    // const wrapper = mount(<BrowsingContainerConnectedToStore store={store} /> )
 
     const browsingContainerParent = wrapper.find(BrowsingContainer)
     const currentItemContainer = wrapper.find(CurrentItemContainer)
@@ -154,7 +152,6 @@ describe("<BrowsingContainer />", () => {
         <BrowsingContainerConnectedToStore store={store} />)
       </MemoryRouter>
     )
-    // const wrapper = mount(<BrowsingContainerConnectedToStore store={store} />)
 
     expect(wrapper.find(FinishedBrowsingDisplay).exists()).toBeTruthy()
   })

@@ -43,7 +43,6 @@ export function submitCreateAccount(credentials) {
         if (data.errors) {
           dispatch(loadErrors(data.errors))
         } else if (data.loggedIn) {
-          //TEST deletion of Errors
           dispatch(deleteErrors())
           dispatch(updateLoggedInStatus(true))
           saveToken(data.token)

@@ -17,6 +17,11 @@ export class CreateAccountContainer extends Component {
     this.handleCreateAccount = this.handleCreateAccount.bind(this)
   }
 
+  componentDidMount() {
+    this.props.resetAPIRequestState()
+  }
+
+
   handleCreateAccount(e) {
     e.preventDefault()
     this.props.resetAPIRequestState()
@@ -30,7 +35,6 @@ export class CreateAccountContainer extends Component {
   render() {
     let content
 
-//IMP I think I need this everywhere
     if (this.props.loggedIn || loggedInWithToken()) {
       content = (
         <RedirectComponent
