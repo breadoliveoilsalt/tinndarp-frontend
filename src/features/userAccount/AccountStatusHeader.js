@@ -24,7 +24,7 @@ class AccountStatusHeader extends Component {
     } else {
       content = (
         <div className="create-account-link-header">
-          <Link  to="/sign_up">Create an Account</Link>
+          <Link to="/sign_up">Create an Account</Link>
         </div>
       )
     }
