@@ -1,4 +1,4 @@
-import React from 'react'
+  import React from 'react'
 import Enzyme, { shallow, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 Enzyme.configure({ adapter: new Adapter() })
@@ -13,15 +13,26 @@ import { BrowserRouter, Link } from 'react-router-dom'
 describe("<CreateAccountContainer />", () => {
 
   let mockStore
+  let shallowProps
 
   beforeEach(() => {
     mockStore = configureMockStore([thunk])
+    shallowProps = {
+        resetAPIRequestState: jest.fn(),
+        submitCreateAccount: jest.fn()
+      }
+  })
+
+  it("calls resetAPIRequestState when mounting", () => {
+    const wrapper = shallow(<CreateAccountContainer {...shallowProps} />)
+
+    expect(shallowProps.resetAPIRequestState.mock.calls.length).toEqual(1)  
   })
 
   describe("if a user is not logged in", () => {
 
     it("renders an <AccountForm />", () => {
-      const wrapper = shallow(<CreateAccountContainer />)
+      const wrapper = shallow(<CreateAccountContainer {...shallowProps} />)
 
       expect(wrapper.find(AccountForm).length).toEqual(1)
     })
@@ -96,12 +107,13 @@ describe("<CreateAccountContainer />", () => {
       expect(event.preventDefault.mock.calls.length).toEqual(1)
     })
 
-    it("calls this.props.resetAPIRequestState()", () => {
+    it("calls this.props.resetAPIRequestState(), after the component calls it when mounting", () => {
       const wrapper = shallow(<CreateAccountContainer {...props} />)
+      expect(props.resetAPIRequestState.mock.calls.length).toEqual(1)
 
       wrapper.instance().handleCreateAccount(event)
 
-      expect(props.resetAPIRequestState.mock.calls.length).toEqual(1)
+      expect(props.resetAPIRequestState.mock.calls.length).toEqual(2)
     })
 
     it("calls this.props.submitCreateAccount, passing it the event target's email and password values", () => {

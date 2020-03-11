@@ -21,7 +21,6 @@ export class CreateAccountContainer extends Component {
     this.props.resetAPIRequestState()
   }
 
-
   handleCreateAccount(e) {
     e.preventDefault()
     this.props.resetAPIRequestState()
