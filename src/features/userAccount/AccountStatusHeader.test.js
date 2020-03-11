@@ -92,5 +92,5 @@ describe("<AccountStatusHeader />", () => {
     })
 
   })
-  
+
 })
