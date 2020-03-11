@@ -95,9 +95,6 @@ describe("<AccountStatusHeader />", () => {
       wrapper.instance().signOut()
 
       expect(wrapper.instance().props.updateLoggedInStatus.mock.calls.length).toEqual(1)
-      // expect(wrapper.props().updateLoggedInStatus.mock.calls[0]).toEqual(1)
-      // works but gives me the argument!!
-      expect(wrapper.instance().props.updateLoggedInStatus.mock.calls[0][0]).toEqual(false)
     })
 
     it("redirects to the home page", () => {
