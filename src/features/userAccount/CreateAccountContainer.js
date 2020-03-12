@@ -5,7 +5,7 @@ import AccountForm from './AccountForm'
 import ErrorsDisplay from '../apiRequests/ErrorsDisplay'
 import RedirectComponent from './RedirectComponent'
 import Loader from '../apiRequests/Loader'
-import { resetAPIRequestState } from '../apiRequests/apiRequestSlice'
+import { deleteErrors } from '../apiRequests/apiRequestSlice'
 import { signUpAction, loggedInWithToken } from './userAccountSlice'
 
 import './UserAccount.css'
@@ -18,12 +18,12 @@ export class CreateAccountContainer extends Component {
   }
 
   componentDidMount() {
-    this.props.resetAPIRequestState()
+    this.props.deleteErrors()
   }
 
   handleCreateAccount(e) {
     e.preventDefault()
-    this.props.resetAPIRequestState()
+    this.props.deleteErrors()
     const credentials = {
       email: e.target.email.value,
       password: e.target.password.value
@@ -33,6 +33,7 @@ export class CreateAccountContainer extends Component {
 
   render() {
     let content
+    debugger;
 
     if (this.props.fetching) {
       content = (<Loader />)
@@ -54,6 +55,7 @@ export class CreateAccountContainer extends Component {
         )
     }
 
+    debugger;
     return content
   }
 
@@ -69,7 +71,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    resetAPIRequestState: () => dispatch(resetAPIRequestState()),
+    deleteErrors: () => dispatch(deleteErrors()),
     signUpAction: (credentials) => dispatch(signUpAction(credentials))
   }
 }

@@ -1,4 +1,4 @@
-  import React from 'react'
+import React from 'react'
 import Enzyme, { shallow, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 Enzyme.configure({ adapter: new Adapter() })
@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import CreateAccountContainerConnectedToStore, { CreateAccountContainer } from './CreateAccountContainer'
+import Loader from '../apiRequests/Loader'
 import AccountForm from './AccountForm'
 import ErrorsDisplay from '../apiRequests/ErrorsDisplay'
 import { BrowserRouter, Link } from 'react-router-dom'
@@ -18,15 +19,37 @@ describe("<CreateAccountContainer />", () => {
   beforeEach(() => {
     mockStore = configureMockStore([thunk])
     shallowProps = {
-        resetAPIRequestState: jest.fn(),
+        deleteErrors: jest.fn(),
         signUpAction: jest.fn()
       }
   })
 
-  it("calls resetAPIRequestState when mounting", () => {
+  it("calls deleteErrors when mounting", () => {
     const wrapper = shallow(<CreateAccountContainer {...shallowProps} />)
 
-    expect(shallowProps.resetAPIRequestState.mock.calls.length).toEqual(1)  
+    expect(shallowProps.deleteErrors.mock.calls.length).toEqual(1)
+  })
+
+  it("renders only a Loader if the api is fetching", () => {
+    const state = {
+      apiRequest:
+        { fetching: true,
+          errors: ["Invalid email format", "Email too short"] },
+      userAccount:
+        { loggedIn: false }
+      }
+    const store = mockStore(state)
+    
+    const wrapper = mount(
+      <Provider store={store}>
+        <BrowserRouter>
+          <CreateAccountContainerConnectedToStore  />
+        </ BrowserRouter>
+      </Provider>)
+
+    expect(wrapper.find(Loader).length).toEqual(1)
+    expect(wrapper.find(AccountForm).length).toEqual(0)
+    expect(wrapper.find(ErrorsDisplay).length).toEqual(0)
   })
 
   describe("if a user is not logged in", () => {
@@ -94,7 +117,7 @@ describe("<CreateAccountContainer />", () => {
         }
       }
       props = {
-        resetAPIRequestState: jest.fn(),
+        deleteErrors: jest.fn(),
         signUpAction: jest.fn()
       }
     })
@@ -107,13 +130,13 @@ describe("<CreateAccountContainer />", () => {
       expect(event.preventDefault.mock.calls.length).toEqual(1)
     })
 
-    it("calls this.props.resetAPIRequestState(), after the component calls it when mounting", () => {
+    it("calls this.props.deleteErrors(), after the component calls it when mounting", () => {
       const wrapper = shallow(<CreateAccountContainer {...props} />)
-      expect(props.resetAPIRequestState.mock.calls.length).toEqual(1)
+      expect(props.deleteErrors.mock.calls.length).toEqual(1)
 
       wrapper.instance().handleCreateAccount(event)
 
-      expect(props.resetAPIRequestState.mock.calls.length).toEqual(2)
+      expect(props.deleteErrors.mock.calls.length).toEqual(2)
     })
 
     it("calls this.props.signUpAction, passing it the event target's email and password values", () => {
