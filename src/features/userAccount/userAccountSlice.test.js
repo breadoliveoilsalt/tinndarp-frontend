@@ -226,7 +226,7 @@ describe("userAccount state", () => {
           requests.postLogIn.mockReturnValueOnce(Promise.resolve(mockReturnedData))
           expect(window.localStorage.getItem(token_key)).toBeNull
 
-          return dispatch(actions.submitCreateAccount()).then(() => {
+          return dispatch(actions.logInAction()).then(() => {
             expect(window.localStorage.getItem(token_key)).toEqual("xyz")
           })
 

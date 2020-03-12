@@ -7,6 +7,14 @@ export async function postCreateAccount(credentials) {
   return process(rawData)
 }
 
+//TEST
+export async function postLogIn(credentials) {
+  const url = config.baseURL + "/log_in"
+  const data = {user: credentials}
+  let rawData = await config.fetchWrapper.post(url, data)
+  return process(rawData)
+}
+
 const process = (rawData) => {
   if (rawData.data.errors) {
     return {
