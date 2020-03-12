@@ -6,7 +6,7 @@ import ErrorsDisplay from '../apiRequests/ErrorsDisplay'
 import RedirectComponent from './RedirectComponent'
 import Loader from '../apiRequests/Loader'
 import { deleteErrors } from '../apiRequests/apiRequestSlice'
-import { signUpAction, loggedInWithToken } from './userAccountSlice'
+import { logInAction, loggedInWithToken } from './userAccountSlice'
 import './UserAccount.css'
 
 export class LogInContainer extends Component {
@@ -69,7 +69,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     deleteErrors: () => dispatch(deleteErrors()),
-    signUpAction: (credentials) => dispatch(signUpAction(credentials))
+    logInAction: (credentials) => dispatch(logInAction(credentials))
   }
 }
 
