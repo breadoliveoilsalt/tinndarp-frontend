@@ -1,4 +1,4 @@
-import { postCreateAccount, postLogIn } from '../apiRequests/createAccountAPIRequest'
+import { postSignUp, postLogIn } from '../apiRequests/userAccountAPIRequests'
 import { loadErrors, deleteErrors } from '../apiRequests/apiRequestSlice'
 
 const RESET_USER_ACCOUNT_STATE = 'RESET_USER_ACCOUNT_STATE'
@@ -38,7 +38,7 @@ export function updateLoggedInStatus(bool) {
 
 export function submitCreateAccount(credentials) {
   return function(dispatch) {
-    return postCreateAccount(credentials)
+    return postSignUp(credentials)
       .then( data => {
         if (data.errors) {
           dispatch(loadErrors(data.errors))

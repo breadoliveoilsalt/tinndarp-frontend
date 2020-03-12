@@ -1,7 +1,7 @@
 import * as config from './backendAPIRequestsConfig'
-import { postCreateAccount, postLogIn } from './createAccountAPIRequest'
+import { postSignUp, postLogIn } from './userAccountAPIRequests'
 
-describe("postCreateAccount()", () => {
+describe("postSignUp()", () => {
 
   const userCredentials = {
     email: "someEmail@email.com",
@@ -21,20 +21,20 @@ describe("postCreateAccount()", () => {
   })
 
   it("calls the post() method of the fetchWrapper", () => {
-    postCreateAccount(userCredentials)
+    postSignUp(userCredentials)
 
     expect(config.fetchWrapper.post.mock.calls.length).toEqual(1)
   })
 
   it("calls the post() method with the cofigured baseURL to /sign_up", () => {
-    postCreateAccount(userCredentials)
+    postSignUp(userCredentials)
 
     const expectedURL = config.baseURL + "/sign_up"
     expect(config.fetchWrapper.post.mock.calls[0][0]).toEqual(expectedURL)
   })
 
   it("passes the userCreditials to the post() method of fetchwapper after prefixing a 'user' key", () => {
-    postCreateAccount(userCredentials)
+    postSignUp(userCredentials)
 
     const expectedParams = {user: userCredentials}
     expect(config.fetchWrapper.post.mock.calls[0][1]).toEqual(expectedParams)
@@ -54,7 +54,7 @@ describe("postCreateAccount()", () => {
     config.fetchWrapper.post = jest.fn()
     config.fetchWrapper.post.mockReturnValueOnce(Promise.resolve(mockData))
 
-    return postCreateAccount(userCredentials).then( result => {
+    return postSignUp(userCredentials).then( result => {
       const expectedResult = {
           loggedIn: false,
           errors: ["Things went wrong", "Sure did"]
@@ -78,7 +78,7 @@ describe("postCreateAccount()", () => {
     config.fetchWrapper.post = jest.fn()
     config.fetchWrapper.post.mockReturnValueOnce(Promise.resolve(mockData))
 
-    return postCreateAccount(userCredentials).then( result => {
+    return postSignUp(userCredentials).then( result => {
       const expectedResult = {
           loggedIn: true,
           token: "xyz"

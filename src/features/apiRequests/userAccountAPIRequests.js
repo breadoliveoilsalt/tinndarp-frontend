@@ -1,13 +1,12 @@
 import * as config from './backendAPIRequestsConfig'
 
-export async function postCreateAccount(credentials) {
+export async function postSignUp(credentials) {
   const url = config.baseURL + "/sign_up"
   const data = {user: credentials}
   let rawData = await config.fetchWrapper.post(url, data)
   return process(rawData)
 }
 
-//TEST
 export async function postLogIn(credentials) {
   const url = config.baseURL + "/log_in"
   const data = {user: credentials}
@@ -30,4 +29,4 @@ const process = (rawData) => {
   return rawData.data
 }
 
-export default postCreateAccount
+export default postSignUp

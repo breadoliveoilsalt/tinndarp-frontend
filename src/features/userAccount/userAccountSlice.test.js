@@ -1,6 +1,6 @@
 import configureStore from '../../configureStore'
 import accountReducer, * as actions from './userAccountSlice'
-import * as requests from  '../apiRequests/createAccountAPIRequest'
+import * as requests from  '../apiRequests/userAccountAPIRequests'
 
 describe("userAccount state", () => {
 
@@ -90,26 +90,26 @@ describe("userAccount state", () => {
       describe("the returned function", () => {
 
         beforeEach(() => {
-          requests.postCreateAccount = jest.fn()
+          requests.postSignUp = jest.fn()
         })
 
-        it("calls postCreateAccount()", () => {
+        it("calls postSignUp()", () => {
           const mockReturnedData = {
             loggedIn: false,
             errors: null
           }
-          requests.postCreateAccount.mockReturnValueOnce(Promise.resolve(mockReturnedData))
+          requests.postSignUp.mockReturnValueOnce(Promise.resolve(mockReturnedData))
 
           dispatch(actions.submitCreateAccount())
 
-          expect(requests.postCreateAccount.mock.calls.length).toEqual(1)
+          expect(requests.postSignUp.mock.calls.length).toEqual(1)
         })
 
         it("updates the state regarding apiRequest errors if the data returns errors", () => {
            const mockReturnedData = {
              errors: ["Big problem"]
            }
-          requests.postCreateAccount.mockReturnValueOnce(Promise.resolve(mockReturnedData))
+          requests.postSignUp.mockReturnValueOnce(Promise.resolve(mockReturnedData))
 
           return dispatch(actions.submitCreateAccount()).then(() => {
             expect(store.getState().apiRequest.errors).toEqual(["Big problem"])
@@ -120,7 +120,7 @@ describe("userAccount state", () => {
            const mockReturnedData = {
              errors: ["Big problem"]
            }
-          requests.postCreateAccount.mockReturnValueOnce(Promise.resolve(mockReturnedData))
+          requests.postSignUp.mockReturnValueOnce(Promise.resolve(mockReturnedData))
           expect(store.getState().userAccount.loggedIn).toEqual(false)
 
           return dispatch(actions.submitCreateAccount()).then(() => {
@@ -132,7 +132,7 @@ describe("userAccount state", () => {
            const mockReturnedData = {
              loggedIn: true
            }
-          requests.postCreateAccount.mockReturnValueOnce(Promise.resolve(mockReturnedData))
+          requests.postSignUp.mockReturnValueOnce(Promise.resolve(mockReturnedData))
           expect(store.getState().userAccount.loggedIn).toEqual(false)
 
           return dispatch(actions.submitCreateAccount()).then(() => {
@@ -145,7 +145,7 @@ describe("userAccount state", () => {
            loggedIn: true,
            token: "xyz"
           }
-          requests.postCreateAccount.mockReturnValueOnce(Promise.resolve(mockReturnedData))
+          requests.postSignUp.mockReturnValueOnce(Promise.resolve(mockReturnedData))
           expect(window.localStorage.getItem(token_key)).toBeNull
 
           return dispatch(actions.submitCreateAccount()).then(() => {
