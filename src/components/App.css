@@ -118,3 +118,8 @@ a {
   box-shadow: 0 0 #666;
   transform: translateY(4px);
 }
+
+.logo-style-button {
+  color: #FFDD1F;
+  background-color: #3484F2;
+}
