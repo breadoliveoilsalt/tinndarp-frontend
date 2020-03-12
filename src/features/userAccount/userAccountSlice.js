@@ -1,4 +1,4 @@
-import { postCreateAccount } from '../apiRequests/createAccountAPIRequest'
+import { postCreateAccount, postLogIn } from '../apiRequests/createAccountAPIRequest'
 import { loadErrors, deleteErrors } from '../apiRequests/apiRequestSlice'
 
 const RESET_USER_ACCOUNT_STATE = 'RESET_USER_ACCOUNT_STATE'
@@ -52,6 +52,24 @@ export function submitCreateAccount(credentials) {
       })
   }
 }
+
+export function logInAction(credentials) {
+  return function(dispatch) {
+    return postLogIn(credentials)
+      .then( data => {
+        if (data.errors) {
+          dispatch(loadErrors(data.errors))
+        } else if (data.loggedIn) {
+          dispatch(deleteErrors())
+          dispatch(updateLoggedInStatus(true))
+          saveToken(data.token)
+        } else {
+          dispatch(loadErrors(["Sorry, something went wrong with the server."]))
+        }
+      })
+  }
+}
+
 
 export function saveToken(token) {
   window.localStorage.setItem(TINNDARP_TOKEN_KEY, token)

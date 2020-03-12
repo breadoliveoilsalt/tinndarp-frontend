@@ -190,7 +190,7 @@ describe("userAccount state", () => {
           requests.postLogIn.mockReturnValueOnce(Promise.resolve(mockReturnedData))
 
           return dispatch(actions.logInAction()).then(() => {
-            expect(store.getState().apiRequest.errors).toEqual(mockReturnedDate.errors)
+            expect(store.getState().apiRequest.errors).toEqual(mockReturnedData.errors)
           })
         })
 
