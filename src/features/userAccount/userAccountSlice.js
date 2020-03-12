@@ -36,7 +36,7 @@ export function updateLoggedInStatus(bool) {
   }
 }
 
-export function submitCreateAccount(credentials) {
+export function signUpAction(credentials) {
   return function(dispatch) {
     return postSignUp(credentials)
       .then( data => {

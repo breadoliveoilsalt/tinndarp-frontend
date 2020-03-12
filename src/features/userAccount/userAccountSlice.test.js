@@ -80,9 +80,9 @@ describe("userAccount state", () => {
       })
     })
 
-    describe("submitCreateAccount()", () => {
+    describe("signUpAction()", () => {
       it("is a thunk that returns a function", () => {
-        const result = actions.submitCreateAccount()
+        const result = actions.signUpAction()
 
         expect(typeof result === "function").toBeTruthy()
       })
@@ -100,7 +100,7 @@ describe("userAccount state", () => {
           }
           requests.postSignUp.mockReturnValueOnce(Promise.resolve(mockReturnedData))
 
-          dispatch(actions.submitCreateAccount())
+          dispatch(actions.signUpAction())
 
           expect(requests.postSignUp.mock.calls.length).toEqual(1)
         })
@@ -111,7 +111,7 @@ describe("userAccount state", () => {
            }
           requests.postSignUp.mockReturnValueOnce(Promise.resolve(mockReturnedData))
 
-          return dispatch(actions.submitCreateAccount()).then(() => {
+          return dispatch(actions.signUpAction()).then(() => {
             expect(store.getState().apiRequest.errors).toEqual(["Big problem"])
           })
         })
@@ -123,7 +123,7 @@ describe("userAccount state", () => {
           requests.postSignUp.mockReturnValueOnce(Promise.resolve(mockReturnedData))
           expect(store.getState().userAccount.loggedIn).toEqual(false)
 
-          return dispatch(actions.submitCreateAccount()).then(() => {
+          return dispatch(actions.signUpAction()).then(() => {
             expect(store.getState().userAccount.loggedIn).toEqual(false)
           })
         })
@@ -135,7 +135,7 @@ describe("userAccount state", () => {
           requests.postSignUp.mockReturnValueOnce(Promise.resolve(mockReturnedData))
           expect(store.getState().userAccount.loggedIn).toEqual(false)
 
-          return dispatch(actions.submitCreateAccount()).then(() => {
+          return dispatch(actions.signUpAction()).then(() => {
             expect(store.getState().userAccount.loggedIn).toEqual(true)
           })
         })
@@ -148,7 +148,7 @@ describe("userAccount state", () => {
           requests.postSignUp.mockReturnValueOnce(Promise.resolve(mockReturnedData))
           expect(window.localStorage.getItem(token_key)).toBeNull
 
-          return dispatch(actions.submitCreateAccount()).then(() => {
+          return dispatch(actions.signUpAction()).then(() => {
             expect(window.localStorage.getItem(token_key)).toEqual("xyz")
           })
 

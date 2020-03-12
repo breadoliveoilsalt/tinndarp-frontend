@@ -19,7 +19,7 @@ describe("<CreateAccountContainer />", () => {
     mockStore = configureMockStore([thunk])
     shallowProps = {
         resetAPIRequestState: jest.fn(),
-        submitCreateAccount: jest.fn()
+        signUpAction: jest.fn()
       }
   })
 
@@ -95,7 +95,7 @@ describe("<CreateAccountContainer />", () => {
       }
       props = {
         resetAPIRequestState: jest.fn(),
-        submitCreateAccount: jest.fn()
+        signUpAction: jest.fn()
       }
     })
 
@@ -116,19 +116,19 @@ describe("<CreateAccountContainer />", () => {
       expect(props.resetAPIRequestState.mock.calls.length).toEqual(2)
     })
 
-    it("calls this.props.submitCreateAccount, passing it the event target's email and password values", () => {
+    it("calls this.props.signUpAction, passing it the event target's email and password values", () => {
       const wrapper = shallow(<CreateAccountContainer {...props} />)
 
       wrapper.instance().handleCreateAccount(event)
 
-      expect(props.submitCreateAccount.mock.calls.length).toEqual(1)
+      expect(props.signUpAction.mock.calls.length).toEqual(1)
 
       const expectedArgument = {
         email: event.target.email.value,
         password: event.target.password.value
       }
 
-      expect(props.submitCreateAccount.mock.calls[0][0]).toEqual(expectedArgument)
+      expect(props.signUpAction.mock.calls[0][0]).toEqual(expectedArgument)
     })
   })
 })

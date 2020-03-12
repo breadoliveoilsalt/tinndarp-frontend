@@ -5,7 +5,7 @@ import AccountForm from './AccountForm'
 import ErrorsDisplay from '../apiRequests/ErrorsDisplay'
 import RedirectComponent from './RedirectComponent'
 import { resetAPIRequestState } from '../apiRequests/apiRequestSlice'
-import { submitCreateAccount, loggedInWithToken } from './userAccountSlice'
+import { signUpAction, loggedInWithToken } from './userAccountSlice'
 
 import './UserAccount.css'
 
@@ -27,7 +27,7 @@ export class CreateAccountContainer extends Component {
       email: e.target.email.value,
       password: e.target.password.value
     }
-    this.props.submitCreateAccount(credentials)
+    this.props.signUpAction(credentials)
   }
 
   render() {
@@ -66,7 +66,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     resetAPIRequestState: () => dispatch(resetAPIRequestState()),
-    submitCreateAccount: (credentials) => dispatch(submitCreateAccount(credentials))
+    signUpAction: (credentials) => dispatch(signUpAction(credentials))
   }
 }
 
