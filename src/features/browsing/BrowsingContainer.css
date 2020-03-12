@@ -13,31 +13,6 @@ div.browsing-item-details {
   font-weight: bold;
 }
 
-a {
-  color: black;
-}
-
-.action-button {
-  display: inline-block;
-  width: 30%;
-  margin: 0 1em;
-  padding: .5em 0;
-  font-size: 1.5em;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  outline: none;
-  color: white;
-  border: none;
-  border-radius: .5em;
-  box-shadow: 0 .25em #999;
-}
-
-.action-button:active {
-  box-shadow: 0 0 #666;
-  transform: translateY(4px);
-}
-
 .like-button {
   background-color: #4CAF50;
 }
