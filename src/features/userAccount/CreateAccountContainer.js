@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom'
 import AccountForm from './AccountForm'
 import ErrorsDisplay from '../apiRequests/ErrorsDisplay'
 import RedirectComponent from './RedirectComponent'
+import Loader from '../apiRequests/Loader'
 import { resetAPIRequestState } from '../apiRequests/apiRequestSlice'
 import { signUpAction, loggedInWithToken } from './userAccountSlice'
 
@@ -33,7 +34,9 @@ export class CreateAccountContainer extends Component {
   render() {
     let content
 
-    if (this.props.loggedIn || loggedInWithToken()) {
+    if (this.props.fetching) {
+      content = (<Loader />)
+    } else if (this.props.loggedIn || loggedInWithToken()) {
       content = (
         <RedirectComponent
           text="You're logged in and being redirected to the browsing page!"
@@ -58,6 +61,7 @@ export class CreateAccountContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    fetching: state.apiRequest.fetching,
     errors: state.apiRequest.errors,
     loggedIn: state.userAccount.loggedIn
   }

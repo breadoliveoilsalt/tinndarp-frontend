@@ -1,6 +1,9 @@
 import configureStore from '../../configureStore'
 import accountReducer, * as actions from './userAccountSlice'
 import * as requests from  '../apiRequests/userAccountAPIRequests'
+import * as apiActions from '../apiRequests/apiRequestSlice'
+import configureMockStore from 'redux-mock-store'
+import thunk from 'redux-thunk'
 
 describe("userAccount state", () => {
 
@@ -181,6 +184,23 @@ describe("userAccount state", () => {
           dispatch(actions.logInAction())
 
           expect(requests.postLogIn.mock.calls.length).toEqual(1)
+        })
+
+      it("updates the apiRequest fetching state to true when first called and updates the apiFetching state when the promise chain is over", () => {
+           const mockReturnedData = {
+             errors: ["Invalid log in credentials."]
+           }
+          requests.postLogIn.mockReturnValueOnce(Promise.resolve(mockReturnedData))
+
+          const mockStore = configureMockStore([thunk])
+          store = mockStore({apiRequest: {fetching: false}})
+          dispatch = store.dispatch
+
+          return dispatch(actions.logInAction()).then(() => {
+            expect(store.getActions()[0]).toEqual(apiActions.updateFetchingStatus(true))
+            const lastAction = store.getActions()[store.getActions().length - 1]
+            expect(lastAction).toEqual(apiActions.updateFetchingStatus(false))
+          })
         })
 
         it("updates the state regarding apiRequest errors if the data returns errors", () => {
