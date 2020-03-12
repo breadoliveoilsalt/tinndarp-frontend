@@ -158,6 +158,83 @@ describe("userAccount state", () => {
 
     })
 
+    describe("logInAction()", () => {
+      it("is a thunk that returns a function", () => {
+        const result = actions.logInAction()
+
+        expect(typeof result === "function").toBeTruthy()
+      })
+
+      describe("the returned function", () => {
+
+        beforeEach(() => {
+          requests.postLogIn = jest.fn()
+        })
+
+        it("calls postLogIn()", () => {
+          const mockReturnedData = {
+            loggedIn: false,
+            errors: null
+          }
+          requests.postLogIn.mockReturnValueOnce(Promise.resolve(mockReturnedData))
+
+          dispatch(actions.logInAction())
+
+          expect(requests.postLogIn.mock.calls.length).toEqual(1)
+        })
+
+        it("updates the state regarding apiRequest errors if the data returns errors", () => {
+           const mockReturnedData = {
+             errors: ["Invalid log in credentials."]
+           }
+          requests.postLogIn.mockReturnValueOnce(Promise.resolve(mockReturnedData))
+
+          return dispatch(actions.logInAction()).then(() => {
+            expect(store.getState().apiRequest.errors).toEqual(mockReturnedDate.errors)
+          })
+        })
+
+        it("does not update the userAcount loggedIn state if the data returns errors", () => {
+           const mockReturnedData = {
+             errors: ["Invalid log in credentials."]
+           }
+          requests.postLogIn.mockReturnValueOnce(Promise.resolve(mockReturnedData))
+          expect(store.getState().userAccount.loggedIn).toEqual(false)
+
+          return dispatch(actions.logInAction()).then(() => {
+            expect(store.getState().userAccount.loggedIn).toEqual(false)
+          })
+        })
+
+        it("updates the userAccount loggedIn state if the data returns a truthy logged in status", () => {
+           const mockReturnedData = {
+             loggedIn: true
+           }
+          requests.postLogIn.mockReturnValueOnce(Promise.resolve(mockReturnedData))
+          expect(store.getState().userAccount.loggedIn).toEqual(false)
+
+          return dispatch(actions.logInAction()).then(() => {
+            expect(store.getState().userAccount.loggedIn).toEqual(true)
+          })
+        })
+
+        it("saves the token locally", () => {
+          const mockReturnedData = {
+           loggedIn: true,
+           token: "xyz"
+          }
+          requests.postLogIn.mockReturnValueOnce(Promise.resolve(mockReturnedData))
+          expect(window.localStorage.getItem(token_key)).toBeNull
+
+          return dispatch(actions.submitCreateAccount()).then(() => {
+            expect(window.localStorage.getItem(token_key)).toEqual("xyz")
+          })
+
+        })
+
+      })
+
+    })
   })
 
 })
