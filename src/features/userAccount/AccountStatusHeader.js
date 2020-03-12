@@ -28,8 +28,8 @@ export class AccountStatusHeader extends Component {
       )
     } else {
       content = (
-        <div className="create-account-link-header">
-          <Link to="/sign_up">Create an Account</Link>
+        <div className="not-signed-in-link-header">
+          <Link to="/">Please Log In or Sign Up</Link>
         </div>
       )
     }

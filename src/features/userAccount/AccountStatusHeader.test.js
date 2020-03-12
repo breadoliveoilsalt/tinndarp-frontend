@@ -54,7 +54,7 @@ describe("<AccountStatusHeader />", () => {
     window.localStorage.removeItem(TINNDARP_TOKEN_KEY)
   })
 
-  it("redners a <Link /> to create an account if the state indicates the user is not signed in", () => {
+  it("redners a <Link /> to the home page for logging in or signin up", () => {
     const state = {userAccount: {loggedIn: false}}
     const store = mockStore(state)
 
@@ -63,8 +63,8 @@ describe("<AccountStatusHeader />", () => {
     const link = wrapper.find("Link")
 
     expect(link.length).toEqual(1)
-    expect(link.text()).toEqual("Create an Account")
-    expect(link.prop("to")).toEqual("/sign_up")
+    expect(link.text()).toEqual("Please Log In or Sign Up")
+    expect(link.prop("to")).toEqual("/")
   })
 
   describe("signOut()", () => {

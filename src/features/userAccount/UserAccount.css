@@ -19,11 +19,11 @@ input.submit-button {
   font-weight: bold;
 }
 
-.create-account-link-header {
+.not-signed-in-link-header {
   width: 5em;
   float: right;
   margin-right: 0.5em;
-  margin-top: 0.25em;
+  /* margin-top: 0.25em; */
 }
 
 .sign-out-link-header {
@@ -39,10 +39,6 @@ input.submit-button {
   padding: 0!important;
   font-size: 1em;
   font-weight: bold;
-  /*optional*/
-  /* font-family: arial, sans-serif; */
-  /*input has OS specific font-family*/
-  /* color: #069; */
   text-decoration: underline;
   cursor: pointer;
 }
