@@ -1,4 +1,4 @@
-import * as config from './backendAPIRequestsConfig'
+import * as config from './apiRequestsConfig/apiRequestsConfig'
 
 export async function getItems() {
   const url = config.baseURL + "/items"

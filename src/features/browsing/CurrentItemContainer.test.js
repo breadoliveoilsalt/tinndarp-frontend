@@ -77,9 +77,9 @@ describe("<CurrentItemContainer />", () => {
 
     describe("the <DecisionButton /> for noping an item", () => {
 
-      it("has a props classname of 'decision-button nope-button'", () => {
+      it("has a props classname of 'action-button nope-button'", () => {
         const nopeButton = wrapper.find(DecisionButton).first()
-        expect(nopeButton.props().className).toEqual("decision-button nope-button")
+        expect(nopeButton.props().className).toEqual("action-button nope-button")
       })
 
       it("has a currentItem prop equal to the currentItem prop of the parent", () => {
@@ -103,9 +103,9 @@ describe("<CurrentItemContainer />", () => {
 
     describe("the <DecisionButton /> for liking an item", () => {
 
-      it("has a props classname of 'decision-button like-button'", () => {
+      it("has a props classname of 'action-button like-button'", () => {
         const likeButton = wrapper.find(DecisionButton).last()
-        expect(likeButton.props().className).toEqual("decision-button like-button")
+        expect(likeButton.props().className).toEqual("action-button like-button")
       })
 
       it("has a currentItem prop equal to the currentItem prop of the parent", () => {

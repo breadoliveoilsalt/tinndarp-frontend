@@ -32,9 +32,13 @@
   }
 }
 
+div.logo-header-container {
+
+}
+
 div.logo-header {
   font-size: 2.2em;
-  width: 50%;
+  width: 5.1em;
   padding: 0.1em 0.2em;
   margin: 0.5em 0 0.5em 0.5em;
   font-weight: bold;
@@ -88,4 +92,34 @@ div.home-logo {
 
 .footer {
   height: 2em;
+}
+
+a {
+  color: black;
+}
+
+.action-button {
+  display: inline-block;
+  width: 30%;
+  margin: 0 1em;
+  padding: .5em 0;
+  font-size: 1.5em;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: white;
+  border: none;
+  border-radius: .5em;
+  box-shadow: 0 .25em #999;
+}
+
+.action-button:active {
+  box-shadow: 0 0 #666;
+  transform: translateY(4px);
+}
+
+.logo-style-button {
+  color: #FFDD1F;
+  background-color: #3484F2;
 }

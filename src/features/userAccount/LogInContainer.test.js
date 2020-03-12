@@ -1,16 +1,17 @@
-  import React from 'react'
+import React from 'react'
 import Enzyme, { shallow, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 Enzyme.configure({ adapter: new Adapter() })
 import { Provider } from 'react-redux'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-import CreateAccountContainerConnectedToStore, { CreateAccountContainer } from './CreateAccountContainer'
+import LogInContainerConnectedToStore, { LogInContainer } from './LogInContainer'
+import Loader from '../apiRequests/Loader'
 import AccountForm from './AccountForm'
 import ErrorsDisplay from '../apiRequests/ErrorsDisplay'
 import { BrowserRouter, Link } from 'react-router-dom'
 
-describe("<CreateAccountContainer />", () => {
+describe("<LogInContainer />", () => {
 
   let mockStore
   let shallowProps
@@ -18,21 +19,43 @@ describe("<CreateAccountContainer />", () => {
   beforeEach(() => {
     mockStore = configureMockStore([thunk])
     shallowProps = {
-        resetAPIRequestState: jest.fn(),
-        submitCreateAccount: jest.fn()
+        deleteErrors: jest.fn(),
+        logInAction: jest.fn()
       }
   })
 
-  it("calls resetAPIRequestState when mounting", () => {
-    const wrapper = shallow(<CreateAccountContainer {...shallowProps} />)
+  it("calls deleteErrors when mounting", () => {
+    const wrapper = shallow(<LogInContainer {...shallowProps} />)
 
-    expect(shallowProps.resetAPIRequestState.mock.calls.length).toEqual(1)  
+    expect(shallowProps.deleteErrors.mock.calls.length).toEqual(1)
+  })
+
+  it("renders only a Loader if the api is fetching", () => {
+    const state = {
+      apiRequest:
+        { fetching: true,
+          errors: ["Invalid credentials"] },
+      userAccount:
+        { loggedIn: false }
+      }
+    const store = mockStore(state)
+
+    const wrapper = mount(
+      <Provider store={store}>
+        <BrowserRouter>
+          <LogInContainerConnectedToStore  />
+        </ BrowserRouter>
+      </Provider>)
+
+    expect(wrapper.find(Loader).length).toEqual(1)
+    expect(wrapper.find(AccountForm).length).toEqual(0)
+    expect(wrapper.find(ErrorsDisplay).length).toEqual(0)
   })
 
   describe("if a user is not logged in", () => {
 
     it("renders an <AccountForm />", () => {
-      const wrapper = shallow(<CreateAccountContainer {...shallowProps} />)
+      const wrapper = shallow(<LogInContainer {...shallowProps} />)
 
       expect(wrapper.find(AccountForm).length).toEqual(1)
     })
@@ -49,7 +72,7 @@ describe("<CreateAccountContainer />", () => {
       const wrapper = mount(
         <Provider store={store}>
           <BrowserRouter>
-            <CreateAccountContainerConnectedToStore />
+            <LogInContainerConnectedToStore />
           </BrowserRouter>
         </Provider>)
 
@@ -70,7 +93,7 @@ describe("<CreateAccountContainer />", () => {
       const wrapper = mount(
         <Provider store={store}>
           <BrowserRouter>
-            <CreateAccountContainerConnectedToStore {...props} />
+            <LogInContainerConnectedToStore {...props} />
           </ BrowserRouter>
         </Provider>)
 
@@ -78,7 +101,7 @@ describe("<CreateAccountContainer />", () => {
     })
   })
 
-  describe("handleCreateAccount()", () => {
+  describe("handleLogIn()", () => {
     const userEmail = "someEmail@email.com"
     const userPassword = "password"
 
@@ -94,41 +117,41 @@ describe("<CreateAccountContainer />", () => {
         }
       }
       props = {
-        resetAPIRequestState: jest.fn(),
-        submitCreateAccount: jest.fn()
+        deleteErrors: jest.fn(),
+        logInAction: jest.fn()
       }
     })
 
     it("call preventDefault() on the event", () => {
-      const wrapper = shallow(<CreateAccountContainer {...props} />)
+      const wrapper = shallow(<LogInContainer {...props} />)
 
-      wrapper.instance().handleCreateAccount(event)
+      wrapper.instance().handleLogIn(event)
 
       expect(event.preventDefault.mock.calls.length).toEqual(1)
     })
 
-    it("calls this.props.resetAPIRequestState(), after the component calls it when mounting", () => {
-      const wrapper = shallow(<CreateAccountContainer {...props} />)
-      expect(props.resetAPIRequestState.mock.calls.length).toEqual(1)
+    it("calls this.props.deleteErrors(), after the component calls it when mounting", () => {
+      const wrapper = shallow(<LogInContainer {...props} />)
+      expect(props.deleteErrors.mock.calls.length).toEqual(1)
 
-      wrapper.instance().handleCreateAccount(event)
+      wrapper.instance().handleLogIn(event)
 
-      expect(props.resetAPIRequestState.mock.calls.length).toEqual(2)
+      expect(props.deleteErrors.mock.calls.length).toEqual(2)
     })
 
-    it("calls this.props.submitCreateAccount, passing it the event target's email and password values", () => {
-      const wrapper = shallow(<CreateAccountContainer {...props} />)
+    it("calls this.props.logInAction, passing it the event target's email and password values", () => {
+      const wrapper = shallow(<LogInContainer {...props} />)
 
-      wrapper.instance().handleCreateAccount(event)
+      wrapper.instance().handleLogIn(event)
 
-      expect(props.submitCreateAccount.mock.calls.length).toEqual(1)
+      expect(props.logInAction.mock.calls.length).toEqual(1)
 
       const expectedArgument = {
         email: event.target.email.value,
         password: event.target.password.value
       }
 
-      expect(props.submitCreateAccount.mock.calls[0][0]).toEqual(expectedArgument)
+      expect(props.logInAction.mock.calls[0][0]).toEqual(expectedArgument)
     })
   })
 })

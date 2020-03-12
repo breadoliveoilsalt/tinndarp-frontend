@@ -1,5 +1,5 @@
-import { postCreateAccount } from '../apiRequests/createAccountAPIRequest'
-import { loadErrors, deleteErrors } from '../apiRequests/apiRequestSlice'
+import { postSignUp, postLogIn } from '../apiRequests/userAccountAPIRequests'
+import * as apiActions from '../apiRequests/apiRequestSlice'
 
 const RESET_USER_ACCOUNT_STATE = 'RESET_USER_ACCOUNT_STATE'
 const UPDATE_LOGGED_IN_STATUS = 'UPDATE_LOGGED_IN_STATUS'
@@ -36,22 +36,45 @@ export function updateLoggedInStatus(bool) {
   }
 }
 
-export function submitCreateAccount(credentials) {
+export function signUpAction(credentials) {
   return function(dispatch) {
-    return postCreateAccount(credentials)
+    dispatch(apiActions.updateFetchingStatus(true))
+    return postSignUp(credentials)
       .then( data => {
         if (data.errors) {
-          dispatch(loadErrors(data.errors))
+          dispatch(apiActions.loadErrors(data.errors))
         } else if (data.loggedIn) {
-          dispatch(deleteErrors())
+          dispatch(apiActions.deleteErrors())
           dispatch(updateLoggedInStatus(true))
           saveToken(data.token)
         } else {
-          dispatch(loadErrors(["Sorry, something went wrong with the server."]))
+          dispatch(apiActions.loadErrors(["Sorry, something went wrong with the server."]))
         }
       })
+      .then(() => dispatch(apiActions.updateFetchingStatus(false)))
+    }
+
+}
+
+export function logInAction(credentials) {
+  return function(dispatch) {
+    dispatch(apiActions.updateFetchingStatus(true))
+    return postLogIn(credentials)
+      .then( data => {
+        if (data.errors) {
+          dispatch(apiActions.loadErrors(data.errors))
+        } else if (data.loggedIn) {
+          dispatch(apiActions.deleteErrors())
+          dispatch(updateLoggedInStatus(true))
+          saveToken(data.token)
+        } else {
+          dispatch(apiActions.loadErrors(["Sorry, something went wrong with the server."]))
+        }
+      })
+      .then(() => dispatch(apiActions.updateFetchingStatus(false)))
   }
 }
+
 
 export function saveToken(token) {
   window.localStorage.setItem(TINNDARP_TOKEN_KEY, token)

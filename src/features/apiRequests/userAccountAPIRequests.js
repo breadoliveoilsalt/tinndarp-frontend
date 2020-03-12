@@ -1,7 +1,14 @@
-import * as config from './backendAPIRequestsConfig'
+import * as config from './apiRequestsConfig/apiRequestsConfig'
 
-export async function postCreateAccount(credentials) {
+export async function postSignUp(credentials) {
   const url = config.baseURL + "/sign_up"
+  const data = {user: credentials}
+  let rawData = await config.fetchWrapper.post(url, data)
+  return process(rawData)
+}
+
+export async function postLogIn(credentials) {
+  const url = config.baseURL + "/log_in"
   const data = {user: credentials}
   let rawData = await config.fetchWrapper.post(url, data)
   return process(rawData)
@@ -22,4 +29,4 @@ const process = (rawData) => {
   return rawData.data
 }
 
-export default postCreateAccount
+export default postSignUp

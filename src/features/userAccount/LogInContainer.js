@@ -4,36 +4,38 @@ import { withRouter } from 'react-router-dom'
 import AccountForm from './AccountForm'
 import ErrorsDisplay from '../apiRequests/ErrorsDisplay'
 import RedirectComponent from './RedirectComponent'
-import { resetAPIRequestState } from '../apiRequests/apiRequestSlice'
-import { submitCreateAccount, loggedInWithToken } from './userAccountSlice'
-
+import Loader from '../apiRequests/Loader'
+import { deleteErrors } from '../apiRequests/apiRequestSlice'
+import { logInAction, loggedInWithToken } from './userAccountSlice'
 import './UserAccount.css'
 
-export class CreateAccountContainer extends Component {
+export class LogInContainer extends Component {
 
   constructor(props) {
     super(props)
-    this.handleCreateAccount = this.handleCreateAccount.bind(this)
+    this.handleLogIn = this.handleLogIn.bind(this)
   }
 
   componentDidMount() {
-    this.props.resetAPIRequestState()
+    this.props.deleteErrors()
   }
 
-  handleCreateAccount(e) {
+  handleLogIn(e) {
     e.preventDefault()
-    this.props.resetAPIRequestState()
+    this.props.deleteErrors()
     const credentials = {
       email: e.target.email.value,
       password: e.target.password.value
     }
-    this.props.submitCreateAccount(credentials)
+    this.props.logInAction(credentials)
   }
 
   render() {
     let content
 
-    if (this.props.loggedIn || loggedInWithToken()) {
+    if (this.props.fetching) {
+      content = (<Loader />)
+    } else if (this.props.loggedIn || loggedInWithToken()) {
       content = (
         <RedirectComponent
           text="You're logged in and being redirected to the browsing page!"
@@ -44,9 +46,9 @@ export class CreateAccountContainer extends Component {
     } else {
        content = (
           <div>
-            <div className="large-text">Sign Up for an Account! </ div>
+            <div className="large-text">Log In</ div>
             {this.props.errors ? <ErrorsDisplay /> : null}
-            <AccountForm action={this.handleCreateAccount} />
+            <AccountForm action={this.handleLogIn} />
           </div>
         )
     }
@@ -58,6 +60,7 @@ export class CreateAccountContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    fetching: state.apiRequest.fetching,
     errors: state.apiRequest.errors,
     loggedIn: state.userAccount.loggedIn
   }
@@ -65,9 +68,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    resetAPIRequestState: () => dispatch(resetAPIRequestState()),
-    submitCreateAccount: (credentials) => dispatch(submitCreateAccount(credentials))
+    deleteErrors: () => dispatch(deleteErrors()),
+    logInAction: (credentials) => dispatch(logInAction(credentials))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CreateAccountContainer))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(LogInContainer))

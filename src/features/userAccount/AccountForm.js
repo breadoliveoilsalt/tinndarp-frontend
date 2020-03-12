@@ -12,7 +12,7 @@ const CreateAccountForm = (props) => {
           <input type="password" placeholder="Your password" name="password" />
         </div>
         <div>
-          <input className="submit-button" type="submit" value="Submit" />
+          <input className="action-button submit-button" type="submit" value="Submit" />
         </div>
       </form>
 

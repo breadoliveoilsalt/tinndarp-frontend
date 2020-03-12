@@ -8,7 +8,8 @@ import thunk from 'redux-thunk'
 import configureStore from '../configureStore'
 import RoutesContainer from './RoutesContainer'
 import Home from './Home'
-import CreateAccountContainer from '../features/userAccount/CreateAccountContainer'
+import SignUpContainer from '../features/userAccount/SignUpContainer'
+import LogInContainer from '../features/userAccount/LogInContainer'
 import BrowsingContainer from '../features/browsing/BrowsingContainer'
 import NoMatch from './NoMatch'
 
@@ -43,7 +44,7 @@ describe("<Routes />", () => {
     expect(routeComponent.children()).toEqual(homeComponent)
   })
 
-  it("renders only a <Route /> with <CreateAccountContainer /> when the route is '/sign_up'", () => {
+  it("renders only a <Route /> with <SignUpContainer /> when the route is '/sign_up'", () => {
     const wrapper = mount(
       <Provider store={store} >
         <MemoryRouter initialEntries={[ '/sign_up' ]} initialIndex={0}>
@@ -53,9 +54,24 @@ describe("<Routes />", () => {
     )
 
     const routeComponent = wrapper.find(Route)
-    const createAccountContainerComponent = wrapper.find(CreateAccountContainer)
+    const SignUpContainerComponent = wrapper.find(SignUpContainer)
     expect(routeComponent.children().length).toEqual(1)
-    expect(routeComponent.children()).toEqual(createAccountContainerComponent)
+    expect(routeComponent.children()).toEqual(SignUpContainerComponent)
+  })
+
+  it("renders only a <Route /> with <LogInContainer /> when the route is '/log_in'", () => {
+    const wrapper = mount(
+      <Provider store={store} >
+        <MemoryRouter initialEntries={[ '/log_in' ]} initialIndex={0}>
+          <RoutesContainer />
+        </MemoryRouter>
+      </Provider>
+    )
+
+    const routeComponent = wrapper.find(Route)
+    const logInContainerComponent = wrapper.find(LogInContainer)
+    expect(routeComponent.children().length).toEqual(1)
+    expect(routeComponent.children()).toEqual(logInContainerComponent)
   })
 
   it("renders only a <Route /> with <BrowsingContainer /> when the route is '/browse'", () => {
