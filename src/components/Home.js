@@ -12,7 +12,6 @@ export class Home extends Component {
     if (this.props.loggedIn || loggedInWithToken()) {
       content = (
         <div>
-
           <div className="large-text">Nice to see you again! Click below to browse items</div>
           <button className="action-button logo-style-button" onClick={() => this.props.history.push("/browse")}>Browse</button>
         </div>
