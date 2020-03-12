@@ -20,7 +20,7 @@ export class AccountStatusHeader extends Component {
   render() {
     let content
 
-    if (this.props.loggedIn || loggedInWithToken()) {
+    if (loggedInWithToken()) {
       content = (
         <div className="sign-out-link-header">
           <button id="sign-out-button-header" onClick={this.signOut}>Sign Out</button>
@@ -43,16 +43,10 @@ export class AccountStatusHeader extends Component {
 
 }
 
-const mapStateToProps = (state) => {
-  return {
-    loggedIn: state.userAccount.loggedIn
-  }
-}
-
 const mapDispatchToProps = (dispatch) => {
   return {
     updateLoggedInStatus: (bool) => dispatch(updateLoggedInStatus(bool))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AccountStatusHeader))
+export default connect(null, mapDispatchToProps)(withRouter(AccountStatusHeader))
