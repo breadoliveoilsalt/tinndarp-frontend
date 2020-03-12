@@ -9,6 +9,7 @@ import configureStore from '../configureStore'
 import RoutesContainer from './RoutesContainer'
 import Home from './Home'
 import CreateAccountContainer from '../features/userAccount/CreateAccountContainer'
+import LogInContainer from '../features/userAccount/LogInContainer'
 import BrowsingContainer from '../features/browsing/BrowsingContainer'
 import NoMatch from './NoMatch'
 
@@ -56,6 +57,21 @@ describe("<Routes />", () => {
     const createAccountContainerComponent = wrapper.find(CreateAccountContainer)
     expect(routeComponent.children().length).toEqual(1)
     expect(routeComponent.children()).toEqual(createAccountContainerComponent)
+  })
+
+  it("renders only a <Route /> with <LogInContainer /> when the route is '/log_in'", () => {
+    const wrapper = mount(
+      <Provider store={store} >
+        <MemoryRouter initialEntries={[ '/log_in' ]} initialIndex={0}>
+          <RoutesContainer />
+        </MemoryRouter>
+      </Provider>
+    )
+
+    const routeComponent = wrapper.find(Route)
+    const logInContainerComponent = wrapper.find(LogInContainer)
+    expect(routeComponent.children().length).toEqual(1)
+    expect(routeComponent.children()).toEqual(logInContainerComponent)
   })
 
   it("renders only a <Route /> with <BrowsingContainer /> when the route is '/browse'", () => {

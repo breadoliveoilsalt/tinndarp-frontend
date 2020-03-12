@@ -7,28 +7,27 @@ import RedirectComponent from './RedirectComponent'
 import Loader from '../apiRequests/Loader'
 import { deleteErrors } from '../apiRequests/apiRequestSlice'
 import { signUpAction, loggedInWithToken } from './userAccountSlice'
-
 import './UserAccount.css'
 
-export class CreateAccountContainer extends Component {
+export class LogInContainer extends Component {
 
   constructor(props) {
     super(props)
-    this.handleCreateAccount = this.handleCreateAccount.bind(this)
+    this.handleLogIn = this.handleLogIn.bind(this)
   }
 
   componentDidMount() {
     this.props.deleteErrors()
   }
 
-  handleCreateAccount(e) {
+  handleLogIn(e) {
     e.preventDefault()
     this.props.deleteErrors()
     const credentials = {
       email: e.target.email.value,
       password: e.target.password.value
     }
-    this.props.signUpAction(credentials)
+    this.props.logInAction(credentials)
   }
 
   render() {
@@ -47,9 +46,9 @@ export class CreateAccountContainer extends Component {
     } else {
        content = (
           <div>
-            <div className="large-text">Sign Up for an Account! </ div>
+            <div className="large-text">Log In</ div>
             {this.props.errors ? <ErrorsDisplay /> : null}
-            <AccountForm action={this.handleCreateAccount} />
+            <AccountForm action={this.handleLogIn} />
           </div>
         )
     }
@@ -74,4 +73,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CreateAccountContainer))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(LogInContainer))

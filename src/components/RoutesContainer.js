@@ -2,6 +2,7 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import Home from './Home'
 import CreateAccountContainer from '../features/userAccount/CreateAccountContainer'
+import LogInContainer from '../features/userAccount/LogInContainer'
 import BrowsingContainer from '../features/browsing/BrowsingContainer'
 import NoMatch from './NoMatch'
 
@@ -16,6 +17,10 @@ const RoutesContainer = () => {
 
         <Route exact path="/sign_up">
           <CreateAccountContainer />
+        </Route>
+
+        <Route exact path="/log_in">
+          <LogInContainer />
         </Route>
 
         <Route exact path="/browse">
