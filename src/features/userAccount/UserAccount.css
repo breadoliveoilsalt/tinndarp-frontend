@@ -11,6 +11,8 @@ input.submit-button {
   font-weight: bold;
   color: #FFDD1F;
   background-color: #3484F2;
+  font-size: 1em;
+  margin: 1em auto;
 }
 
 .account-status-header {
