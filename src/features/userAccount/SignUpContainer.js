@@ -10,7 +10,7 @@ import { signUpAction, loggedInWithToken } from './userAccountSlice'
 
 import './UserAccount.css'
 
-export class CreateAccountContainer extends Component {
+export class SignUpContainer extends Component {
 
   constructor(props) {
     super(props)
@@ -74,4 +74,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CreateAccountContainer))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SignUpContainer))

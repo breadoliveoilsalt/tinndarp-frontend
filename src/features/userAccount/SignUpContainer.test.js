@@ -5,13 +5,13 @@ Enzyme.configure({ adapter: new Adapter() })
 import { Provider } from 'react-redux'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-import CreateAccountContainerConnectedToStore, { CreateAccountContainer } from './CreateAccountContainer'
+import SignUpContainerConnectedToStore, { SignUpContainer } from './SignUpContainer'
 import Loader from '../apiRequests/Loader'
 import AccountForm from './AccountForm'
 import ErrorsDisplay from '../apiRequests/ErrorsDisplay'
 import { BrowserRouter, Link } from 'react-router-dom'
 
-describe("<CreateAccountContainer />", () => {
+describe("<SignUpContainer />", () => {
 
   let mockStore
   let shallowProps
@@ -25,7 +25,7 @@ describe("<CreateAccountContainer />", () => {
   })
 
   it("calls deleteErrors when mounting", () => {
-    const wrapper = shallow(<CreateAccountContainer {...shallowProps} />)
+    const wrapper = shallow(<SignUpContainer {...shallowProps} />)
 
     expect(shallowProps.deleteErrors.mock.calls.length).toEqual(1)
   })
@@ -43,7 +43,7 @@ describe("<CreateAccountContainer />", () => {
     const wrapper = mount(
       <Provider store={store}>
         <BrowserRouter>
-          <CreateAccountContainerConnectedToStore  />
+          <SignUpContainerConnectedToStore  />
         </ BrowserRouter>
       </Provider>)
 
@@ -55,7 +55,7 @@ describe("<CreateAccountContainer />", () => {
   describe("if a user is not logged in", () => {
 
     it("renders an <AccountForm />", () => {
-      const wrapper = shallow(<CreateAccountContainer {...shallowProps} />)
+      const wrapper = shallow(<SignUpContainer {...shallowProps} />)
 
       expect(wrapper.find(AccountForm).length).toEqual(1)
     })
@@ -72,7 +72,7 @@ describe("<CreateAccountContainer />", () => {
       const wrapper = mount(
         <Provider store={store}>
           <BrowserRouter>
-            <CreateAccountContainerConnectedToStore />
+            <SignUpContainerConnectedToStore />
           </BrowserRouter>
         </Provider>)
 
@@ -93,7 +93,7 @@ describe("<CreateAccountContainer />", () => {
       const wrapper = mount(
         <Provider store={store}>
           <BrowserRouter>
-            <CreateAccountContainerConnectedToStore {...props} />
+            <SignUpContainerConnectedToStore {...props} />
           </ BrowserRouter>
         </Provider>)
 
@@ -123,7 +123,7 @@ describe("<CreateAccountContainer />", () => {
     })
 
     it("call preventDefault() on the event", () => {
-      const wrapper = shallow(<CreateAccountContainer {...props} />)
+      const wrapper = shallow(<SignUpContainer {...props} />)
 
       wrapper.instance().handleCreateAccount(event)
 
@@ -131,7 +131,7 @@ describe("<CreateAccountContainer />", () => {
     })
 
     it("calls this.props.deleteErrors(), after the component calls it when mounting", () => {
-      const wrapper = shallow(<CreateAccountContainer {...props} />)
+      const wrapper = shallow(<SignUpContainer {...props} />)
       expect(props.deleteErrors.mock.calls.length).toEqual(1)
 
       wrapper.instance().handleCreateAccount(event)
@@ -140,7 +140,7 @@ describe("<CreateAccountContainer />", () => {
     })
 
     it("calls this.props.signUpAction, passing it the event target's email and password values", () => {
-      const wrapper = shallow(<CreateAccountContainer {...props} />)
+      const wrapper = shallow(<SignUpContainer {...props} />)
 
       wrapper.instance().handleCreateAccount(event)
 
