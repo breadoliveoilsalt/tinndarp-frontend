@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { loggedInWithToken } from '../features/userAccount/userAccountSlice'
 import Logo from './Logo'
 
-export class Home extends Component {
+class Home extends Component {
 
   render() {
+
     let content
 
-    if (this.props.loggedIn || loggedInWithToken()) {
+    if (loggedInWithToken()) {
       content = (
         <div>
           <div className="large-text">Nice to see you again! Click below to browse items</div>
@@ -37,10 +37,4 @@ export class Home extends Component {
 
 }
 
-const mapStateToProps = (state) => {
-  return {
-    loggedIn: state.userAccount.loggedIn
-  }
-}
-
-export default connect(mapStateToProps)(withRouter(Home))
+export default withRouter(Home)

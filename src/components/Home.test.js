@@ -6,25 +6,19 @@ import { Provider } from 'react-redux'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import { BrowserRouter } from 'react-router-dom'
-import HomeConnectedToStore, { Home } from './Home'
+import Home from './Home'
 
 describe("<Home />", () => {
 
   const TINNDARP_TOKEN_KEY = 'tinndarp_token'
-  let mockStore
-
-  beforeEach(() => {
-    mockStore = configureMockStore([thunk])
-  })
+  // let mockStore
 
   describe("if the state's logged in status is false", () => {
 
     it("renders a button for signing up and a button for logging in", () => {
-      const state = { userAccount: {loggedIn: false}}
-      const store = mockStore(state)
       const wrapper = mount(
         <BrowserRouter>
-          <HomeConnectedToStore store={store} />)
+          <Home />)
         </BrowserRouter>
       )
 
@@ -36,11 +30,9 @@ describe("<Home />", () => {
     describe("Clicking the button for logging in", () => {
 
       it("redirects the user to the /log_in page", () => {
-        const state = { userAccount: {loggedIn: false}}
-        const store = mockStore(state)
         const wrapper = mount(
           <BrowserRouter>
-            <HomeConnectedToStore store={store} />)
+            <Home />)
           </BrowserRouter>
         )
 
@@ -53,11 +45,9 @@ describe("<Home />", () => {
     describe("Clicking the button for signing up", () => {
 
       it("redirect the user to the /sign_up page", () => {
-        const state = { userAccount: {loggedIn: false}}
-        const store = mockStore(state)
         const wrapper = mount(
           <BrowserRouter>
-            <HomeConnectedToStore store={store} />)
+            <Home />)
           </BrowserRouter>
         )
 
@@ -71,12 +61,18 @@ describe("<Home />", () => {
 
   describe("if the user is logged in", () => {
 
+    beforeEach(() => {
+      window.localStorage.setItem(TINNDARP_TOKEN_KEY, "xyz")
+    })
+
+    afterEach(() => {
+      window.localStorage.removeItem(TINNDARP_TOKEN_KEY, "xyz")
+    })
+
     it("renders a button for browsing", () => {
-      const state = { userAccount: {loggedIn: true}}
-      const store = mockStore(state)
       const wrapper = mount(
         <BrowserRouter>
-          <HomeConnectedToStore store={store} />)
+          <Home />)
         </BrowserRouter>
       )
 
@@ -87,11 +83,9 @@ describe("<Home />", () => {
     describe("Clicking the button for browsing", () => {
 
       it("redirects the user to the /browsing page", () => {
-        const state = { userAccount: {loggedIn: true}}
-        const store = mockStore(state)
         const wrapper = mount(
           <BrowserRouter>
-            <HomeConnectedToStore store={store} />)
+            <Home />)
           </BrowserRouter>
         )
 
@@ -103,20 +97,14 @@ describe("<Home />", () => {
 
     describe("the determination of a positive logged in status", () => {
       it("can also be determined by the existence of a token", () => {
-        const state = { userAccount: {loggedIn: false}}
-        const store = mockStore(state)
-        window.localStorage.setItem(TINNDARP_TOKEN_KEY, "xyz")
         const wrapper = mount(
-          <Provider store={store}>
-            <BrowserRouter>
-              <HomeConnectedToStore />
-            </BrowserRouter>
-          </Provider>
+          <BrowserRouter>
+            <Home />)
+          </BrowserRouter>
         )
 
         expect(wrapper.find("button").length).toEqual(1)
         expect(wrapper.find("button").text()).toEqual("Browse")
-        window.localStorage.removeItem(TINNDARP_TOKEN_KEY)
       })
 
     })
