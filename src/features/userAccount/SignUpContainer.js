@@ -36,7 +36,7 @@ export class SignUpContainer extends Component {
 
     if (this.props.fetching) {
       content = (<Loader />)
-    } else if (this.props.loggedIn || loggedInWithToken()) {
+    } else if (loggedInWithToken()) {
       content = (
         <RedirectComponent
           text="You're logged in and being redirected to the browsing page!"
@@ -62,8 +62,7 @@ export class SignUpContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     fetching: state.apiRequest.fetching,
-    errors: state.apiRequest.errors,
-    loggedIn: state.userAccount.loggedIn
+    errors: state.apiRequest.errors
   }
 }
 

@@ -6,7 +6,7 @@ const UPDATE_LOGGED_IN_STATUS = 'UPDATE_LOGGED_IN_STATUS'
 const TINNDARP_TOKEN_KEY = 'tinndarp_token'
 
 const initialState = {
-  loggedIn: false,
+  loggedIn: false
 }
 
 function userAccountReducer(state = initialState, action) {

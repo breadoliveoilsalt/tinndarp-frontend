@@ -9,6 +9,7 @@ import SignUpContainerConnectedToStore, { SignUpContainer } from './SignUpContai
 import Loader from '../apiRequests/Loader'
 import AccountForm from './AccountForm'
 import ErrorsDisplay from '../apiRequests/ErrorsDisplay'
+import RedirectComponent from './RedirectComponent'
 import { BrowserRouter, Link } from 'react-router-dom'
 
 describe("<SignUpContainer />", () => {
@@ -52,7 +53,7 @@ describe("<SignUpContainer />", () => {
     expect(wrapper.find(ErrorsDisplay).length).toEqual(0)
   })
 
-  describe("if a user is not logged in", () => {
+  describe("if a user does not have a token", () => {
 
     it("renders an <AccountForm />", () => {
       const wrapper = shallow(<SignUpContainer {...shallowProps} />)
@@ -98,6 +99,30 @@ describe("<SignUpContainer />", () => {
         </Provider>)
 
       expect(wrapper.find(ErrorsDisplay).length).toEqual(0)
+    })
+  })
+
+  describe("if a user does have a tinndarp token", () => {
+
+    it("renders a <RedirectComponent /> to /browse", () => {
+      window.localStorage.setItem("tinndarp_token", "xyz")
+      const state = {
+        apiRequest:
+          { errors: null },
+        }
+      const store = mockStore(state)
+
+      const props = {history: jest.fn()}
+
+      const wrapper = mount(
+        <Provider store={store}>
+          <BrowserRouter>
+            <SignUpContainerConnectedToStore {...props} />
+          </ BrowserRouter>
+        </Provider>)
+
+      expect(wrapper.find(RedirectComponent).length).toEqual(1)
+      expect(wrapper.find(RedirectComponent).prop("redirectTo")).toEqual("/browse")
     })
   })
 
