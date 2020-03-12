@@ -5,7 +5,7 @@ Enzyme.configure({ adapter: new Adapter() })
 import { Provider } from 'react-redux'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-import { MemoryRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import HomeConnectedToStore, { Home } from './Home'
 
 describe("<Home />", () => {
@@ -16,15 +16,15 @@ describe("<Home />", () => {
     mockStore = configureMockStore([thunk])
   })
 
-  describe("if the user not is logged in", () => {
+  describe("if the state's logged in status is false", () => {
 
     it("renders a button for signing up and a button for logging in", () => {
       const state = { userAccount: {loggedIn: false}}
       const store = mockStore(state)
       const wrapper = mount(
-        <MemoryRouter>
+        <BrowserRouter>
           <HomeConnectedToStore store={store} />)
-        </MemoryRouter>
+        </BrowserRouter>
       )
 
       expect(wrapper.find("button")).toHaveLength(2)
@@ -35,7 +35,16 @@ describe("<Home />", () => {
     describe("Clicking the button for signing up", () => {
 
       it("redirect the user to the /sign_up page", () => {
+        const state = { userAccount: {loggedIn: false}}
+        const store = mockStore(state)
+        const wrapper = mount(
+          <BrowserRouter>
+            <HomeConnectedToStore store={store} />)
+          </BrowserRouter>
+        )
 
+        wrapper.find("button").at(1).simulate("click")
+        expect(window.location.pathname).toEqual("/sign_up")
       })
 
     })
