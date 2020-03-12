@@ -1,4 +1,4 @@
-import * as config from './backendAPIRequestsConfig'
+import * as config from './apiRequestsConfig/apiRequestsConfig'
 
 export async function postSignUp(credentials) {
   const url = config.baseURL + "/sign_up"
