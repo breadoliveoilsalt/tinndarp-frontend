@@ -31,14 +31,14 @@ const CurrentItemContainer = ( {currentItem, handleNope, handleLike} ) => {
         <div>
           <DecisionButton
             text="Nope"
-            className="decision-button nope-button"
+            className="action-button nope-button"
             currentItem={currentItem}
             action={handleNope}
           />
 
           <DecisionButton
             text="Like"
-            className="decision-button like-button"
+            className="action-button like-button"
             currentItem={currentItem}
             action={handleLike}
           />

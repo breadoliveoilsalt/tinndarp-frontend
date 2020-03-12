@@ -30,7 +30,7 @@ describe("<DecisionButton />", () => {
     })
 
     it("has a className from props.className", () => {
-      const buttonClassName ="decision-button nope-button"
+      const buttonClassName ="action-button nope-button"
 
       props = {className: buttonClassName}
       wrapper = shallow(<DecisionButton {...props} />)
