@@ -32,9 +32,13 @@
   }
 }
 
+div.logo-header-container {
+
+}
+
 div.logo-header {
   font-size: 2.2em;
-  width: 50%;
+  width: 5.1em;
   padding: 0.1em 0.2em;
   margin: 0.5em 0 0.5em 0.5em;
   font-weight: bold;
