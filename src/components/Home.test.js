@@ -10,6 +10,7 @@ import HomeConnectedToStore, { Home } from './Home'
 
 describe("<Home />", () => {
 
+  const TINNDARP_TOKEN_KEY = 'tinndarp_token'
   let mockStore
 
   beforeEach(() => {
@@ -79,14 +80,45 @@ describe("<Home />", () => {
         </BrowserRouter>
       )
 
-      expect(wrapper.find("button").at(0).text()).toEqual("Browse")
+      expect(wrapper.find("button").length).toEqual(1)
+      expect(wrapper.find("button").text()).toEqual("Browse")
     })
 
     describe("Clicking the button for browsing", () => {
 
       it("redirects the user to the /browsing page", () => {
+        const state = { userAccount: {loggedIn: true}}
+        const store = mockStore(state)
+        const wrapper = mount(
+          <BrowserRouter>
+            <HomeConnectedToStore store={store} />)
+          </BrowserRouter>
+        )
 
+        wrapper.find("button").simulate("click")
+        expect(window.location.pathname).toEqual("/browse")
       })
+
+    })
+
+    describe("the determination of a positive logged in status", () => {
+      it("can also be determined by the existence of a token", () => {
+        const state = { userAccount: {loggedIn: false}}
+        const store = mockStore(state)
+        window.localStorage.setItem(TINNDARP_TOKEN_KEY, "xyz")
+        const wrapper = mount(
+          <Provider store={store}>
+            <BrowserRouter>
+              <HomeConnectedToStore />
+            </BrowserRouter>
+          </Provider>
+        )
+
+        expect(wrapper.find("button").length).toEqual(1)
+        expect(wrapper.find("button").text()).toEqual("Browse")
+        window.localStorage.removeItem(TINNDARP_TOKEN_KEY)
+      })
+
     })
 
   })
