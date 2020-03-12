@@ -32,8 +32,6 @@ describe("<Home />", () => {
       expect(wrapper.find("button").at(1).text()).toEqual("Sign Up")
     })
 
-
-
     describe("Clicking the button for logging in", () => {
 
       it("redirects the user to the /log_in page", () => {
@@ -73,7 +71,15 @@ describe("<Home />", () => {
   describe("if the user is logged in", () => {
 
     it("renders a button for browsing", () => {
+      const state = { userAccount: {loggedIn: true}}
+      const store = mockStore(state)
+      const wrapper = mount(
+        <BrowserRouter>
+          <HomeConnectedToStore store={store} />)
+        </BrowserRouter>
+      )
 
+      expect(wrapper.find("button").at(0).text()).toEqual("Browse")
     })
 
     describe("Clicking the button for browsing", () => {
