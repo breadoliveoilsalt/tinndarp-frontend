@@ -1,5 +1,6 @@
 import { postSignUp, postLogIn } from '../apiRequests/userAccountAPIRequests'
 import * as apiActions from '../apiRequests/apiRequestSlice'
+import qs from 'qs'
 
 import axios from 'axios'
 
@@ -107,7 +108,11 @@ export function authenticateUserToken() {
     return axios({
       method: "get",
       url: "http://localhost:3001/api/authenticate_user_token",
-      params: {user: {token: getToken()} }
+      params: {user: {token: getToken()} },
+      paramsSerializer: function(params) {
+        return qs.stringify(params)
+      }
     })
+    .then( data => console.log(data))
   }
 }
