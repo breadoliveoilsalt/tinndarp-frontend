@@ -35,9 +35,9 @@ export class BrowsingContainer extends Component {
     if (this.props.errors) {
       return (
         <RedirectComponent
-          text="You are not logged in. Please create an account!"
-          redirectTo="/sign_up"
-          millisecondsToRedirect="2000"
+          text="Sorry, there were some errors. Please log in."
+          redirectTo="/log_in"
+          millisecondsToRedirect="2500"
         />
       )
     } else if (this.props.fetching) {

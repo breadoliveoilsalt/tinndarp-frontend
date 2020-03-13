@@ -5,7 +5,7 @@ import AccountForm from './AccountForm'
 import ErrorsDisplay from '../apiRequests/ErrorsDisplay'
 import RedirectComponent from './RedirectComponent'
 import Loader from '../apiRequests/Loader'
-import { deleteErrors } from '../apiRequests/apiRequestSlice'
+import { deleteErrors } from '../apiRequests/apiRequestsSlice'
 import { signUpAction, loggedInWithToken } from './userAccountSlice'
 
 import './UserAccount.css'

@@ -1,7 +1,7 @@
 import configureStore from '../../configureStore'
 import accountReducer, * as actions from './userAccountSlice'
 import * as requests from  '../apiRequests/userAccountAPIRequests'
-import * as apiActions from '../apiRequests/apiRequestSlice'
+import * as apiActions from '../apiRequests/apiRequestsSlice'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 

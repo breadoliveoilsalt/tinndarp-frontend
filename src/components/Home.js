@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
 import { loggedInWithToken } from '../features/userAccount/userAccountSlice'
+import LogInSignUpLinks from '../features/userAccount/LogInSignUpLinks'
+import BrowseLink from '../features/browsing/BrowseLink'
 import Logo from './Logo'
 
 class Home extends Component {
@@ -12,17 +13,12 @@ class Home extends Component {
     if (loggedInWithToken()) {
       content = (
         <div>
-          <div className="large-text">Nice to see you again! Click below to browse items</div>
-          <button className="action-button logo-style-button" onClick={() => this.props.history.push("/browse")}>Browse</button>
+          <BrowseLink />
         </div>
       )
     } else {
       content = (
-       <div>
-         <div className="large-text">Please log in or sign up.</div>
-         <button className="action-button logo-style-button" onClick={() => this.props.history.push("/log_in")}>Log In</button>
-         <button className="action-button logo-style-button" onClick={() => this.props.history.push("/sign_up")}>Sign Up</button>
-      </div>
+       <LogInSignUpLinks />
       )
     }
 
@@ -37,4 +33,4 @@ class Home extends Component {
 
 }
 
-export default withRouter(Home)
+export default Home

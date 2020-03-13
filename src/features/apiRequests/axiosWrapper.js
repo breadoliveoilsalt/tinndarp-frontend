@@ -1,6 +1,7 @@
 import axios from 'axios'
+import qs from 'qs'
 
-const fetchWrapper =  {
+const fetchWrapper = {
   get: async (url) => {
     return axios.get(url)
   },
@@ -10,7 +11,18 @@ const fetchWrapper =  {
       url: url,
       data: params
     })
+  },
+  getWithParams: async (url, params) => {
+    return axios({
+      method: "get",
+      url: url,
+      params: params,
+      paramsSerializer: function(params) {
+        return qs.stringify(params)
+      }
+    })
   }
+
 }
 
 export default fetchWrapper

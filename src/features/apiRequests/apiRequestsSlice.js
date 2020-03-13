@@ -1,19 +1,23 @@
 const RESET_API_REQUEST_STATE = 'RESET_API_REQUEST_STATE'
 const UPDATE_FETCHING_STATUS = 'UPDATE_FETCHING_STATUS'
+const UPDATE_AUTHENTICATING_STATUS = 'UPDATE_AUTHENICATING_STATUS'
 const LOAD_ERRORS = 'LOAD_ERRORS'
 const DELETE_ERRORS = 'DELETE_ERRORS'
 
 const initialState = {
   fetching: false,
+  authenticating: false,
   errors: null,
 }
 
-function apiRequestReducer(state = initialState, action) {
+function apiRequestsReducer(state = initialState, action) {
   switch (action.type) {
     case RESET_API_REQUEST_STATE:
       return Object.assign({}, initialState)
     case UPDATE_FETCHING_STATUS:
       return Object.assign({}, state, {fetching: action.payload})
+    case UPDATE_AUTHENTICATING_STATUS:
+      return Object.assign({}, state, {authenticating: action.payload})
     case LOAD_ERRORS:
       return Object.assign({}, state, {errors: action.payload})
     case DELETE_ERRORS:
@@ -23,7 +27,7 @@ function apiRequestReducer(state = initialState, action) {
   }
 }
 
-export default apiRequestReducer
+export default apiRequestsReducer
 
 export function resetAPIRequestState() {
   return {
@@ -37,6 +41,12 @@ export function updateFetchingStatus(bool) {
   }
 }
 
+export function updateAuthenticatingStatus(bool) {
+  return {
+    type: UPDATE_AUTHENTICATING_STATUS,
+    payload: bool
+  }
+}
 export function loadErrors(errors) {
   return {
     type: LOAD_ERRORS,
