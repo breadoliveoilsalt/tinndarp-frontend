@@ -1,6 +1,9 @@
 import { postSignUp, postLogIn } from '../apiRequests/userAccountAPIRequests'
 import * as apiActions from '../apiRequests/apiRequestSlice'
 
+import axios from 'axios'
+
+
 const RESET_USER_ACCOUNT_STATE = 'RESET_USER_ACCOUNT_STATE'
 const UPDATE_LOGGED_IN_STATUS = 'UPDATE_LOGGED_IN_STATUS'
 const TINNDARP_TOKEN_KEY = 'tinndarp_token'
@@ -88,4 +91,23 @@ export function deleteToken() {
 
 export function loggedInWithToken() {
   return !!window.localStorage.getItem(TINNDARP_TOKEN_KEY)
+}
+
+export function getToken() {
+  if (window.localStorage.getItem(TINNDARP_TOKEN_KEY)) {
+    return window.localStorage.getItem(TINNDARP_TOKEN_KEY)
+  } else {
+    return "null"
+  }
+}
+
+export function authenticateUserToken() {
+  return function(dispatch) {
+    console.log("Got to auth")
+    return axios({
+      method: "get",
+      url: "http://localhost:3001/api/authenticate_user_token",
+      params: {user: {token: getToken()} }
+    })
+  }
 }
