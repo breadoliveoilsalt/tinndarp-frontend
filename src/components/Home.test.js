@@ -11,7 +11,6 @@ import Home from './Home'
 describe("<Home />", () => {
 
   const TINNDARP_TOKEN_KEY = 'tinndarp_token'
-  // let mockStore
 
   describe("if the state's logged in status is false", () => {
 
