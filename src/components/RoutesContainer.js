@@ -7,7 +7,7 @@ import SignUpContainer from '../features/userAccount/SignUpContainer'
 import LogInContainer from '../features/userAccount/LogInContainer'
 import NoMatch from './NoMatch'
 
-class RoutesContainer extends Component {
+export class RoutesContainer extends Component {
 
   render() {
     return (

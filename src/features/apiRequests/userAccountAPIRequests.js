@@ -14,7 +14,6 @@ export async function postLogIn(credentials) {
   return process(rawData)
 }
 
-//TEST
 export async function getAuthenticateUserToken(token) {
   const url = config.baseURL + "/authenticate_user_token"
   const data = {user: {token: token}}

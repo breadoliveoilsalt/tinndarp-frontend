@@ -98,7 +98,6 @@ export function getToken() {
   }
 }
 
-//TEST
 export function authenticateUserTokenAction() {
   return function(dispatch) {
     dispatch(apiActions.updateFetchingStatus(true))
