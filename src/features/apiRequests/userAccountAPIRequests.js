@@ -14,19 +14,27 @@ export async function postLogIn(credentials) {
   return process(rawData)
 }
 
+export async function getAuthenticateUserToken(token) {
+  const url = config.baseURL + "/authenticate_user_token"
+  const data = {user: {token: token}}
+  const rawData = await config.fetchWrapper.getWithParams(url, data)
+  return process(rawData)
+}
+
 const process = (rawData) => {
   if (rawData.data.errors) {
     return {
       loggedIn: false,
       errors: rawData.data.errors
     }
-  } else if (rawData.data.logged_in) {
+  } else if (rawData.data.logged_in === "true") {
     return {
-      loggedIn: rawData.data.logged_in,
+      loggedIn: true,
       token: rawData.data.token
     }
+  } else {
+    return {
+      errors: "Sorry, something appears to have gone wrong."
+    }
   }
-  return rawData.data
 }
-
-export default postSignUp

@@ -1,7 +1,7 @@
 import configureStore from '../../configureStore'
 import accountReducer, * as actions from './userAccountSlice'
 import * as requests from  '../apiRequests/userAccountAPIRequests'
-import * as apiActions from '../apiRequests/apiRequestSlice'
+import * as apiActions from '../apiRequests/apiRequestsSlice'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 
@@ -68,18 +68,18 @@ describe("userAccount state", () => {
 
     })
 
-    describe("loggedInWithToken()", () => {
+    describe("tokenPresent()", () => {
 
       it("returns true if there is a token saved locally", () => {
         const token = "xyz"
         actions.saveToken(token)
 
-        expect(actions.loggedInWithToken()).toEqual(true)
+        expect(actions.tokenPresent()).toEqual(true)
       })
 
 
       it("returns false if there is not a token saved locally", () => {
-        expect(actions.loggedInWithToken()).toEqual(false)
+        expect(actions.tokenPresent()).toEqual(false)
       })
     })
 
@@ -255,6 +255,94 @@ describe("userAccount state", () => {
       })
 
     })
+
+
+    describe("authenticateUserTokenAction()", () => {
+      it("is a thunk that returns a function", () => {
+        const result = actions.logInAction()
+
+        expect(typeof result === "function").toBeTruthy()
+      })
+
+      describe("the returned function", () => {
+
+        beforeEach(() => {
+          requests.getAuthenticateUserToken = jest.fn()
+        })
+
+        it("calls getAuthenticateUserToken()", () => {
+          const mockReturnedData = {
+            loggedIn: false,
+            errors: null
+          }
+          requests.getAuthenticateUserToken.mockReturnValueOnce(Promise.resolve(mockReturnedData))
+
+          dispatch(actions.authenticateUserTokenAction())
+
+          expect(requests.getAuthenticateUserToken.mock.calls.length).toEqual(1)
+        })
+
+        it("updates the apiRequest fetching state to true when first called and updates the apiFetching state when the promise chain is over", () => {
+           const mockReturnedData = {
+             loggedIn: false,
+             errors: ["Invalid token."]
+
+           }
+          requests.getAuthenticateUserToken.mockReturnValueOnce(Promise.resolve(mockReturnedData))
+
+          const mockStore = configureMockStore([thunk])
+          store = mockStore({apiRequest: {fetching: false}})
+          dispatch = store.dispatch
+
+          return dispatch(actions.authenticateUserTokenAction()).then(() => {
+            expect(store.getActions()[0]).toEqual(apiActions.updateFetchingStatus(true))
+            const lastAction = store.getActions()[store.getActions().length - 1]
+            expect(lastAction).toEqual(apiActions.updateFetchingStatus(false))
+          })
+        })
+
+        it("updates the userAccount loggedIn state if the data returns a truthy logged in status", () => {
+           const mockReturnedData = {
+             loggedIn: true
+           }
+          requests.getAuthenticateUserToken.mockReturnValueOnce(Promise.resolve(mockReturnedData))
+          expect(store.getState().userAccount.loggedIn).toEqual(false)
+
+          return dispatch(actions.authenticateUserTokenAction()).then(() => {
+            expect(store.getState().userAccount.loggedIn).toEqual(true)
+          })
+        })
+
+        it("leaves the userAccount loggedIn state as false if the data returns a falsey logged in status", () => {
+           const mockReturnedData = {
+             loggedIn: false
+           }
+          requests.getAuthenticateUserToken.mockReturnValueOnce(Promise.resolve(mockReturnedData))
+          expect(store.getState().userAccount.loggedIn).toEqual(false)
+
+          return dispatch(actions.authenticateUserTokenAction()).then(() => {
+            expect(store.getState().userAccount.loggedIn).toEqual(false)
+          })
+        })
+
+        it("saves the token locally", () => {
+          const token_key = "tinndarp_token"
+          window.localStorage.setItem(token_key, "xyz")
+          const mockReturnedData = {
+           loggedIn: false,
+          }
+          requests.getAuthenticateUserToken.mockReturnValueOnce(Promise.resolve(mockReturnedData))
+          expect(window.localStorage.getItem(token_key)).toEqual("xyz")
+
+          return dispatch(actions.authenticateUserTokenAction()).then(() => {
+            expect(window.localStorage.getItem(token_key)).toBeNull()
+          })
+        })
+
+      })
+
+    })
+
   })
 
 })

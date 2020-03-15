@@ -1,19 +1,27 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
+import Authenticator from '../features/userAccount/Authenticator'
+import BrowsingContainer from '../features/browsing/BrowsingContainer'
 import Home from './Home'
 import SignUpContainer from '../features/userAccount/SignUpContainer'
 import LogInContainer from '../features/userAccount/LogInContainer'
-import BrowsingContainer from '../features/browsing/BrowsingContainer'
 import NoMatch from './NoMatch'
 
-const RoutesContainer = () => {
+export class RoutesContainer extends Component {
 
-  return (
+  render() {
+    return (
       <Switch>
+
+        <Route exact path="/browse">
+          <Authenticator>
+            <BrowsingContainer />
+          </Authenticator>
+        </Route>
 
         <Route exact path="/">
           <Home />
-        </ Route>
+        </Route>
 
         <Route exact path="/sign_up">
           <SignUpContainer />
@@ -23,16 +31,14 @@ const RoutesContainer = () => {
           <LogInContainer />
         </Route>
 
-        <Route exact path="/browse">
-          <BrowsingContainer />
-        </Route>
-
         <Route path="*">
           <NoMatch />
         </Route>
 
-      </Switch>
-  )
+     </Switch>
+    )
+  }
+
 }
 
 export default RoutesContainer

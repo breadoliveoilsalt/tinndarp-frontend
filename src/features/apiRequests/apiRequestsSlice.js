@@ -8,7 +8,7 @@ const initialState = {
   errors: null,
 }
 
-function apiRequestReducer(state = initialState, action) {
+function apiRequestsReducer(state = initialState, action) {
   switch (action.type) {
     case RESET_API_REQUEST_STATE:
       return Object.assign({}, initialState)
@@ -23,7 +23,7 @@ function apiRequestReducer(state = initialState, action) {
   }
 }
 
-export default apiRequestReducer
+export default apiRequestsReducer
 
 export function resetAPIRequestState() {
   return {

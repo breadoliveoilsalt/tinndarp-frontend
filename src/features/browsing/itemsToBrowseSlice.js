@@ -1,5 +1,5 @@
 import * as requests from '../apiRequests/itemsAPIRequests'
-import * as apiActions from '../apiRequests/apiRequestSlice'
+import * as apiActions from '../apiRequests/apiRequestsSlice'
 
 const LOAD_ITEMS = 'LOAD_ITEMS'
 const UPDATE_CURRENT_ITEM = 'UPDATE_CURRENT_ITEM'

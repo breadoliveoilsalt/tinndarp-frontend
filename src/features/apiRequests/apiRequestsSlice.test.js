@@ -1,7 +1,7 @@
 import configureStore from '../../configureStore'
-import apiRequestReducer, * as actions from './apiRequestSlice'
+import apiRequestsReducer, * as actions from './apiRequestsSlice'
 
-describe("apiRequestSlice", () => {
+describe("apiRequestsSlice", () => {
 
   const expectedInitialState = {
     fetching: false,

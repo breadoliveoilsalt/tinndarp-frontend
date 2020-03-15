@@ -5,8 +5,8 @@ import AccountForm from './AccountForm'
 import ErrorsDisplay from '../apiRequests/ErrorsDisplay'
 import RedirectComponent from './RedirectComponent'
 import Loader from '../apiRequests/Loader'
-import { deleteErrors } from '../apiRequests/apiRequestSlice'
-import { signUpAction, loggedInWithToken } from './userAccountSlice'
+import { deleteErrors } from '../apiRequests/apiRequestsSlice'
+import { signUpAction, tokenPresent } from './userAccountSlice'
 
 import './UserAccount.css'
 
@@ -36,7 +36,7 @@ export class SignUpContainer extends Component {
 
     if (this.props.fetching) {
       content = (<Loader />)
-    } else if (this.props.loggedIn || loggedInWithToken()) {
+    } else if (tokenPresent()) {
       content = (
         <RedirectComponent
           text="You're logged in and being redirected to the browsing page!"
@@ -62,8 +62,7 @@ export class SignUpContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     fetching: state.apiRequest.fetching,
-    errors: state.apiRequest.errors,
-    loggedIn: state.userAccount.loggedIn
+    errors: state.apiRequest.errors
   }
 }
 

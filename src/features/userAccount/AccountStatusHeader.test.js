@@ -31,9 +31,9 @@ describe("<AccountStatusHeader />", () => {
     window.localStorage.removeItem(TINNDARP_TOKEN_KEY)
   })
 
-  it("renders a button to 'Sign Out' if the state indicates the user is signed in", () => {
-    const state = {userAccount: {loggedIn: true}}
-    const store = mockStore(state)
+  it("renders a button to 'Sign Out' if the user has a token", () => {
+    window.localStorage.setItem(TINNDARP_TOKEN_KEY, "xyz")
+    const store = mockStore({})
 
     const wrapper = customMount(store)
 
@@ -41,17 +41,14 @@ describe("<AccountStatusHeader />", () => {
     expect(wrapper.find("button#sign-out-button-header").text()).toEqual("Sign Out")
   })
 
-  it("renders a button to 'Sign Out' if the state does not indicate the user is signed in but there is a token saved", () => {
-    const state = {userAccount: {loggedIn: false}}
-    const store = mockStore(state)
+  it("renders a button to 'Sign Out' if the user does not have a token saved", () => {
+    const store = mockStore({})
     window.localStorage.setItem(TINNDARP_TOKEN_KEY, "xyz")
 
     const wrapper = customMount(store)
 
     expect(wrapper.find("button#sign-out-button-header").length).toEqual(1)
     expect(wrapper.find("button#sign-out-button-header").text()).toEqual("Sign Out")
-
-    window.localStorage.removeItem(TINNDARP_TOKEN_KEY)
   })
 
   it("redners a <Link /> to the home page for logging in or signin up", () => {

@@ -6,10 +6,11 @@ import { MemoryRouter, Switch, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import configureStore from '../configureStore'
-import RoutesContainer from './RoutesContainer'
+import ConnectedRoutesContainer, { RoutesContainer } from './RoutesContainer'
 import Home from './Home'
 import SignUpContainer from '../features/userAccount/SignUpContainer'
 import LogInContainer from '../features/userAccount/LogInContainer'
+import Authenticator from '../features/userAccount/Authenticator'
 import BrowsingContainer from '../features/browsing/BrowsingContainer'
 import NoMatch from './NoMatch'
 
@@ -33,7 +34,7 @@ describe("<Routes />", () => {
     const wrapper = mount(
       <Provider store={store}>
         <MemoryRouter initialEntries={[ '/' ]} initialIndex={0}>
-          <RoutesContainer />
+          <ConnectedRoutesContainer />
         </MemoryRouter>
       </Provider>
     )
@@ -48,7 +49,7 @@ describe("<Routes />", () => {
     const wrapper = mount(
       <Provider store={store} >
         <MemoryRouter initialEntries={[ '/sign_up' ]} initialIndex={0}>
-          <RoutesContainer />
+          <ConnectedRoutesContainer />
         </MemoryRouter>
       </Provider>
     )
@@ -63,7 +64,7 @@ describe("<Routes />", () => {
     const wrapper = mount(
       <Provider store={store} >
         <MemoryRouter initialEntries={[ '/log_in' ]} initialIndex={0}>
-          <RoutesContainer />
+          <ConnectedRoutesContainer />
         </MemoryRouter>
       </Provider>
     )
@@ -74,26 +75,11 @@ describe("<Routes />", () => {
     expect(routeComponent.children()).toEqual(logInContainerComponent)
   })
 
-  it("renders only a <Route /> with <BrowsingContainer /> when the route is '/browse'", () => {
-    const wrapper = mount(
-      <Provider store={store} >
-        <MemoryRouter initialEntries={[ '/browse' ]} initialIndex={0}>
-          <RoutesContainer />
-        </MemoryRouter>
-      </Provider>
-    )
-
-    const routeComponent = wrapper.find(Route)
-    const browsingContainerComponent = wrapper.find(BrowsingContainer)
-    expect(routeComponent.children().length).toEqual(1)
-    expect(routeComponent.children()).toEqual(browsingContainerComponent)
-  })
-
   it("renders only a <Route /> with <NoMatch /> when the route does not match any other routes", () => {
     const wrapper = mount(
       <Provider store={store} >
         <MemoryRouter initialEntries={[ '/adlkjfasl' ]} initialIndex={0}>
-          <RoutesContainer />
+          <ConnectedRoutesContainer />
         </MemoryRouter>
       </Provider>
     )

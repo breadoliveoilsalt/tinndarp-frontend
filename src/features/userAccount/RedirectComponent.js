@@ -7,7 +7,9 @@ class RedirectComponent extends Component {
   delayedRedirect() {
     const redirectTo = this.props.redirectTo
     const millisecondsToRedirect = parseInt(this.props.millisecondsToRedirect)
-    setTimeout(() => this.props.history.push(redirectTo), millisecondsToRedirect)
+    setTimeout(() => {
+      this.props.history.push(redirectTo)
+    }, millisecondsToRedirect)
   }
 
   render() {

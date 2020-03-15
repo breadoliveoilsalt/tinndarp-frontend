@@ -1,28 +1,22 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
-import { loggedInWithToken } from '../features/userAccount/userAccountSlice'
+import { tokenPresent } from '../features/userAccount/userAccountSlice'
+import LogInSignUpLinks from '../features/userAccount/LogInSignUpLinks'
+import BrowseLink from '../features/browsing/BrowseLink'
 import Logo from './Logo'
 
-export class Home extends Component {
+class Home extends Component {
 
   render() {
+
     let content
 
-    if (this.props.loggedIn || loggedInWithToken()) {
+    if (tokenPresent()) {
       content = (
-        <div>
-          <div className="large-text">Nice to see you again! Click below to browse items</div>
-          <button className="action-button logo-style-button" onClick={() => this.props.history.push("/browse")}>Browse</button>
-        </div>
+        <BrowseLink />
       )
     } else {
       content = (
-       <div>
-         <div className="large-text">Please log in or sign up.</div>
-         <button className="action-button logo-style-button" onClick={() => this.props.history.push("/log_in")}>Log In</button>
-         <button className="action-button logo-style-button" onClick={() => this.props.history.push("/sign_up")}>Sign Up</button>
-      </div>
+        <LogInSignUpLinks />
       )
     }
 
@@ -37,10 +31,4 @@ export class Home extends Component {
 
 }
 
-const mapStateToProps = (state) => {
-  return {
-    loggedIn: state.userAccount.loggedIn
-  }
-}
-
-export default connect(mapStateToProps)(withRouter(Home))
+export default Home
