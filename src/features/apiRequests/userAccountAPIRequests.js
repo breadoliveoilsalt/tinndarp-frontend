@@ -39,6 +39,3 @@ const process = (rawData) => {
     }
   }
 }
-
-//TEST -- that is, fix
-export default postSignUp
