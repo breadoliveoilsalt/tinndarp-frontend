@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import Loader from '../features/apiRequests/Loader'
-import LogInSignUpLinks from '../features/userAccount/LogInSignUpLinks'
-import { authenticateUserTokenAction, updateLoggedInStatus, tokenPresent } from '../features/userAccount/userAccountSlice'
+import Loader from '../apiRequests/Loader'
+import LogInSignUpLinks from './LogInSignUpLinks'
+import { authenticateUserTokenAction, tokenPresent } from './userAccountSlice'
 
 class Authenticator extends Component {
 
@@ -15,10 +15,10 @@ class Authenticator extends Component {
 
   render() {
 
-    if (this.props.authenticating) {
+    if (this.props.fetching) {
       return (<Loader />)
     } else if (this.props.loggedIn && tokenPresent()) {
-      return  (this.props.children)
+      return (this.props.children)
     } else {
       return (<LogInSignUpLinks />)
     }
@@ -27,7 +27,7 @@ class Authenticator extends Component {
 
 const mapStateToProps = state => {
   return {
-    authenticating: state.apiRequest.authenticating,
+    fetching: state.apiRequest.fetching,
     loggedIn: state.userAccount.loggedIn
   }
 
@@ -35,7 +35,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    // updateLoggedInStatus: (bool) => dispatch(updateLoggedInStatus(bool)),
     authenticateUserTokenAction: () => dispatch(authenticateUserTokenAction())
   }
 }

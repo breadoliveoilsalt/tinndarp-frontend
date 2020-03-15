@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import Authenticator from './Authenticator'
+import Authenticator from '../features/userAccount/Authenticator'
 import BrowsingContainer from '../features/browsing/BrowsingContainer'
 import Home from './Home'
 import SignUpContainer from '../features/userAccount/SignUpContainer'

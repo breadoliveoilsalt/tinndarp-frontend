@@ -101,18 +101,18 @@ export function getToken() {
 //TEST
 export function authenticateUserTokenAction() {
   return function(dispatch) {
-    dispatch(apiActions.updateAuthenticatingStatus(true))
-    dispatch(updateLoggedInStatus(false))
+    dispatch(apiActions.updateFetchingStatus(true))
     return getAuthenticateUserToken(getToken())
     .then( data => {
       if (data.loggedIn === true) {
         dispatch(updateLoggedInStatus(true))
       } else {
         dispatch(updateLoggedInStatus(false))
+        deleteToken()
       }
     })
     .then( () => {
-      dispatch(apiActions.updateAuthenticatingStatus(false))
+      dispatch(apiActions.updateFetchingStatus(false))
     })
   }
 }
