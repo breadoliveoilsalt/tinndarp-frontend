@@ -1,5 +1,5 @@
 import * as config from './apiRequestsConfig/apiRequestsConfig'
-import { postSignUp, postLogIn } from './userAccountAPIRequests'
+import { postSignUp, postLogIn, getAuthenticateUserToken } from './userAccountAPIRequests'
 
 describe("postSignUp()", () => {
 
@@ -10,7 +10,7 @@ describe("postSignUp()", () => {
 
   let mockData = {
     data: {
-      loggedIn: true,
+      logged_in: "true",
       token: "xyz"
     }
   }
@@ -44,7 +44,7 @@ describe("postSignUp()", () => {
     mockData = {
       headers: "stuff",
       data: {
-        loggedIn: false,
+        logged_in: "false",
         errors: ["Things went wrong", "Sure did"]
       },
       metaData: {
@@ -68,7 +68,7 @@ describe("postSignUp()", () => {
     mockData = {
       headers: "stuff",
       data: {
-        loggedIn: true,
+        logged_in: "true",
         token: "xyz"
       },
       metaData: {
@@ -99,7 +99,7 @@ describe("postLogIn()", () => {
 
   let mockData = {
     data: {
-      loggedIn: true,
+      logged_in: true,
       token: "xyz"
     }
   }
@@ -133,7 +133,7 @@ describe("postLogIn()", () => {
     mockData = {
       headers: "stuff",
       data: {
-        loggedIn: false,
+        logged_in: "false",
         errors: ["Invalid log in credentials."]
       },
       metaData: {
@@ -145,7 +145,7 @@ describe("postLogIn()", () => {
 
     return postLogIn(userCredentials).then( result => {
       const expectedResult = {
-          loggedIn: mockData.data.loggedIn,
+          loggedIn: false,
           errors: mockData.data.errors
       }
       expect(result).toEqual(expectedResult)
@@ -157,7 +157,7 @@ describe("postLogIn()", () => {
     mockData = {
       headers: "stuff",
       data: {
-        loggedIn: true,
+        logged_in: "true",
         token: "xyz"
       },
       metaData: {
@@ -169,7 +169,93 @@ describe("postLogIn()", () => {
 
     return postLogIn(userCredentials).then( result => {
       const expectedResult = {
-          loggedIn: mockData.data.loggedIn,
+          loggedIn: true,
+          token: mockData.data.token
+      }
+      expect(result).toEqual(expectedResult)
+    })
+
+  })
+
+})
+
+describe("getAuthenticateUserToken()", () => {
+
+  const token = "xyz"
+
+  let mockData = {
+    data: {
+      logged_in: "true",
+      token: "xyz"
+    }
+  }
+
+  beforeEach(() => {
+    config.fetchWrapper.getWithParams = jest.fn()
+    config.fetchWrapper.getWithParams.mockReturnValueOnce(Promise.resolve(mockData))
+  })
+
+  it("calls the getWithParams() method of the fetchWrapper", () => {
+    getAuthenticateUserToken(token)
+
+    expect(config.fetchWrapper.getWithParams.mock.calls.length).toEqual(1)
+  })
+
+  it("calls the getWithParams() method with the cofigured baseURL to /authenticate_user_token", () => {
+    getAuthenticateUserToken(token)
+
+    const expectedURL = config.baseURL + "/authenticate_user_token"
+    expect(config.fetchWrapper.getWithParams.mock.calls[0][0]).toEqual(expectedURL)
+  })
+
+  it("passes the token to the getWithParams() method of fetchwapper after prefixing a 'user' and 'token' keys", () => {
+    getAuthenticateUserToken(token)
+
+    const expectedParams = {user: {token: token}}
+    expect(config.fetchWrapper.getWithParams.mock.calls[0][1]).toEqual(expectedParams)
+  })
+
+  it("parses the return data to return a simple object with errors if the data returns errors about creating an account", () => {
+    mockData = {
+      headers: "stuff",
+      data: {
+        logged_in: "false",
+        errors: ["Invalid token."]
+      },
+      metaData: {
+        statusCode: 200
+      }
+    }
+    config.fetchWrapper.getWithParams = jest.fn()
+    config.fetchWrapper.getWithParams.mockReturnValueOnce(Promise.resolve(mockData))
+
+    return getAuthenticateUserToken(token).then( result => {
+      const expectedResult = {
+          loggedIn: false,
+          errors: mockData.data.errors
+      }
+      expect(result).toEqual(expectedResult)
+    })
+
+  })
+
+  it("parses the return data to return a simple object with a loggedIn status and token if the data does not have errors about creating an account", () => {
+    mockData = {
+      headers: "stuff",
+      data: {
+        logged_in: "true",
+        token: "xyz"
+      },
+      metaData: {
+        statusCode: 200
+      }
+    }
+    config.fetchWrapper.getWithParams = jest.fn()
+    config.fetchWrapper.getWithParams.mockReturnValueOnce(Promise.resolve(mockData))
+
+    return getAuthenticateUserToken(token).then( result => {
+      const expectedResult = {
+          loggedIn: true,
           token: mockData.data.token
       }
       expect(result).toEqual(expectedResult)

@@ -5,7 +5,6 @@ const DELETE_ERRORS = 'DELETE_ERRORS'
 
 const initialState = {
   fetching: false,
-  authenticating: false,
   errors: null,
 }
 
