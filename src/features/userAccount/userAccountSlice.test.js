@@ -68,18 +68,18 @@ describe("userAccount state", () => {
 
     })
 
-    describe("loggedInWithToken()", () => {
+    describe("tokenPresent()", () => {
 
       it("returns true if there is a token saved locally", () => {
         const token = "xyz"
         actions.saveToken(token)
 
-        expect(actions.loggedInWithToken()).toEqual(true)
+        expect(actions.tokenPresent()).toEqual(true)
       })
 
 
       it("returns false if there is not a token saved locally", () => {
-        expect(actions.loggedInWithToken()).toEqual(false)
+        expect(actions.tokenPresent()).toEqual(false)
       })
     })
 

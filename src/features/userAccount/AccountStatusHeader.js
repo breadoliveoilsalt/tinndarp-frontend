@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
-import { loggedInWithToken, deleteToken, updateLoggedInStatus } from './userAccountSlice'
+import { tokenPresent, deleteToken, updateLoggedInStatus } from './userAccountSlice'
 import './UserAccount.css'
 
 export class AccountStatusHeader extends Component {
@@ -20,7 +20,7 @@ export class AccountStatusHeader extends Component {
   render() {
     let content
 
-    if (loggedInWithToken()) {
+    if (tokenPresent()) {
       content = (
         <div className="sign-out-link-header">
           <button id="sign-out-button-header" onClick={this.signOut}>Sign Out</button>

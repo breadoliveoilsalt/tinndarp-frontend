@@ -6,7 +6,7 @@ import ErrorsDisplay from '../apiRequests/ErrorsDisplay'
 import RedirectComponent from './RedirectComponent'
 import Loader from '../apiRequests/Loader'
 import { deleteErrors } from '../apiRequests/apiRequestsSlice'
-import { signUpAction, loggedInWithToken } from './userAccountSlice'
+import { signUpAction, tokenPresent } from './userAccountSlice'
 
 import './UserAccount.css'
 
@@ -36,7 +36,7 @@ export class SignUpContainer extends Component {
 
     if (this.props.fetching) {
       content = (<Loader />)
-    } else if (loggedInWithToken()) {
+    } else if (tokenPresent()) {
       content = (
         <RedirectComponent
           text="You're logged in and being redirected to the browsing page!"

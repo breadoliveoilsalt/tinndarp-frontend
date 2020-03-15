@@ -86,7 +86,7 @@ export function deleteToken() {
   }
 }
 
-export function loggedInWithToken() {
+export function tokenPresent() {
   return !!window.localStorage.getItem(TINNDARP_TOKEN_KEY)
 }
 
@@ -102,6 +102,7 @@ export function getToken() {
 export function authenticateUserTokenAction() {
   return function(dispatch) {
     dispatch(apiActions.updateAuthenticatingStatus(true))
+    dispatch(updateLoggedInStatus(false))
     return getAuthenticateUserToken(getToken())
     .then( data => {
       if (data.loggedIn === true) {

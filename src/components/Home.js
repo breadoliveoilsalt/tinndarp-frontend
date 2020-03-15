@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { loggedInWithToken } from '../features/userAccount/userAccountSlice'
+import { tokenPresent } from '../features/userAccount/userAccountSlice'
 import LogInSignUpLinks from '../features/userAccount/LogInSignUpLinks'
 import BrowseLink from '../features/browsing/BrowseLink'
 import Logo from './Logo'
@@ -10,15 +10,13 @@ class Home extends Component {
 
     let content
 
-    if (loggedInWithToken()) {
+    if (tokenPresent()) {
       content = (
-        <div>
-          <BrowseLink />
-        </div>
+        <BrowseLink />
       )
     } else {
       content = (
-       <LogInSignUpLinks />
+        <LogInSignUpLinks />
       )
     }
 

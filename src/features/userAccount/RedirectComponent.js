@@ -8,7 +8,6 @@ class RedirectComponent extends Component {
     const redirectTo = this.props.redirectTo
     const millisecondsToRedirect = parseInt(this.props.millisecondsToRedirect)
     setTimeout(() => {
-      console.log("I'm about to blow!", millisecondsToRedirect)
       this.props.history.push(redirectTo)
     }, millisecondsToRedirect)
   }
