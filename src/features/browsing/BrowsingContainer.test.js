@@ -9,7 +9,7 @@ import { MemoryRouter } from 'react-router-dom'
 import BrowsingContainerConnectedToStore, { BrowsingContainer } from './BrowsingContainer'
 import RedirectComponent from '../userAccount/RedirectComponent'
 import CurrentItemContainer from './CurrentItemContainer'
-import Loader from '../apiRequests/Loader'
+import Loader from '../../components/Loader'
 import FinishedBrowsingDisplay from './FinishedBrowsingDisplay'
 
 describe("<BrowsingContainer />", () => {

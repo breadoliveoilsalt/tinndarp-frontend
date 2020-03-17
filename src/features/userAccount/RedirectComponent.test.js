@@ -4,7 +4,7 @@ import Adapter from 'enzyme-adapter-react-16'
 Enzyme.configure({ adapter: new Adapter() })
 import { BrowserRouter, Link } from 'react-router-dom'
 import RedirectComponent from './RedirectComponent'
-import Loader from '../apiRequests/Loader'
+import Loader from '../../components/Loader'
 
 describe("<RedirectComponent />", () => {
 

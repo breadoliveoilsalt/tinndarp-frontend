@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import Loader from '../apiRequests/Loader'
+import Loader from '../../components/Loader'
 import LogInSignUpLinks from './LogInSignUpLinks'
 import { authenticateUserTokenAction, tokenPresent } from './userAccountSlice'
 

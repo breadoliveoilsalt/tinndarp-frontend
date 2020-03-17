@@ -123,3 +123,11 @@ a {
   color: #FFDD1F;
   background-color: #3484F2;
 }
+
+.error {
+  margin: 0.5em auto;
+  border: .2em solid red;
+  width: 80%;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+}
