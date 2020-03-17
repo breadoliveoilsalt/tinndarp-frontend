@@ -111,7 +111,8 @@ describe("postLike", () => {
       item_id: "1",
       liked: true
     }
-    // config.fetchWrapper.get.mockReturnValueOnce(getReturnValue)
+    mockData = {data: {}} 
+    config.fetchWrapper.post.mockReturnValueOnce(Promise.resolve(mockData))
   })
 
   it("calls the post() method of the fetchWrapper", () => {
@@ -146,7 +147,7 @@ describe("postLike", () => {
     config.fetchWrapper.post.mockReturnValueOnce(Promise.resolve(mockData))
 
     return postLike(params).then(result => {
-      expect(result.errors).toBeNull()
+      expect(result.errors).toBeUndefined()
     })
 
   })

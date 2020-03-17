@@ -26,4 +26,19 @@ function cherrypickItemData(rawItemData, processedData) {
   processedData.push(newObject)
 }
 
+export async function postLike(params) {
+  const url = config.baseURL + "/browsing"
+  const data = {browsing: params}
+  let rawData = await config.fetchWrapper.post(url, data)
+  return processDecisionData(rawData)
+}
+
+function processDecisionData(rawData) {
+  const decisionData = rawData.data
+  if (decisionData.errors !== undefined) {
+    return {errors: decisionData.errors}
+  } else {
+    return {}
+  }
+}
 
