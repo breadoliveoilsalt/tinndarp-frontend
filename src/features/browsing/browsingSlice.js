@@ -69,3 +69,17 @@ export function fetchItems() {
       .then(() => dispatch(apiActions.updateFetchingStatus(false)))
   }
 }
+
+export function postBrowsingDecisionAction(params) {
+  return function(dispatch) {
+    return requests.postBrowsingDecision(params)
+      .then( data => {
+        if (data.errors) {
+          dispatch(apiActions.loadErrors(data.errors))
+        } else {
+          dispatch(removeCurrentItem())
+          dispatch(updateCurrentItem())
+        }
+      })    
+  }
+}

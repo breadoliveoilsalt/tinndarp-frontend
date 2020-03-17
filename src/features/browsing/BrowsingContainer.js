@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchItems, removeCurrentItem, updateCurrentItem } from './browsingSlice'
+import { fetchItems, removeCurrentItem, updateCurrentItem, postBrowsingDecisionAction } from './browsingSlice'
+import { getToken } from '../userAccount/userAccountSlice'
 import RedirectComponent from '../userAccount/RedirectComponent'
 import Loader from '../../components/Loader'
 import CurrentItemContainer from './CurrentItemContainer'
@@ -21,14 +22,17 @@ export class BrowsingContainer extends Component {
     }
   }
 
-  handleNope() {
-    this.props.removeCurrentItem()
-    this.props.updateCurrentItem()
+  handleLike() {
+    this.props.postBrowsingDecisionAction(
+      { token: getToken(),
+        item_id: this.props.currentItem.id,
+        liked: true }
+    )
   }
 
-  handleLike() {
-    this.props.removeCurrentItem()
-    this.props.updateCurrentItem()
+  handleNope() {
+    // this.props.removeCurrentItem()
+    // this.props.updateCurrentItem()
   }
 
   render() {
@@ -68,7 +72,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchItems: () => dispatch(fetchItems()),
     removeCurrentItem: () => dispatch(removeCurrentItem()),
-    updateCurrentItem: () => dispatch(updateCurrentItem())
+    updateCurrentItem: () => dispatch(updateCurrentItem()),
+    postBrowsingDecisionAction: (params) => dispatch(postBrowsingDecisionAction(params))
   }
 }
 
