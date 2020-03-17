@@ -1,4 +1,4 @@
-import { getItems, processItemDataFromBackendAPI, postLike, postNope } from './browsingAPIRequests'
+import { getItems, processItemDataFromBackendAPI, postBrowsingDecision, postNope } from './browsingAPIRequests'
 import * as config from '../apiRequests/apiRequestsConfig/apiRequestsConfig'
 
 const mockData = {data: [
@@ -99,7 +99,7 @@ describe("processFromBackendAPI()", () => {
   })
 })
 
-describe("postLike", () => {
+describe("postBrowsingDecision", () => {
 
   let params
   let mockData
@@ -116,20 +116,20 @@ describe("postLike", () => {
   })
 
   it("calls the post() method of the fetchWrapper", () => {
-    postLike(params)
+    postBrowsingDecision(params)
 
     expect(config.fetchWrapper.post.mock.calls.length).toEqual(1)
   })
 
   it("calls the post() method with the cofigured baseURL to /browsing", () => {
-    postLike(params)
+    postBrowsingDecision(params)
 
     const expectedURL = config.baseURL + "/browsing"
     expect(config.fetchWrapper.post.mock.calls[0][0]).toEqual(expectedURL)
   })
 
   it("passes the params to the post() method of fetchwapper after prefixing a 'browsing' key", () => {
-    postLike(params)
+    postBrowsingDecision(params)
 
     const expectedParams = {browsing: params}
     expect(config.fetchWrapper.post.mock.calls[0][1]).toEqual(expectedParams)
@@ -146,7 +146,7 @@ describe("postLike", () => {
     config.fetchWrapper.post = jest.fn()
     config.fetchWrapper.post.mockReturnValueOnce(Promise.resolve(mockData))
 
-    return postLike(params).then(result => {
+    return postBrowsingDecision(params).then(result => {
       expect(result.errors).toBeUndefined()
     })
 
@@ -165,84 +165,7 @@ describe("postLike", () => {
     config.fetchWrapper.post = jest.fn()
     config.fetchWrapper.post.mockReturnValueOnce(Promise.resolve(mockData))
 
-    return postLike(params).then(result => {
-      expect(result.errors).toEqual(mockData.data.errors)
-    })
-  })
-
-})
-
-describe("postNope", () => {
-
-  let params
-  let mockData
-
-  beforeEach(() => {
-    config.fetchWrapper.post = jest.fn()
-    params = {
-      token: "xyz",
-      item_id: "1",
-      liked: false
-    }
-    mockData = {
-      data: {}
-    }
-    config.fetchWrapper.post.mockReturnValueOnce(Promise.resolve(mockData))
-  })
-
-  it("calls the post() method of the fetchWrapper", () => {
-    postNope(params)
-
-    expect(config.fetchWrapper.post.mock.calls.length).toEqual(1)
-  })
-
-  it("calls the post() method with the cofigured baseURL to /browsing", () => {
-    postNope(params)
-
-    const expectedURL = config.baseURL + "/browsing"
-    expect(config.fetchWrapper.post.mock.calls[0][0]).toEqual(expectedURL)
-  })
-
-  it("passes the params to the post() method of fetchwapper after prefixing a 'browsing' key", () => {
-    postNope(params)
-
-    const expectedParams = {
-      browsing: params
-    }
-    expect(config.fetchWrapper.post.mock.calls[0][1]).toEqual(expectedParams)
-  })
-
-  it("parses the return data to return a simple object with no errors if the data returns no errors", () => {
-    mockData = {
-      headers: "stuff",
-      data: {},
-      metaData: {
-        statusCode: 200
-      }
-    }
-    config.fetchWrapper.post = jest.fn()
-    config.fetchWrapper.post.mockReturnValueOnce(Promise.resolve(mockData))
-
-    return postNope(params).then(result => {
-      expect(result.errors).toBeUndefined()
-    })
-
-  })
-
-  it("parses the return data to return a simple object with an error field if the data returns errors", () => {
-    mockData = {
-      headers: "stuff",
-      data: {
-        errors: "Something went wrong"
-      },
-      metaData: {
-        statusCode: 200
-      }
-    }
-    config.fetchWrapper.post = jest.fn()
-    config.fetchWrapper.post.mockReturnValueOnce(Promise.resolve(mockData))
-
-    return postNope(params).then(result => {
+    return postBrowsingDecision(params).then(result => {
       expect(result.errors).toEqual(mockData.data.errors)
     })
   })
