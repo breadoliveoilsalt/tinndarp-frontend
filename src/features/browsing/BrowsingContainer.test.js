@@ -156,62 +156,62 @@ describe("<BrowsingContainer />", () => {
     expect(wrapper.find(FinishedBrowsingDisplay).exists()).toBeTruthy()
   })
 
-  describe("handleNope()", () => {
+  // describe("handleNope()", () => {
 
-    let props
-    beforeEach(() => {
-      props = {
-        removeCurrentItem: jest.fn(),
-        updateCurrentItem: jest.fn(),
-        fetchItems: jest.fn()
-      }
-    })
+  //   let props
+  //   beforeEach(() => {
+  //     props = {
+  //       removeCurrentItem: jest.fn(),
+  //       updateCurrentItem: jest.fn(),
+  //       fetchItems: jest.fn()
+  //     }
+  //   })
 
-    it("calls the removeCurrentItem action", () => {
-      const wrapper = shallow(<BrowsingContainer {...props} />)
+  //   it("calls the removeCurrentItem action", () => {
+  //     const wrapper = shallow(<BrowsingContainer {...props} />)
 
-      wrapper.instance().handleNope()
+  //     wrapper.instance().handleNope()
 
-      expect(props.removeCurrentItem.mock.calls.length).toEqual(1)
-    })
+  //     expect(props.removeCurrentItem.mock.calls.length).toEqual(1)
+  //   })
 
-    it("calls the updateCurrentItem action", () => {
-      const wrapper = shallow(<BrowsingContainer {...props} />)
+  //   it("calls the updateCurrentItem action", () => {
+  //     const wrapper = shallow(<BrowsingContainer {...props} />)
 
-      wrapper.instance().handleNope()
+  //     wrapper.instance().handleNope()
 
-      expect(props.updateCurrentItem.mock.calls.length).toEqual(1)
-    })
+  //     expect(props.updateCurrentItem.mock.calls.length).toEqual(1)
+  //   })
 
-  })
+  // })
 
-  describe("handleLike()", () => {
+  // describe("handleLike()", () => {
 
-    let props
-    beforeEach(() => {
-      props = {
-        removeCurrentItem: jest.fn(),
-        updateCurrentItem: jest.fn(),
-        fetchItems: jest.fn()
-      }
-    })
+  //   let props
+  //   beforeEach(() => {
+  //     props = {
+  //       removeCurrentItem: jest.fn(),
+  //       updateCurrentItem: jest.fn(),
+  //       fetchItems: jest.fn()
+  //     }
+  //   })
 
-    it("calls the removeCurrentItem action", () => {
-      const wrapper = shallow(<BrowsingContainer {...props} />)
+  //   it("calls the removeCurrentItem action", () => {
+  //     const wrapper = shallow(<BrowsingContainer {...props} />)
 
-      wrapper.instance().handleLike()
+  //     wrapper.instance().handleLike()
 
-      expect(props.removeCurrentItem.mock.calls.length).toEqual(1)
-    })
+  //     expect(props.removeCurrentItem.mock.calls.length).toEqual(1)
+  //   })
 
-    it("calls the updateCurrentItem action", () => {
-      const wrapper = shallow(<BrowsingContainer {...props} />)
+  //   it("calls the updateCurrentItem action", () => {
+  //     const wrapper = shallow(<BrowsingContainer {...props} />)
 
-      wrapper.instance().handleLike()
+  //     wrapper.instance().handleLike()
 
-      expect(props.updateCurrentItem.mock.calls.length).toEqual(1)
-    })
+  //     expect(props.updateCurrentItem.mock.calls.length).toEqual(1)
+  //   })
 
-  })
+  // })
 
 })
