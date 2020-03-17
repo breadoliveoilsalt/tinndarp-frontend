@@ -1,4 +1,4 @@
-import * as config from './apiRequestsConfig/apiRequestsConfig'
+import * as config from '../apiRequests/apiRequestsConfig/apiRequestsConfig'
 import { postSignUp, postLogIn, getAuthenticateUserToken } from './userAccountAPIRequests'
 
 describe("postSignUp()", () => {
