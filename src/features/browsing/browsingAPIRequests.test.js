@@ -102,6 +102,7 @@ describe("processFromBackendAPI()", () => {
 describe("postLike", () => {
 
   let params
+  let mockData
   
   beforeEach(() => {
     config.fetchWrapper.post = jest.fn()
@@ -133,5 +134,39 @@ describe("postLike", () => {
     expect(config.fetchWrapper.post.mock.calls[0][1]).toEqual(expectedParams)
   })
 
+  it("parses the return data to return a simple object with no errors if the data returns no errors", () => {
+    mockData = {
+      headers: "stuff",
+      data: {},
+      metaData: {
+        statusCode: 200
+      }
+    }
+    config.fetchWrapper.post = jest.fn()
+    config.fetchWrapper.post.mockReturnValueOnce(Promise.resolve(mockData))
+
+    return postLike(params).then(result => {
+      expect(result.errors).toBeNull()
+    })
+
+  })
+
+  it("parses the return data to return a simple object with an error field if the data returns errors", () => {
+    mockData = {
+      headers: "stuff",
+      data: {
+        errors: "Something went wrong"
+      },
+      metaData: {
+        statusCode: 200
+      }
+    }
+    config.fetchWrapper.post = jest.fn()
+    config.fetchWrapper.post.mockReturnValueOnce(Promise.resolve(mockData))
+
+    return postLike(params).then(result => {
+      expect(result.errors).toEqual(mockData.data.errors)
+    })
+  })
 
 })
