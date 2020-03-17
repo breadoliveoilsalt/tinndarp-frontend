@@ -1,5 +1,5 @@
-import { getItems, processFromBackendAPI } from './itemsAPIRequests'
-import * as config from './apiRequestsConfig/apiRequestsConfig'
+import { getItems, processFromBackendAPI } from './browsingAPIRequests'
+import * as config from '../apiRequests/apiRequestsConfig/apiRequestsConfig'
 
 const mockData = {data: [
   {

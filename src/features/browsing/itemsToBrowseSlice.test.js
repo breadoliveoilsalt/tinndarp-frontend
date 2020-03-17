@@ -1,6 +1,6 @@
 import configureStore from '../../configureStore'
 import itemsToBrowseReducer, * as actions from './itemsToBrowseSlice'
-import * as requests from  '../apiRequests/itemsAPIRequests'
+import * as requests from  './browsingAPIRequests'
 
 describe("itemsToBrowse store slice", () => {
 

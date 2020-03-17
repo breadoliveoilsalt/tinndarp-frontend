@@ -1,4 +1,4 @@
-import * as requests from '../apiRequests/itemsAPIRequests'
+import * as requests from './browsingAPIRequests'
 import * as apiActions from '../apiRequests/apiRequestsSlice'
 
 const LOAD_ITEMS = 'LOAD_ITEMS'
