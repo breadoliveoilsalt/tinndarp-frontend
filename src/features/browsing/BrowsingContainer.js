@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchItems, removeCurrentItem, updateCurrentItem } from './itemsToBrowseSlice'
+import { fetchItems, removeCurrentItem, updateCurrentItem } from './browsingSlice'
 import RedirectComponent from '../userAccount/RedirectComponent'
 import Loader from '../../components/Loader'
 import CurrentItemContainer from './CurrentItemContainer'
@@ -57,8 +57,8 @@ export class BrowsingContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    items: state.itemsToBrowse.items,
-    currentItem: state.itemsToBrowse.currentItem,
+    items: state.browsing.items,
+    currentItem: state.browsing.currentItem,
     fetching: state.apiRequest.fetching,
     errors: state.apiRequest.errors
   }

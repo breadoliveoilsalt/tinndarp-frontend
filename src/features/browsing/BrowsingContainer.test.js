@@ -25,7 +25,7 @@ describe("<BrowsingContainer />", () => {
                     fetching: false,
                     errors: ["Error logging in"]
                   },
-                  itemsToBrowse: {
+                  browsing: {
                     items: ["item 1", "item 2"]}
                   }
     const store = mockStore(state)
@@ -43,7 +43,7 @@ describe("<BrowsingContainer />", () => {
     const state = { apiRequest: {
                     fetching: false
                   },
-                  itemsToBrowse: {
+                  browsing: {
                     items: null}
                   }
     const store = mockStore(state)
@@ -61,7 +61,7 @@ describe("<BrowsingContainer />", () => {
                     apiRequest: {
                       fetching: false
                     },
-                    itemsToBrowse: {
+                    browsing: {
                       items: ["item 1", "item 2"]
                     }
                   }
@@ -80,7 +80,7 @@ describe("<BrowsingContainer />", () => {
                     apiRequest: {
                       fetching: false
                     },
-                    itemsToBrowse: {
+                    browsing: {
                       items: ["item 1"],
                       currentItem: "item 1"
                     }
@@ -112,7 +112,7 @@ describe("<BrowsingContainer />", () => {
                     apiRequest: {
                       fetching: true
                     },
-                    itemsToBrowse: {
+                    browsing: {
                       items: ["item 1"]
                     }
                   }
@@ -127,7 +127,7 @@ describe("<BrowsingContainer />", () => {
                     apiRequest: {
                       fetching: true,
                     },
-                    itemsToBrowse: {
+                    browsing: {
                       items: ["item 1"]
                     }
                   }
@@ -142,7 +142,7 @@ describe("<BrowsingContainer />", () => {
                     apiRequest: {
                       fetching: false,
                     },
-                    itemsToBrowse: {
+                    browsing: {
                       items: []
                     }
                   }

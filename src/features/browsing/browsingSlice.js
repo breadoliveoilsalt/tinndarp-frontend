@@ -11,7 +11,7 @@ const initialState = {
   currentItem: null,
 }
 
-function itemsToBrowseReducer(state = initialState, action) {
+function browsingReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_ITEMS:
       return Object.assign({}, state, {items: action.payload})
@@ -31,7 +31,7 @@ function itemsToBrowseReducer(state = initialState, action) {
   }
 }
 
-export default itemsToBrowseReducer
+export default browsingReducer
 
 export function loadItems(data) {
   return {
@@ -52,7 +52,7 @@ export function removeCurrentItem() {
   }
 }
 
-export function resetItemsToBrowseState() {
+export function resetbrowsingState() {
   return {
     type: RESET_ITEMS_TO_BROWSE_STATE
   }

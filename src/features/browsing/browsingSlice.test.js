@@ -1,8 +1,8 @@
 import configureStore from '../../configureStore'
-import itemsToBrowseReducer, * as actions from './itemsToBrowseSlice'
+import * as actions from './browsingSlice'
 import * as requests from  './browsingAPIRequests'
 
-describe("itemsToBrowse store slice", () => {
+describe("browsing store slice", () => {
 
   let store
   let dispatch
@@ -14,11 +14,11 @@ describe("itemsToBrowse store slice", () => {
 
   describe("the inital state", () => {
     it("has fields for a list of items, a currentItem, and a currentItemIndex", () => {
-      const expectedItemsToBrowseInitialState = {
+      const expectedbrowsingInitialState = {
         items: null,
         currentItem: null
       }
-      expect(store.getState().itemsToBrowse).toEqual(expectedItemsToBrowseInitialState)
+      expect(store.getState().browsing).toEqual(expectedbrowsingInitialState)
     })
   })
 
@@ -31,7 +31,7 @@ describe("itemsToBrowse store slice", () => {
 
         dispatch(actions.loadItems(itemsList))
 
-        expect(store.getState().itemsToBrowse.items).toEqual(itemsList)
+        expect(store.getState().browsing.items).toEqual(itemsList)
       })
 
     })
@@ -62,7 +62,7 @@ describe("itemsToBrowse store slice", () => {
 
         it("relies on dispatch to load the returned data to the store", () => {
           return dispatch(actions.fetchItems()).then(() => {
-            expect(store.getState().itemsToBrowse.items).toEqual(mockReturnedData)
+            expect(store.getState().browsing.items).toEqual(mockReturnedData)
           })
 
         })
@@ -81,20 +81,20 @@ describe("itemsToBrowse store slice", () => {
         const itemsList = ["item 1", "item 2"]
         dispatch(actions.loadItems(itemsList))
 
-        expect(store.getState().itemsToBrowse.currentItem).toBeNull()
+        expect(store.getState().browsing.currentItem).toBeNull()
         dispatch(actions.updateCurrentItem())
 
-        expect(store.getState().itemsToBrowse.currentItem).toEqual("item 1")
+        expect(store.getState().browsing.currentItem).toEqual("item 1")
       })
 
       it("does nothing if the items list is empty", () => {
         const itemsList = []
         dispatch(actions.loadItems(itemsList))
 
-        expect(store.getState().itemsToBrowse.currentItem).toBeNull()
+        expect(store.getState().browsing.currentItem).toBeNull()
         dispatch(actions.updateCurrentItem())
 
-        expect(store.getState().itemsToBrowse.currentItem).toBeNull()
+        expect(store.getState().browsing.currentItem).toBeNull()
       })
     })
 
@@ -105,10 +105,10 @@ describe("itemsToBrowse store slice", () => {
         dispatch(actions.loadItems(itemsList))
         dispatch(actions.updateCurrentItem())
 
-        expect(store.getState().itemsToBrowse.currentItem).toEqual("item 1")
+        expect(store.getState().browsing.currentItem).toEqual("item 1")
         dispatch(actions.removeCurrentItem())
 
-        expect(store.getState().itemsToBrowse.currentItem).toBeNull()
+        expect(store.getState().browsing.currentItem).toBeNull()
       })
 
       it("removes the first item in the items list", () => {
@@ -117,7 +117,7 @@ describe("itemsToBrowse store slice", () => {
 
         dispatch(actions.removeCurrentItem())
 
-        expect(store.getState().itemsToBrowse.items).toEqual(["item 2"])
+        expect(store.getState().browsing.items).toEqual(["item 2"])
       })
     })
   })
