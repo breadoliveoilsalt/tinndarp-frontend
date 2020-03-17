@@ -1,4 +1,4 @@
-import { getItems, processFromBackendAPI } from './browsingAPIRequests'
+import { getItems, processItemDataFromBackendAPI, postLike } from './browsingAPIRequests'
 import * as config from '../apiRequests/apiRequestsConfig/apiRequestsConfig'
 
 const mockData = {data: [
@@ -36,7 +36,6 @@ const mockData = {data: [
 
 describe("getItems", () => {
 
-  let getMock
   let getReturnValue = Promise.resolve(mockData)
 
   beforeEach(() => {
@@ -67,7 +66,7 @@ describe("getItems", () => {
 describe("processFromBackendAPI()", () => {
 
   it("processes the API's raw data for a list of items into data comsumable by the frontend", () => {
-    const result = processFromBackendAPI(mockData)
+    const result = processItemDataFromBackendAPI(mockData)
 
     const expectedResults = [
       {
@@ -98,4 +97,41 @@ describe("processFromBackendAPI()", () => {
 
     expect(result).toEqual(expectedResults)
   })
+})
+
+describe("postLike", () => {
+
+  let params
+  
+  beforeEach(() => {
+    config.fetchWrapper.post = jest.fn()
+    params = {
+      token: "xyz",
+      item_id: "1",
+      liked: true
+    }
+    // config.fetchWrapper.get.mockReturnValueOnce(getReturnValue)
+  })
+
+  it("calls the post() method of the fetchWrapper", () => {
+    postLike(params)
+
+    expect(config.fetchWrapper.post.mock.calls.length).toEqual(1)
+  })
+
+  it("calls the post() method with the cofigured baseURL to /browsing", () => {
+    postLike(params)
+
+    const expectedURL = config.baseURL + "/browsing"
+    expect(config.fetchWrapper.post.mock.calls[0][0]).toEqual(expectedURL)
+  })
+
+  it("passes the params to the post() method of fetchwapper after prefixing a 'browsing' key", () => {
+    postLike(params)
+
+    const expectedParams = {browsing: params}
+    expect(config.fetchWrapper.post.mock.calls[0][1]).toEqual(expectedParams)
+  })
+
+
 })
