@@ -76,6 +76,7 @@ describe("browsing store slice", () => {
       })
     })
 
+
     describe("updateCurrentItem()", () => {
       it("loads the first item as the currentItem", () => {
         const itemsList = ["item 1", "item 2"]
@@ -120,5 +121,37 @@ describe("browsing store slice", () => {
         expect(store.getState().browsing.items).toEqual(["item 2"])
       })
     })
+
+    describe("postBrowsingDecisionAction()", () => {
+
+      it("is a thunk that returns a function", () => {
+        const result = actions.postBrowsingDecisionAction()
+
+        expect(typeof result === "function").toBeTruthy()
+      })
+
+      describe("the returned function", () => {
+
+      })
+      
+    })
+              // const mockReturnedData = {
+              //   errors: ["Invalid log in credentials."]
+              // }
+              // requests.postLogIn.mockReturnValueOnce(Promise.resolve(mockReturnedData))
+
+              // const mockStore = configureMockStore([thunk])
+              // store = mockStore({
+              //   apiRequest: {
+              //     fetching: false
+              //   }
+              // })
+              // dispatch = store.dispatch
+
+              // return dispatch(actions.logInAction()).then(() => {
+              //   expect(store.getActions()[0]).toEqual(apiActions.updateFetchingStatus(true))
+              //   const lastAction = store.getActions()[store.getActions().length - 1]
+              //   expect(lastAction).toEqual(apiActions.updateFetchingStatus(false))
+              // })
   })
 })
