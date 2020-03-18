@@ -18,7 +18,8 @@ export class BrowsingContainer extends Component {
 
   componentDidMount() {
     if (!this.props.items) {
-      this.props.fetchItems()
+      const params = {token: getToken()}
+      this.props.fetchItems(params)
     }
   }
 

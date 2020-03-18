@@ -1,4 +1,4 @@
-import { getItems, processItemDataFromBackendAPI, postBrowsingDecision, postNope } from './browsingAPIRequests'
+import { getItemsToBrowse, processItemDataFromBackendAPI, postBrowsingDecision, postNope } from './browsingAPIRequests'
 import * as config from '../apiRequests/apiRequestsConfig/apiRequestsConfig'
 
 const mockData = {data: [
@@ -34,7 +34,7 @@ const mockData = {data: [
   }
 ]}
 
-describe("getItems", () => {
+describe("getItemsToBrowse", () => {
 
   let getReturnValue = Promise.resolve(mockData)
 
@@ -44,19 +44,19 @@ describe("getItems", () => {
   })
 
   it("calls `get` on the configured fetchWrapper", () => {
-    getItems()
+    getItemsToBrowse()
 
     expect(config.fetchWrapper.get.mock.calls.length).toEqual(1)
   })
 
   it("passes to `get` an items url based on the configured base URL", () => {
-    getItems()
+    getItemsToBrowse()
 
     expect(config.fetchWrapper.get.mock.calls[0][0]).toEqual(config.baseURL + "/items")
   })
 
   it("returns the data fetched by the fetchWrapper's `get` call", () => {
-    const returnValue = getItems()
+    const returnValue = getItemsToBrowse()
 
     expect(returnValue).toEqual(getReturnValue)
   })

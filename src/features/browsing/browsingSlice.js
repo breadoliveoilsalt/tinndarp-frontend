@@ -58,10 +58,10 @@ export function resetbrowsingState() {
   }
 }
 
-export function fetchItems() {
+export function fetchItems(params) {
   return function(dispatch) {
     dispatch(apiActions.updateFetchingStatus(true))
-    return requests.getItems()
+    return requests.getItemsToBrowse(params)
       .then(data => {
         dispatch(loadItems(data))
       })

@@ -52,18 +52,18 @@ describe("browsing store slice", () => {
         const mockReturnedData = ["item 1", "item 2"]
 
         beforeEach(() => {
-          requests.getItems = jest.fn()
-          requests.getItems.mockReturnValueOnce(Promise.resolve(mockReturnedData))
+          requests.getItemsToBrowse = jest.fn()
+          requests.getItemsToBrowse.mockReturnValueOnce(Promise.resolve(mockReturnedData))
         })
 
         afterEach(() => {
-          requests.getItems.mockRestore()
+          requests.getItemsToBrowse.mockRestore()
         })
 
-        it("calls getItems to request items from the backend server", () => {
+        it("calls getItemsToBrowse to request items from the backend server", () => {
           dispatch(actions.fetchItems())
 
-          expect(requests.getItems.mock.calls.length).toEqual(1)
+          expect(requests.getItemsToBrowse.mock.calls.length).toEqual(1)
         })
 
         it("relies on dispatch to load the returned data to the store", () => {

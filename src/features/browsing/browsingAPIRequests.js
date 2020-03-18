@@ -1,8 +1,9 @@
 import * as config from '../apiRequests/apiRequestsConfig/apiRequestsConfig'
 
-export async function getItems() {
-  const url = config.baseURL + "/items"
-  let rawData = await config.fetchWrapper.get(url)
+export async function getItemsToBrowse(params) {
+  const url = config.baseURL + "/browsing"
+  const strongParams = {browsing: params}
+  let rawData = await config.fetchWrapper.getWithParams(url, strongParams)
   return processItemDataFromBackendAPI(rawData)
 }
 
@@ -28,8 +29,8 @@ function cherrypickItemData(rawItemData, processedData) {
 
 export async function postBrowsingDecision(params) {
     const url = config.baseURL + "/browsing"
-    const data = {browsing: params}
-    let rawData = await config.fetchWrapper.post(url, data)
+    const strongParams = {browsing: params}
+    let rawData = await config.fetchWrapper.post(url, strongParams)
     return processDecisionData(rawData)
 }
 
