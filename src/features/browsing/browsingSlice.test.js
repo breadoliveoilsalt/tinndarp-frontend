@@ -1,11 +1,14 @@
 import configureStore from '../../configureStore'
 import * as actions from './browsingSlice'
 import * as requests from  './browsingAPIRequests'
+import configureMockStore from 'redux-mock-store'
+import thunk from 'redux-thunk'
 
 describe("browsing store slice", () => {
 
   let store
   let dispatch
+  // consider own mock dispatch
 
   beforeEach(() => {
     store = configureStore()
@@ -46,12 +49,15 @@ describe("browsing store slice", () => {
 
       describe("the returned function", () => {
 
-        let mockGetItems
         const mockReturnedData = ["item 1", "item 2"]
 
         beforeEach(() => {
           requests.getItems = jest.fn()
           requests.getItems.mockReturnValueOnce(Promise.resolve(mockReturnedData))
+        })
+
+        afterEach(() => {
+          requests.getItems.mockRestore()
         })
 
         it("calls getItems to request items from the backend server", () => {
@@ -78,6 +84,7 @@ describe("browsing store slice", () => {
 
 
     describe("updateCurrentItem()", () => {
+
       it("loads the first item as the currentItem", () => {
         const itemsList = ["item 1", "item 2"]
         dispatch(actions.loadItems(itemsList))
@@ -97,6 +104,7 @@ describe("browsing store slice", () => {
 
         expect(store.getState().browsing.currentItem).toBeNull()
       })
+
     })
 
     describe("removeCurrentItem()", () => {
@@ -124,6 +132,32 @@ describe("browsing store slice", () => {
 
     describe("postBrowsingDecisionAction()", () => {
 
+      let params
+      let mockReturnData
+
+      beforeEach(() => {
+        params = {
+          token: "xyz", 
+          item_id: "1",
+          liked: true
+        }
+        mockReturnData = {data: {saved: "true"}}
+        requests.postBrowsingDecision = jest.fn()
+        requests.postBrowsingDecision.mockResolvedValue(mockReturnData)
+
+        // const mockStore = configureMockStore([thunk])
+        // store = mockStore({
+        //   apiRequest: {
+        //     fetching: false
+        //   }
+        // })
+        // dispatch = store.dispatch
+      })
+
+      afterEach(() => {
+        requests.postBrowsingDecision.mockRestore()
+      })
+
       it("is a thunk that returns a function", () => {
         const result = actions.postBrowsingDecisionAction()
 
@@ -131,6 +165,17 @@ describe("browsing store slice", () => {
       })
 
       describe("the returned function", () => {
+
+        it("calls the postBrowsingDecision request", () => {
+          dispatch(actions.postBrowsingDecisionAction(params))
+
+        //   expect(requests.postBrowsingDecision.mock.calls.length).toEqual(1)
+
+          // return dispatch(actions.postBrowsingDecisionAction(params))
+          //   .then(() => {
+          //     expect(requests.postBrowsingDecision.mock.calls.length).toEqual(1)
+          //   })
+        })
 
       })
       

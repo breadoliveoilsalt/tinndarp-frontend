@@ -81,5 +81,8 @@ export function postBrowsingDecisionAction(params) {
           dispatch(updateCurrentItem())
         }
       })    
+      .catch( error => {
+        dispatch(apiActions.loadErrors(error))
+      })
   }
 }

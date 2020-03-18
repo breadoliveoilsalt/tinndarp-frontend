@@ -27,10 +27,10 @@ function cherrypickItemData(rawItemData, processedData) {
 }
 
 export async function postBrowsingDecision(params) {
-  const url = config.baseURL + "/browsing"
-  const data = {browsing: params}
-  let rawData = await config.fetchWrapper.post(url, data)
-  return processDecisionData(rawData)
+    const url = config.baseURL + "/browsing"
+    const data = {browsing: params}
+    let rawData = await config.fetchWrapper.post(url, data)
+    return processDecisionData(rawData)
 }
 
 function processDecisionData(rawData) {
