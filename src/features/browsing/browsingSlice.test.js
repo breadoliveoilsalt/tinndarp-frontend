@@ -169,7 +169,7 @@ describe("browsing store slice", () => {
         it("calls the postBrowsingDecision request", () => {
           dispatch(actions.postBrowsingDecisionAction(params))
 
-        //   expect(requests.postBrowsingDecision.mock.calls.length).toEqual(1)
+          expect(requests.postBrowsingDecision.mock.calls.length).toEqual(1)
 
           // return dispatch(actions.postBrowsingDecisionAction(params))
           //   .then(() => {
