@@ -132,26 +132,18 @@ describe("browsing store slice", () => {
 
     describe("postBrowsingDecisionAction()", () => {
 
-      let params
-      let mockReturnData
+      const params = { token: "xyz", item_id: "1", liked: true }
 
       beforeEach(() => {
-        params = {
-          token: "xyz", 
-          item_id: "1",
-          liked: true
-        }
-        mockReturnData = {data: {saved: "true"}}
         requests.postBrowsingDecision = jest.fn()
-        requests.postBrowsingDecision.mockResolvedValue(mockReturnData)
 
-        // const mockStore = configureMockStore([thunk])
-        // store = mockStore({
-        //   apiRequest: {
-        //     fetching: false
-        //   }
-        // })
-        // dispatch = store.dispatch
+        const mockStore = configureMockStore([thunk])
+        store = mockStore({
+          apiRequest: {
+            fetching: false
+          }
+        })
+        dispatch = store.dispatch
       })
 
       afterEach(() => {
@@ -159,6 +151,8 @@ describe("browsing store slice", () => {
       })
 
       it("is a thunk that returns a function", () => {
+        const mockReturnData = {data: {saved: "true"}}
+        requests.postBrowsingDecision.mockResolvedValue(mockReturnData)
         const result = actions.postBrowsingDecisionAction()
 
         expect(typeof result === "function").toBeTruthy()
@@ -167,14 +161,16 @@ describe("browsing store slice", () => {
       describe("the returned function", () => {
 
         it("calls the postBrowsingDecision request", () => {
+          const mockReturnData = {data: {saved: "true"}}
+          requests.postBrowsingDecision.mockResolvedValue(mockReturnData)
           dispatch(actions.postBrowsingDecisionAction(params))
 
           expect(requests.postBrowsingDecision.mock.calls.length).toEqual(1)
+        })
 
-          // return dispatch(actions.postBrowsingDecisionAction(params))
-          //   .then(() => {
-          //     expect(requests.postBrowsingDecision.mock.calls.length).toEqual(1)
-          //   })
+        it("loads errors if postBrowsingDecision returns an errors field", () => {
+          const mockReturnData = {data: {saved: "true"}}
+          requests.postBrowsingDecision.mockResolvedValue(mockReturnData)
         })
 
       })
