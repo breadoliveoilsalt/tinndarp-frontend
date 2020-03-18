@@ -9,7 +9,7 @@ import RedirectComponent from '../userAccount/RedirectComponent'
 import CurrentItemContainer from './CurrentItemContainer'
 import Loader from '../../components/Loader'
 import FinishedBrowsingDisplay from './FinishedBrowsingDisplay'
-import * as browsingActions from '../userAccount/userAccountSlice'
+import * as userAccountActions from '../userAccount/userAccountSlice'
 
 Enzyme.configure({ adapter: new Adapter() })
 
@@ -106,6 +106,7 @@ describe("<BrowsingContainer />", () => {
     const wrapper = shallow(<BrowsingContainer {...props} />)
 
     expect(props.fetchItems.mock.calls.length).toEqual(1)
+    props.fetchItems.mockRestore()  
   })
 
   it("renders a Loader if the app is fetching items", () => {
@@ -166,11 +167,14 @@ describe("<BrowsingContainer />", () => {
         postBrowsingDecisionAction: jest.fn(),
         currentItem: {id: 1}
       }
+      userAccountActions.getToken = jest.fn()
+      userAccountActions.getToken.mockReturnValue("xyz")
     })
 
     afterEach(() => {
       props.fetchItems.mockRestore()
       props.postBrowsingDecisionAction.mockRestore()
+      userAccountActions.getToken.mockRestore()
     })
 
     it("calls postBrowsingDecisionAction", () => {
@@ -182,8 +186,6 @@ describe("<BrowsingContainer />", () => {
     })
 
     it("passes an object to  postBrowsingDecisionAction with the result of getToken, the currentItem id, and a liked status set to true", () => {
-      browsingActions.getToken = jest.fn()
-      browsingActions.getToken.mockReturnValueOnce("xyz")
       const wrapper = shallow(<BrowsingContainer {...props} />)
 
       wrapper.instance().handleLike()
@@ -194,8 +196,6 @@ describe("<BrowsingContainer />", () => {
         liked: true
       }  
       expect(props.postBrowsingDecisionAction.mock.calls[0][0]).toEqual(expectedResult)
-
-      browsingActions.getToken.mockRestore()
     })
   })
 
@@ -208,11 +208,14 @@ describe("<BrowsingContainer />", () => {
         postBrowsingDecisionAction: jest.fn(),
         currentItem: {id: 1}
       }
+      userAccountActions.getToken = jest.fn()
+      userAccountActions.getToken.mockReturnValue("xyz")
     })
 
     afterEach(() => {
       props.fetchItems.mockRestore()
       props.postBrowsingDecisionAction.mockRestore()
+      userAccountActions.getToken.mockRestore()
     })
 
     it("calls postBrowsingDecisionAction", () => {
@@ -224,8 +227,6 @@ describe("<BrowsingContainer />", () => {
     })
 
     it("passes an object to  postBrowsingDecisionAction with the result of getToken, the currentItem id, and a liked status set to false", () => {
-      browsingActions.getToken = jest.fn()
-      browsingActions.getToken.mockReturnValueOnce("xyz")
       const wrapper = shallow(<BrowsingContainer {...props} />)
 
       wrapper.instance().handleNope()
@@ -236,8 +237,6 @@ describe("<BrowsingContainer />", () => {
         liked: false
       }  
       expect(props.postBrowsingDecisionAction.mock.calls[0][0]).toEqual(expectedResult)
-
-      browsingActions.getToken.mockRestore()
     })
   })
 })

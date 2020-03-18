@@ -1,5 +1,6 @@
-import { getItemsToBrowse, processItemDataFromBackendAPI, postBrowsingDecision, postNope } from './browsingAPIRequests'
+import { getItemsToBrowse, processItemDataFromBackendAPI, postBrowsingDecision } from './browsingAPIRequests'
 import * as config from '../apiRequests/apiRequestsConfig/apiRequestsConfig'
+import * as userAccountActions from '../userAccount/userAccountSlice'
 
 const mockData = {
   data: {
@@ -45,10 +46,13 @@ describe("getItemsToBrowse", () => {
   beforeEach(() => {
     config.fetchWrapper.getWithParams = jest.fn()
     config.fetchWrapper.getWithParams.mockReturnValueOnce(getReturnValue)
+    userAccountActions.getToken = jest.fn()
+    userAccountActions.getToken.mockReturnValueOnce("xyz")
   })
 
   afterEach(() => {
     config.fetchWrapper.getWithParams.mockRestore()
+    userAccountActions.getToken.mockRestore()
   })
 
   it("calls `getWithParams` on the configured fetchWrapper", () => {
@@ -63,7 +67,7 @@ describe("getItemsToBrowse", () => {
     expect(config.fetchWrapper.getWithParams.mock.calls[0][0]).toEqual(config.baseURL + "/browsing")
   })
 
-  it("returns the data fetched by the fetchWrapper's `get` call", () => {
+  it("returns the data fetched by the fetchWrapper's `getWithParams` call", () => {
     const returnValue = getItemsToBrowse()
 
     expect(returnValue).toEqual(getReturnValue)
