@@ -31,8 +31,11 @@ export class BrowsingContainer extends Component {
   }
 
   handleNope() {
-    // this.props.removeCurrentItem()
-    // this.props.updateCurrentItem()
+    this.props.postBrowsingDecisionAction(
+      { token: getToken(),
+        item_id: this.props.currentItem.id,
+        liked: false }
+    )
   }
 
   render() {

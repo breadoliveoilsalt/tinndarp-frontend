@@ -1,7 +1,6 @@
 import React from 'react'
 import Enzyme, { shallow, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-Enzyme.configure({ adapter: new Adapter() })
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import { MemoryRouter } from 'react-router-dom'
@@ -11,6 +10,8 @@ import CurrentItemContainer from './CurrentItemContainer'
 import Loader from '../../components/Loader'
 import FinishedBrowsingDisplay from './FinishedBrowsingDisplay'
 import * as browsingActions from '../userAccount/userAccountSlice'
+
+Enzyme.configure({ adapter: new Adapter() })
 
 describe("<BrowsingContainer />", () => {
 
@@ -156,35 +157,6 @@ describe("<BrowsingContainer />", () => {
     expect(wrapper.find(FinishedBrowsingDisplay).exists()).toBeTruthy()
   })
 
-  // describe("handleNope()", () => {
-
-  //   let props
-  //   beforeEach(() => {
-  //     props = {
-  //       removeCurrentItem: jest.fn(),
-  //       updateCurrentItem: jest.fn(),
-  //       fetchItems: jest.fn()
-  //     }
-  //   })
-
-  //   it("calls the removeCurrentItem action", () => {
-  //     const wrapper = shallow(<BrowsingContainer {...props} />)
-
-  //     wrapper.instance().handleNope()
-
-  //     expect(props.removeCurrentItem.mock.calls.length).toEqual(1)
-  //   })
-
-  //   it("calls the updateCurrentItem action", () => {
-  //     const wrapper = shallow(<BrowsingContainer {...props} />)
-
-  //     wrapper.instance().handleNope()
-
-  //     expect(props.updateCurrentItem.mock.calls.length).toEqual(1)
-  //   })
-
-  // })
-
   describe("handleLike()", () => {
 
     let props
@@ -227,4 +199,45 @@ describe("<BrowsingContainer />", () => {
     })
   })
 
+  describe("handleNope()", () => {
+
+    let props
+    beforeEach(() => {
+      props = {
+        fetchItems: jest.fn(),
+        postBrowsingDecisionAction: jest.fn(),
+        currentItem: {id: 1}
+      }
+    })
+
+    afterEach(() => {
+      props.fetchItems.mockRestore()
+      props.postBrowsingDecisionAction.mockRestore()
+    })
+
+    it("calls postBrowsingDecisionAction", () => {
+      const wrapper = shallow(<BrowsingContainer {...props} />)
+
+      wrapper.instance().handleLike()
+
+      expect(props.postBrowsingDecisionAction.mock.calls.length).toEqual(1)
+    })
+
+    it("passes an object to  postBrowsingDecisionAction with the result of getToken, the currentItem id, and a liked status set to false", () => {
+      browsingActions.getToken = jest.fn()
+      browsingActions.getToken.mockReturnValueOnce("xyz")
+      const wrapper = shallow(<BrowsingContainer {...props} />)
+
+      wrapper.instance().handleNope()
+
+      const expectedResult = {
+        token: "xyz",
+        item_id: props.currentItem.id,
+        liked: false
+      }  
+      expect(props.postBrowsingDecisionAction.mock.calls[0][0]).toEqual(expectedResult)
+
+      browsingActions.getToken.mockRestore()
+    })
+  })
 })
