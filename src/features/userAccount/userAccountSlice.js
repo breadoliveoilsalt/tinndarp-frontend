@@ -1,4 +1,4 @@
-import { postSignUp, postLogIn, getAuthenticateUserToken } from '../apiRequests/userAccountAPIRequests'
+import { postSignUp, postLogIn, getAuthenticateUserToken } from './userAccountAPIRequests'
 import * as apiActions from '../apiRequests/apiRequestsSlice'
 
 const RESET_USER_ACCOUNT_STATE = 'RESET_USER_ACCOUNT_STATE'

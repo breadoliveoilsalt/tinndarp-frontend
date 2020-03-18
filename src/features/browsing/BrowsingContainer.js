@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchItems, removeCurrentItem, updateCurrentItem } from './itemsToBrowseSlice'
+import { fetchItems, removeCurrentItem, updateCurrentItem, postBrowsingDecisionAction } from './browsingSlice'
+import { getToken } from '../userAccount/userAccountSlice'
 import RedirectComponent from '../userAccount/RedirectComponent'
-import Loader from '../apiRequests/Loader'
+import Loader from '../../components/Loader'
 import CurrentItemContainer from './CurrentItemContainer'
 import FinishedBrowsingDisplay from './FinishedBrowsingDisplay'
 import './BrowsingContainer.css'
@@ -17,18 +18,25 @@ export class BrowsingContainer extends Component {
 
   componentDidMount() {
     if (!this.props.items) {
-      this.props.fetchItems()
+      const params = {token: getToken()}
+      this.props.fetchItems(params)
     }
   }
 
-  handleNope() {
-    this.props.removeCurrentItem()
-    this.props.updateCurrentItem()
+  handleLike() {
+    this.props.postBrowsingDecisionAction(
+      { token: getToken(),
+        item_id: this.props.currentItem.id,
+        liked: "true" }
+    )
   }
 
-  handleLike() {
-    this.props.removeCurrentItem()
-    this.props.updateCurrentItem()
+  handleNope() {
+    this.props.postBrowsingDecisionAction(
+      { token: getToken(),
+        item_id: this.props.currentItem.id,
+        liked: "false" }
+    )
   }
 
   render() {
@@ -57,8 +65,8 @@ export class BrowsingContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    items: state.itemsToBrowse.items,
-    currentItem: state.itemsToBrowse.currentItem,
+    items: state.browsing.items,
+    currentItem: state.browsing.currentItem,
     fetching: state.apiRequest.fetching,
     errors: state.apiRequest.errors
   }
@@ -66,9 +74,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchItems: () => dispatch(fetchItems()),
+    fetchItems: (params) => dispatch(fetchItems(params)),
     removeCurrentItem: () => dispatch(removeCurrentItem()),
-    updateCurrentItem: () => dispatch(updateCurrentItem())
+    updateCurrentItem: () => dispatch(updateCurrentItem()),
+    postBrowsingDecisionAction: (params) => dispatch(postBrowsingDecisionAction(params))
   }
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Loader from '../apiRequests/Loader'
+import Loader from '../../components/Loader'
 import { withRouter } from 'react-router-dom'
 
 class RedirectComponent extends Component {

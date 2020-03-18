@@ -1,4 +1,4 @@
-import * as config from './apiRequestsConfig/apiRequestsConfig'
+import * as config from '../apiRequests/apiRequestsConfig/apiRequestsConfig'
 
 export async function postSignUp(credentials) {
   const url = config.baseURL + "/sign_up"

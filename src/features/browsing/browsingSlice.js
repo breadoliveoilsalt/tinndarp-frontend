@@ -1,4 +1,4 @@
-import * as requests from '../apiRequests/itemsAPIRequests'
+import * as requests from './browsingAPIRequests'
 import * as apiActions from '../apiRequests/apiRequestsSlice'
 
 const LOAD_ITEMS = 'LOAD_ITEMS'
@@ -11,7 +11,7 @@ const initialState = {
   currentItem: null,
 }
 
-function itemsToBrowseReducer(state = initialState, action) {
+function browsingReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_ITEMS:
       return Object.assign({}, state, {items: action.payload})
@@ -31,7 +31,7 @@ function itemsToBrowseReducer(state = initialState, action) {
   }
 }
 
-export default itemsToBrowseReducer
+export default browsingReducer
 
 export function loadItems(data) {
   return {
@@ -52,20 +52,42 @@ export function removeCurrentItem() {
   }
 }
 
-export function resetItemsToBrowseState() {
+export function resetbrowsingState() {
   return {
     type: RESET_ITEMS_TO_BROWSE_STATE
   }
 }
 
-export function fetchItems() {
+export function fetchItems(params) {
   return function(dispatch) {
     dispatch(apiActions.updateFetchingStatus(true))
-    return requests.getItems()
+    return requests.getItemsToBrowse(params)
       .then(data => {
         dispatch(loadItems(data))
       })
       .then(() => dispatch(updateCurrentItem()))
       .then(() => dispatch(apiActions.updateFetchingStatus(false)))
+      .catch( error => {
+        console.log(error)
+        dispatch(apiActions.loadErrors(error))
+      })
+  }
+}
+
+export function postBrowsingDecisionAction(params) {
+  return function(dispatch) {
+    return requests.postBrowsingDecision(params)
+      .then( data => {
+        if (data.errors) {
+          dispatch(apiActions.loadErrors(data.errors))
+        } else {
+          dispatch(removeCurrentItem())
+          dispatch(updateCurrentItem())
+        }
+      })    
+      .catch( error => {
+        console.log(error)
+        dispatch(apiActions.loadErrors(error))
+      })
   }
 }

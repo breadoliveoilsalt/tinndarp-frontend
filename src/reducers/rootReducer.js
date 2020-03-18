@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
 import apiRequestsReducer from '../features/apiRequests/apiRequestsSlice'
-import itemsToBrowseReducer from '../features/browsing/itemsToBrowseSlice'
+import browsingReducer from '../features/browsing/browsingSlice'
 import userAccountReducer from '../features/userAccount/userAccountSlice'
 
 export default combineReducers({
   apiRequest: apiRequestsReducer,
-  itemsToBrowse: itemsToBrowseReducer,
+  browsing: browsingReducer,
   userAccount: userAccountReducer
 })
