@@ -186,29 +186,20 @@ describe("browsing store slice", () => {
             .then(() => {
               expect(store.getActions()).toContainEqual(actions.removeCurrentItem())
             })
+        })
 
+        it("updates the current item in the state if postBrowsingDecision returns no errors", () => {
+          const mockReturnData = {}
+          requests.postBrowsingDecision.mockResolvedValue(mockReturnData)
+
+          return dispatch(actions.postBrowsingDecisionAction(params))
+            .then(() => {
+              expect(store.getActions()).toContainEqual(actions.updateCurrentItem())
+            })
         })
 
       })
       
     })
-              // const mockReturnedData = {
-              //   errors: ["Invalid log in credentials."]
-              // }
-              // requests.postLogIn.mockReturnValueOnce(Promise.resolve(mockReturnedData))
-
-              // const mockStore = configureMockStore([thunk])
-              // store = mockStore({
-              //   apiRequest: {
-              //     fetching: false
-              //   }
-              // })
-              // dispatch = store.dispatch
-
-              // return dispatch(actions.logInAction()).then(() => {
-              //   expect(store.getActions()[0]).toEqual(apiActions.updateFetchingStatus(true))
-              //   const lastAction = store.getActions()[store.getActions().length - 1]
-              //   expect(lastAction).toEqual(apiActions.updateFetchingStatus(false))
-              // })
   })
 })
