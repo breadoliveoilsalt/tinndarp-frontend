@@ -1,5 +1,6 @@
 import configureStore from '../../configureStore'
 import * as actions from './browsingSlice'
+import * as apiActions from '../apiRequests/apiRequestsSlice'
 import * as requests from  './browsingAPIRequests'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
@@ -8,7 +9,6 @@ describe("browsing store slice", () => {
 
   let store
   let dispatch
-  // consider own mock dispatch
 
   beforeEach(() => {
     store = configureStore()
@@ -169,8 +169,13 @@ describe("browsing store slice", () => {
         })
 
         it("loads errors if postBrowsingDecision returns an errors field", () => {
-          const mockReturnData = {data: {saved: "true"}}
+          const mockReturnData = {errors: "Something went wrong"}
           requests.postBrowsingDecision.mockResolvedValue(mockReturnData)
+
+          return dispatch(actions.postBrowsingDecisionAction(params))
+            .then(() => {
+              expect(store.getActions()).toContainEqual(apiActions.loadErrors(mockReturnData.errors))
+            })
         })
 
       })
