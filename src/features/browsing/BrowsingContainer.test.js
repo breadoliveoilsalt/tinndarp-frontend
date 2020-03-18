@@ -193,7 +193,7 @@ describe("<BrowsingContainer />", () => {
       const expectedResult = {
         token: "xyz",
         item_id: props.currentItem.id,
-        liked: true
+        liked: "true"
       }  
       expect(props.postBrowsingDecisionAction.mock.calls[0][0]).toEqual(expectedResult)
     })
@@ -234,7 +234,7 @@ describe("<BrowsingContainer />", () => {
       const expectedResult = {
         token: "xyz",
         item_id: props.currentItem.id,
-        liked: false
+        liked: "false"
       }  
       expect(props.postBrowsingDecisionAction.mock.calls[0][0]).toEqual(expectedResult)
     })

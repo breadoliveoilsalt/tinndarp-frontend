@@ -27,7 +27,7 @@ export class BrowsingContainer extends Component {
     this.props.postBrowsingDecisionAction(
       { token: getToken(),
         item_id: this.props.currentItem.id,
-        liked: true }
+        liked: "true" }
     )
   }
 
@@ -35,7 +35,7 @@ export class BrowsingContainer extends Component {
     this.props.postBrowsingDecisionAction(
       { token: getToken(),
         item_id: this.props.currentItem.id,
-        liked: false }
+        liked: "false" }
     )
   }
 
