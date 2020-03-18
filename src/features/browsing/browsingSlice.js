@@ -67,6 +67,10 @@ export function fetchItems(params) {
       })
       .then(() => dispatch(updateCurrentItem()))
       .then(() => dispatch(apiActions.updateFetchingStatus(false)))
+      .catch( error => {
+        console.log(error)
+        dispatch(apiActions.loadErrors(error))
+      })
   }
 }
 
@@ -82,6 +86,7 @@ export function postBrowsingDecisionAction(params) {
         }
       })    
       .catch( error => {
+        console.log(error)
         dispatch(apiActions.loadErrors(error))
       })
   }

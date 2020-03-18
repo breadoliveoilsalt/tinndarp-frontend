@@ -74,7 +74,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchItems: () => dispatch(fetchItems()),
+    fetchItems: (params) => dispatch(fetchItems(params)),
     removeCurrentItem: () => dispatch(removeCurrentItem()),
     updateCurrentItem: () => dispatch(updateCurrentItem()),
     postBrowsingDecisionAction: (params) => dispatch(postBrowsingDecisionAction(params))

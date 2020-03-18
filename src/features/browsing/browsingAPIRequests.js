@@ -8,10 +8,15 @@ export async function getItemsToBrowse(params) {
 }
 
 export function processItemDataFromBackendAPI(rawData) {
-  const rawItemListData = rawData.data
-  let processedData = []
-  rawItemListData.forEach(rawItemData => cherrypickItemData(rawItemData, processedData))
-  return processedData
+  const parsedData = rawData.data
+  if (parsedData.errors) {
+    throw new Error(parsedData.errors)
+  } else {
+    const rawItemListData = rawData.data.items
+    let processedData = []
+    rawItemListData.forEach(rawItemData => cherrypickItemData(rawItemData, processedData))
+    return processedData
+  }
 }
 
 function cherrypickItemData(rawItemData, processedData) {
