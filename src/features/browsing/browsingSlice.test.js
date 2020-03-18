@@ -178,6 +178,17 @@ describe("browsing store slice", () => {
             })
         })
 
+        it("removes the current item in the state if postBrowsingDecision returns no errors", () => {
+          const mockReturnData = {}
+          requests.postBrowsingDecision.mockResolvedValue(mockReturnData)
+
+          return dispatch(actions.postBrowsingDecisionAction(params))
+            .then(() => {
+              expect(store.getActions()).toContainEqual(actions.removeCurrentItem())
+            })
+
+        })
+
       })
       
     })
