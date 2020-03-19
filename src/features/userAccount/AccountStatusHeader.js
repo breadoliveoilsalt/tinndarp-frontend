@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
-import { signOutAction, tokenPresent, deleteToken, updateLoggedInStatus } from './userAccountSlice'
+import { signOutAction, tokenPresent } from './userAccountSlice'
 import './UserAccount.css'
 
 export class AccountStatusHeader extends Component {
@@ -13,9 +13,6 @@ export class AccountStatusHeader extends Component {
 
   signOut() {
     this.props.signOutAction()
-    //TEST - that is, fix all comments here -- including above
-    // deleteToken()
-    // this.props.updateLoggedInStatus(false)
     this.props.history.push("/")
   }
 
@@ -47,7 +44,6 @@ export class AccountStatusHeader extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // updateLoggedInStatus: (bool) => dispatch(updateLoggedInStatus(bool))
     signOutAction: () => dispatch(signOutAction())
   }
 }

@@ -5,7 +5,6 @@ import { Provider } from 'react-redux'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import {  BrowserRouter } from 'react-router-dom'
-import * as userAccountActions from './userAccountSlice'
 import AccountStatusHeaderConnectedToStore, { AccountStatusHeader } from './AccountStatusHeader'
 
 Enzyme.configure({ adapter: new Adapter() })
