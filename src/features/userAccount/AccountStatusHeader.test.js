@@ -1,13 +1,14 @@
 import React from 'react'
 import Enzyme, { shallow, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-Enzyme.configure({ adapter: new Adapter() })
 import { Provider } from 'react-redux'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-import { Link, BrowserRouter, MemoryRouter } from 'react-router-dom'
+import {  BrowserRouter } from 'react-router-dom'
 import * as userAccountActions from './userAccountSlice'
 import AccountStatusHeaderConnectedToStore, { AccountStatusHeader } from './AccountStatusHeader'
+
+Enzyme.configure({ adapter: new Adapter() })
 
 describe("<AccountStatusHeader />", () => {
   const TINNDARP_TOKEN_KEY = 'tinndarp_token'
@@ -66,40 +67,34 @@ describe("<AccountStatusHeader />", () => {
 
   describe("signOut()", () => {
 
-    it("calls deleteToken()", () => {
-      userAccountActions.deleteToken = jest.fn()
-      const props = {
+    let props
+    beforeEach(() => {
+      props = {
         history: {push: jest.fn()},
-        updateLoggedInStatus: jest.fn()
+        signOutAction: jest.fn()
       }
-
-      const wrapper = shallow(<AccountStatusHeader {...props} />)
-
-      wrapper.instance().signOut()
-
-      expect(userAccountActions.deleteToken.mock.calls.length).toEqual(1)
     })
 
-    it("updates the state's loggedIn status as false", () => {
-      userAccountActions.deleteToken = jest.fn()
+    afterEach(() => {
+      props.history.push.mockRestore()
+      props.signOutAction.mockRestore()
+    })
+    
+    it("calls signOutAction()", () => {
+
       const props = {
         history: {push: jest.fn()},
-        updateLoggedInStatus: jest.fn()
+        signOutAction: jest.fn()
       }
 
       const wrapper = shallow(<AccountStatusHeader {...props} />)
 
       wrapper.instance().signOut()
 
-      expect(wrapper.instance().props.updateLoggedInStatus.mock.calls.length).toEqual(1)
+      expect(props.signOutAction.mock.calls.length).toEqual(1)
     })
 
     it("redirects to the home page", () => {
-      userAccountActions.deleteToken = jest.fn()
-      const props = {
-        history: {push: jest.fn()},
-        updateLoggedInStatus: jest.fn()
-      }
       const wrapper = shallow(<AccountStatusHeader {...props} />)
 
       wrapper.instance().signOut()

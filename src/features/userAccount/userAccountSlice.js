@@ -1,5 +1,6 @@
 import { postSignUp, postLogIn, getAuthenticateUserToken } from './userAccountAPIRequests'
 import * as apiActions from '../apiRequests/apiRequestsSlice'
+import * as browsingActions from '../browsing/browsingSlice'
 
 const RESET_USER_ACCOUNT_STATE = 'RESET_USER_ACCOUNT_STATE'
 const UPDATE_LOGGED_IN_STATUS = 'UPDATE_LOGGED_IN_STATUS'
@@ -23,7 +24,6 @@ function userAccountReducer(state = initialState, action) {
 export default userAccountReducer
 
 export function resetUserAccountState() {
-  deleteToken()
   return {
     type: RESET_USER_ACCOUNT_STATE
   }
@@ -113,5 +113,14 @@ export function authenticateUserTokenAction() {
     .then( () => {
       dispatch(apiActions.updateFetchingStatus(false))
     })
+  }
+}
+
+export function signOutAction() {
+  return function(dispatch) {
+    deleteToken()
+    dispatch(resetUserAccountState())
+    dispatch(browsingActions.resetbrowsingState())
+    dispatch(apiActions.resetAPIRequestState())
   }
 }
