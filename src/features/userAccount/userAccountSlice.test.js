@@ -1,5 +1,5 @@
 import configureStore from '../../configureStore'
-import accountReducer, * as actions from './userAccountSlice'
+import * as actions from './userAccountSlice'
 import * as requests from  './userAccountAPIRequests'
 import * as apiActions from '../apiRequests/apiRequestsSlice'
 import configureMockStore from 'redux-mock-store'
@@ -24,7 +24,8 @@ describe("userAccount state", () => {
 
   it("has an initial state with fields for logged_in and token", () => {
     const expectedUserAccountInitialState = {
-      loggedIn: false
+      loggedIn: false,
+      userEmail: null
     }
     expect(store.getState().userAccount).toEqual(expectedUserAccountInitialState)
   })
