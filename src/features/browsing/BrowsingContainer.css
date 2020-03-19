@@ -4,7 +4,8 @@ div.browsing-instructions {
 }
 
 img.browsing-item-image {
-  width: 80%;
+  width: 18em;
+  height: 18em;
   border: 0.1em solid black;
 }
 
