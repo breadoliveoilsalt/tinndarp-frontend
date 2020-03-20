@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class CompareContainer extends Component {
+class ComparingContainer extends Component {
 
   render() {
     return (
@@ -13,4 +13,4 @@ class CompareContainer extends Component {
 
 }
 
-export default CompareContainer
+export default ComparingContainer
