@@ -1,6 +1,6 @@
 import React from 'react'
-import Logo from './Logo'
 import AccountStatusHeader from '../features/userAccount/AccountStatusHeader'
+import HeaderLogoLink from './HeaderLogoLink'
 import NavBar from './NavBar'
 import Divider from './Divider'
 
@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <div className="header">
       <AccountStatusHeader />
-      <Logo className="logo-header" />
+      <HeaderLogoLink /> 
       <Divider className="divider"/>
       <NavBar />
       <Divider className="divider"/>

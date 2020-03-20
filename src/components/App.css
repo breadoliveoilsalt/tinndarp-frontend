@@ -48,6 +48,10 @@ img.logo-header {
   width: 50%;
 }
 
+.header-logo-link {
+  text-decoration: none;
+}
+
 div.divider {
   border: 0.1em solid grey;
   background-color: grey;
