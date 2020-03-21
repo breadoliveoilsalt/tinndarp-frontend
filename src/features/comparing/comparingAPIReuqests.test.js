@@ -65,11 +65,12 @@ describe("getItemsInCommonWith()", () => {
   })
 
   it("process the raw data to return an object with userEmail, successfulComparisonTo, and commonItems", () => {
-    const result = getItemsInCommonWith(params)
-
-    expect(result.userEmail).toEqual("billy@billy.com")
-    expect(result.successfulComparisonTo).toEqual("tommy@tommy.com")
-    expect(result.comparedTo).toEqual([item1, item2])
+    return getItemsInCommonWith(params)
+      .then(result => {
+        expect(result.userEmail).toEqual("billy@billy.com")
+        expect(result.successfulComparisonTo).toEqual("tommy@tommy.com")
+        expect(result.commonItems).toEqual([item1, item2])
+      })
   })
 
 })
