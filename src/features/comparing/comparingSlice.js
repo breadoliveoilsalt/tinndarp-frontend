@@ -24,3 +24,10 @@ function comparingReducer(state = initialState, action) {
 }
 
 export default comparingReducer
+
+export function loadCommonItems(commonItems) {
+  return {
+    type: LOAD_COMMON_ITEMS, 
+    payload: commonItems
+  }
+}

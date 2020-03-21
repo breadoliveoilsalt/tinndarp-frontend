@@ -31,7 +31,7 @@ describe("userAccount state", () => {
 
         dispatch(actions.loadCommonItems(commonItems))
 
-        expect(store.getState.comparing.commonItems).toEqual(commonItems)
+        expect(store.getState().comparing.commonItems).toEqual(commonItems)
       })
 
     })
