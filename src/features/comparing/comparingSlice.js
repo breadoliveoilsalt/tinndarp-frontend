@@ -39,3 +39,9 @@ export function loadComparedToUser(emailAddress) {
   }
 }
 
+export function resetComparingState() {
+  return {
+    type: RESET_COMPARING_STATE
+  }
+}
+
