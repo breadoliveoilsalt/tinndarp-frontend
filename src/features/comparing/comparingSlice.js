@@ -31,3 +31,10 @@ export function loadCommonItems(commonItems) {
     payload: commonItems
   }
 }
+
+export function loadComparedToUser(emailAddress) {
+  return {
+    type: LOAD_COMPARED_TO_USER,
+    payload: emailAddress
+  }
+}
