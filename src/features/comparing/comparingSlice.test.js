@@ -48,5 +48,24 @@ describe("userAccount state", () => {
       })
 
     })
+
+    describe("resetComparingState()", () => {
+
+      it("resets the comparing state fields to null", () => {
+        const commonItems = ["item 1", "item 2"]
+        const comparedToUserEmail = "timmy@timmy.com"
+        dispatch(actions.loadCommonItems(commonItems))
+        dispatch(actions.loadComparedToUser(comparedToUserEmail))
+        expect(store.getState().comparing.commonItems).toEqual(commonItems)
+        expect(store.getState().comparing.comparedTo).toEqual(comparedToUserEmail)
+
+        dispatch(actions.resetComparingState())
+
+        expect(store.getState().comparing.commonItems).toEqual(null)
+        expect(store.getState().comparing.comparedTo).toEqual(null)
+      })
+
+    })
+    
   })
 })

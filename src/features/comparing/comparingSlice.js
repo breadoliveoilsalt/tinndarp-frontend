@@ -38,3 +38,4 @@ export function loadComparedToUser(emailAddress) {
     payload: emailAddress
   }
 }
+
