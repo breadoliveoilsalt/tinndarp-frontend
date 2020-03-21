@@ -6,7 +6,7 @@ import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 
 describe("userAccount state", () => {
-
+  
   let store
   let dispatch
   const token_key = "tinndarp_token"
