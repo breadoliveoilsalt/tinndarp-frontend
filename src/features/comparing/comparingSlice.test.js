@@ -25,13 +25,26 @@ describe("userAccount state", () => {
 
     describe("loadCommonItems()", () => {
 
-      it("populates the state's commonItems with it's argument", () => {
+      it("populates the state's commonItems with its argument", () => {
         const commonItems = ["item 1", "item 2"]
         expect(store.getState().comparing.commonItems).toEqual(null)
 
         dispatch(actions.loadCommonItems(commonItems))
 
         expect(store.getState().comparing.commonItems).toEqual(commonItems)
+      })
+
+    })
+
+    describe("loadComparedToUser()", () => {
+
+      it("populates the state's comparedTo field with its argument", () => {
+        const comparedToUserEmail = "timmy@timmy.com"
+        expect(store.getState().comparing.comparedTo).toEqual(null)
+
+        dispatch(actions.loadComparedToUser(comparedToUserEmail))
+
+        expect(store.getState().comparing.comparedTo).toEqual(comparedToUserEmail)
       })
 
     })
