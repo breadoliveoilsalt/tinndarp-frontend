@@ -64,4 +64,12 @@ describe("getItemsInCommonWith()", () => {
     expect(config.fetchWrapper.getWithParams.mock.calls[0][1]).toEqual(expectedParams)
   })
 
+  it("process the raw data to return an object with userEmail, successfulComparisonTo, and commonItems", () => {
+    const result = getItemsInCommonWith(params)
+
+    expect(result.userEmail).toEqual("billy@billy.com")
+    expect(result.successfulComparisonTo).toEqual("tommy@tommy.com")
+    expect(result.comparedTo).toEqual([item1, item2])
+  })
+
 })
