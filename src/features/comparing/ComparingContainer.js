@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getItemsInCommonWithAction } from './comparingSlice'
+import Loader from '../../components/Loader'
+// import ErrorsDisplay from 'components/ErrorsDisplay'
 
 class ComparingContainer extends Component {
 
@@ -9,14 +11,25 @@ class ComparingContainer extends Component {
   }
 
   render() {
-    return (
-      <div>
-        You made it to the CompareContainer!
-      </div>
-    )
+    // if (this.props.fetching) {
+    //   return <Loader /> 
+    // } else {
+      return (
+        <div>
+          You made it to the CompareContainer!
+        </div>
+      )
+    // }
   }
 
 
+}
+
+const mapStateToProps = (state) => {
+  return {
+    fetching: state.apiRequest.fetching,
+    errors: state.apiRequest.errors,
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -25,4 +38,4 @@ const mapDispatchToProps = (dispatch) => {
   } 
 }
 
-export default connect(null, mapDispatchToProps)(ComparingContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(ComparingContainer)

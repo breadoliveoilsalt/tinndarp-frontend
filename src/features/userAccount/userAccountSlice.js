@@ -127,6 +127,9 @@ export function authenticateUserTokenAction() {
     .then( () => {
       dispatch(apiActions.updateFetchingStatus(false))
     })
+    .catch( () => {
+      dispatch(apiActions.updateFetchingStatus(false))
+    })
   }
 }
 

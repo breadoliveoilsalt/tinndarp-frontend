@@ -63,7 +63,9 @@ export function getItemsInCommonWithAction(params) {
         dispatch(apiActions.updateFetchingStatus(false))
       })
       .catch( (errors) => {
+        debugger
         dispatch(apiActions.loadErrors(errors))
+        dispatch(apiActions.updateFetchingStatus(false))
       })
   }
 

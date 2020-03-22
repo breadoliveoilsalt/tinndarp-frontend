@@ -14,6 +14,9 @@ export default function configureStore(preloadedState) {
   const middlewareEnhancer = applyMiddleware(...middlewares)
   // const enhancers = [middlewareEnhancer, monitorReducersEnhancer]
   const enhancers = [middlewareEnhancer]
+  // did not work
+  // const composedEnhancers = composeWithDevTools({trace: true}, ...enhancers)
+  // const composedEnhancers = composeWithDevTools(...enhancers, {trace: true, tracelimit:25})
   const composedEnhancers = composeWithDevTools(...enhancers)
   const store = createStore(rootReducer, preloadedState, composedEnhancers)
   return store
