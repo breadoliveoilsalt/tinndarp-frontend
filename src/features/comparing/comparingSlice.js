@@ -1,5 +1,7 @@
+//TEST
 // import * as requests from './browsingAPIRequests'
-// import * as apiActions from '../apiRequests/apiRequestsSlice'
+import * as apiActions from '../apiRequests/apiRequestsSlice'
+import { getItemsInCommonWith } from './comparingAPIRequests'
 
 const LOAD_COMMON_ITEMS = 'LOAD_COMMON_ITEMS'
 const LOAD_COMPARED_TO_USER = 'LOAD_COMPARED_TO_USER'
@@ -43,5 +45,29 @@ export function resetComparingState() {
   return {
     type: RESET_COMPARING_STATE
   }
+}
+
+export function getItemsInCommonWithAction(params) {
+  return function(dispatch) {
+    dispatch(apiActions.updateFetchingStatus(true))
+    return getItemsInCommonWith(params)
+      .then(data => {
+        if (data.errors) {
+          console.log(data.errors)
+          dispatch(apiActions.loadErrors(data.errors))
+        } else {
+          dispatch(loadComparedToUser(data.successfulComparisonTo))
+          dispatch(loadCommonItems(data.commonItems))
+        }
+      })
+      .then( () => {
+        dispatch(apiActions.updateFetchingStatus(false))
+      })
+      .catch( (errors) => {
+        debugger
+        dispatch(apiActions.loadErrors(errors))
+      })
+  }
+
 }
 

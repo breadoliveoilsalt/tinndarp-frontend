@@ -6,13 +6,19 @@ export async function getItemsInCommonWith(params) {
     comparing: params
   }
   const rawData = await config.fetchWrapper.getWithParams(url, strongParams)
+  debugger
   return process(rawData)
 }
 
+//TEST - that errors are returned
 function process(rawData) {
-  return {
-    userEmail: rawData.data.user_email,
-    successfulComparisonTo: rawData.data.successful_comparison_to,
-    commonItems: rawData.data.common_items
+  if (rawData.data.errors !== undefined) {
+    return { errors: rawData.data.errors }
+  } else {
+    return {
+      userEmail: rawData.data.user_email,
+      successfulComparisonTo: rawData.data.successful_comparison_to,
+      commonItems: rawData.data.common_items
+    }
   }
 }

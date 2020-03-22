@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { getItemsInCommonWithAction } from './comparingSlice'
 
 class ComparingContainer extends Component {
 
+  componentDidMount() {
+    this.props.getItemsInCommonWithAction()
+  }
 
   render() {
     return (
@@ -14,4 +19,10 @@ class ComparingContainer extends Component {
 
 }
 
-export default ComparingContainer
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getItemsInCommonWithAction: (params) => dispatch(getItemsInCommonWithAction(params))
+  } 
+}
+
+export default connect(null, mapDispatchToProps)(ComparingContainer)
