@@ -22,8 +22,8 @@ export class AccountStatusHeader extends Component {
     if (tokenPresent()) {
       content = (
         <div className="sign-out-link-header">
-          Hi,<br/> 
-          {this.props.userEmail}<br/> 
+          Hi<br/> 
+          {this.props.userEmail ? this.props.userEmail : "there!"}<br/> 
           <button id="sign-out-button-header" onClick={this.signOut}>Sign Out Here</button>
         </div>
       )
