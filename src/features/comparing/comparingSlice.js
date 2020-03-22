@@ -53,7 +53,6 @@ export function getItemsInCommonWithAction(params) {
     return getItemsInCommonWith(params)
       .then(data => {
         if (data.errors) {
-          console.log(data.errors)
           dispatch(apiActions.loadErrors(data.errors))
         } else {
           dispatch(loadComparedToUser(data.successfulComparisonTo))
@@ -64,7 +63,6 @@ export function getItemsInCommonWithAction(params) {
         dispatch(apiActions.updateFetchingStatus(false))
       })
       .catch( (errors) => {
-        debugger
         dispatch(apiActions.loadErrors(errors))
       })
   }

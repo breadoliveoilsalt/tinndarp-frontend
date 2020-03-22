@@ -24,7 +24,7 @@ describe("getItemsInCommonWith()", () => {
     more_info_url: "https://www.ikea.com/us/en/p/malm-bed-frame-high-black-brown-luroey-s69009475/"
   }
 
-  const mockData = {
+  let mockData = {
     data: {
       user_email: "billy@billy.com",
       successful_comparison_to: "tommy@tommy.com",
@@ -64,13 +64,36 @@ describe("getItemsInCommonWith()", () => {
     expect(config.fetchWrapper.getWithParams.mock.calls[0][1]).toEqual(expectedParams)
   })
 
-  it("process the raw data to return an object with userEmail, successfulComparisonTo, and commonItems", () => {
-    return getItemsInCommonWith(params)
-      .then(result => {
-        expect(result.userEmail).toEqual("billy@billy.com")
-        expect(result.successfulComparisonTo).toEqual("tommy@tommy.com")
-        expect(result.commonItems).toEqual([item1, item2])
-      })
+  describe("the rawData does not have an errors key", () => {
+
+    it("process the raw data to return an object with userEmail, successfulComparisonTo, and commonItems", () => {
+      return getItemsInCommonWith(params)
+        .then(result => {
+          expect(result.userEmail).toEqual("billy@billy.com")
+          expect(result.successfulComparisonTo).toEqual("tommy@tommy.com")
+          expect(result.commonItems).toEqual([item1, item2])
+        })
+    })
+
   })
 
+  describe("the rawData has an errors key", () => {
+
+    it("process the raw data to return an object with an errors key", () => {
+      mockData = {
+        data: {
+          errors: ["Something went wrong!"]
+        }
+      }
+
+      config.fetchWrapper.getWithParams = jest.fn()
+      config.fetchWrapper.getWithParams.mockReturnValueOnce(Promise.resolve(mockData))
+
+      return getItemsInCommonWith(params)
+        .then(result => {
+          expect(result.errors).toEqual(mockData.data.errors)
+        })
+    })
+
+  })
 })

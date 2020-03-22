@@ -6,11 +6,9 @@ export async function getItemsInCommonWith(params) {
     comparing: params
   }
   const rawData = await config.fetchWrapper.getWithParams(url, strongParams)
-  debugger
   return process(rawData)
 }
 
-//TEST - that errors are returned
 function process(rawData) {
   if (rawData.data.errors !== undefined) {
     return { errors: rawData.data.errors }
