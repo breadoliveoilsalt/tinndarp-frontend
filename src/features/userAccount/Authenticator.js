@@ -14,13 +14,6 @@ class Authenticator extends Component {
   }
 
   render() {
-    // if (this.props.fetching) {
-    //   return (<Loader />)
-    // } else if (this.props.loggedIn && tokenPresent()) {
-    //   return (this.props.children)
-    // } else {
-    //   return (<LogInSignUpLinks />)
-    // }
     if (this.props.loggedIn && tokenPresent()) {
       return (this.props.children)
     } else {
@@ -32,7 +25,6 @@ class Authenticator extends Component {
 
 const mapStateToProps = state => {
   return {
-    fetching: state.apiRequest.fetching,
     loggedIn: state.userAccount.loggedIn
   }
 

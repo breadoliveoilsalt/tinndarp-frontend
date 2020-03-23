@@ -1,5 +1,3 @@
-//TEST
-// import * as requests from './browsingAPIRequests'
 import * as apiActions from '../apiRequests/apiRequestsSlice'
 import { getItemsInCommonWith } from './comparingAPIRequests'
 

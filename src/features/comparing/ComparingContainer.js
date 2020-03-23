@@ -10,7 +10,7 @@ class ComparingContainer extends Component {
   componentDidMount() {
     const params = {
       token: getToken(),
-      compare_to: "alice@alice.com"
+      compare_to: "pipes@pipes.com"
     }
     this.props.getItemsInCommonWithAction(params)
   }
@@ -29,7 +29,6 @@ class ComparingContainer extends Component {
         <div>
           You made it to the CompareContainer!<br/>
           Compared To: {this.props.comparedTo}<br/>
-          {/* Common Items: {JSON.stringify(this.props.commonItems)} */}
           Common Items: <br/>
           {commonItemsList}
         </div>
