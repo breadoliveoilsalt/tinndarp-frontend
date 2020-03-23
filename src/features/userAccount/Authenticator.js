@@ -14,7 +14,6 @@ class Authenticator extends Component {
   }
 
   render() {
-
     if (this.props.fetching) {
       return (<Loader />)
     } else if (this.props.loggedIn && tokenPresent()) {
