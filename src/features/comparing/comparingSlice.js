@@ -55,6 +55,7 @@ export function getItemsInCommonWithAction(params) {
         if (data.errors) {
           dispatch(apiActions.loadErrors(data.errors))
         } else {
+          debugger
           dispatch(loadComparedToUser(data.successfulComparisonTo))
           dispatch(loadCommonItems(data.commonItems))
         }
