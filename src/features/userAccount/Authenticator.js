@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom'
 import Loader from '../../components/Loader'
 import LogInSignUpLinks from './LogInSignUpLinks'
 import { authenticateUserTokenAction, tokenPresent } from './userAccountSlice'
+import ErrorsDisplay from 'components/ErrorsDisplay'
 
 class Authenticator extends Component {
 
@@ -14,12 +15,17 @@ class Authenticator extends Component {
   }
 
   render() {
-    if (this.props.fetching) {
-      return (<Loader />)
-    } else if (this.props.loggedIn && tokenPresent()) {
+    // if (this.props.fetching) {
+    //   return (<Loader />)
+    // } else if (this.props.loggedIn && tokenPresent()) {
+    //   return (this.props.children)
+    // } else {
+    //   return (<LogInSignUpLinks />)
+    // }
+    if (this.props.loggedIn && tokenPresent()) {
       return (this.props.children)
     } else {
-      return (<LogInSignUpLinks />)
+      return ( <LogInSignUpLinks />)
     }
   }
 }

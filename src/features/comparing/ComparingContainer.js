@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getItemsInCommonWithAction } from './comparingSlice'
 import Loader from '../../components/Loader'
-// import ErrorsDisplay from 'components/ErrorsDisplay'
+import ErrorsDisplay from 'components/ErrorsDisplay'
 
 class ComparingContainer extends Component {
 
@@ -11,17 +11,19 @@ class ComparingContainer extends Component {
   }
 
   render() {
-    // if (this.props.fetching) {
-    //   return <Loader /> 
-    // } else {
+    if (this.props.errors) {
+      return null
+    }
+    else if (this.props.fetching) {
+      return <Loader /> 
+    } else {
       return (
         <div>
           You made it to the CompareContainer!
         </div>
       )
-    // }
+    }
   }
-
 
 }
 
