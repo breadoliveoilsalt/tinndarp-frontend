@@ -38,16 +38,16 @@ export class LogInContainer extends Component {
     } else if (tokenPresent()) {
       content = (
         <RedirectComponent
-          text="You're logged in and being redirected to the browsing page!"
+          text="You're logged in. Redirecting to the browsing page!"
           redirectTo="/browse"
-          millisecondsToRedirect="2500"
+          millisecondsToRedirect="1500"
         />
       )
     } else {
        content = (
           <div>
             <div className="large-text">Log In</ div>
-            {this.props.errors ? <ErrorsDisplay /> : null}
+            {this.props.errors ? <ErrorsDisplay errors={this.props.errors} /> : null}
             <AccountForm action={this.handleLogIn} />
           </div>
         )

@@ -48,7 +48,7 @@ export class SignUpContainer extends Component {
        content = (
           <div>
             <div className="large-text">Sign Up for an Account! </ div>
-            {this.props.errors ? <ErrorsDisplay /> : null}
+            {this.props.errors ? <ErrorsDisplay errors={this.props.errors} /> : null}
             <AccountForm action={this.handleCreateAccount} />
           </div>
         )

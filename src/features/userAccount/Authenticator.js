@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import LogInSignUpLinks from './LogInSignUpLinks'
 import { authenticateUserTokenAction, tokenPresent } from './userAccountSlice'
-import { loadErrors } from '../apiRequests/apiRequestsSlice'
+import { deleteErrors, loadErrors } from '../apiRequests/apiRequestsSlice'
+import ErrorsDisplay from '../../components/ErrorsDisplay'
+import LogInSignUpLinks from './LogInSignUpLinks'
 
 class Authenticator extends Component {
 
@@ -17,8 +18,14 @@ class Authenticator extends Component {
     if (this.props.loggedIn && tokenPresent()) {
       return (this.props.children)
     } else {
-      loadErrors(["Not authorized to access", "Please sign in to get token"])
-      return ( <LogInSignUpLinks />)
+      return (
+        <div>
+          <ErrorsDisplay 
+            errors= {["Not authorized to access", "Please sign in to get or renew token"]}
+          />
+          <LogInSignUpLinks />
+        </div>
+      )
     }
   }
 }
@@ -33,7 +40,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     authenticateUserTokenAction: () => dispatch(authenticateUserTokenAction()),
-    loadErrors: (errorsList) => dispatch(loadErrors(errorsList))
+    loadErrors: (errorsList) => dispatch(loadErrors(errorsList)),
+    deleteErrors: () => dispatch(deleteErrors())
   }
 }
 

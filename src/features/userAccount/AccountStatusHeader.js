@@ -19,7 +19,7 @@ export class AccountStatusHeader extends Component {
   render() {
     let content
 
-    if (tokenPresent() && this.props.loggedIn()) {
+    if (tokenPresent()) {
       content = (
         <div className="sign-out-link-header">
           Hi<br/> 

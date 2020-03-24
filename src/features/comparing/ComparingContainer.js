@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { getItemsInCommonWithAction } from './comparingSlice'
 import { getToken } from '../userAccount/userAccountSlice'
 import Loader from '../../components/Loader'
-import ErrorsDisplay from 'components/ErrorsDisplay'
 
 class ComparingContainer extends Component {
 
