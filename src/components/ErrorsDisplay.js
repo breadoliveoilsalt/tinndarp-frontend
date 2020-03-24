@@ -9,7 +9,7 @@ class ErrorsDisplay extends Component {
     })
 
    return (
-     <div>
+     <div className="errors-container">
        <div>Sorry, the following errors occured:</div>
        {errorsDivs}
      </div>
