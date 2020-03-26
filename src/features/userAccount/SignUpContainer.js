@@ -39,9 +39,9 @@ export class SignUpContainer extends Component {
     } else if (tokenPresent()) {
       content = (
         <RedirectComponent
-          text="You're logged in and being redirected to the browsing page!"
+          text ="You're logged in. Redirecting to the browsing page!"
           redirectTo="/browse"
-          millisecondsToRedirect="2500"
+          millisecondsToRedirect="1500"
         />
       )
     } else {

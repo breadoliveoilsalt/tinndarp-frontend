@@ -5,7 +5,6 @@ import { getToken } from '../userAccount/userAccountSlice'
 import Loader from '../../components/Loader'
 import ErrorsDisplay from '../../components/ErrorsDisplay'
 
-
 class ComparingContainer extends Component {
 
   componentDidMount() {
