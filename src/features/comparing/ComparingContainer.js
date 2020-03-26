@@ -8,12 +8,22 @@ import './ComparingContainer.css'
 
 class ComparingContainer extends Component {
 
+  constructor(props) {
+    super(props)
+    this.handleComparison = this.handleComparison.bind(this)
+  }
+
   componentDidMount() {
     const params = {
       token: getToken(),
       compare_to: "timmy@timmy.com"
     }
     this.props.getItemsInCommonWithAction(params)
+  }
+
+  handleComparison(event) {
+    event.preventDefault()
+    console.log("comparing!")
   }
 
   render() {
@@ -24,6 +34,7 @@ class ComparingContainer extends Component {
         errors={this.props.errors}
         commonItems={this.props.commonItems}
         comparedTo={this.props.comparedTo}
+        handleComparison={this.handleComparison}
       />
     }
   }
