@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import { getItemsInCommonWithAction } from './comparingSlice'
 import { getToken } from '../userAccount/userAccountSlice'
 import Loader from '../../components/Loader'
-import ErrorsDisplay from '../../components/ErrorsDisplay'
+import ComparingTool from './ComparingTool'
+import './ComparingContainer.css'
 
 class ComparingContainer extends Component {
 
@@ -17,27 +18,13 @@ class ComparingContainer extends Component {
 
   render() {
     if (this.props.fetching) {
-      return (<Loader />) 
+      return <Loader /> 
     } else {
-      const errorsDisplay = this.props.errors ? <ErrorsDisplay errors={this.props.errors} /> : null
-
-      const generateCommonItemsList = () => {
-        return this.props.commonItems.map( commonItemData => {
-          return(<p> {JSON.stringify(commonItemData)}</p>)
-        })
-      }
-
-      const commonItemsList = this.props.commonItems ? generateCommonItemsList() : null
-
-      return (
-        <div>
-          {errorsDisplay}
-          You made it to the CompareContainer!<br/>
-          Compared To: {this.props.comparedTo}<br/>
-          Common Items: <br/>
-          {commonItemsList}
-        </div>
-      )
+      return <ComparingTool 
+        errors={this.props.errors}
+        commonItems={this.props.commonItems}
+        comparedTo={this.props.comparedTo}
+      />
     }
   }
 
