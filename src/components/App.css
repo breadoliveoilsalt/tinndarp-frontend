@@ -146,6 +146,9 @@ a {
   display: inline-block;
   margin: 0 3em;
 }
+div.item-display-container {
+  margin: 1em auto;
+}
 
 img.item-image {
   width: 18em;

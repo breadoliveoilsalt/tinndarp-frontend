@@ -13,7 +13,7 @@ const ComparingTool = ({ errors, commonItems, comparedTo, handleComparison }) =>
       return ( 
         <div> 
           <ItemDisplay item={commonItemData} /> 
-          <Divider />
+          <Divider className="divider" />
         </div>
       )
     })
@@ -25,8 +25,7 @@ const ComparingTool = ({ errors, commonItems, comparedTo, handleComparison }) =>
       {errorsDisplay}
       <CompareForm action={handleComparison} /> 
       <Divider className="divider" />
-      Compared To: { comparedTo } < br / >
-      Common Items: <br/> 
+      <div className="large-text">Results of Comparison to {comparedTo}</div>
       {commonItemsList}
     </div>
   )
