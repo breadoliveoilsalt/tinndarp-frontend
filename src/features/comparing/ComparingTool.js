@@ -2,6 +2,7 @@ import React from 'react'
 import ErrorsDisplay from '../../components/ErrorsDisplay'
 import Divider from '../../components/Divider'
 import CompareForm from './CompareForm'
+import ItemDisplay from '../../components/ItemDisplay'
 
 const ComparingTool = ({ errors, commonItems, comparedTo, handleComparison }) => {
 
@@ -9,10 +10,14 @@ const ComparingTool = ({ errors, commonItems, comparedTo, handleComparison }) =>
 
   const generateCommonItemsList = () => {
     return commonItems.map( (commonItemData) => {
-      return ( <p key={commonItemData.id}> { JSON.stringify(commonItemData) } </p>)
+      return ( 
+        <div> 
+          <ItemDisplay item={commonItemData} /> 
+          <Divider />
+        </div>
+      )
     })
   }
-
   const commonItemsList = commonItems ? generateCommonItemsList() : null
 
   return (
@@ -20,7 +25,6 @@ const ComparingTool = ({ errors, commonItems, comparedTo, handleComparison }) =>
       {errorsDisplay}
       <CompareForm action={handleComparison} /> 
       <Divider className="divider" />
-      You made it to the CompareContainer! < br / >
       Compared To: { comparedTo } < br / >
       Common Items: <br/> 
       {commonItemsList}

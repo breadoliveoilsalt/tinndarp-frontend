@@ -7,7 +7,7 @@ const ItemDisplay = ({ item }) => {
       <div>
         <img
           className="item-image"
-          src={item.imageURL}
+          src={item.image_url}
           alt={"item"}
         />
       </div>
@@ -16,7 +16,7 @@ const ItemDisplay = ({ item }) => {
         {item.name} <br/>
         {item.description} <br/>
         ${item.price} <br/>
-        <a href={item.moreInfoURL} target="_blank" rel="noopener noreferrer"> More Info </a>
+        <a href={item.more_info_url} target="_blank" rel="noopener noreferrer"> More Info </a>
       </div>
     </div>
   )
