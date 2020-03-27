@@ -146,3 +146,15 @@ a {
   display: inline-block;
   margin: 0 3em;
 }
+
+img.item-image {
+  width: 18em;
+  height: 18em;
+  border: 0.1em solid black;
+}
+
+div.item-details {
+  margin: 1em;
+  font-weight: bold;
+}
+
