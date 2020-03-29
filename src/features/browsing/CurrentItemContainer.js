@@ -3,22 +3,7 @@ import ItemDisplay from '../../components/ItemDisplay'
 import DecisionButton from './DecisionButton'
 
 const CurrentItemContainer = ( {currentItem, handleNope, handleLike} ) => {
-        // <div>
-        //   <img
-        //     className="item-image"
-        //     src={currentItem.imageURL}
-        //     alt={"current item"}
-        //   />
-        // </div>
-
-        // <div className="item-info">
-        //   {currentItem.name} <br/>
-        //   {currentItem.description} <br/>
-        //   ${currentItem.price} <br/>
-        //   <a href={currentItem.moreInfoURL} target="_blank" rel="noopener noreferrer"> More Info </a>
-        // </div>
-
-
+ 
   let content = null
 
   if (currentItem) {

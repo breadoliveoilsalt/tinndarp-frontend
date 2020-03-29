@@ -4,9 +4,18 @@ import Divider from '../../components/Divider'
 import CompareForm from './CompareForm'
 import ItemDisplay from '../../components/ItemDisplay'
 
-const ComparingTool = ({ errors, commonItems, comparedTo, handleComparison }) => {
+const ComparingDisplay = ({ errors, commonItems, comparedTo, handleComparison }) => {
 
   const errorsDisplay = errors ? < ErrorsDisplay errors = { errors } /> : null
+
+  const generateCommonItemsDisplay = () => {
+    return (
+      <div>
+        <div className="large-text">Results of Comparison to {comparedTo}</div>
+        {generateCommonItemsList()}
+      </div> 
+    )
+  }
 
   const generateCommonItemsList = () => {
     return commonItems.map( (commonItemData) => {
@@ -18,17 +27,16 @@ const ComparingTool = ({ errors, commonItems, comparedTo, handleComparison }) =>
       )
     })
   }
-  const commonItemsList = commonItems ? generateCommonItemsList() : null
+  const commonItemsDisplay = commonItems ? generateCommonItemsDisplay() : null
 
   return (
     <div className="comparing-tool-container"> 
       {errorsDisplay}
       <CompareForm action={handleComparison} /> 
       <Divider className="divider" />
-      <div className="large-text">Results of Comparison to {comparedTo}</div>
-      {commonItemsList}
+      {commonItemsDisplay}
     </div>
   )
 }
 
-export default ComparingTool
+export default ComparingDisplay

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { getItemsInCommonWithAction } from './comparingSlice'
 import { getToken } from '../userAccount/userAccountSlice'
 import Loader from '../../components/Loader'
-import ComparingTool from './ComparingTool'
+import ComparingDisplay from './ComparingDisplay'
 import './ComparingContainer.css'
 
 class ComparingContainer extends Component {
@@ -30,7 +30,7 @@ class ComparingContainer extends Component {
     if (this.props.fetching) {
       return <Loader /> 
     } else {
-      return <ComparingTool 
+      return <ComparingDisplay 
         errors={this.props.errors}
         commonItems={this.props.commonItems}
         comparedTo={this.props.comparedTo}
