@@ -47,6 +47,7 @@ export function resetComparingState() {
 
 export function getItemsInCommonWithAction(params) {
   return function(dispatch) {
+    dispatch(resetComparingState())
     dispatch(apiActions.updateFetchingStatus(true))
     return getItemsInCommonWith(params)
       .then(data => {

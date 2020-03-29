@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-// import { connect } from 'react-redux'
 
 class ErrorsDisplay extends Component {
 
@@ -18,11 +17,3 @@ class ErrorsDisplay extends Component {
 }
 
 export default ErrorsDisplay
-
-// const mapStateToProps = (state) => {
-//   return ({
-//     errors: state.apiRequest.errors
-//   })
-// }
-
-// export default connect(mapStateToProps)(ErrorsDisplay)

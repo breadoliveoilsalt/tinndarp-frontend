@@ -2,7 +2,6 @@ import React from 'react'
 
 const ItemDisplay = ({ item }) => {
 
-  //FLAG - make sure someone processes the fields so it says imageURL and moreInfoURL!
   return (
     <div className="item-display-container"> 
       <div>

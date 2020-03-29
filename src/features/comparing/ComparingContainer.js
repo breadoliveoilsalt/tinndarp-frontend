@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getItemsInCommonWithAction } from './comparingSlice'
 import { getToken } from '../userAccount/userAccountSlice'
+import { deleteErrors } from '../apiRequests/apiRequestsSlice'
 import Loader from '../../components/Loader'
 import ComparingDisplay from './ComparingDisplay'
 import './ComparingContainer.css'
@@ -14,16 +15,17 @@ class ComparingContainer extends Component {
   }
 
   componentDidMount() {
-    const params = {
-      token: getToken(),
-      compare_to: "timmy@timmy.com"
-    }
-    this.props.getItemsInCommonWithAction(params)
+  
   }
 
   handleComparison(event) {
     event.preventDefault()
-    console.log("comparing!")
+    this.props.deleteErrors()
+    const params = {
+      token: getToken(),
+      compare_to: event.target.email.value
+    }
+    this.props.getItemsInCommonWithAction(params)
   }
 
   render() {
@@ -52,7 +54,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getItemsInCommonWithAction: (params) => dispatch(getItemsInCommonWithAction(params))
+    getItemsInCommonWithAction: (params) => dispatch(getItemsInCommonWithAction(params)),
+    deleteErrors: () => dispatch(deleteErrors)
   } 
 }
 
