@@ -20,7 +20,7 @@ const ComparingDisplay = ({ errors, commonItems, comparedTo, handleComparison })
   const generateCommonItemsList = () => {
     return commonItems.map( (commonItemData) => {
       return ( 
-        <div> 
+        <div key={commonItemData.id}> 
           <ItemDisplay item={commonItemData} /> 
           <Divider className="divider" />
         </div>

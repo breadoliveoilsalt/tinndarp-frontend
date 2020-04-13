@@ -102,7 +102,7 @@ describe("<BrowsingContainer />", () => {
   })
 
   it("calls fetchItems when it mounts", () => {
-    const props = {fetchItems: jest.fn()}
+    const props = {fetchItems: jest.fn(), deleteErrors: jest.fn()}
     const wrapper = shallow(<BrowsingContainer {...props} />)
 
     expect(props.fetchItems.mock.calls.length).toEqual(1)
@@ -165,7 +165,8 @@ describe("<BrowsingContainer />", () => {
       props = {
         fetchItems: jest.fn(),
         postBrowsingDecisionAction: jest.fn(),
-        currentItem: {id: 1}
+        currentItem: {id: 1},
+        deleteErrors: jest.fn()
       }
       userAccountActions.getToken = jest.fn()
       userAccountActions.getToken.mockReturnValue("xyz")
@@ -206,7 +207,8 @@ describe("<BrowsingContainer />", () => {
       props = {
         fetchItems: jest.fn(),
         postBrowsingDecisionAction: jest.fn(),
-        currentItem: {id: 1}
+        currentItem: {id: 1},
+        deleteErrors: jest.fn()
       }
       userAccountActions.getToken = jest.fn()
       userAccountActions.getToken.mockReturnValue("xyz")

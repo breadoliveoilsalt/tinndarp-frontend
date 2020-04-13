@@ -7,15 +7,11 @@ import Loader from '../../components/Loader'
 import ComparingDisplay from './ComparingDisplay'
 import './ComparingContainer.css'
 
-class ComparingContainer extends Component {
+export class ComparingContainer extends Component {
 
   constructor(props) {
     super(props)
     this.handleComparison = this.handleComparison.bind(this)
-  }
-
-  componentDidMount() {
-  
   }
 
   handleComparison(event) {
@@ -55,7 +51,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getItemsInCommonWithAction: (params) => dispatch(getItemsInCommonWithAction(params)),
-    deleteErrors: () => dispatch(deleteErrors)
+    deleteErrors: () => dispatch(deleteErrors())
   } 
 }
 

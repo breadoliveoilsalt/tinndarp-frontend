@@ -9,6 +9,7 @@ describe("getItemsInCommonWith()", () => {
   }
 
   const item1 = {
+    id: 1, 
     name: "SAGSTUA",
     image_url: "https://www.ikea.com/us/en/images/products/sagstua-bed-frame__0783215_PE761511_S5.JPG?f=s",
     price: "149.00",
@@ -17,6 +18,7 @@ describe("getItemsInCommonWith()", () => {
   }
 
   const item2 = {
+    id: 2, 
     name: "MALM",
     image_url: "https://www.ikea.com/us/en/images/products/malm-bed-frame-high__0637598_PE698416_S5.JPG?f=s",
     price: "199.00",
@@ -64,20 +66,38 @@ describe("getItemsInCommonWith()", () => {
     expect(config.fetchWrapper.getWithParams.mock.calls[0][1]).toEqual(expectedParams)
   })
 
-  describe("the rawData does not have an errors key", () => {
+  describe("if the rawData does not have an errors key", () => {
 
-    it("process the raw data to return an object with userEmail, successfulComparisonTo, and commonItems", () => {
+    it("processes the raw data to return an object with userEmail, successfulComparisonTo, and commonItems", () => {
       return getItemsInCommonWith(params)
         .then(result => {
           expect(result.userEmail).toEqual("billy@billy.com")
           expect(result.successfulComparisonTo).toEqual("tommy@tommy.com")
-          expect(result.commonItems).toEqual([item1, item2])
+
+          const expectedItem1 = {
+            id: 1, 
+            name: "SAGSTUA",
+            imageURL: "https://www.ikea.com/us/en/images/products/sagstua-bed-frame__0783215_PE761511_S5.JPG?f=s",
+            price: "149.00",
+            description: "Bed frame, black, Full",
+            moreInfoURL: "https://www.ikea.com/us/en/p/sagstua-bed-frame-black-s59268898/"
+          }
+
+          const expectedItem2 = {
+            id: 2, 
+            name: "MALM",
+            imageURL: "https://www.ikea.com/us/en/images/products/malm-bed-frame-high__0637598_PE698416_S5.JPG?f=s",
+            price: "199.00",
+            description: "Bed frame, high, black-brown, Luröy, Queen",
+            moreInfoURL: "https://www.ikea.com/us/en/p/malm-bed-frame-high-black-brown-luroey-s69009475/"
+          }
+          expect(result.commonItems).toEqual([expectedItem1, expectedItem2])
         })
     })
 
   })
 
-  describe("the rawData has an errors key", () => {
+  describe("if the rawData has an errors key", () => {
 
     it("process the raw data to return an object with an errors key", () => {
       mockData = {

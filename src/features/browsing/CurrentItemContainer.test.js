@@ -1,9 +1,9 @@
 import React from 'react'
 import Enzyme, { shallow, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-Enzyme.configure({ adapter: new Adapter() })
 import CurrentItemContainer from './CurrentItemContainer'
 import DecisionButton from './DecisionButton'
+Enzyme.configure({ adapter: new Adapter() })
 
 describe("<CurrentItemContainer />", () => {
 
@@ -31,7 +31,7 @@ describe("<CurrentItemContainer />", () => {
 
     let wrapper
     beforeEach(() => {
-      wrapper = shallow(<CurrentItemContainer currentItem={currentItem} />)
+      wrapper = mount(<CurrentItemContainer currentItem={currentItem} />)
     })
 
     it("renders instructions on how to rate an item in a div with 'browsing-instruction' className", () => {

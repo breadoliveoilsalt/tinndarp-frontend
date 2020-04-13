@@ -31,9 +31,9 @@ describe("<AccountStatusHeader />", () => {
     window.localStorage.removeItem(TINNDARP_TOKEN_KEY)
   })
 
-  it("renders a button to 'Sign Out' if the user has a token", () => {
+  it("renders a button to 'Sign Out' if the user has a token and is loggedIn", () => {
     window.localStorage.setItem(TINNDARP_TOKEN_KEY, "xyz")
-    const state = {userAccount: {loggedIn: false, userEmail: null}}
+    const state = {userAccount: {loggedIn: true, userEmail: null}}
     const store = mockStore(state)
 
     const wrapper = customMount(store)
@@ -42,18 +42,7 @@ describe("<AccountStatusHeader />", () => {
     expect(wrapper.find("button#sign-out-button-header").text()).toEqual("Sign Out Here")
   })
 
-  it("renders a button to 'Sign Out' if the user does not have a token saved", () => {
-    const state = {userAccount: {loggedIn: false, userEmail: null}}
-    const store = mockStore(state)
-    window.localStorage.setItem(TINNDARP_TOKEN_KEY, "xyz")
-
-    const wrapper = customMount(store)
-
-    expect(wrapper.find("button#sign-out-button-header").length).toEqual(1)
-    expect(wrapper.find("button#sign-out-button-header").text()).toEqual("Sign Out Here")
-  })
-
-  it("redners a <Link /> to the home page for logging in or signin up", () => {
+  it("redners a <Link /> to the home page for logging in or signin up if the user does not have a token or is not logged in", () => {
     const state = {userAccount: {loggedIn: false, userEmail: null}}
     const store = mockStore(state)
 
