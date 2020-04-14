@@ -1,5 +1,5 @@
 import configureStore from '../../configureStore'
-import * as actions from './ComparingSlice'
+import * as actions from './comparingSlice'
 import * as apiActions from '../apiRequests/apiRequestsSlice'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
