@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import Loader from '../../components/Loader'
-import LogInSignUpLinks from './LogInSignUpLinks'
 import { authenticateUserTokenAction, tokenPresent } from './userAccountSlice'
+import { deleteErrors, loadErrors } from '../apiRequests/apiRequestsSlice'
+import ErrorsDisplay from '../../components/ErrorsDisplay'
+import LogInSignUpLinks from './LogInSignUpLinks'
 
 class Authenticator extends Component {
 
@@ -14,20 +15,23 @@ class Authenticator extends Component {
   }
 
   render() {
-
-    if (this.props.fetching) {
-      return (<Loader />)
-    } else if (this.props.loggedIn && tokenPresent()) {
+    if (this.props.loggedIn && tokenPresent()) {
       return (this.props.children)
     } else {
-      return (<LogInSignUpLinks />)
+      return (
+        <div>
+          <ErrorsDisplay 
+            errors= {["Not authorized to access", "Please sign in to get or renew token"]}
+          />
+          <LogInSignUpLinks />
+        </div>
+      )
     }
   }
 }
 
 const mapStateToProps = state => {
   return {
-    fetching: state.apiRequest.fetching,
     loggedIn: state.userAccount.loggedIn
   }
 
@@ -35,7 +39,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    authenticateUserTokenAction: () => dispatch(authenticateUserTokenAction())
+    authenticateUserTokenAction: () => dispatch(authenticateUserTokenAction()),
+    loadErrors: (errorsList) => dispatch(loadErrors(errorsList)),
+    deleteErrors: () => dispatch(deleteErrors())
   }
 }
 

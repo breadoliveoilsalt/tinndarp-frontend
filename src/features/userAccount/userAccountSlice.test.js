@@ -1,12 +1,12 @@
 import configureStore from '../../configureStore'
-import accountReducer, * as actions from './userAccountSlice'
+import * as actions from './userAccountSlice'
 import * as requests from  './userAccountAPIRequests'
 import * as apiActions from '../apiRequests/apiRequestsSlice'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 
 describe("userAccount state", () => {
-
+  
   let store
   let dispatch
   const token_key = "tinndarp_token"
@@ -24,7 +24,8 @@ describe("userAccount state", () => {
 
   it("has an initial state with fields for logged_in and token", () => {
     const expectedUserAccountInitialState = {
-      loggedIn: false
+      loggedIn: false,
+      userEmail: null
     }
     expect(store.getState().userAccount).toEqual(expectedUserAccountInitialState)
   })

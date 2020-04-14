@@ -12,53 +12,14 @@ describe("<Home />", () => {
 
   const TINNDARP_TOKEN_KEY = 'tinndarp_token'
 
-  describe("if the state's logged in status is false", () => {
+  let store
 
-    it("renders a button for signing up and a button for logging in", () => {
-      const wrapper = mount(
-        <BrowserRouter>
-          <Home />)
-        </BrowserRouter>
-      )
-
-      expect(wrapper.find("button")).toHaveLength(2)
-      expect(wrapper.find("button").at(0).text()).toEqual("Log In")
-      expect(wrapper.find("button").at(1).text()).toEqual("Sign Up")
-    })
-
-    describe("Clicking the button for logging in", () => {
-
-      it("redirects the user to the /log_in page", () => {
-        const wrapper = mount(
-          <BrowserRouter>
-            <Home />)
-          </BrowserRouter>
-        )
-
-        wrapper.find("button").at(0).simulate("click")
-        expect(window.location.pathname).toEqual("/log_in")
-      })
-
-    })
-
-    describe("Clicking the button for signing up", () => {
-
-      it("redirect the user to the /sign_up page", () => {
-        const wrapper = mount(
-          <BrowserRouter>
-            <Home />)
-          </BrowserRouter>
-        )
-
-        wrapper.find("button").at(1).simulate("click")
-        expect(window.location.pathname).toEqual("/sign_up")
-      })
-
-    })
-
+  beforeEach(() => {
+    const mockStore = configureMockStore([thunk])
+    store = mockStore(store)
   })
 
-  describe("if the user is logged in", () => {
+  describe("if the user has a token", () => {
 
     beforeEach(() => {
       window.localStorage.setItem(TINNDARP_TOKEN_KEY, "xyz")
@@ -70,9 +31,11 @@ describe("<Home />", () => {
 
     it("renders a button for browsing", () => {
       const wrapper = mount(
-        <BrowserRouter>
-          <Home />)
-        </BrowserRouter>
+        <Provider store={store}>
+          <BrowserRouter>
+            <Home />)
+          </BrowserRouter>
+        </Provider>
       )
 
       expect(wrapper.find("button").length).toEqual(1)
@@ -83,9 +46,11 @@ describe("<Home />", () => {
 
       it("redirects the user to the /browsing page", () => {
         const wrapper = mount(
-          <BrowserRouter>
-            <Home />)
-          </BrowserRouter>
+          <Provider store={store}>
+            <BrowserRouter>
+              <Home />)
+            </BrowserRouter>
+          </Provider>
         )
 
         wrapper.find("button").simulate("click")
@@ -97,9 +62,11 @@ describe("<Home />", () => {
     describe("the determination of a positive logged in status", () => {
       it("can also be determined by the existence of a token", () => {
         const wrapper = mount(
-          <BrowserRouter>
-            <Home />)
-          </BrowserRouter>
+          <Provider store={store}>
+            <BrowserRouter>
+              <Home />)
+            </BrowserRouter>
+          </Provider>
         )
 
         expect(wrapper.find("button").length).toEqual(1)
@@ -107,8 +74,58 @@ describe("<Home />", () => {
       })
 
     })
-
   })
 
+  describe("if user does not have a token", () => {
+
+    it("renders a button for signing up and a button for logging in", () => {
+      const wrapper = mount(
+        <Provider store={store}>
+          <BrowserRouter>
+            <Home />)
+          </BrowserRouter>
+        </Provider>
+      )
+
+      expect(wrapper.find("button")).toHaveLength(2)
+      expect(wrapper.find("button").at(0).text()).toEqual("Log In")
+      expect(wrapper.find("button").at(1).text()).toEqual("Sign Up")
+    })
+
+    describe("Clicking the button for logging in", () => {
+
+      it("redirects the user to the /log_in page", () => {
+      const wrapper = mount(
+        <Provider store={store}>
+          <BrowserRouter>
+            <Home />)
+          </BrowserRouter>
+        </Provider>
+      )
+
+        wrapper.find("button").at(0).simulate("click")
+        expect(window.location.pathname).toEqual("/log_in")
+      })
+
+    })
+
+    describe("Clicking the button for signing up", () => {
+
+      it("redirect the user to the /sign_up page", () => {
+        const wrapper = mount(
+          <Provider store={store}>
+            <BrowserRouter>
+              <Home />)
+            </BrowserRouter>
+          </Provider>
+        )
+
+        wrapper.find("button").at(1).simulate("click")
+        expect(window.location.pathname).toEqual("/sign_up")
+      })
+
+    })
+
+  })
 
 })

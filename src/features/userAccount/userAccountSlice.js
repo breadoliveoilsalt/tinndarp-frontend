@@ -4,10 +4,12 @@ import * as browsingActions from '../browsing/browsingSlice'
 
 const RESET_USER_ACCOUNT_STATE = 'RESET_USER_ACCOUNT_STATE'
 const UPDATE_LOGGED_IN_STATUS = 'UPDATE_LOGGED_IN_STATUS'
+const UPDATE_USER_EMAIL = 'UPDATE_USER_EMAIL'
 const TINNDARP_TOKEN_KEY = 'tinndarp_token'
 
 const initialState = {
-  loggedIn: false
+  loggedIn: false,
+  userEmail: null
 }
 
 function userAccountReducer(state = initialState, action) {
@@ -16,6 +18,8 @@ function userAccountReducer(state = initialState, action) {
       return Object.assign({}, initialState)
     case UPDATE_LOGGED_IN_STATUS:
       return Object.assign({}, state, {loggedIn: action.payload})
+    case UPDATE_USER_EMAIL:
+      return Object.assign({}, state, {userEmail: action.payload})
     default:
       return state
   }
@@ -36,6 +40,13 @@ export function updateLoggedInStatus(bool) {
   }
 }
 
+export function updateUserEmail(email) {
+  return {
+    type: UPDATE_USER_EMAIL,
+    payload: email
+  }
+}
+
 export function signUpAction(credentials) {
   return function(dispatch) {
     dispatch(apiActions.updateFetchingStatus(true))
@@ -46,6 +57,7 @@ export function signUpAction(credentials) {
         } else if (data.loggedIn === true) {
           dispatch(apiActions.deleteErrors())
           dispatch(updateLoggedInStatus(true))
+          dispatch(updateUserEmail(data.userEmail))
           saveToken(data.token)
         } else {
           dispatch(apiActions.loadErrors(["Sorry, something went wrong with the server."]))
@@ -66,6 +78,7 @@ export function logInAction(credentials) {
         } else if (data.loggedIn === true) {
           dispatch(apiActions.deleteErrors())
           dispatch(updateLoggedInStatus(true))
+          dispatch(updateUserEmail(data.userEmail))
           saveToken(data.token)
         } else {
           dispatch(apiActions.loadErrors(["Sorry, something went wrong with the server."]))
@@ -105,12 +118,16 @@ export function authenticateUserTokenAction() {
     .then( data => {
       if (data.loggedIn === true) {
         dispatch(updateLoggedInStatus(true))
+        dispatch(updateUserEmail(data.userEmail))
       } else {
         dispatch(updateLoggedInStatus(false))
         deleteToken()
       }
     })
     .then( () => {
+      dispatch(apiActions.updateFetchingStatus(false))
+    })
+    .catch( () => {
       dispatch(apiActions.updateFetchingStatus(false))
     })
   }

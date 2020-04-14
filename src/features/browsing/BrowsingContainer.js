@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchItems, removeCurrentItem, updateCurrentItem, postBrowsingDecisionAction } from './browsingSlice'
+import { deleteErrors } from '../apiRequests/apiRequestsSlice'
 import { getToken } from '../userAccount/userAccountSlice'
 import RedirectComponent from '../userAccount/RedirectComponent'
 import Loader from '../../components/Loader'
@@ -17,6 +18,7 @@ export class BrowsingContainer extends Component {
   }
 
   componentDidMount() {
+    this.props.deleteErrors()
     if (!this.props.items) {
       const params = {token: getToken()}
       this.props.fetchItems(params)
@@ -74,6 +76,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    deleteErrors: () => dispatch(deleteErrors()),
     fetchItems: (params) => dispatch(fetchItems(params)),
     removeCurrentItem: () => dispatch(removeCurrentItem()),
     updateCurrentItem: () => dispatch(updateCurrentItem()),

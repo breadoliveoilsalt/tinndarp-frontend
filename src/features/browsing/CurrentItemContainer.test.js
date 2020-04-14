@@ -1,9 +1,9 @@
 import React from 'react'
 import Enzyme, { shallow, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-Enzyme.configure({ adapter: new Adapter() })
 import CurrentItemContainer from './CurrentItemContainer'
 import DecisionButton from './DecisionButton'
+Enzyme.configure({ adapter: new Adapter() })
 
 describe("<CurrentItemContainer />", () => {
 
@@ -31,7 +31,7 @@ describe("<CurrentItemContainer />", () => {
 
     let wrapper
     beforeEach(() => {
-      wrapper = shallow(<CurrentItemContainer currentItem={currentItem} />)
+      wrapper = mount(<CurrentItemContainer currentItem={currentItem} />)
     })
 
     it("renders instructions on how to rate an item in a div with 'browsing-instruction' className", () => {
@@ -44,22 +44,22 @@ describe("<CurrentItemContainer />", () => {
       expect(instructions.props().className).toEqual("browsing-instructions")
     })
 
-    it("renders an image with the currentItem url_image and 'browsing-item-image' className", () => {
+    it("renders an image with the currentItem url_image and 'item-image' className", () => {
       expect(wrapper.find("img")).toHaveLength(1)
       expect(wrapper.find("img").prop("src")).toEqual(itemImageURL)
-      expect(wrapper.find("img").prop("className")).toEqual("browsing-item-image")
+      expect(wrapper.find("img").prop("className")).toEqual("item-image")
     })
 
-    it("renders the item's name in div with the classname 'browsing-item-details'", () => {
-      expect(wrapper.find("div.browsing-item-details").text()).toContain(itemName)
+    it("renders the item's name in div with the classname 'item-info'", () => {
+      expect(wrapper.find("div.item-info").text()).toContain(itemName)
     })
 
-    it("renders the item's price in div with the classname 'browsing-item-details'", () => {
-      expect(wrapper.find("div.browsing-item-details").text()).toContain("$" + itemPrice)
+    it("renders the item's price in div with the classname 'item-info'", () => {
+      expect(wrapper.find("div.item-info").text()).toContain("$" + itemPrice)
     })
 
-    it("renders the item's description in div with the classname 'browsing-item-details'", () => {
-      expect(wrapper.find("div.browsing-item-details").text()).toContain(itemDescription)
+    it("renders the item's description in div with the classname 'item-info'", () => {
+      expect(wrapper.find("div.item-info").text()).toContain(itemDescription)
     })
 
     it("renders a 'More Info' link, linking to the currentItem's moreInfoURL", () => {

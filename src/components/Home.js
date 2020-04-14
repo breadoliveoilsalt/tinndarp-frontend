@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
-import { tokenPresent } from '../features/userAccount/userAccountSlice'
-import LogInSignUpLinks from '../features/userAccount/LogInSignUpLinks'
+import { connect } from 'react-redux'
 import BrowseLink from '../features/browsing/BrowseLink'
+import LogInSignUpLinks from '../features/userAccount/LogInSignUpLinks'
+import { tokenPresent } from '../features/userAccount/userAccountSlice'
+import { deleteErrors } from '../features/apiRequests/apiRequestsSlice'
 import Logo from './Logo'
 
 class Home extends Component {
+
+  componentDidMount() {
+    this.props.deleteErrors() 
+  }
 
   render() {
 
@@ -31,4 +37,10 @@ class Home extends Component {
 
 }
 
-export default Home
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteErrors: () => dispatch(deleteErrors())
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Home)

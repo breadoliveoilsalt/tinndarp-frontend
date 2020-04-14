@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import Authenticator from '../features/userAccount/Authenticator'
 import BrowsingContainer from '../features/browsing/BrowsingContainer'
+import ComparingContainer from '../features/comparing/ComparingContainer'
 import Home from './Home'
 import SignUpContainer from '../features/userAccount/SignUpContainer'
 import LogInContainer from '../features/userAccount/LogInContainer'
@@ -16,6 +17,12 @@ export class RoutesContainer extends Component {
         <Route exact path="/browse">
           <Authenticator>
             <BrowsingContainer />
+          </Authenticator>
+        </Route>
+
+        <Route exact path="/compare">
+          <Authenticator>
+            <ComparingContainer />
           </Authenticator>
         </Route>
 

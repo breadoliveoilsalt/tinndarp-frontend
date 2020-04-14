@@ -30,7 +30,8 @@ const process = (rawData) => {
   } else if (rawData.data.logged_in === "true") {
     return {
       loggedIn: true,
-      token: rawData.data.token
+      token: rawData.data.token,
+      userEmail: rawData.data.user_email
     }
   } else {
     return {

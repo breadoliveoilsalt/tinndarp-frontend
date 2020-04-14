@@ -1,7 +1,6 @@
 import React from 'react'
 import Enzyme, { shallow, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-Enzyme.configure({ adapter: new Adapter() })
 import { Provider } from 'react-redux'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
@@ -11,6 +10,8 @@ import AccountForm from './AccountForm'
 import ErrorsDisplay from '../../components/ErrorsDisplay'
 import RedirectComponent from './RedirectComponent'
 import { BrowserRouter, Link } from 'react-router-dom'
+
+Enzyme.configure({ adapter: new Adapter() })
 
 describe("<LogInContainer />", () => {
 

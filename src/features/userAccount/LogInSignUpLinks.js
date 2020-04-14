@@ -12,7 +12,6 @@ class LogInSignUpLinks extends Component {
      </div>
    )
   }
-
 }
 
 export default withRouter(LogInSignUpLinks)

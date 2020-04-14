@@ -3,19 +3,13 @@ div.browsing-instructions {
   width: 75%;
 }
 
-img.browsing-item-image {
-  width: 18em;
-  height: 18em;
-  border: 0.1em solid black;
-}
+div.browsing-button-container {
+  margin: 1em auto;
 
-div.browsing-item-details {
-  margin: 1em;
-  font-weight: bold;
 }
 
 .like-button {
-  background-color: #4CAF50;
+  background-color: #4CAF50;  
 }
 
 .like-button:hover {

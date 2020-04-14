@@ -19,10 +19,12 @@ export class AccountStatusHeader extends Component {
   render() {
     let content
 
-    if (tokenPresent()) {
+    if (tokenPresent() && this.props.loggedIn) {
       content = (
         <div className="sign-out-link-header">
-          <button id="sign-out-button-header" onClick={this.signOut}>Sign Out</button>
+          Hi<br/> 
+          {this.props.userEmail ? this.props.userEmail : "there!"}<br/> 
+          <button id="sign-out-button-header" onClick={this.signOut}>Sign Out Here</button>
         </div>
       )
     } else {
@@ -42,10 +44,17 @@ export class AccountStatusHeader extends Component {
 
 }
 
+const mapStateToProps = (state) => {
+  return {
+    userEmail: state.userAccount.userEmail,
+    loggedIn: state.userAccount.loggedIn
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
     signOutAction: () => dispatch(signOutAction())
   }
 }
 
-export default connect(null, mapDispatchToProps)(withRouter(AccountStatusHeader))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AccountStatusHeader))

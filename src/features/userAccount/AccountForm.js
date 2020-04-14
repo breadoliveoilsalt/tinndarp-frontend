@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CreateAccountForm = (props) => {
+const AccountForm = (props) => {
   return (
     <div>
 
@@ -20,4 +20,4 @@ const CreateAccountForm = (props) => {
   )
 }
 
-export default CreateAccountForm
+export default AccountForm
