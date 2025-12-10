@@ -1,5 +1,6 @@
 import axiosWrapper from '../axiosWrapper';
 
-// export const baseURL = "https://tinndarp-backend.herokuapp.com/api"
-export const baseURL = 'http://localhost:3001/api';
+// Use environment variable with fallback to localhost for backwards compatibility
+export const baseURL =
+  process.env.REACT_APP_API_BASE_URL || 'http://localhost:3001/api';
 export const fetchWrapper = axiosWrapper;
